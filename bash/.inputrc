@@ -1,0 +1,11 @@
+# shellcheck shell=bash
+
+# shellcheck disable=SC2154
+$include /etc/inputrc
+
+set colored-completion-prefix on
+set colored-stats on
+set completion-ignore-case On
+set mark-symlinked-directories on
+set show-all-if-ambiguous on
+set visible-stats on
