@@ -1,0 +1,303 @@
+# https://docs.helix-editor.com/languages.html
+# https://github.com/helix-editor/helix/blob/master/languages.toml
+# https://github.com/helix-editor/helix/wiki/Language-Server-Configurations
+
+config = { "provideFormatter" = true, "json" = { "keepLines" = { "enable" = true } } }
+
+[language-server.bash-language-server]
+command = "bash-language-server"
+args    = ["start"]
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+[language-server.rust-analyzer.config]
+inlayHints.bindingModeHints.enable             = false
+inlayHints.closingBraceHints.minLines          = 10
+inlayHints.closureReturnTypeHints.enable       = "with_block"
+inlayHints.discriminantHints.enable            = "fieldless"
+inlayHints.lifetimeElisionHints.enable         = "skip_trivial"
+inlayHints.typeHints.hideClosureInitialization = false
+
+[language-server.pylyzer]
+command = "pylyzer"
+args    = ["--server"]
+
+[language-server.ruff]
+command     = "ruff"
+args        = ["server", "-q", "--preview"]
+environment = { "RUFF_TRACE" = "messages" }
+
+[language-server.ruff.config.settings]
+format.preview = true
+lint.ignore    = ["F401"]
+lint.preview   = true
+lint.select    = ["E", "F"]
+logLevel       = "debug"
+run            = "onSave"
+
+[language-server.pylsp]
+command = "pylsp"
+
+[language-server.pylsp.config.pylsp]
+plugins.black.enabled                 = false
+plugins.isort.enabled                 = true
+plugins.pyflakes.enabled              = true
+plugins.pylint.enabled                = true
+plugins.pyls_mypy.enabled             = false
+plugins.pyls_mypy.live_mode           = false
+plugins.pylsp_mypy.disable_error_code = ["import-untyped", "import-not-found"]
+plugins.pylsp_mypy.dmypy              = false # does not work in live_mode.
+plugins.rope_autoimport.enabled       = false
+plugins.ruff.enabled                  = true
+plugins.ruff.formatEnabled            = true
+plugins.ruff.preview                  = true
+
+[language-server.sql-language-server]
+command = "sql-language-server"
+args    = ["up", "--method", "stdio"]
+
+
+[[language]]
+name             = "python"
+language-id      = "python"
+language-servers = ["ruff", "basedpyright"] #, "pylsp"] #, "pylyzer"]
+injection-regex  = "py(thon)?"
+auto-format      = true
+shebangs         = ["python", "uv"]
+roots            = ["pyproject.toml", "setup.py", "poetry.lock", "pyrightconfig.json", "requirements.txt", ".venv/"]
+comment-token    = "#"
+scope            = "source.python"
+indent           = { tab-width = 4, unit = "    " }
+formatter        = { command = "ruff", args = ["format", "-"] }
+
+file-types = [
+  "py",
+  "pyi",
+  "py3",
+  "pyw",
+  "ptl",
+  "rpy",
+  "cpy",
+  "ipy",
+  "pyt",
+  { glob = ".python_history" },
+  { glob = ".pythonstartup" },
+  { glob = ".pythonrc" },
+  { glob = "SConstruct" },
+  { glob = "SConscript" },
+]
+
+[[grammar]]
+name       = "python"
+source.git = "https://github.com/tree-sitter/tree-sitter-python"
+rev        = "4bfdd9033a2225cc95032ce77066b7aeca9e2efc"
+
+
+[[language]]
+name                          = "rust"
+scope                         = "source.rust"
+injection-regex               = "rs|rust"
+file-types                    = ["rs"]
+roots                         = ["Cargo.toml", "Cargo.lock"]
+shebangs                      = ["rust-script", "cargo"]
+auto-format                   = true
+comment-tokens                = ["//", "///", "//!"]
+block-comment-tokens          = [{ start = "/*", end = "*/" }, { start = "/**", end = "*/" }, { start = "/*!", end = "*/" }]
+language-servers              = ["rust-analyzer"]
+indent                        = { tab-width = 4, unit = "    " }
+persistent-diagnostic-sources = ["rustc", "clippy"]
+
+[[grammar]]
+name       = "rust"
+source.git = "https://github.com/tree-sitter/tree-sitter-rust"
+source.rev = "0431a2c60828731f27491ee9fdefe25e250ce9c9"
+
+
+[[language]]
+name            = "xit"
+auto-format     = true
+scope           = "source.xit"
+injection-regex = "xit"
+file-types      = ["xit"]
+indent          = { tab-width = 4, unit = "    " }
+formatter       = { command = "bash", args = ["-c", "xit-sort -"] } # custom script in ~/bin/
+
+[[grammar]]
+name       = "xit"
+source.git = "https://github.com/synaptiko/tree-sitter-xit"
+source.rev = "7d7902456061bc2ad21c64c44054f67b5515734c"
+
+
+[[language]]
+name        = "csv"
+file-types  = ["csv"]
+scope       = "source.csv"
+auto-format = true
+formatter   = { command = "bash", args = ["-c", "column -t -s, -o, <&0"] }
+
+[[grammar]]
+name       = "csv"
+source.git = "https://github.com/weartist/rainbow-csv-tree-sitter"
+source.rev = "896e6d09b23a1b0d87e45bf97ca34a249f41495c"
+
+
+[[language]]
+name             = "bash"
+scope            = "source.bash"
+injection-regex  = "(shell|bash|zsh|sh)"
+shebangs         = ["sh", "bash", "dash", "zsh"]
+comment-token    = "#"
+language-servers = ["bash-language-server"]
+indent           = { tab-width = 2, unit = "  " }
+
+file-types = [
+  "sh",
+  "bash",
+  "ash",
+  "dash",
+  "ksh",
+  "mksh",
+  "zsh",
+  "zshenv",
+  "zlogin",
+  "zlogout",
+  "zprofile",
+  "zshrc",
+  "eclass",
+  "ebuild",
+  "bazelrc",
+  "Renviron",
+  "zsh-theme",
+  "cshrc",
+  "tcshrc",
+  { glob = "i3/config" },
+  { glob = "sway/config" },
+  { glob = "tmux.conf" },
+  { glob = ".bash_history" },
+  { glob = ".bash_login" },
+  { glob = ".bash_logout" },
+  { glob = ".bash_profile" },
+  { glob = ".bashrc" },
+  { glob = ".profile" },
+  { glob = ".zshenv" },
+  { glob = ".zlogin" },
+  { glob = ".zlogout" },
+  { glob = ".zprofile" },
+  { glob = ".zshrc" },
+  { glob = ".zimrc" },
+  { glob = "APKBUILD" },
+  { glob = ".bash_aliases" },
+  { glob = ".Renviron" },
+  { glob = ".xprofile" },
+  { glob = ".xsession" },
+  { glob = ".xsessionrc" },
+  { glob = ".yashrc" },
+  { glob = ".yash_profile" },
+  { glob = ".hushlogin" },
+  { glob = "*ssh*" },
+  { glob = ".inputrc" },
+  { glob = "crontab" },
+  { glob = "*.rc" },
+  { glob = ".bash_functions" },
+]
+
+[[grammar]]
+name       = "bash"
+source.git = "https://github.com/tree-sitter/tree-sitter-bash"
+source.rev = "f8fb3274f72a30896075585b32b0c54cad65c086"
+
+
+[[language]]
+name                 = "markdown"
+scope                = "source.md"
+injection-regex      = "md|markdown"
+file-types           = ["md", "markdown", "mdx", "mkd", "mkdn", "mdwn", "mdown", "markdn", "mdtxt", "mdtext", "workbook", "README", { glob = "PULLREQ_EDITMSG" }]
+roots                = [".marksman.toml"]
+language-servers     = ["marksman", "markdown-oxide"]
+indent               = { tab-width = 2, unit = "  " }
+block-comment-tokens = { start = "<!--", end = "-->" }
+soft-wrap.enable     = true
+text-width           = 200
+
+[[grammar]]
+name           = "markdown"
+source.git     = "https://github.com/tree-sitter-grammars/tree-sitter-markdown"
+source.rev     = "62516e8c78380e3b51d5b55727995d2c511436d8"
+source.subpath = "tree-sitter-markdown"
+
+
+[[language]]
+name            = "mermaid"
+scope           = "source.mermaid"
+injection-regex = "mermaid"
+file-types      = ["mermaid", "mmd"]
+comment-token   = "%%"
+indent          = { tab-width = 4, unit = "    " }
+
+[[grammar]]
+name       = "mermaid"
+source.git = "https://github.com/monaqa/tree-sitter-mermaid"
+source.rev = "90ae195b31933ceb9d079abfa8a3ad0a36fee4cc"
+
+
+[[language]]
+name            = "git-ignore"
+scope           = "source.gitignore"
+injection-regex = "git-ignore"
+comment-token   = "#"
+grammar         = "gitignore"
+
+file-types = [
+  { glob = ".gitignore_global" },
+  { glob = "git/ignore" },
+  { glob = ".ignore" },
+  { glob = "CODEOWNERS" },
+  { glob = ".config/helix/ignore" },
+  { glob = ".helix/ignore" },
+  { glob = ".*ignore" },
+  { glob = "*.*ignore" },
+  # Additional file types added below for syntax highlighting.
+  { glob = ".*exclude" },
+  { glob = ".*include" },
+  { glob = ".*filter" },
+]
+
+
+[[language]]
+name                 = "sql"
+scope                = "source.sql"
+file-types           = ["sql", "dsql", "sqlx"]
+comment-token        = "--"
+block-comment-tokens = { start = "/*", end = "*/" }
+indent               = { tab-width = 2, unit = "    " }
+injection-regex      = "sql"
+auto-format          = true
+language-servers     = ["sql-language-server"]
+formatter            = { command = "sqlfluff", args = ["fix -"] }
+
+[[grammar]]
+name       = "sql"
+source.git = "https://github.com/DerekStride/tree-sitter-sql"
+source.rev = "da2d1eff425b146d3c8cab7be8dfa98b11d896dc"
+
+
+[[language]]
+name             = "toml"
+scope            = "source.toml"
+injection-regex  = "toml"
+file-types       = ["toml", { glob = "pdm.lock" }, { glob = "poetry.lock" }, { glob = "Cargo.lock" }, { glob = "uv.lock" }]
+comment-token    = "#"
+language-servers = ["taplo"]
+indent           = { tab-width = 2, unit = "  " }
+auto-format      = true
+# formatter.command = "taplo"
+# formatter.args = ["format", "-"]
+formatter.command = "bash"
+formatter.args    = ["-c", "xargs -0 taplo-helix-fmt"] # custom script in ~/bin/
+# https://github.com/helix-editor/helix/issues/3596
+
+[[grammar]]
+name       = "toml"
+source.git = "https://github.com/ikatyang/tree-sitter-toml"
+source.rev = "7cff70bbcbbc62001b465603ca1ea88edd668704"
