@@ -1,0 +1,104 @@
+# yazi.toml
+# line above is for $ taplo fmt --stdin-filepath
+
+# https://yazi-rs.github.io/docs/configuration/yazi
+
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
+[manager]
+ratio          = [1, 3, 4]
+sort_by        = "natural"
+sort_sensitive = false
+sort_reverse   = false
+sort_dir_first = true
+sort_translit  = false
+linemode       = "size_and_mtime" # custom line mode in init.lua
+show_hidden    = true
+show_symlink   = true
+scrolloff      = 10
+mouse_events   = ["click", "scroll"]
+title_format   = "yazi: {cwd}"
+
+[preview]
+wrap            = "no"
+tab_size        = 4
+max_width       = 600
+max_height      = 900
+cache_dir       = "~/.cache/yazi"
+image_delay     = 0
+image_filter    = "lanczos3"
+image_quality   = 90
+sixel_fraction  = 10
+ueberzug_scale  = 1.5
+ueberzug_offset = [0, 0, 0, 0]
+
+[opener]
+edit = [
+  { run = "hx %*", desc = "helix", block = true, for = "windows" },
+  { run = "code %*", desc = "vscode", orphan = true, for = "windows" },
+  { run = 'code -w %*', block = true, desc = "vscode (block)", for = "windows" },
+]
+open = [
+  { run = 'start "" "%1"', orphan = true, desc = "open", for = "windows" },
+  { run = "hx %*", block = true, desc = "helix", for = "windows" },
+  { run = "code %*", block = true, desc = "vscode", orphan = true, for = "windows" },
+  { run = '7zFM %*', orphan = true, desc = "7zFM", for = "windows" },
+]
+reveal = [
+  { run = '''explorer /select,"%1"''', orphan = true, desc = "reveal", for = "windows" },
+  { run = '''bash -c "exiftool $(cygpath '%*'); echo 'Press enter to exit'; read _"''', block = true, desc = "show exif", for = "windows" },
+]
+extract = [
+  { run = '''ya pub extract --list %*''', desc = "extract here", for = "windows" },
+  { run = '''7zFM %*''', orphan = true, desc = "7zFM", for = "windows" },
+]
+play = [
+  { run = '''mpv --force-window %*''', orphan = true, for = "windows" },
+  { run = '''photoqt %*''', orphan = true, desc = "photoqt", for = "windows" },
+]
+database = [
+  { run = '''bash -c "harlequin '%*'"''', block = true, desc = "harlequin", for = "windows" },
+]
+browser = [
+  { run = '''bash -c "cat '%*' | xargs $BROWSER"''', orphan = true, desc = "browser", for = "windows" },
+]
+
+[open]
+prepend_rules = [
+  # Remove edit use from default config on directories.
+  { name = "*/", use = ["open", "reveal"] },
+  # Hash files.
+  { name = "*.{sha*,md5}", use = ["edit"] },
+  # Database opener using harlequin.
+  { name = "*.{db,sqlite}", use = ["database"] },
+  # Browser opener.
+  { name = "*.url", use = ["browser", "edit"] },
+  # Additional files not caught in default.
+  { name = "*.{toml,hx,*rc,ini}", use = ["edit"] },
+]
+append_rules = [{ name = "*", use = ["open", "reveal", "edit"] }]
+
+[tasks]
+micro_workers    = 10
+macro_workers    = 25
+bizarre_retry    = 5
+image_alloc      = 1073741824 # 1024MB
+image_bound      = [0, 0]
+suppress_preload = false
+
+[plugin]
+prepend_fetchers = [{ id = "git", name = "*", run = "git" }]
+
+[input]
+cursor_blink  = true
+create_origin = "hovered"
+rename_origin = "hovered"
+filter_origin = "hovered"
+find_origin   = "hovered"
+search_origin = "hovered"
+
+[confirm]
+trash_origin  = "hovered"
+trash_offset  = [0, 1, 80, 10]
+delete_origin = "hovered"
+delete_offset = [0, 1, 80, 10]
