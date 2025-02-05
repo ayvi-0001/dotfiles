@@ -1,0 +1,11 @@
+# dir for legacy/removed config files/key-value pairs
+**/.ignore/**
+# dir for templated files
+**/.templates/**
+# config file for src/target paths + patterns/replacements
+dotfiles*.toml
+
+.envrc.private
+
+.helix/
+.vscode/
