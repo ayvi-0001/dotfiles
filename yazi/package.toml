@@ -1,0 +1,22 @@
+[plugin]
+deps = [
+  { use = "AnirudhG07/custom-shell", rev = "2f3d7a6" },
+  { use = "KKV9/compress", rev = "60b24af" },
+  { use = "MasouShizuka/projects", rev = "ba8d00b" },
+  { use = "Reledia/glow", rev = "5ce76dc" },
+  { use = "Rolv-Apneseth/starship", rev = "4053c8c" },
+  { use = "dawsers/toggle-view", rev = "9ae57f9" },
+  { use = "h-hg/yamb", rev = "108347b" },
+  { use = "yazi-rs/plugins:diff", rev = "600614a" },
+  { use = "yazi-rs/plugins:full-border", rev = "600614a" },
+  { use = "yazi-rs/plugins:git", rev = "600614a" },
+  { use = "yazi-rs/plugins:hide-preview", rev = "600614a" },
+  { use = "yazi-rs/plugins:jump-to-char", rev = "600614a" },
+  { use = "dedukun/relative-motions", rev = "df97039" },
+  { use = "ayvi-0001/git-cd-root-dir", rev = "b12aeec" },
+  { use = "BennyOe/tokyo-night", rev = "caa00ab" },
+  { use = "lpnh/fg", rev = "9bba743" }, { use = "pirafrank/what-size", rev = "b23e3a4" },
+]
+
+[flavor]
+deps = [{ use = "kmlupreti/ayu-dark", rev = "8ddf095" }]
