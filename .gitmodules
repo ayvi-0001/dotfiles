@@ -1,3 +1,7 @@
 [submodule ".secret"]
 	path = .secret
 	url = http://ayvi:3000/ayvi/dotfiles-secret.git
+
+[submodule "yazi/plugins/git-cd-root-dir.yazi"]
+	path = yazi/plugins/git-cd-root-dir.yazi
+	url = https://github.com/ayvi-0001/git-cd-root-dir.yazi.git
