@@ -1,0 +1,134 @@
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[[input.prepend_keymap]]
+on   = "<Esc>"
+run  = "close"
+desc = "Cancel input"
+
+[manager]
+prepend_keymap = [
+  # start: override builtins
+  # Add the '--separator' option to builtin copy commands.
+  { on = ["c", "c"], run = "copy --separator='unix' path", desc = "Copy the file path" },
+  { on = ["c", "d"], run = "copy --separator='unix' dirname", desc = "Copy the directory path" },
+  { on = ["c", "f"], run = "copy --separator='unix' filename", desc = "Copy the filename" },
+  { on = ["c", "n"], run = "copy --separator='unix' name_without_ext", desc = "Copy the filename without extension" },
+  # end: override builtins
+
+  # start: what-size
+  { on   = [ ".", "s" ], run  = "plugin what-size", desc = "Calc size of selection or cwd" },
+  # end: what-size
+
+  # start: goto
+  { on = ["g", "e"], run = "arrow 99999999", desc = "Move cursor to the bottom" },
+  { on = ["g", "C"], run = "cd ~/.cache", desc = "Goto ~/.cache" },
+  { on = ["g", "a"], run = "cd a:/", desc = "Goto /a/" },
+  # start: git-cd-root-dir
+  { on = ["g", "r"], run = "plugin git-cd-root-dir", desc = "Goto git root directory" },
+  # end: git-cd-root-dir
+  # end: goto
+
+  # start: arrow.yazi | parent-arrow.yazi
+  { on = "k", run = "plugin arrow --args=-1" },
+  { on = "j", run = "plugin arrow --args=1" },
+  { on = "K", run = "plugin parent-arrow --args=-1" },
+  { on = "J", run = "plugin parent-arrow --args=1" },
+  # end: arrow.yazi | parent-arrow.yazi
+
+  # start: compress.yazi
+  { on = ["c", "a"], run = "plugin compress", desc = "Archive selected files" },
+  # end: compress.yazi
+
+  # start: custom-shell.yazi
+  { on = [";"], run = "plugin custom-shell --args=bash --no-block --orphan --no-confirm", desc = "bash shell" },
+  { on = ["'", "h"], run = "plugin custom-shell --args=history", desc = "Show Custom-shell history" },
+  { on = ["'", "g"], run = """ plugin custom-shell --args='custom bash "gitui -d."' """, desc = "gitui" },
+  { on = ["'", "d"], run = """ plugin custom-shell --args='custom bash "git diff; echo Press enter to exit; read _"' """, desc = "git diff" },
+  # end: custom-shell.yazi
+
+  # start: projects.yazi
+  { on = ["P", "s"], run = "plugin projects --args=save", desc = "Save current project" },
+  { on = ["P", "l"], run = "plugin projects --args=load", desc = "Load project" },
+  { on = ["P", "L"], run = "plugin projects --args=load", desc = "Load project" },
+  { on = ["P", "P"], run = "plugin projects --args=load_last", desc = "Load last project" },
+  { on = ["P", "d"], run = "plugin projects --args=delete", desc = "Delete project" },
+  { on = ["P", "D"], run = "plugin projects --args=delete_all", desc = "Delete all projects" },
+  { on = ["P", "m"], run = "plugin projects --args='merge current'", desc = "Merge current tab to other projects" },
+  { on = ["P", "M"], run = "plugin projects --args='merge all'", desc = "Merge current project to other projects" },
+  { on = ["q"], run = "plugin projects --args=quit", desc = "Save last project and exit the process" },
+  # end: projects.yazi
+
+  # start: hide-preview.yazi
+  { on = "T", run = "plugin hide-preview", desc = "Hide or show preview" },
+  # end: hide-preview.yazi
+
+  # start: diff.yazi
+  { on = "<C-d>", run = "plugin diff", desc = "Diff the selected with the hovered file" },
+  # end: diff.yazi
+
+  # start: follow-symlink.yazi
+  { on = ["g", "l"], run = "plugin follow-symlink", desc = "Follow symlink" },
+  # end: follow-symlink.yazi
+
+  # start: dual-pane.yazi
+  { on = ["b", "t"], run = "plugin dual-pane --args=toggle", desc = "Dual-pane: toggle" },
+  { on = ["b", "b"], run = "plugin dual-pane --args=toggle_zoom", desc = "Dual-pane: toggle zoom" },
+  { on = "<Tab>", run = "plugin dual-pane --args=next_pane", desc = "Dual-pane: switch to the other pane" },
+  { on = "[", run = "plugin dual-pane --args='tab_switch -1 --relative'", desc = "Dual-pane: switch active to previous tab" },
+  { on = "]", run = "plugin dual-pane --args='tab_switch 1 --relative'", desc = "Dual-pane: switch active to next tab" },
+  { on = ["M", "1"], run = "plugin dual-pane --args='tab_switch 0'", desc = "Switch to the first tab" },
+  { on = ["M", "2"], run = "plugin dual-pane --args='tab_switch 1'", desc = "Switch to the second tab" },
+  { on = ["M", "3"], run = "plugin dual-pane --args='tab_switch 2'", desc = "Switch to the third tab" },
+  { on = ["M", "4"], run = "plugin dual-pane --args='tab_switch 3'", desc = "Switch to the fourth tab" },
+  { on = ["M", "5"], run = "plugin dual-pane --args='tab_switch 4'", desc = "Switch to the fifth tab" },
+  { on = ["M", "6"], run = "plugin dual-pane --args='tab_switch 5'", desc = "Switch to the sixth tab" },
+  { on = ["M", "7"], run = "plugin dual-pane --args='tab_switch 6'", desc = "Switch to the seventh tab" },
+  { on = ["M", "8"], run = "plugin dual-pane --args='tab_switch 7'", desc = "Switch to the eighth tab" },
+  { on = ["M", "9"], run = "plugin dual-pane --args='tab_switch 8'", desc = "Switch to the ninth tab" },
+  { on = "t", run = "plugin dual-pane --args='tab_create --current'", desc = "Dual-pane: create a new tab with CWD" },
+  { on = "<F5>", run = "plugin dual-pane --args='copy_files --follow'", desc = "Dual-pane: copy selected files from active to inactive pane" },
+  { on = "<F6>", run = "plugin dual-pane --args='move_files --follow'", desc = "Dual-pane: move selected files from active to inactive pane" },
+  { on = ["b", "s"], run = "plugin dual-pane --args=save_config", desc = "Dual-pane: save current configuration" },
+  { on = ["b", "l"], run = "plugin dual-pane --args=load_config", desc = "Dual-pane: load saved configuration" },
+  { on = ["b", "r"], run = "plugin dual-pane --args=reset_config", desc = "Dual-pane: reset saved configuration" },
+  { on = ["b", "c"], run = "plugin dual-pane --args='shell_fzf /home/dawsers/.config/yazi/dual-pane.txt'", desc = "Dual-pane: run command (use fzf)" },
+  { on = ["b", "i"], run = "plugin dual-pane --args='shell_fzf --interactive /home/dawsers/.config/yazi/dual-pane.txt'", desc = "Dual-pane: run command interactively (use fzf)" },
+  # end: dual-pane.yazi
+
+  # start: toggle-view.yazi
+  { on = "<C-1>", run = "plugin toggle-view --args=parent", desc = "Toggle parent" },
+  { on = "<C-2>", run = "plugin toggle-view --args=current", desc = "Toggle current" },
+  { on = "<C-3>", run = "plugin toggle-view --args=preview", desc = "Toggle preview" },
+  # end: toggle-view.yazi
+
+  # start: yamb.yazi
+  { on = ["u", "a"], run = "plugin yamb --args=save", desc = "Add bookmark" },
+  { on = ["u", "g"], run = "plugin yamb --args=jump_by_key", desc = "Jump bookmark by key" },
+  { on = ["u", "G"], run = "plugin yamb --args=jump_by_fzf", desc = "Jump bookmark by fzf" },
+  { on = ["u", "d"], run = "plugin yamb --args=delete_by_key", desc = "Delete bookmark by key" },
+  { on = ["u", "D"], run = "plugin yamb --args=delete_by_fzf", desc = "Delete bookmark by fzf" },
+  { on = ["u", "A"], run = "plugin yamb --args=delete_all", desc = "Delete all bookmarks" },
+  { on = ["u", "r"], run = "plugin yamb --args=rename_by_key", desc = "Rename bookmark by key" },
+  { on = ["u", "R"], run = "plugin yamb --args=rename_by_fzf", desc = "Rename bookmark by fzf" },
+  # end: yamb.yazi
+
+  # start: fg.yazi
+  # NOTE `g` and `G` swapped from default (usually using ripgrep over fuzzy match)
+  { on = ["f", "g"], run = "plugin fg --args='rg'", desc = "find file by content (ripgrep match)" },
+  { on = ["f", "a"], run = "plugin fg --args='rga'", desc = "find file by content (ripgrep-all)" },
+  { on = ["f", "G"], run = "plugin fg", desc = "find file by content (fuzzy match)" },
+  { on = ["f", "f"], run = "plugin fg --args='fzf'", desc = "find file by filename" },
+  # end: fg.yazi
+
+  # start: relative-motions.yazi
+  { on = ["1"], run = "plugin relative-motions --args=1", desc = "move in relative steps" },
+  { on = ["2"], run = "plugin relative-motions --args=2", desc = "move in relative steps" },
+  { on = ["3"], run = "plugin relative-motions --args=3", desc = "move in relative steps" },
+  { on = ["4"], run = "plugin relative-motions --args=4", desc = "move in relative steps" },
+  { on = ["5"], run = "plugin relative-motions --args=5", desc = "move in relative steps" },
+  { on = ["6"], run = "plugin relative-motions --args=6", desc = "move in relative steps" },
+  { on = ["7"], run = "plugin relative-motions --args=7", desc = "move in relative steps" },
+  { on = ["8"], run = "plugin relative-motions --args=8", desc = "move in relative steps" },
+  { on = ["9"], run = "plugin relative-motions --args=9", desc = "Move in relative steps" },
+  # end: relative-motions.yazi
+]
