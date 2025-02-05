@@ -1,0 +1,242 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+THISDIR="$(dirname "$(readlink -f "$0")")"
+
+DEBUG="${DEBUG:-}"
+if [[ "$DEBUG" -eq 2 ]]; then set -x; fi
+
+
+_validate_bin() {
+  for dep in "$@"; do command -v "$dep" >/dev/null \
+    || { echo >&2 "Missing required dependency: $dep"; exit 1; }
+  done; unset dep
+}
+
+_validate_bin fd gum jq ln rg sd taplo
+
+
+__debug() { test -z "$DEBUG" || gum log -tRFC1123Z -ldebug -s "$@"; }
+
+
+_find_config() {
+  local file="${DOTFILES_CONFIG_FILE:-}"
+  if [[ -z "$file" ]]; then
+    if [[ -f "$THISDIR/.secret/dotfiles.toml" ]]; then
+      file="$THISDIR/.secret/dotfiles.toml"
+    else
+      file="$THISDIR/dotfiles.toml"
+    fi
+  fi
+  printf '%s' "$file"
+}
+
+DOTFILES_CONFIG="$(_find_config)"
+
+! test -f "$DOTFILES_CONFIG" && \
+  { gum style --foreground='#dc4720' "error: $DOTFILES_CONFIG not found." >&2; exit 1; }
+
+CONFIG="$(
+	eval "cat <<-EOF
+	$(<"$DOTFILES_CONFIG")
+	EOF" | taplo get -ojson | jq
+)"
+
+
+declare -a LN_OPTS
+ln --help | rg '\-a,\s+--absolute' &>/dev/null && LN_OPTS+=(-a)
+ln --help | rg '\-f,\s+--force' &>/dev/null && LN_OPTS+=(-f)
+LN_OPTS+=(-s)
+
+__debug "LN_OPTS=${LN_OPTS[*]}"
+
+
+SUDO_CMD="$(command -v sudo || command -v gsudo)"
+
+
+_create_or_replace_symlink() {
+  src_file="$(realpath "$1")"
+  # Make the directory first in the case it's an old symlink source,
+  # otherwise realpath will fail in the following command.
+  mkdir -p "$(dirname "$2")"
+  dest_file="$(realpath --no-symlinks "$2")"
+
+  __debug "src_file=$src_file"
+  __debug "dest_file=$dest_file"
+
+  # Delete if destination alredy exists as a regular file.
+  test -f "$dest_file" && rm "$_"
+
+  # Verify an existing symlink points to the correct source, fix if not.
+  if test -L "$dest_file"; then
+    if [[ "$(realpath -m "$dest_file")" != "$(realpath "$src_file")" ]]; then
+      gum style --foreground='#FCFA7D' \
+        "Canonical path of $dest_file does not exist. Replacing symlink source."
+      rm -f "$dest_file"
+    fi
+  fi
+
+  mkdir -p "$(dirname "$dest_file")"
+
+  if [[ -n "$SUDO_CMD" ]]; then
+    "$SUDO_CMD" ln "${LN_OPTS[@]}" "$src_file" "$dest_file" >/dev/null 2>&1
+  else
+    ln "${LN_OPTS[@]}" "$src_file" "$dest_file" >/dev/null 2>&1
+  fi
+
+  gum style --bold --foreground='#89F57C' "1 file linked: $src_file ->$dest_path"
+}
+
+
+_replace_patterns() {
+  local key T object pattern replacement
+  key="$1"; T="$2"
+
+  for (( i=0; i<"$(jq '. | length' <<< "$T")"; i++ )); do
+    object="$(jq -r ".[$i]" <<< "$T")"
+    pattern="$(jq -r ".pattern" <<< "$object")"
+    replacement="$(jq -r ".replacement" <<< "$object")"
+
+    __debug "pattern=$pattern"
+    __debug "replacement=$replacement"
+
+    fd -ua --print0 --base-directory "./$key/.templates/" -tf | xargs -0 sd -F "$pattern" "$replacement"
+  done
+}
+
+
+_deploy_files() {
+  if ! test -d "$1"; then
+    gum style --faint >&2 "The base directory path '$1' is not a directory. Skipping"
+    return
+  fi
+
+  local key key_object templates files patterns_file
+
+  key="$1"
+  fd_filter="${2:-}"
+  key_object="$(jq ".\"$key\"" <<< "$CONFIG")"
+  templates="$(jq '.templates // empty' <<< "$key_object")"
+  files="$(jq -r '.files // empty' <<< "$key_object")"
+
+  patterns_file="$(mktemp -t tmp.dotfiles.patterns.XXXXXXXXXX)"
+  if [[ -n "$templates" ]]; then
+    jq -r ".[].pattern" <<< "$templates" | sort -u > "$patterns_file"
+  fi
+
+  ignore_patterns=(-E '.ignore/' -E '.templates/' -E '.gitignore' -E 'README.md')
+  fd_opts=(--unrestricted --type file --full-path --base-directory "$key")
+  readarray -t file_list < <(fd "${fd_opts[@]}" "${ignore_patterns[@]}" "$fd_filter")
+  readarray -t config_file_list < <(jq 'keys | .[]' -r <<< "$files")
+
+  if [[ "${#config_file_list[@]}" -eq 0 ]]; then
+    gum style --faint >&2 "$key has no files defined in config. Skipping.."
+    return
+  fi
+
+  for file in "${file_list[@]}"; do
+    # Skip files that start with 2 leading underscores.
+    if [[ $file == __* ]]; then continue; fi
+
+    if [[ ! " ${config_file_list[*]} " =~ [[:space:]]${file}[[:space:]] ]]; then
+      gum style --faint >&2 \
+        "$file found in dir $key/ but no destination path set in config. Skipping file.."
+    else
+      src_path="$key/$file"
+      dest_dir="$(jq -r ".\"$file\"" <<< "$files")"
+      dest_dir_expanded="${dest_dir/#\~/$HOME}"
+
+      target_file_name="$(basename "$file")"
+      if ! test -d "$dest_dir_expanded"; then
+        target_file_name="$(basename "$dest_dir_expanded")"
+        dest_dir_expanded="$(dirname "$dest_dir_expanded")"
+      fi
+
+      dest_path="${dest_dir_expanded%/}/$target_file_name"
+
+      # If file contains a pattern from dotfiles.toml, copy the file to the
+      # local .templates/ dir and apply the substitutions.
+      # Reassign src_path to the new template file and symlink that instead.
+      if [[ -n "$templates" ]] && [[ -n "$(rg -Ff "$patterns_file" "$src_path")" ]]; then
+        template_dir="$key/.templates"
+        template_file="$template_dir/$file"
+
+        mkdir -p "$(dirname "$template_file")"
+
+        cp --preserve=all --force "$src_path" "$template_file" \
+          2> >(gum log -terror "$@" 2>/dev/null)
+
+        src_path="$template_file"
+      fi
+
+      _create_or_replace_symlink "$src_path" "$dest_path"
+    fi
+  done
+
+  rm -f "$patterns_file"
+
+  [[ -n "$templates" ]] && _replace_patterns "$key" "$templates"
+
+  return 0
+}
+
+
+usage() {
+	cat <<- EOF
+	Usage: ${BASH_SOURCE[0]} [OPTIONS] [ARGS]
+	
+	Examples:
+	\$ ${BASH_SOURCE[0]} 
+
+	\$ DEBUG=1 ${BASH_SOURCE[0]}
+
+	\$ ${BASH_SOURCE[0]} --fd-filter git -- bin
+	\$ ${BASH_SOURCE[0]} -fgit -- bin
+	
+	Options:
+	  -h, --help       Display this help message.
+	  -f, --fd-filter  Filter to pass to fd when searching for files.
+	EOF
+}
+
+
+main() {
+  declare -a DIRS
+
+  FD_FILTER=
+
+  GETOPT_ARGS=(--options 'hf:' --long 'help,fd-filter:')
+
+  if OPTS=$(getopt "${GETOPT_ARGS[@]}" -- "$@"); then eval set -- "$OPTS"; fi
+
+  while :; do
+    case "$1" in
+      -h | --help)       usage; exit 0 ;;
+      -f | --fd-filter)  FD_FILTER="$2"; shift ;;
+      --)                shift; break ;;
+      *)                 echo >&2 'error'; exit 1 ;;
+    esac
+    shift
+  done
+
+  DIRS=("$@") # remaining args
+
+  if [ ${#DIRS[@]} -eq 0 ]; then
+    # If no args passed, read top-level keys from config.
+    readarray -t DIRS < <(jq -r '. | keys | .[]' <<< "$CONFIG")
+    # Reversing order of the array, so it reads top -> bottom of the config file.
+    __reverse_array_order() { DIRS=("${BASH_ARGV[@]}"); }
+    shopt -s extdebug
+    __reverse_array_order "${DIRS[@]}"
+    shopt -u extdebug
+  fi
+
+  for d in "${DIRS[@]}"; do
+    _deploy_files "$(tr -d '\r' <<< "$d")" "$FD_FILTER"
+  done; unset d
+
+  exit 0
+}
+
+main "$@"
