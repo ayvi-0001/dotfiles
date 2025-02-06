@@ -1,0 +1,431 @@
+default_profile = "main"
+
+[profiles.main]
+adapter     = "sqlite"
+keymap_name = ['custom']
+limit       = 100000
+mode        = "rw"
+show_files  = "./"
+theme       = "github-dark"
+
+[[keymaps.custom]]
+action = "quit"
+keys   = "ctrl+q"
+
+[[keymaps.custom]]
+action = "help"
+keys   = "f1"
+
+[[keymaps.custom]]
+action = "focus_next"
+keys   = "tab"
+
+[[keymaps.custom]]
+action = "focus_previous"
+keys   = "shift+tab"
+
+[[keymaps.custom]]
+action = "focus_query_editor"
+keys   = "f2"
+
+[[keymaps.custom]]
+action = "focus_results_viewer"
+keys   = "f5"
+
+[[keymaps.custom]]
+action = "focus_data_catalog"
+keys   = "f6"
+
+[[keymaps.custom]]
+action = "toggle_sidebar"
+keys   = "ctrl+b,f9"
+
+[[keymaps.custom]]
+action = "toggle_full_screen"
+keys   = "f10"
+
+[[keymaps.custom]]
+action = "show_query_history"
+keys   = "f8"
+
+[[keymaps.custom]]
+action = "show_data_exporter"
+keys   = "ctrl+b"
+
+[[keymaps.custom]]
+action = "refresh_catalog"
+keys   = "ctrl+r"
+
+[[keymaps.custom]]
+action = "code_editor.new_buffer"
+keys   = "ctrl+n"
+
+[[keymaps.custom]]
+action = "code_editor.close_buffer"
+keys   = "ctrl+d"
+
+[[keymaps.custom]]
+action = "code_editor.next_buffer"
+keys   = "ctrl+k"
+
+[[keymaps.custom]]
+action      = "code_editor.run_query"
+key_display = "^⏎ or ^j"
+keys        = "ctrl+enter,ctrl+j"
+
+[[keymaps.custom]]
+action = "code_editor.format_buffer"
+keys   = "f4"
+
+[[keymaps.custom]]
+action = "code_editor.save_buffer"
+keys   = "ctrl+s"
+
+[[keymaps.custom]]
+action = "code_editor.load_buffer"
+keys   = "ctrl+o"
+
+[[keymaps.custom]]
+action = "code_editor.find"
+keys   = "ctrl+f"
+
+[[keymaps.custom]]
+action = "code_editor.find_next"
+keys   = "f3"
+
+[[keymaps.custom]]
+action = "code_editor.goto_line"
+keys   = "ctrl+g"
+
+[[keymaps.custom]]
+action = "code_editor.cursor_up"
+keys   = "up"
+
+[[keymaps.custom]]
+action = "code_editor.cursor_down"
+keys   = "down"
+
+[[keymaps.custom]]
+action = "code_editor.cursor_left"
+keys   = "left"
+
+[[keymaps.custom]]
+action = "code_editor.cursor_right"
+keys   = "right"
+
+[[keymaps.custom]]
+action = "code_editor.cursor_word_left"
+keys   = "ctrl+left"
+
+[[keymaps.custom]]
+action = "code_editor.cursor_word_right"
+keys   = "ctrl+right"
+
+[[keymaps.custom]]
+action = "code_editor.cursor_line_start"
+keys   = "home"
+
+[[keymaps.custom]]
+action = "code_editor.cursor_line_end"
+keys   = "end"
+
+[[keymaps.custom]]
+action = "code_editor.cursor_doc_start"
+keys   = "ctrl+home"
+
+[[keymaps.custom]]
+action = "code_editor.cursor_doc_end"
+keys   = "ctrl+end"
+
+[[keymaps.custom]]
+action = "code_editor.cursor_page_up"
+keys   = "pageup"
+
+[[keymaps.custom]]
+action = "code_editor.cursor_page_down"
+keys   = "pagedown"
+
+[[keymaps.custom]]
+action = "code_editor.select_up"
+keys   = "shift+up"
+
+[[keymaps.custom]]
+action = "code_editor.select_down"
+keys   = "shift+down"
+
+[[keymaps.custom]]
+action = "code_editor.select_left"
+keys   = "shift+left"
+
+[[keymaps.custom]]
+action = "code_editor.select_right"
+keys   = "shift+right"
+
+[[keymaps.custom]]
+action = "code_editor.select_word_left"
+keys   = "ctrl+shift+left"
+
+[[keymaps.custom]]
+action = "code_editor.select_word_right"
+keys   = "ctrl+shift+right"
+
+[[keymaps.custom]]
+action = "code_editor.select_line_start"
+keys   = "shift+home"
+
+[[keymaps.custom]]
+action = "code_editor.select_line_end"
+keys   = "shift+end"
+
+[[keymaps.custom]]
+action = "code_editor.select_doc_start"
+keys   = "ctrl+shift+home"
+
+[[keymaps.custom]]
+action = "code_editor.select_doc_end"
+keys   = "ctrl+shift+end"
+
+[[keymaps.custom]]
+action = "code_editor.select_all"
+keys   = "ctrl+a"
+
+[[keymaps.custom]]
+action = "code_editor.scroll_up_one"
+keys   = "ctrl+up"
+
+[[keymaps.custom]]
+action = "code_editor.scroll_down_one"
+keys   = "ctrl+down"
+
+[[keymaps.custom]]
+action = "code_editor.toggle_comment"
+keys   = "ctrl+backslash"
+
+[[keymaps.custom]]
+action = "code_editor.cut"
+keys   = "ctrl+x"
+
+[[keymaps.custom]]
+action = "code_editor.copy"
+keys   = "ctrl+c"
+
+[[keymaps.custom]]
+action = "code_editor.paste"
+keys   = "ctrl+v,shift+insert"
+
+[[keymaps.custom]]
+action = "code_editor.undo"
+keys   = "ctrl+z"
+
+[[keymaps.custom]]
+action = "code_editor.redo"
+keys   = "ctrl+y"
+
+[[keymaps.custom]]
+action = "code_editor.delete_left"
+keys   = "backspace"
+
+[[keymaps.custom]]
+action = "code_editor.delete_right"
+keys   = "delete"
+
+[[keymaps.custom]]
+action = "code_editor.delete_word_left"
+keys   = "ctrl+w"
+
+[[keymaps.custom]]
+action = "code_editor.delete_word_right"
+keys   = "ctrl+left"
+
+[[keymaps.custom]]
+action = "code_editor.delete_to_start_of_line"
+keys   = "ctrl+u"
+
+[[keymaps.custom]]
+action = "data_catalog.previous_tab"
+keys   = "j"
+
+[[keymaps.custom]]
+action = "data_catalog.next_tab"
+keys   = "k"
+
+[[keymaps.custom]]
+action      = "data_catalog.insert_name"
+key_display = "^⏎ or ^j"
+keys        = "ctrl+enter,ctrl+j"
+
+[[keymaps.custom]]
+action = "data_catalog.copy_name"
+keys   = "ctrl+c"
+
+[[keymaps.custom]]
+action = "data_catalog.select_cursor"
+keys   = "enter"
+
+[[keymaps.custom]]
+action = "data_catalog.toggle_node"
+keys   = "l,space"
+
+[[keymaps.custom]]
+action = "data_catalog.cursor_up"
+keys   = "k,up"
+
+[[keymaps.custom]]
+action = "data_catalog.cursor_down"
+keys   = "down,j"
+
+[[keymaps.custom]]
+action = "data_catalog.focus_query_editor"
+keys   = "tab"
+
+[[keymaps.custom]]
+action = "data_catalog.focus_results_viewer"
+keys   = "shift+tab"
+
+[[keymaps.custom]]
+action = "data_catalog.show_context_menu"
+keys   = "full_stop"
+
+[[keymaps.custom]]
+action = "data_catalog.hide_context_menu"
+keys   = "escape"
+
+[[keymaps.custom]]
+action = "results_viewer.previous_tab"
+keys   = "j"
+
+[[keymaps.custom]]
+action = "results_viewer.next_tab"
+keys   = "k"
+
+[[keymaps.custom]]
+action = "results_viewer.copy_selection"
+keys   = "ctrl+c"
+
+[[keymaps.custom]]
+action = "results_viewer.select_cursor"
+keys   = "enter"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_up"
+keys   = "k,up"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_down"
+keys   = "down,j"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_left"
+keys   = "h,left"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_right"
+keys   = "l,right"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_row_start"
+keys   = "ctrl+left"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_row_end"
+keys   = "ctrl+right"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_column_start"
+keys   = "ctrl+up,home"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_column_end"
+keys   = "ctrl+down,end"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_next_cell"
+keys   = "tab"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_previous_cell"
+keys   = "shift+tab"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_page_up"
+keys   = "pageup"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_page_down"
+keys   = "pagedown"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_table_start"
+keys   = "ctrl+home"
+
+[[keymaps.custom]]
+action = "results_viewer.cursor_table_end"
+keys   = "ctrl+end"
+
+[[keymaps.custom]]
+action = "results_viewer.select_up"
+keys   = "shift+up"
+
+[[keymaps.custom]]
+action = "results_viewer.select_down"
+keys   = "shift+down"
+
+[[keymaps.custom]]
+action = "results_viewer.select_left"
+keys   = "shift+left"
+
+[[keymaps.custom]]
+action = "results_viewer.select_right"
+keys   = "shift+right"
+
+[[keymaps.custom]]
+action = "results_viewer.select_row_start"
+keys   = "ctrl+shift+left"
+
+[[keymaps.custom]]
+action = "results_viewer.select_row_end"
+keys   = "ctrl+shift+right"
+
+[[keymaps.custom]]
+action = "results_viewer.select_column_start"
+keys   = "ctrl+shift+up,shift+home"
+
+[[keymaps.custom]]
+action = "results_viewer.select_column_end"
+keys   = "ctrl+shift+down,shift+end"
+
+[[keymaps.custom]]
+action = "results_viewer.select_page_up"
+keys   = "shift+pageup"
+
+[[keymaps.custom]]
+action = "results_viewer.select_page_down"
+keys   = "shift+pagedown"
+
+[[keymaps.custom]]
+action = "results_viewer.select_table_start"
+keys   = "ctrl+shift+home"
+
+[[keymaps.custom]]
+action = "results_viewer.select_table_end"
+keys   = "ctrl+shift+end"
+
+[[keymaps.custom]]
+action = "results_viewer.select_all"
+keys   = "ctrl+a"
+
+[[keymaps.custom]]
+action = "results_viewer.focus_query_editor"
+keys   = "shift+tab"
+
+[[keymaps.custom]]
+action = "results_viewer.focus_data_catalog"
+keys   = "tab"
+
+[[keymaps.custom]]
+action = "history_screen.select_query"
+keys   = "enter"
+
+[[keymaps.custom]]
+action = "history_screen.cancel"
+keys   = "escape"
