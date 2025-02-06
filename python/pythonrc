@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+
+import atexit
+import readline
+from contextlib import suppress
+from pathlib import Path
+
+history = Path.home() / ".cache" / "python" / ".history"
+
+history.touch(exist_ok=True)
+
+if not history.read_text(encoding="utf-8"):
+    history.write_text("# History created.\n")
+
+
+with suppress(OSError):
+    readline.read_history_file(history)
+
+
+def write_history():
+    try:
+        readline.write_history_file(history)
+    except OSError:
+        pass
+
+
+atexit.register(write_history)
