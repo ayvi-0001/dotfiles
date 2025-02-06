@@ -1,0 +1,7 @@
+[query]
+--use_legacy_sql=false
+--max_rows=100000000
+
+[ls]
+--max_results=100000
+--all
