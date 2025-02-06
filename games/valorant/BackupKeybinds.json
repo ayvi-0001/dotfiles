@@ -1,0 +1,788 @@
+{
+	"settingsVersion": 14,
+	"actionMappings": [
+		{
+			"name": "InformationalHUD",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "N",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "InformationalHUD",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "SecondaryTrigger",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "RightMouseButton",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "SecondaryTrigger",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Reload",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "R",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_Primary",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "One",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_Primary",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_Secondary",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "Two",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_Secondary",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_Melee",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "Three",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_Melee",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_GrenadeAbility",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "C",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_Ability1",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "Q",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_Ability2",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "V",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_Ability2",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_Level",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "Four",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_Ultimate",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "F",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Activate_Ultimate",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "PrevWeapon",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "NextWeapon",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "EquipLastUsed",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Jump",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "MouseScrollDown",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Jump",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "LeftAlt",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Crouch",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "LeftControl",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Crouch",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Walk",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "LeftShift",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Walk",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "UseObject",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "E",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "UseObject",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Ping",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "MiddleMouseButton",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Ping",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ToggleShop",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "B",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ToggleShop",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ToggleMap",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "M",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ToggleMap",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ToggleCharacterAbilityHUD",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "F1",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ToggleCharacterAbilityHUD",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ShowScoreboard",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "Tab",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ShowScoreboard",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "DropEquippable",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "G",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "DropEquippable",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ToggleMouseCursor",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "RightAlt",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ToggleMouseCursor",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "OpenMegamap",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "X",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "OpenMegamap",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Spray",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "T",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Inspect",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "MouseScrollUp",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Ghost",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "MiddleMouseButton",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "Ghost",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ToggleZoomLevel",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "OpenCommMenu",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "Period",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "OpenCommMenu",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "UseAlternateObject",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "Four",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "OpenCommTree1",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "OpenCommTree2",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "OpenCommTree3",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "OpenCommTree4",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "CommWheelIndex",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "Comma",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ExpandedCombatCommWheel",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "StrategyTacticsCommWheel",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "SocialCommWheel",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "ShowExtendedInfo",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "None",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "VOICE_TeamPTTAction",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "SpaceBar",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		},
+		{
+			"name": "VOICE_PartyPTTAction",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "Tilde",
+			"shift": false,
+			"ctrl": false,
+			"alt": false,
+			"cmd": false,
+			"tapHoldType": "None"
+		}
+	],
+	"axisMappings": [
+		{
+			"name": "MoveForward",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "W",
+			"scale": 1
+		},
+		{
+			"name": "MoveForward",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"scale": 1
+		},
+		{
+			"name": "MoveForward",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "S",
+			"scale": -1
+		},
+		{
+			"name": "MoveForward",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"scale": -1
+		},
+		{
+			"name": "MoveRight",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "A",
+			"scale": -1
+		},
+		{
+			"name": "MoveRight",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"scale": -1
+		},
+		{
+			"name": "MoveRight",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "D",
+			"scale": 1
+		},
+		{
+			"name": "MoveRight",
+			"characterName": "None",
+			"bindIndex": 1,
+			"key": "None",
+			"scale": 1
+		},
+		{
+			"name": "MoveUp",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "LeftAlt",
+			"scale": 1
+		},
+		{
+			"name": "MoveUp",
+			"characterName": "None",
+			"bindIndex": 0,
+			"key": "LeftControl",
+			"scale": -1
+		}
+	],
+	"settingsProfiles": [],
+	"characterProfileData": [
+		{
+			"profileName": "None",
+			"presetIndex": 0
+		}
+	]
+}
