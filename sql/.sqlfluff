@@ -1,0 +1,28 @@
+[sqlfluff]
+dialect = bigquery
+wildcard_policy = multiple
+sql_file_exts = .sql,.sqlx
+max_line_length = 0
+
+[sqlfluff:rules:aliasing.length]
+min_alias_length = 3
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.identifiers]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.functions]
+extended_capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.types]
+extended_capitalisation_policy = upper
+
+[sqlfluff:indentation]
+indent_unit = space
+tab_space_size = 2
+indented_joins = True
+indented_ctes = True
+allow_implicit_indents = True
+template_blocks_indent = True
