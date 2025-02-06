@@ -1,0 +1,42 @@
+# CLIENT
+client_automatic_displays=false
+client_decoder_10bit=false
+client_decoder_h265=1
+client_immersive=1 # both (key/mouse)
+client_macos_key_swap=true
+client_mic_passthrough=true
+client_overlay=1
+client_overlay_warnings=1
+client_renderer=3 # Direct3D 11 
+client_vsync=1
+client_zero_copy=true
+decoder_software=0 # hardware
+lient_windowed=0
+network_raw_audio=1 # uncompressed
+
+# HOST
+app_copy_paste=true
+app_daisychaining=0
+app_host=1
+app_write_minidump=true
+encoder_bitrate=40
+encoder_fps=60
+encoder_min_qp=5 # lowest latency
+host_audio_cancel=0
+host_exclusive_input=0
+host_full_fps=false
+host_idle_kick_time=0
+host_lock_desktop=false
+host_prevent_sleep=true
+host_protective_mode=false	
+host_require_whitelist=0
+host_rotated=false
+host_virtual_microphone=1
+host_virtual_monitor_fallback=true
+host_virtual_mouse=1
+network_cg_level=1
+network_server_start_port=0
+server_admin_mute=1
+server_max_clients=20
+server_resolution_x=65535 # both to this setting to not change host's resolution
+server_resolution_y=65535 
