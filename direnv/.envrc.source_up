@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# This file gets deployed to several directories.
+source_up_if_exists
