@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# uv fails to hardlink files when the cache and target directories are on different filesystems.
+# This gets deployed to the top level directories on different drives/mounts.
+export UV_LINK_MODE=copy
+export UV_CACHE_DIR='{{CACHE_PREFIX}}/uv/'
