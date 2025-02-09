@@ -1,0 +1,132 @@
+{
+  "$schema": "./schema.json",
+  "config": {
+    "updateChannel": "stable",
+    "fontSize": 15,
+    "fontFamily": "\"SpaceMono Nerd Font\", \"DejaVu Sans Mono\", Consolas, \"Lucida Console\", monospace",
+    "fontWeight": "normal",
+    "fontWeightBold": "bold",
+    "lineHeight": 1,
+    "letterSpacing": 0,
+    "scrollback": 1000,
+    "cursorColor": "rgba(248,28,229,0.8)",
+    "cursorAccentColor": "#000",
+    "cursorShape": "BLOCK",
+    "cursorBlink": false,
+    "foregroundColor": "#fff",
+    "backgroundColor": "#000",
+    "selectionColor": "rgba(248,28,229,0.3)",
+    "borderColor": "#333",
+    "css": "",
+    "termCSS": "",
+    "workingDirectory": "",
+    "showHamburgerMenu": false,
+    "showWindowControls": false,
+    "padding": "12px 14px",
+    "colors": {
+      "black": "#000000",
+      "red": "#C51E14",
+      "green": "#1DC121",
+      "yellow": "#C7C329",
+      "blue": "#0A2FC4",
+      "magenta": "#C839C5",
+      "cyan": "#20C5C6",
+      "white": "#C7C7C7",
+      "lightBlack": "#686868",
+      "lightRed": "#FD6F6B",
+      "lightGreen": "#67F86F",
+      "lightYellow": "#FFFA72",
+      "lightBlue": "#6A76FB",
+      "lightMagenta": "#FD7CFC",
+      "lightCyan": "#68FDFE",
+      "lightWhite": "#FFFFFF",
+      "limeGreen": "#32CD32",
+      "lightCoral": "#F08080"
+    },
+    "shell": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "shellArgs": [
+      "-i",
+      "-l"
+    ],
+    "env": {},
+    "bell": false,
+    "bellSound": null,
+    "bellSoundURL": null,
+    "copyOnSelect": true,
+    "defaultSSHApp": true,
+    "quickEdit": false,
+    "macOptionSelectionMode": "force",
+    "webGLRenderer": true,
+    "webLinksActivationKey": "",
+    "disableLigatures": true,
+    "disableAutoUpdates": false,
+    "autoUpdatePlugins": true,
+    "preserveCWD": true,
+    "screenReaderMode": false,
+    "imageSupport": true,
+    "defaultProfile": "default",
+    "profiles": [
+      {
+        "name": "default",
+        "config": {}
+      }
+    ],
+    "modifierKeys": {
+      "altIsMeta": true
+    }
+  },
+  "plugins": [],
+  "localPlugins": [
+    "migrated-hyper3-config"
+  ],
+  "keymaps": {
+    "window:devtools": "",
+    "window:reload": "ctrl+shift+r",
+    "window:reloadFull": "ctrl+shift+f5",
+    "window:preferences": "",
+    "window:hamburgerMenu": "alt+f",
+    "zoom:reset": "ctrl+0",
+    "zoom:in": "ctrl+=",
+    "zoom:out": "ctrl+-",
+    "window:new": "ctrl+shift+n",
+    "window:minimize": "",
+    "window:zoom": "",
+    "window:toggleFullScreen": "f11",
+    "window:close": [
+      "ctrl+shift+q",
+      "alt+f4"
+    ],
+    "tab:new": "ctrl+shift+t",
+    "tab:next": [
+      "ctrl+tab"
+    ],
+    "tab:prev": [
+      "ctrl+shift+tab"
+    ],
+    "tab:jump:prefix": "ctrl",
+    "pane:next": "ctrl+pageup",
+    "pane:prev": "ctrl+pagedown",
+    "pane:splitRight": "",
+    "pane:splitDown": "",
+    "pane:close": "ctrl+shift+w",
+    "editor:undo": "ctrl+shift+z",
+    "editor:redo": "ctrl+shift+y",
+    "editor:cut": "ctrl+shift+x",
+    "editor:copy": "ctrl+shift+c",
+    "editor:paste": "ctrl+shift+v",
+    "editor:selectAll": "ctrl+shift+a",
+    "editor:search": "ctrl+shift+f",
+    "editor:search-close": "esc",
+    "editor:movePreviousWord": "",
+    "editor:moveNextWord": "",
+    "editor:moveBeginningLine": "Home",
+    "editor:moveEndLine": "End",
+    "editor:deletePreviousWord": "ctrl+backspace",
+    "editor:deleteNextWord": "ctrl+del",
+    "editor:deleteBeginningLine": "ctrl+home",
+    "editor:deleteEndLine": "ctrl+end",
+    "editor:clearBuffer": "ctrl+shift+k",
+    "editor:break": "ctrl+c",
+    "plugins:update": ""
+  }
+}
