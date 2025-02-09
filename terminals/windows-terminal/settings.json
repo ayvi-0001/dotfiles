@@ -1,0 +1,383 @@
+{
+  "$help": "https://aka.ms/terminal-documentation",
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+  "alwaysShowNotificationIcon": true,
+  "alwaysShowTabs": true,
+  "centerOnLaunch": true,
+  "copyFormatting": "none",
+  "copyOnSelect": true,
+  "defaultProfile": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+  "firstWindowPreference": "persistedWindowLayout",
+  "focusFollowMouse": false,
+  "initialCols": 280,
+  "initialRows": 60,
+  "launchMode": "default",
+  "minimizeToNotificationArea": false,
+  "newTabMenu": [
+    {
+      "type": "remainingProfiles"
+    }
+  ],
+  "newTabPosition": "afterCurrentTab",
+  "profiles": {
+    "defaults": {
+      "adjustIndistinguishableColors": "always",
+      "altGrAliasing": true,
+      "antialiasingMode": "cleartype",
+      "autoMarkPrompts": false,
+      "backgroundImage": null,
+      "bellStyle": [
+        "window",
+        "taskbar"
+      ],
+      "closeOnExit": "graceful",
+      "colorScheme": "ayvi",
+      "compatibility.reloadEnvironmentVariables": false,
+      "cursorShape": "filledBox",
+      "experimental.repositionCursorWithMouse": false,
+      "experimental.rightClickContextMenu": false,
+      "font": {
+        "builtinGlyphs": false,
+        "cellHeight": "1.4",
+        "face": "SpaceMono Nerd Font",
+        "size": 9,
+        "weight": "medium"
+      },
+      "historySize": 500000,
+      "icon": null,
+      "intenseTextStyle": "bright",
+      "opacity": 80,
+      "padding": "25",
+      "scrollbarState": "visible",
+      "showMarksOnScrollbar": false,
+      "startingDirectory": null,
+      "tabTitle": null,
+      "useAcrylic": false
+    },
+    "list": [
+      {
+        "altGrAliasing": true,
+        "commandline": "C:/Program Files/Git/bin/bash.exe -il",
+        "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+        "hidden": false,
+        "intenseTextStyle": "all",
+        "name": "Git Bash",
+        "source": "Git",
+        "startingDirectory": "%USERPROFILE%"
+      }
+    ]
+  },
+  "rendering.graphicsAPI": "direct3d11",
+  "schemes": [
+    {
+      "background": "#020202",
+      "black": "#000000",
+      "blue": "#7176F5",
+      "brightBlack": "#555753",
+      "brightBlue": "#7176F5",
+      "brightCyan": "#8FFAFD",
+      "brightGreen": "#89F57C",
+      "brightPurple": "#F084F7",
+      "brightRed": "#DC4720",
+      "brightWhite": "#F0F0FF",
+      "brightYellow": "#FCFA7D",
+      "cursorColor": "#9146FF",
+      "cyan": "#8FFAFD",
+      "foreground": "#F0F0FF",
+      "green": "#89F57C",
+      "name": "ayvi",
+      "purple": "#F084F7",
+      "red": "#DC4720",
+      "selectionBackground": "#F0F0FF",
+      "white": "#F0F0FF",
+      "yellow": "#FCFA7D"
+    }
+  ],
+  "showTabsInTitlebar": true,
+  "startOnUserLogin": false,
+  "tabSwitcherMode": "inOrder",
+  "tabWidthMode": "titleLength",
+  "themes": [],
+  "useAcrylicInTabRow": true,
+  "windowingBehavior": "useExisting",
+  "wordDelimiters": "\"'",
+  "actions": [
+    {
+      "command": "find",
+      "id": "User.find",
+      "keys": "ctrl+shift+f"
+    },
+    {
+      "command": {
+        "action": "resizePane",
+        "direction": "left"
+      },
+      "id": "User.resizePane.2A0DA8E0",
+      "keys": "alt+shift+left"
+    },
+    {
+      "command": {
+        "action": "scrollDown"
+      },
+      "id": "Terminal.ScrollDown",
+      "keys": "ctrl+shift+down"
+    },
+    {
+      "command": {
+        "action": "moveFocus",
+        "direction": "down"
+      },
+      "id": "Terminal.MoveFocusDown",
+      "keys": "alt+down"
+    },
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "up"
+      },
+      "id": "User.splitPane.B39B174B"
+    },
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "right"
+      },
+      "id": "User.splitPane.864CD510"
+    },
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "auto"
+      },
+      "id": "User.splitPane.91AB55B1"
+    },
+    {
+      "command": {
+        "action": "moveFocus",
+        "direction": "right"
+      },
+      "id": "Terminal.MoveFocusRight",
+      "keys": "alt+right"
+    },
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "down"
+      },
+      "id": "User.splitPane.D5151347"
+    },
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "left"
+      },
+      "id": "User.splitPane.21DBB4A1"
+    },
+    {
+      "command": {
+        "action": "moveFocus",
+        "direction": "up"
+      },
+      "id": "Terminal.MoveFocusUp",
+      "keys": "alt+up"
+    },
+    {
+      "command": "scrollUpPage",
+      "id": "Terminal.ScrollUpPage",
+      "keys": "ctrl+shift+pgup"
+    },
+    {
+      "command": "scrollDownPage",
+      "id": "Terminal.ScrollDownPage",
+      "keys": "ctrl+shift+pgdn"
+    },
+    {
+      "command": {
+        "action": "scrollUp"
+      },
+      "id": "Terminal.ScrollUp",
+      "keys": "ctrl+shift+up"
+    },
+    {
+      "command": {
+        "action": "moveFocus",
+        "direction": "left"
+      },
+      "id": "Terminal.MoveFocusLeft",
+      "keys": "alt+left"
+    },
+    {
+      "command": "scrollToTop",
+      "id": "Terminal.ScrollToTop",
+      "keys": "ctrl+shift+home"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+m"
+    },
+    {
+      "command": "unbound",
+      "keys": "f11"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+enter"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+9"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+8"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+7"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+6"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+5"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+4"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+3"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+2"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+1"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+shift+plus"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+shift+minus"
+    },
+    {
+      "command": "unbound",
+      "keys": "win+sc(41)"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+space"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+left"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+shift+d"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+space"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+a"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+comma"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+comma"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+alt+comma"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+shift+d"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+shift+j"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+shift+h"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+shift+l"
+    },
+    {
+      "command": "unbound",
+      "keys": "alt+shift+k"
+    },
+    {
+      "command": "scrollToBottom",
+      "id": "Terminal.ScrollToBottom",
+      "keys": "ctrl+shift+end"
+    },
+    {
+      "command": {
+        "action": "exportBuffer"
+      },
+      "id": "Terminal.ExportBuffer"
+    },
+    {
+      "command": "paste",
+      "id": "User.paste",
+      "keys": "ctrl+v"
+    },
+    {
+      "command": {
+        "action": "copy",
+        "singleLine": false
+      },
+      "id": "User.copy.644BA8F2",
+      "keys": "ctrl+c"
+    },
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "auto",
+        "splitMode": "duplicate"
+      },
+      "id": "User.splitPane.A6751878"
+    },
+    {
+      "command": {
+        "action": "resizePane",
+        "direction": "down"
+      },
+      "id": "User.resizePane.F747588A",
+      "keys": "alt+shift+down"
+    },
+    {
+      "command": {
+        "action": "resizePane",
+        "direction": "right"
+      },
+      "id": "User.resizePane.87C324ED",
+      "keys": "alt+shift+right"
+    },
+    {
+      "command": {
+        "action": "resizePane",
+        "direction": "up"
+      },
+      "id": "User.resizePane.6CD791B",
+      "keys": "alt+shift+up"
+    }
+  ]
+}
