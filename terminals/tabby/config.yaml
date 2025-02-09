@@ -1,0 +1,262 @@
+terminal:
+  frontend: xterm-webgl
+  fontSize: 12
+  fontWeight: 400
+  fontWeightBold: 700
+  fallbackFont: null
+  linePadding: 0
+  bell: visual
+  bracketedPaste: true
+  background: theme
+  ligatures: true
+  cursor: block
+  cursorBlink: true
+  hideTabIndex: true
+  showTabProfileIcon: false
+  hideCloseButton: true
+  hideTabOptionsButton: true
+  rightClick: 'off'
+  pasteOnMiddleClick: false
+  copyOnSelect: true
+  copyAsHTML: true
+  scrollOnInput: true
+  altIsMeta: true
+  wordSeparator: ' ''"'''''
+  colorScheme:
+    name: ayu
+    foreground: '#e6e1cf'
+    background: '#0f1419'
+    cursor: '#f29718'
+    colors:
+      - '#000000'
+      - '#ff3333'
+      - '#b8cc52'
+      - '#e7c547'
+      - '#36a3d9'
+      - '#f07178'
+      - '#95e6cb'
+      - '#ffffff'
+      - '#323232'
+      - '#ff6565'
+      - '#eafe84'
+      - '#fff779'
+      - '#68d5ff'
+      - '#ffa3aa'
+      - '#c7fffd'
+      - '#ffffff'
+  customColorSchemes: []
+  warnOnMultilinePaste: true
+  searchRegexAlwaysEnabled: false
+  searchOptions: {}
+  detectProgress: true
+  scrollbackLines: 50000
+  drawBoldTextInBrightColors: true
+  sixel: true
+  minimumContrastRatio: 3
+  trimWhitespaceOnPaste: true
+  font: SpaceMono Nerd Font Mono
+  autoOpen: true
+  useConPTY: true
+  environment: {}
+  setComSpec: false
+  profile: local:git-bash
+  showBuiltinProfiles: true
+  showRecentProfiles: 3
+  focusFollowsMouse: false
+  identification: cygwin
+ssh:
+  warnOnClose: true
+  winSCPPath: null
+  agentType: auto
+  agentPath: null
+  x11Display: null
+  verifyHostKeys: true
+clickableLinks:
+  modifier: metaKey
+configSync:
+  host: null
+  token: null
+  configID: null
+  auto: false
+  parts:
+    hotkeys: true
+    appearance: true
+    vault: true
+accessibility:
+  animations: false
+appearance:
+  dock: 'off'
+  dockScreen: current
+  dockFill: 0.5
+  dockSpace: 1
+  dockHideOnBlur: false
+  dockAlwaysOnTop: true
+  flexTabs: true
+  tabsLocation: top
+  tabsInFullscreen: true
+  cycleTabs: true
+  theme: Follow the color scheme
+  frame: thin
+  css: '/* * { color: blue !important; } */'
+  opacity: 0.80
+  vibrancyType: blur
+  lastTabClosesWindow: true
+  spaciness: 1
+  colorSchemeMode: dark
+profiles: []
+groups: []
+profileDefaults:
+  ssh:
+    disableDynamicTitle: true
+titleControl: {}
+enableAnalytics: false
+enableWelcomeTab: false
+electronFlags:
+  - - force_discrete_gpu
+    - '0'
+saveOutput:
+  autoSave: 'on'
+  autoSaveDirectory: c:\var\tabby_logs
+qc:
+  cmds: []
+recoverTabs: false
+docker: {}
+enableAutomaticUpdates: true
+version: 7
+vault: null
+encrypted: false
+enableExperimentalFeatures: true
+workspaceManager: {}
+pluginBlacklist: []
+commandBlacklist: []
+providerBlacklist: []
+profileBlacklist: []
+hacks:
+  disableGPU: false
+  disableVibrancyWhileDragging: false
+  enableFluentBackground: false
+hideTray: true
+hotkeys:
+  toggle-window: []
+  copy:
+    - Ctrl-Shift-C
+  paste:
+    - Ctrl-Shift-V
+  select-all: []
+  clear: []
+  zoom-in:
+    - Ctrl-=
+    - Ctrl-Shift-=
+  zoom-out:
+    - Ctrl--
+    - Ctrl-Shift--
+  reset-zoom:
+    - Ctrl-0
+  home: []
+  end: []
+  restart-telnet-session: []
+  search:
+    - Ctrl-Shift-F
+  restart-ssh-session: []
+  launch-winscp: []
+  settings-tab: {}
+  settings: []
+  serial: null
+  restart-serial-session: []
+  new-window:
+    - Ctrl-Shift-N
+  profile: {}
+  profile-selectors: {}
+  toggle-fullscreen: null
+  close-tab:
+    - Ctrl-Shift-W
+  reopen-tab: []
+  rename-tab: []
+  next-tab:
+    - Ctrl-Shift-Right
+    - Ctrl-Tab
+  previous-tab:
+    - Ctrl-Shift-Left
+    - Ctrl-Shift-Tab
+  move-tab-left: null
+  move-tab-right: null
+  rearrange-panes: []
+  duplicate-tab: []
+  restart-tab: []
+  reconnect-tab: []
+  disconnect-tab: []
+  explode-tab: null
+  combine-tabs: null
+  tab-1: null
+  tab-2: null
+  tab-3: null
+  tab-4: null
+  tab-5: null
+  tab-6: null
+  tab-7: null
+  tab-8: null
+  tab-9: null
+  tab-10: null
+  tab-11: []
+  tab-12: []
+  tab-13: []
+  tab-14: []
+  tab-15: []
+  tab-16: []
+  tab-17: []
+  tab-18: []
+  tab-19: []
+  tab-20: []
+  split-right: null
+  split-bottom: null
+  split-left: []
+  split-top: []
+  pane-nav-right:
+    - Ctrl-Alt-Right
+  pane-nav-down:
+    - Ctrl-Alt-Down
+  pane-nav-up:
+    - Ctrl-Alt-Up
+  pane-nav-left:
+    - Ctrl-Alt-Left
+  pane-nav-previous: null
+  pane-nav-next: null
+  pane-nav-1: []
+  pane-nav-2: []
+  pane-nav-3: []
+  pane-nav-4: []
+  pane-nav-5: []
+  pane-nav-6: []
+  pane-nav-7: []
+  pane-nav-8: []
+  pane-nav-9: []
+  pane-maximize: null
+  close-pane: []
+  pane-increase-vertical: []
+  pane-decrease-vertical: []
+  pane-increase-horizontal: []
+  pane-decrease-horizontal: []
+  profile-selector: []
+  ctrl-c:
+    - Ctrl-C
+  previous-word: null
+  next-word: null
+  delete-previous-word:
+    - Ctrl-Backspace
+  delete-line: null
+  delete-next-word:
+    - Ctrl-Delete
+  pane-focus-all: null
+  focus-all-tabs: null
+  scroll-to-top: null
+  scroll-up: null
+  scroll-down: null
+  scroll-to-bottom: null
+  qc: null
+  switch-profile: null
+  toggle-last-tab: []
+  command-selector:
+    - Ctrl-Shift-P
+  copy-current-path: []
+  new-tab:
+    - Ctrl-Shift-T
