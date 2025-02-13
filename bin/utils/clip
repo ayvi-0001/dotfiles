@@ -1,0 +1,15 @@
+#!/usr/bin/env bash 
+# clip command for git-bash on windows.
+# redirect input to copy to clipboard.
+# redirect output to get clipboard value.
+# e.g. 
+# ```
+# $ pwd | clip
+# $ clip <<< "$(pwd)"
+# 
+# $ clip | xargs dirname
+# ```
+[[ ! -t 1 ]] && powershell.exe gcb
+[[ ! -t 0 ]] && clip.exe
+[[ -t 1 && -t 0 ]] && { echo >&2 'Nothing specified to copy or paste!'; exit 1; }
+exit 0
