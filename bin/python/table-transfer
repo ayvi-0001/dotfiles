@@ -1,0 +1,150 @@
+#!/usr/bin/env -S uv run -s
+# /// script
+# requires-python = ">3.11"
+# dependencies = [
+#   "click",
+#   "pandas",
+#   "sqlalchemy",
+#   "sqlalchemy-bigquery[bqstorage]"
+# ]
+# ///
+
+# sqlalchemy engine extensions may need to be added to script above as needed.
+
+import typing as t
+from collections.abc import Sequence
+from decimal import Decimal
+
+import click
+import pandas as pd
+import sqlalchemy as sq
+
+if t.TYPE_CHECKING:
+    from _sqlite3 import _Converter
+
+
+__all__: Sequence[str] = ("main",)
+
+
+@click.command()
+@click.argument(
+    "source_url",
+    type=click.STRING,
+)
+@click.argument(
+    "dest_url",
+    type=click.STRING,
+)
+@click.option(
+    "-t",
+    "--table-name",
+    required=True,
+    type=click.STRING,
+)
+@click.option(
+    "-ss",
+    "--source-schema",
+    type=click.STRING,
+)
+@click.option(
+    "-ds",
+    "--destination-schema",
+    type=click.STRING,
+)
+@click.option(
+    "-c",
+    "--chunk-size",
+    type=click.INT,
+    default=1000,
+    show_default=True,
+)
+@click.option(
+    "-m",
+    "--method",
+    type=click.Choice(choices=["none", "multi"]),
+    default="multi",
+    show_default=True,
+)
+@click.option(
+    "-e",
+    "--if-exists",
+    type=click.Choice(choices=["fail", "append", "replace"]),
+    default="append",
+    show_default=True,
+)
+@click.option(
+    "-i",
+    "--index",
+    type=click.BOOL,
+    is_flag=True,
+    default=False,
+    show_default=True,
+)
+def main(
+    source_url: str,
+    dest_url: str,
+    table_name: str,
+    source_schema: str,
+    destination_schema: str,
+    chunk_size: int,
+    method: str,
+    if_exists: t.Literal["append", "fail", "replace"],
+    index: bool,
+) -> None:
+    """Push/pull table from dest to src by engine url."""
+    source_engine: sq.Engine = sq.create_engine(url=source_url)
+    dest_engine: sq.Engine = sq.create_engine(url=dest_url)
+
+    if any("sqlite" in url for url in [source_url, dest_url]):
+        import sqlite3
+
+        def convert_str_to_decimal(string: str) -> Decimal:
+            return Decimal(
+                (string.decode("ascii") if isinstance(string, bytes) else string) or 0
+            )
+
+        def register_decimal_adapters_and_converters() -> None:
+            adapters: "map[object]" = map(lambda a: a[0], sqlite3.adapters)
+            if not any(isinstance(a, Decimal) for a in adapters):
+                sqlite3.register_adapter(Decimal, lambda d: str(d))
+
+            converters: "map[_Converter]" = map(lambda a: a[0], sqlite3.converters)
+            if not any(c == convert_str_to_decimal for c in converters):
+                sqlite3.register_converter("DECIMAL", convert_str_to_decimal)
+
+        register_decimal_adapters_and_converters()
+
+    source_table: sq.Table = sq.Table(
+        name=table_name,
+        metadata=sq.MetaData(schema=source_schema),
+        schema=source_schema,
+        autoload_with=source_engine,
+    )
+
+    with source_engine.connect() as source_conn:
+        executable: sq.Select[t.Any] = source_table.select()
+        rows: Sequence[sq.Row[t.Any]] = source_conn.execute(executable).fetchall()
+
+    records: Sequence[dict[str, t.Any]] = list(map(lambda r: r._asdict(), rows))
+    df: pd.DataFrame = pd.DataFrame.from_records(data=records, coerce_float=True)
+    column_order: list[str] = list(map(str, records[0].keys()))
+
+    sq.Table(
+        name=table_name,
+        metadata=sq.MetaData(schema=destination_schema),
+        schema=destination_schema,
+    ).drop(bind=dest_engine, checkfirst=True)
+
+    df[[*column_order]].to_sql(
+        name=table_name,
+        schema=destination_schema,
+        if_exists=if_exists,
+        index=index,
+        chunksize=chunk_size,
+        method=method if method != "none" else None,
+        con=dest_engine,
+    )
+
+
+if __name__ == "__main__":
+    main()
