@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# https://rclone.org/gui/
+device="$(gum choose < <(tailscale status | tr -s ' ' | cut -d' ' -f2))"
+host="$(tailscale status | rg "$device" | cut -d' ' -f1)"
+port=443
+rclone-gui --rc-addr "$host:$port" --rc-user me --rc-pass "$RCLONE_CONFIG_PASS" --copy-links "$@"
