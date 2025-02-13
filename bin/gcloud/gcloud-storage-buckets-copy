@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+set -eou pipefail
+
+declare origin_bucket replica_bucket project
+GETOPT_ARGS=(--options 'o:r:p:h' --long 'origin-bucket:,replica-bucket:,project:,help')
+if OPTS=$(getopt "${GETOPT_ARGS[@]}" -- "$@"); then eval set -- "$OPTS"; fi
+
+default_project="${CLOUDSDK_CORE_PROJECT:-$(gcloud config get project 2>/dev/null)}"
+
+usage() {
+	cat <<- EOF
+	Usage: ${BASH_SOURCE[0]##*/} [OPTIONS]
+
+	Example:
+	  \$ ${BASH_SOURCE[0]##*/} --origin-bucket gs://bucket-to-copy --replica-bucket gs://new-bucket
+
+	Options:
+	   -h, --help             Display this help message.
+	 * -o, --origin-bucket    The existing bucket to copy. Must be a bucket url, e.g. gs://bucket. [required]
+	 * -r, --replica-bucket   The new bucket to create. Must be a bucket url, e.g. gs://bucket. [required]
+	   -p, --project          [default=$default_project] Google Cloud project to create the replica bucket in.
+	                          This project is also used as the billing project.
+	                          If \$CLOUDSDK_CORE_PROJECT is set, it will take precedence
+	                          over the active config, otherwise, defaults to the project 
+	                          set in the active config: \$ gcloud config get project
+	EOF
+}
+
+while :; do
+  case "$1" in
+    -h | --help)            usage ; exit 0 ;;
+    -o | --origin-bucket)   origin_bucket="$2"; shift ;;
+    -r | --replica-bucket)  replica_bucket="$2"; shift ;;
+    -p | --project)         project="$2"; shift ;;
+    --)                     shift; break ;;
+    *)                      echo >&2 'error'; exit 1 ;;
+  esac
+  shift
+done
+
+[[ -z "${project:-}" ]] && project="$default_project"
+
+: "${project:?Cannot determine project from environment.}"
+: "${origin_bucket:?Missing -o / --origin-bucket}"
+: "${replica_bucket:?Missing -r / --replica-bucket}"
+
+
+bucket_meta="$(mktemp)"
+
+declare -a global_options create_options update_options
+
+[[ -n "$project" ]] && \
+    global_options+=("--billing-project=$project" "--project=$project")
+
+gcloud storage buckets describe --format json "$origin_bucket" > "$bucket_meta"
+
+location="$(jq -r '.location | ascii_downcase' < "$bucket_meta")"
+create_options+=("--location=$location")
+
+default_storage_class="$(jq -r '.default_storage_class' < "$bucket_meta")"
+create_options+=("--default-storage-class=$default_storage_class")
+
+uniform_bucket_level_access="$(jq -r '.uniform_bucket_level_access' < "$bucket_meta")"
+"$uniform_bucket_level_access" && \
+    create_options+=("--uniform-bucket-level-access") || \
+    create_options+=("--no-uniform-bucket-level-access")
+
+versioning_enabled="$(jq -r '.versioning_enabled' < "$bucket_meta")"
+"$versioning_enabled" && \
+    update_options+=("--versioning") || \
+    update_options+=("-no-versioning")
+
+soft_delete_policy="$(jq -r '.soft_delete_policy.retentionDurationSeconds' < "$bucket_meta")"
+[[ -n "$soft_delete_policy" ]] && \
+    create_options+=("--soft-delete-duration=$soft_delete_policy")
+
+public_access_prevention="$(jq -r '.public_access_prevention' < "$bucket_meta")"
+[[ "$public_access_prevention" == "enforced" ]] && \
+    update_options+=("--public-access-prevention") || \
+    update_options+=("-no-public-access-prevention")
+
+gcloud "${global_options[@]}" storage buckets create "$replica_bucket" "${create_options[@]}"
+gcloud storage buckets update "$replica_bucket" "${update_options[@]}"
+
+rm -f "$bucket_meta"
