@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Set pass to an environment variable.
+# Pass is exported as the first argument passed, or REPLY.
+# Disables ‘!’ style history substitution.
+# If using in a script, must invoke with $ . set-env-pass
+
+set +H
+read -rse -p'pass: '
+export "${1:-REPLY}"="$REPLY"
+set -H
