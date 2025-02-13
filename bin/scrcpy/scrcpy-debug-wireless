@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -xeuo pipefail
+
+adb tcpip 5555
+
+device="$(gum choose < <(tailscale status | tr -s ' ' | cut -d' ' -f2))"
+host="$(tailscale status | rg "$device" | cut -d' ' -f1)"
+read -rp "port: "
+adb connect "$host:$REPLY"
+
+scrcpy --tcpip
+scrcpy \
+  --keyboard=uhid \
+  --max-fps=60 \
+  --max-size=1920 \
+  --no-audio \
+  --shortcut-mod=lsuper \
+  --video-codec=h265 \
+  -K "$@"
