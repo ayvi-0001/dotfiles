@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DEBUG="${DEBUG:-}"
+[[ -n "$DEBUG" ]] && set -x
+
+declare PROJECT_ID DATASET FILTER LOCATION
+GETOPT_ARGS=(--options 'p:d:f:l:' --long 'project:,dataset:,filter:,location:')
+if OPTS=$(getopt "${GETOPT_ARGS[@]}" -- "$@"); then eval set -- "$OPTS"; fi
+
+while :; do
+  case "$1" in
+    -p | --project)   PROJECT_ID="$2"; shift ;;
+    -d | --dataset)   DATASET="$2"; shift ;;
+    -f | --filter)    FILTER="$2"; shift ;;
+    -l | --location)  LOCATION="$2"; shift ;;
+    --)               shift; break ;;
+    *)                echo >&2 'error'; exit 1 ;;
+  esac
+  shift
+done
+
+if [[ -z "${PROJECT_ID:-}" ]]; then
+  PROJECT_ID="${CLOUDSDK_CORE_PROJECT:-$(gcloud config get project 2>/dev/null)}"
+fi
+
+: "${PROJECT_ID:?Cannot determine project from environment.}"
+: "${DATASET:?Missing -d / --dataset}"
+
+stderr_log="$(mktemp -uq)"
+
+declare -a bq_global_opts
+bq_global_opts+=(--project_id "$PROJECT_ID")
+[[ -n "$LOCATION" ]] && bq_global_opts+=(--location "$LOCATION")
+
+cat << EOF \
+  | bq "${bq_global_opts[@]}" --format json query --quiet --sync \
+  |& tee "$stderr_log" | jq -r '.[].statements' || cat "$stderr_log" && rm "$stderr_log"
+SELECT
+  STRING_AGG(
+    "DROP"||(IF(type = 2, " VIEW", " TABLE"))||" IF EXISTS \`"||project_id||"."||dataset_id||"."||table_id||"\`",
+    ";\n"
+  ) || ";" as statements,
+FROM
+  \`$PROJECT_ID.$DATASET\`.__TABLES__
+${FILTER:-}
+EOF
