@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# last arg must be one file
+git diff --no-prefix "-U$(wc -l "${@:1:$#-1}")" "${@:2}"
