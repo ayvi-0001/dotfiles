@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# 1st arg is file to convert.
+# 2nd arg is number of spaces to convert tabs to, 4 if left blank.
+# A backup file with a timestamp is saved in /tmp
+# /tmp is found from $TMPDIR -> $TMP -> /tmp
+
+set -euo pipefail
+
+fp="$1"
+spaces="$(seq -s' ' 0 "${2:-4}" | tr -d '[:digit:]')"
+
+tmpdir_template=tmp.convert_tab_to_spaces
+_TMP="${TMPDIR:-${TMP:-/tmp}}"
+
+if command -v fd >/dev/null 2>&1; then
+  tmpdir="$(fd -1 -u "$tmpdir_template" "$_TMP")"
+else
+  tmpdir="$(find "$_TMP" -iname "$tmpdir_template*" | head -n1)"
+fi
+
+if [[ -z "$tmpdir" ]]; then
+  tmpdir="$(mktemp -dt "$tmpdir_template.XXXXXXXXX")"
+fi
+
+backup_fp_ext=".$(date +%s).bak"
+
+sed -i"$backup_fp_ext" $"s/\t/$spaces/g" "$fp"
+
+mv "$fp$backup_fp_ext" "$tmpdir"
