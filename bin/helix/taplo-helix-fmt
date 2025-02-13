@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Must be called as $ xargs -0 taplo-helix-fmt
+
+read -r firstline<<<"$@"
+
+if [[ "$firstline" =~ \#[[:space:]] ]]; then
+  filepath="$(sed -e 's/# //' <<<"$firstline")"
+  if [[ -f "$filepath" ]]; then
+    taplo format --stdin-filepath "$filepath" - <<<"$@"
+    exit $?
+  fi
+fi
+
+taplo format - <<<"$@"
