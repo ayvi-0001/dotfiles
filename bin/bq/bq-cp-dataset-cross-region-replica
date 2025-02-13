@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DEBUG="${DEBUG:-}"
+[[ -n "$DEBUG" ]] && set -x
+
+declare SOURCE_PROJECT SOURCE_DATASET TARGET_DATASET TARGET_PROJECT TARGET_REGION
+GETOPT_ARGS=(
+  -o ''
+  --long 'source-project:,source-dataset:,target-project:,target-dataset:,target-region:'
+)
+if OPTS=$(getopt "${GETOPT_ARGS[@]}" -- "$@"); then eval set -- "$OPTS"; fi
+
+while :; do
+  case "$1" in
+    --source-project)  SOURCE_PROJECT="$2"; shift ;;
+    --source-dataset)  SOURCE_DATASET="$2"; shift ;;
+    --target-project)  TARGET_PROJECT="$2"; shift ;;
+    --target-dataset)  TARGET_DATASET="$2"; shift ;;
+    --target-region)   TARGET_REGION="$2"; shift ;;
+    --)                shift; break ;;
+    *)                 echo >&2 'error'; exit 1 ;;
+  esac
+  shift
+done
+
+: "${TARGET_PROJECT:="${CLOUDSDK_CORE_PROJECT:-$(gcloud config get-value project 2>/dev/null)}"}"
+: "${TARGET_REGION:="${CLOUDSDK_COMPUTE_REGION:-$(gcloud config get-value compute/region 2>/dev/null)}"}"
+: "${TARGET_DATASET:=$SOURCE_DATASET}"
+
+declare -a REMAINING_ARGS REQUIRED_ARGS MISSING_ARGS 
+
+REMAINING_ARGS+=("$@")
+REQUIRED_ARGS+=( SOURCE_PROJECT SOURCE_DATASET TARGET_PROJECT TARGET_DATASET TARGET_REGION )
+IS_MISSING_ARGS=false
+
+for arg in "${REQUIRED_ARGS[@]}"; do
+  if [[ -z "${!arg:-}" ]]; then IS_MISSING_ARGS=true; MISSING_ARGS+=("$arg"); fi
+done
+
+if "$IS_MISSING_ARGS"; then
+  echo >&2 "Required options missing or unset."
+  for missing_arg in "${MISSING_ARGS[@]}"; do
+    printf >&2 ' %s\n' "--$missing_arg" | tr '[:upper:]' '[:lower:]' | sed -e 's/_/-/g'
+  done
+  exit 2;
+fi
+
+if [[ -n "${REMAINING_ARGS[*]}" ]]; then
+  echo >&2 "Unrecognized arguments: ${REMAINING_ARGS[*]}"
+fi
+
+SCRIPT_NAME="$(basename "${BASH_SOURCE[0]}")"
+TRANSFER_CONFIG_NAME_TEMPLATE="$SCRIPT_NAME-$TARGET_DATASET-XXXXXXXXXXXX"
+TRANSFER_CONFIG_DISPLAY_NAME="$(mktemp -u "$TRANSFER_CONFIG_NAME_TEMPLATE")"
+
+PARAMS_FILE="$(mktemp -t tmp.XXXXXXXXXX,json)"
+cat << EOF > "$PARAMS_FILE"
+{
+  "source_dataset_id": "$SOURCE_DATASET",
+  "source_project_id": "$SOURCE_PROJECT",
+  "overwrite_destination_table": "true"
+}
+EOF
+
+# enclose-json-in-single-quotes() {
+# 	if [[ -f "$1" ]]; then cat <<- EOF
+# 		'$(jq -rc '.' < "$1")'
+# 		EOF
+# 	else cat <<- EOF
+# 		'$(jq -rc '.' <<< "$1")'
+# 		EOF
+# 	fi
+# }
+
+bq --project_id "$TARGET_PROJECT" --location "$TARGET_REGION" \
+  mk --dataset "$TARGET_PROJECT:$TARGET_DATASET" 2>/dev/null | grep -vE 'error|exists' || \
+  echo "$TARGET_PROJECT:$TARGET_DATASET already exists."
+
+bq --project_id "$TARGET_PROJECT" --location "$TARGET_REGION" \
+  mk --transfer_config \
+  --project_id "$TARGET_PROJECT" \
+  --data_source cross_region_copy \
+  --no_auto_scheduling \
+  --target_dataset "$TARGET_DATASET" \
+  --display_name "$TRANSFER_CONFIG_DISPLAY_NAME" \
+  --params "$(jq -rc '.' < "$PARAMS_FILE")"
+  # --params "$(enclose-json-in-single-quotes "$PARAMETERS_FILE")"
+
+TRANSFER_CONFIG_RESOURCE_NAME="$(
+  bq --project_id "$TARGET_PROJECT" --location "$TARGET_REGION" \
+    ls --transfer_config --transfer_location "$TARGET_REGION" \
+    | grep "$TRANSFER_CONFIG_DISPLAY_NAME" | tr -s ' ' | cut -d' ' -f2
+)"
+
+bq --project_id "$TARGET_PROJECT" --location "$TARGET_REGION" \
+  mk --transfer_run --run_time "$(date --iso-8601=seconds)" "$TRANSFER_CONFIG_RESOURCE_NAME"
+
+rm -f "$PARAMS_FILE"
