@@ -1,0 +1,3 @@
+#!/usr/bin/env bash 
+gcloud storage du "$1" --summarize \
+  | cut -d ' ' -f1 | numfmt --to=si --format="%.2f"
