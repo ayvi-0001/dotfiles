@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+args=("$@")
+line_number="$(rg -uan -m 1 "$@" --no-filename | tr -s ' ' | cut -d: -f1 | head -n1)"
+rg -ual "${args[@]:0:1}" | xargs hx +"$line_number" "${args[@]:1:${#args[*]}}"
