@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# https://rclone.org/gui/
+rclone rcd --rc-web-gui "$@"
