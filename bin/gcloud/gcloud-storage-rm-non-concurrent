@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+gcloud storage ls "$1" -r -a -j \
+  | jq '.[] | select((.metadata.timeDeleted != null)) | .url' -r \
+  | gcloud storage rm --read-paths-from-stdin --all-versions --continue-on-error
