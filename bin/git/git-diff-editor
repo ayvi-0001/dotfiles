@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# NOTE: I've since learned that `$ git diff-editor` is already a real command and does the exact same thing
+
+tmpfile="$(mktemp -t 'tmp.XXXXXXXXXX.diff')"
+git diff --no-prefix "$@" > "$tmpfile"
+"$EDITOR" "$tmpfile"
+rm "$tmpfile"
