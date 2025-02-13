@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+hx "$(mktemp -up. "tmp.XXXXXXXXXX.${1:-hx}")"
