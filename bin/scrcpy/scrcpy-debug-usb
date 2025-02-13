@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+scrcpy \
+  --keyboard=uhid \
+  --max-fps=60 \
+  --max-size=1920 \
+  --no-audio \
+  --shortcut-mod=lsuper \
+  --video-codec=h265 \
+  -K "$@"
