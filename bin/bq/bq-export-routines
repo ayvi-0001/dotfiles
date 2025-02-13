@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DEBUG="${DEBUG:-}"
+[[ -n "$DEBUG" ]] && set -x
+
+THISDIR="$(dirname "$(readlink -f "$0")")"
+
+declare project_id dataset raw
+GETOPT_ARGS=(--options 'hrp:d:' --long 'help,raw,project:,dataset:')
+if OPTS=$(getopt "${GETOPT_ARGS[@]}" -- "$@"); then eval set -- "$OPTS"; fi
+
+default_project="${CLOUDSDK_CORE_PROJECT:-$(gcloud config get project 2>/dev/null)}"
+
+usage() {
+	cat <<- EOF
+	Usage: ${BASH_SOURCE[0]} [OPTIONS]
+	
+	Examples:
+	\$ ${BASH_SOURCE[0]} -d mydataset
+	
+	Options:
+	  -h, --help      Display this help message.
+	  -p, --project   Google Cloud project. If \$CLOUDSDK_CORE_PROJECT is set,
+	                  it will take precedence over the active config,
+	                  otherwise, defaults to the project set in the active config
+	                  [default=$default_project]
+	EOF
+}
+
+while :; do
+  case "$1" in
+    -h | --help)     usage; exit 0 ;;
+    -p | --project)  project_id="$2"; shift ;;
+    -d | --dataset)  dataset="$2"; shift ;;
+    -r | --raw)      raw=true ;;
+    --)              shift; break ;;
+    *)               echo >&2 'error'; exit 1 ;;
+  esac
+  shift
+done
+
+: "${project_id:=$default_project}"
+: "${raw:=false}"
+
+: "${project_id:?Cannot determine project from environment.}"
+: "${dataset:?Missing -d / --dataset}"
+
+
+gum style --faint 'listing routines..'
+
+readarray -t routines < <(
+  bq --project_id "$project_id" --format json ls --routines "$dataset" \
+    | jq -r '.[] | {routineId: (.routineReference.datasetId + "." + .routineReference.routineId)} | .routineId' \
+    2>/dev/null | tr -d '\r'
+)
+
+
+if [[ -z "${routines[*]}" ]]; then
+  printf '%s %s' \
+    "dataset \`$project_id.$dataset\` either doesn't exist" \
+    "or no routines were found." \
+    | gum style --faint --foreground='#dc4720' >&2
+  exit 1
+fi
+
+
+target_dir="$THISDIR/$dataset" && mkdir -p "$target_dir"
+
+for routine_id in "${routines[@]}"; do
+  if ! "$raw"; then
+    target_file="$target_dir/$routine_id.sql"
+
+    gum style --bold --foreground='#89F57C' \
+      "Exporting routine_id: $project_id.$routine_id > $target_file"
+
+    bq --project_id "$project_id" --format json show --routine "$routine_id" | jq -r .definitionBody > "$target_file"
+  else
+    target_file="$target_dir/$routine_id.json"
+
+    gum style --bold --foreground='#89F57C' \
+      "Exporting routine_id: $project_id.$routine_id > $target_file"
+
+    bq --project_id "$project_id" --format json show --routine "$routine_id" | jq > "$target_file"
+  fi
+done
