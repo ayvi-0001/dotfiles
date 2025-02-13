@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Clone specific patterns only.
+
+set -euo pipefail
+
+remote_url="$1"
+patterns=("${@:2}")
+# shellcheck disable=SC2001
+repo_name="$(sed 's/.git//'<<<"${remote_url##*/}")"
+
+mkdir -p "$repo_name"
+cd "$repo_name" || exit 1
+git init
+git sparse-checkout init
+git remote add -f origin "$remote_url"
+git sparse-checkout set --no-cone "${patterns[@]}"
+git sparse-checkout list
+git pull origin main
