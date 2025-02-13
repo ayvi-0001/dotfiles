@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+
+from contextlib import suppress
+
+from pip._internal.models.target_python import TargetPython
+
+with suppress(Exception):
+    from rich import print
+
+
+print(TargetPython().get_sorted_tags())
