@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+find . -type f -printf '%p/ %f\n' | sort -k2 | uniq -f1 --all-repeated=separate 
