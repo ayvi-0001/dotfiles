@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+perl -MCompress::Zlib -e 'undef $/; print uncompress(<>)' "$@"
+
+# or with openssl
+# openssl zlib -d <
