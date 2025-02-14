@@ -9,6 +9,8 @@ require("custom-shell"):setup({
 
 require("full-border"):setup { type = ui.Border.ROUNDED }
 
+require("current-size"):setup{}
+
 -- start: yamb.yazi
 local bookmarks = {}
 local path_sep = package.config:sub(1, 1)
