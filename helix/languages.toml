@@ -139,8 +139,7 @@ formatter   = { command = "bash", args = ["-c", "column -t -s, -o, <&0"] }
 [[grammar]]
 name       = "csv"
 source.git = "https://github.com/weartist/rainbow-csv-tree-sitter"
-source.rev = "896e6d09b23a1b0d87e45bf97ca34a249f41495c"
-
+source.rev = "d3dbf916446131417e4c2ea9eb8591b23b466d27"
 
 [[language]]
 name             = "bash"
