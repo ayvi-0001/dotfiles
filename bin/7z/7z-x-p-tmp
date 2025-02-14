@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# Extracts files from archive with their full paths into a dir in /tmp.
+# Prompts for password if archive is encrypted.
+# First argument is the archive path. Any following args are passed to 7z.
+# Process waits until user confirms, exits, or sends sigint, then deletes tmpdir.
+# If bleachbit_console is on path, files will be shredded.
+
+set -euo pipefail
+[[ -n "${DEBUG:-}" ]] && set -x
+
+archive_path_relative="$1"
+archive_basename="${archive_path_relative##*/}"
+archive_name="${archive_basename//.7z/}"
+
+tmp_dir="$(mktemp -d)"
+tmp_archive="$tmp_dir/$archive_name"
+
+function _cleanup {
+  if command -v bleachbit_console >/dev/null; then
+    cd "$(dirname "$tmp_dir")"
+    bleachbit_console --shred "$(basename "$tmp_dir")"
+  else
+    rm -fr "$tmp_dir"
+  fi
+}
+
+trap _cleanup EXIT SIGINT
+
+command -v gum >/dev/null && _has_gum=true || _has_gum=false
+
+if ! 7z t "$archive_path_relative" -p &>/dev/null; then
+  if "$_has_gum"; then
+    REPLY="$(gum input --placeholder='password' --prompt=)"
+  else
+    set +H
+    read -rse -p'password: ' 
+    set -H
+  fi
+fi
+
+echo "extracting archive to tmpdir: $tmp_dir"
+
+7z x "${@:2}" -slt -spe -slsl -ba -mmt=on -p"${REPLY:-}" -o"$tmp_archive" \
+  -- "$archive_path_relative"
+  
+if "$_has_gum"; then
+  gum confirm 'Press enter to exit & remove archive.' \
+    --affirmative Close --negative '' --default=yes
+else
+  read -r -p'Press enter to exit & remove archive.'
+fi
+
+# -slt      - show technical information
+# -spe      - eliminate duplication of root folder for extract command
+# -slsl     - show paths with linux path separator (slash '/') instead of windows path separator (backslash '\')
+# -ba       - disable headers in standard output log
+# -mmt      - set multithreading mode
