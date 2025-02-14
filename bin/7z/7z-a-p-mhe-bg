@@ -1,0 +1,37 @@
+#!/usr/bin/env bash 
+
+# Adds files in directory to an archive of the same name in $pwd.
+# Eliminates duplication of root folder in archive.
+# Prompts for password to encrypt archive.
+# First argument is the directory path. Any following args are passed to 7z.
+# Process runs in the background and prints PID before returning control to user.
+
+set -euo pipefail
+[[ -n "${DEBUG:-}" ]] && set -x
+
+target_dir="${1%/}"
+archive="$(basename "$target_dir").7z"
+
+! test -d "$target_dir" \
+  && { echo >&2 'first argument must be a directory'; exit 1; }
+
+command -v gum >/dev/null && _has_gum=true || _has_gum=false
+
+if "$_has_gum"; then
+  REPLY="$(gum input --placeholder='password' --prompt=)"
+else
+  set +H
+  read -rse -p'password: ' 
+  set -H
+fi
+
+7z a "${@:2}" -ssp -ssw -mmt=on -mtr=on -mhe -p"$REPLY" \
+  -- "$archive" "$(realpath --relative-base=. "$target_dir")/." >/dev/null & 
+
+echo "PID=$!"
+
+# -ssp      - do not modify "last access time" property of source files when archiving or hashing
+# -ssw      - compress files open for writing
+# -mmt      - set multithreading mode
+# -mtr      - store file attributes
+# -mhe      - enable archive header encryption
