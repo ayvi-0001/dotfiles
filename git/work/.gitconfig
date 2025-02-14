@@ -1,13 +1,13 @@
 [user]
-    name = {{GIT_USER_WORK}}
-    email = {{GIT_EMAIL_WORK}}
-    signingkey = {{GIT_SIGNING_KEY_WORK}}
+	name = {{GIT_USER_WORK}}
+	email = {{GIT_EMAIL_WORK}}
+	signingkey = {{GIT_SIGNING_KEY_WORK}}
 
 [commit]
-    gpgsign = true
+	gpgsign = true
 
 [tag]
-    gpgSign = true
+	gpgSign = true
 
 [gpg]
-    program = {{GPG_PATH_TO_EXEC}}
+	program = {{GPG_PATH_TO_EXEC}}

@@ -21,12 +21,12 @@
 [core]
 	editor = hx
 	pager = delta
-    symlinks = true
+	symlinks = true
 	autocrlf = input
-    fscache = true
+	fscache = true
 
 [interactive]
-    diffFilter = delta --color-only --dark --paging=never --syntax-theme base16-256 --diff-so-fancy
+	diffFilter = delta --color-only --dark --paging=never --syntax-theme base16-256 --diff-so-fancy
 
 [alias]
 	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
@@ -38,19 +38,19 @@
 	ignore = "!gi() { IFS=\",\"; curl -L -s \"https://www.toptal.com/developers/gitignore/api/$*\" | tee .gitignore;}; gi"
 
 [delta]
-    navigate = true
+	navigate = true
 	side-by-side = true
 	hyperlinks = true
 	hyperlinks-file-link-format = "file://{path}:{line}"
 	line-numbers = true
-    dark = true
+	dark = true
 
 [merge]
-    conflictstyle = diff3
+	conflictstyle = diff3
 
 [diff]
 	tool = hx
-    colorMoved = default
+	colorMoved = default
 
 [credential "{{GITEA_URL}}"]
 	username = {{GITEA_USERNAME}}
