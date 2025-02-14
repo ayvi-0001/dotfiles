@@ -19,11 +19,12 @@
 	helper = manager
 
 [core]
+	autocrlf = input
 	editor = hx
+	fscache = true
+	longpaths = true
 	pager = delta
 	symlinks = true
-	autocrlf = input
-	fscache = true
 
 [interactive]
 	diffFilter = delta --color-only --dark --paging=never --syntax-theme base16-256 --diff-so-fancy
