@@ -19,4 +19,4 @@ deps = [
 ]
 
 [flavor]
-deps = [{ use = "kmlupreti/ayu-dark", rev = "8ddf095" }]
+deps = [{ use = "kmlupreti/ayu-dark", rev = "8ddf095" }, { use = "BennyOe/tokyo-night", rev = "9e6f899" }]
