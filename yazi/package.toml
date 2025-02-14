@@ -14,8 +14,8 @@ deps = [
   { use = "yazi-rs/plugins:jump-to-char", rev = "600614a" },
   { use = "dedukun/relative-motions", rev = "df97039" },
   { use = "ayvi-0001/git-cd-root-dir", rev = "b12aeec" },
-  { use = "BennyOe/tokyo-night", rev = "caa00ab" },
-  { use = "lpnh/fg", rev = "9bba743" }, { use = "pirafrank/what-size", rev = "b23e3a4" },
+  { use = "lpnh/fg", rev = "9bba743" },
+  { use = "pirafrank/what-size", rev = "b23e3a4" },
 ]
 
 [flavor]
