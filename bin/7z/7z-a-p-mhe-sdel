@@ -1,0 +1,32 @@
+#!/usr/bin/env bash 
+
+# Adds files in directory to an archive of the same name in $pwd.
+# Eliminates duplication of root folder in archive.
+# Prompts for password to encrypt archive.
+# First argument is the directory path. Any following args are passed to 7z.
+# WARNING: Deletes files after archiving
+
+set -euo pipefail
+[[ -n "${DEBUG:-}" ]] && set -x
+
+target_dir="${1%/}"
+archive="$(basename "$target_dir").7z"
+
+! test -d "$target_dir" \
+  && { echo >&2 'first argument must be a directory'; exit 1; }
+
+7z a "${@:2}" -slt -sdel -slsl -ba -ssp -ssw -mhe -p \
+  -- "$archive" "$(realpath --relative-base=. "$target_dir")/."
+
+# 7z may leave some empty directories behind.
+test -d "$target_dir" && rm -fr "$target_dir"
+
+# -slt      - show technical information
+# -sdel     - delete files after compression
+# -slsl     - show paths with linux path separator (slash '/') instead of windows path separator (backslash '\')
+# -ba       - disable headers in standard output log
+# -ssp      - do not modify "last access time" property of source files when archiving or hashing
+# -ssw      - compress files open for writing
+# -mmt      - set multithreading mode
+# -mtr      - store file attributes
+# -mhe      - enable archive header encryption
