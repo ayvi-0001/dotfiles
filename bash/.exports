@@ -47,12 +47,12 @@ export npm_config_cache=$HOME/.cache/npm
 
 # history -------------------------------------------------------------------
 
-export HISTSIZE=100000 # in bytes
+export HISTSIZE=100000000 # in bytes
 export HISTFILESIZE=$HISTSIZE
 
 export HISTCONTROL=ignoredups:erasedups:ignorespace
 export HISTFILE=$HOME/.bash_history
-export HISTLINESTOLOAD=5000
+export HISTLINESTOLOAD=50000
 
 export LESSHISTFILE=$HOME/.cache/less/history # set to `-` to disable
 export NODE_REPL_HISTORY=''
