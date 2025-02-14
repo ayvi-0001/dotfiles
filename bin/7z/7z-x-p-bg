@@ -1,0 +1,31 @@
+#!/usr/bin/env bash 
+
+# Extracts files from archive with their full paths into a dir in $pwd of the same name.
+# Prompts for password if archive is encrypted.
+# First argument is the archive path. Any following args are passed to 7z.
+# Process runs in the background and prints PID before returning control to user.
+# NOTE: Assumes yes on all queries.
+
+set -euo pipefail
+[[ -n "${DEBUG:-}" ]] && set -x
+
+archive_path_relative="$1"
+archive_basename="${archive_path_relative##*/}"
+archive_name="${archive_basename//.7z/}"
+
+command -v gum >/dev/null && _has_gum=true || _has_gum=false
+
+if ! 7z t "$archive_path_relative" -p &>/dev/null; then
+  if "$_has_gum"; then
+    REPLY="$(gum input --placeholder='password' --prompt=)"
+  else
+    set +H
+    read -rse -p'password: ' 
+    set -H
+  fi
+fi
+
+7z x "${@:2}" -y -spe -p"${REPLY:-}" -o"$archive_name" \
+  -- "$archive_path_relative" >/dev/null &
+
+echo "PID=$!"
