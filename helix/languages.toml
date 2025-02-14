@@ -1,3 +1,5 @@
+# languages.toml
+
 # https://docs.helix-editor.com/languages.html
 # https://github.com/helix-editor/helix/blob/master/languages.toml
 # https://github.com/helix-editor/helix/wiki/Language-Server-Configurations
@@ -290,10 +292,8 @@ comment-token    = "#"
 language-servers = ["taplo"]
 indent           = { tab-width = 2, unit = "  " }
 auto-format      = true
-# formatter.command = "taplo"
-# formatter.args = ["format", "-"]
-formatter.command = "bash"
-formatter.args    = ["-c", "xargs -0 taplo-helix-fmt"] # custom script in ~/bin/
+# formatter        = { command = "taplo", args = ["format", "-"] }
+formatter.command = "taplo-helix-fmt" # custom script in ~/bin/
 # https://github.com/helix-editor/helix/issues/3596
 
 [[grammar]]
