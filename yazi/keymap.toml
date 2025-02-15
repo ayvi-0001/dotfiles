@@ -44,6 +44,7 @@ prepend_keymap = [
   { on = ["'", "h"], run = "plugin custom-shell --args=history", desc = "Show Custom-shell history" },
   { on = ["'", "g"], run = """ plugin custom-shell --args='custom bash "gitui -d."' """, desc = "gitui" },
   { on = ["'", "d"], run = """ plugin custom-shell --args='custom bash "git diff; echo Press enter to exit; read _"' """, desc = "git diff" },
+  { on = ["'", "t"], run = """ plugin custom-shell --args='custom bash "$EDITOR $(mktemp -up.)"' """, desc = "write to tmpfile" },
   # end: custom-shell.yazi
 
   # start: projects.yazi
