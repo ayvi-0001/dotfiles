@@ -205,8 +205,14 @@ text-width           = 200
 [[grammar]]
 name           = "markdown"
 source.git     = "https://github.com/tree-sitter-grammars/tree-sitter-markdown"
-source.rev     = "62516e8c78380e3b51d5b55727995d2c511436d8"
+source.rev     = "192407ab5a24bfc24f13332979b5e7967518754a"
 source.subpath = "tree-sitter-markdown"
+
+[[grammar]]
+name           = "markdown_inline"
+source.git     = "https://github.com/tree-sitter-grammars/tree-sitter-markdown"
+source.rev     = "192407ab5a24bfc24f13332979b5e7967518754a"
+source.subpath = "tree-sitter-markdown-inline"
 
 
 [[language]]
