@@ -55,6 +55,9 @@ __debug "LN_OPTS=${LN_OPTS[*]}"
 SUDO_CMD="$(command -v sudo || command -v gsudo)"
 
 
+DRY_RUN=false
+
+
 _create_or_replace_symlink() {
   src_file="$(realpath "$1")"
   # Make the directory first in the case it's an old symlink source,
@@ -66,23 +69,25 @@ _create_or_replace_symlink() {
   __debug "dest_file=$dest_file"
 
   # Delete if destination alredy exists as a regular file.
-  test -f "$dest_file" && rm "$_"
+  ! "$DRY_RUN" && test -f "$dest_file" && rm "$_"
 
   # Verify an existing symlink points to the correct source, fix if not.
   if test -L "$dest_file"; then
     if [[ "$(realpath -m "$dest_file")" != "$(realpath "$src_file")" ]]; then
       gum style --foreground='#FCFA7D' \
         "Canonical path of $dest_file does not exist. Replacing symlink source."
-      rm -f "$dest_file"
+      ! "$DRY_RUN" && rm -f "$dest_file"
     fi
   fi
 
-  mkdir -p "$(dirname "$dest_file")"
+  ! "$DRY_RUN" && mkdir -p "$(dirname "$dest_file")"
 
-  if [[ -n "$SUDO_CMD" ]]; then
-    "$SUDO_CMD" ln "${LN_OPTS[@]}" "$src_file" "$dest_file" >/dev/null 2>&1
-  else
-    ln "${LN_OPTS[@]}" "$src_file" "$dest_file" >/dev/null 2>&1
+  if ! "$DRY_RUN"; then
+    if [[ -n "$SUDO_CMD" ]]; then
+      "$SUDO_CMD" ln "${LN_OPTS[@]}" "$src_file" "$dest_file" >/dev/null 2>&1
+    else
+      ln "${LN_OPTS[@]}" "$src_file" "$dest_file" >/dev/null 2>&1
+    fi
   fi
 
   gum style --bold --foreground='#89F57C' "1 file linked: $src_file ->$dest_path"
@@ -122,7 +127,7 @@ _deploy_files() {
 
   patterns_file="$(mktemp -t tmp.dotfiles.patterns.XXXXXXXXXX)"
   if [[ -n "$templates" ]]; then
-    jq -r ".[].pattern" <<< "$templates" | sort -u > "$patterns_file"
+    jq -r '.[].pattern' <<< "$templates" | sort -u > "$patterns_file"
   fi
 
   ignore_patterns=(-E '.ignore/' -E '.templates/' -E '.gitignore' -E 'README.md')
@@ -137,9 +142,9 @@ _deploy_files() {
 
   for file in "${file_list[@]}"; do
     # Skip files that start with 2 leading underscores.
-    if [[ $file == __* ]]; then continue; fi
-
-    if [[ ! " ${config_file_list[*]} " =~ [[:space:]]${file}[[:space:]] ]]; then
+    if [[ $file == __* ]]; then
+      continue
+    elif [[ ! " ${config_file_list[*]} " =~ [[:space:]]${file}[[:space:]] ]]; then
       gum style --faint >&2 \
         "$file found in dir $key/ but no destination path set in config. Skipping file.."
     else
@@ -196,6 +201,8 @@ usage() {
 	
 	Options:
 	  -h, --help       Display this help message.
+	  -d, --dry-run    Templated files will still be copied,
+	                   but no symlink targets are created.
 	  -f, --fd-filter  Filter to pass to fd when searching for files.
 	EOF
 }
@@ -206,7 +213,7 @@ main() {
 
   FD_FILTER=
 
-  GETOPT_ARGS=(--options 'hf:' --long 'help,fd-filter:')
+  GETOPT_ARGS=(--options 'hdf:' --long 'help,dry-run,fd-filter:')
 
   if OPTS=$(getopt "${GETOPT_ARGS[@]}" -- "$@"); then eval set -- "$OPTS"; fi
 
@@ -214,6 +221,7 @@ main() {
     case "$1" in
       -h | --help)       usage; exit 0 ;;
       -f | --fd-filter)  FD_FILTER="$2"; shift ;;
+      -d | --dry-run)    export DRY_RUN=true;;
       --)                shift; break ;;
       *)                 echo >&2 'error'; exit 1 ;;
     esac
@@ -231,6 +239,11 @@ main() {
     __reverse_array_order "${DIRS[@]}"
     shopt -u extdebug
   fi
+
+  "$DRY_RUN" && printf '%s %s' \
+    'dry run is enabled, templated files will still be copied' \
+    'but no symlink targets will be created.' \
+    | gum style --italic --foreground='#8FFAFD'
 
   for d in "${DIRS[@]}"; do
     _deploy_files "$(tr -d '\r' <<< "$d")" "$FD_FILTER"
