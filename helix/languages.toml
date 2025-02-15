@@ -113,7 +113,7 @@ formatter       = { command = "bash", args = ["-c", "xit-sort -"] } # custom scr
 [[grammar]]
 name       = "xit"
 source.git = "https://github.com/synaptiko/tree-sitter-xit"
-source.rev = "7d7902456061bc2ad21c64c44054f67b5515734c"
+source.rev = "a4fad351bfa5efdcb379b40c36671413fbe9caac"
 
 
 [[language]]
