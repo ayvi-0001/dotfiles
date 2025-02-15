@@ -22,14 +22,14 @@ terminal                = { command = "c:/program files/git/usr/bin/bash", args 
 text-width              = 200
 true-color              = true
 whitespace.characters   = { nbsp = "⍽", newline = "⏎", nnbsp = "␣", space = "·", tab = "→", tabpad = "·" } # Tabs will look like "→···" (depending on tab width)
-end-of-line-diagnostics = "disable"
+end-of-line-diagnostics = "hint"
 
 [editor.inline-diagnostics]
-cursor-line     = "hint"
+cursor-line     = "warning"
 other-lines     = "disable"
 prefix-len      = 1
 max-wrap        = 20
-max-diagnostics = 20
+max-diagnostics = 10
 
 [editor.lsp]
 enable                             = true
@@ -119,7 +119,7 @@ A-J = [
 J = [":clipboard-yank-join"]
 
 [keys.normal.space.t]
-c = ":toggle inline-diagnostics.cursor-line hint disable"
+c = ":toggle inline-diagnostics.cursor-line warning disable"
 e = ":toggle end-of-line-diagnostics hint disable"
 f = ":toggle auto-format"
 i = ":toggle lsp.display-inlay-hints"
