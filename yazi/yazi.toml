@@ -70,7 +70,7 @@ prepend_rules = [
   # Hash files.
   { name = "*.{sha*,md5}", use = ["edit"] },
   # Database opener using harlequin.
-  { name = "*.{db,sqlite}", use = ["database"] },
+  { name = "*.{db,sqlite,sqlite3}", use = ["database"] },
   # Browser opener.
   { name = "*.url", use = ["browser", "edit"] },
   # Additional files not caught in default.
