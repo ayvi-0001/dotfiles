@@ -4,8 +4,6 @@
 # https://github.com/helix-editor/helix/blob/master/languages.toml
 # https://github.com/helix-editor/helix/wiki/Language-Server-Configurations
 
-config = { "provideFormatter" = true, "json" = { "keepLines" = { "enable" = true } } }
-
 [language-server.bash-language-server]
 command = "bash-language-server"
 args    = ["start"]
@@ -32,9 +30,7 @@ environment = { "RUFF_TRACE" = "messages" }
 
 [language-server.ruff.config.settings]
 format.preview = true
-lint.ignore    = ["F401"]
 lint.preview   = true
-lint.select    = ["E", "F"]
 logLevel       = "debug"
 run            = "onSave"
 
@@ -42,18 +38,17 @@ run            = "onSave"
 command = "pylsp"
 
 [language-server.pylsp.config.pylsp]
-plugins.black.enabled                 = false
-plugins.isort.enabled                 = true
-plugins.pyflakes.enabled              = true
-plugins.pylint.enabled                = true
-plugins.pyls_mypy.enabled             = false
-plugins.pyls_mypy.live_mode           = false
-plugins.pylsp_mypy.disable_error_code = ["import-untyped", "import-not-found"]
-plugins.pylsp_mypy.dmypy              = false # does not work in live_mode.
-plugins.rope_autoimport.enabled       = false
-plugins.ruff.enabled                  = true
-plugins.ruff.formatEnabled            = true
-plugins.ruff.preview                  = true
+plugins.black.enabled           = false
+plugins.isort.enabled           = true
+plugins.pyflakes.enabled        = true
+plugins.pylint.enabled          = true
+plugins.pyls_mypy.enabled       = false
+plugins.pyls_mypy.live_mode     = false
+plugins.pylsp_mypy.dmypy        = false # does not work in live_mode.
+plugins.rope_autoimport.enabled = false
+plugins.ruff.enabled            = true
+plugins.ruff.formatEnabled      = true
+plugins.ruff.preview            = true
 
 [language-server.sql-language-server]
 command = "sql-language-server"
