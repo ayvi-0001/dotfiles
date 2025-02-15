@@ -4,10 +4,10 @@ local module = {}
 
 function module.apply_to_config(config)
   config.window_padding = {
-    left = '1.5cell',
-    right = '1.5cell',
+    left = '2.5cell',
+    right = '2.5cell',
     top = '0.5cell',
-    bottom = '0cell',
+    bottom = '0.5cell',
   }
   config.window_frame = {
     font = wezterm.font { family = "SpaceMono Nerd Font", weight = "Bold" },
