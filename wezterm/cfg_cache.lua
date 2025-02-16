@@ -1,5 +1,3 @@
-local wezterm = require "wezterm"
-local config = wezterm.config_builder()
 local module = {}
 
 -- https://github.com/wez/wezterm/discussions/3664

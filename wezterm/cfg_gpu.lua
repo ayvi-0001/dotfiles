@@ -1,9 +1,7 @@
-local wezterm = require "wezterm"
-local config = wezterm.config_builder()
 local module = {}
 
 function module.apply_to_config(config)
-  config.front_end= "WebGpu"
+  config.front_end = "WebGpu"
   config.max_fps = 60
   config.prefer_egl = true
   config.webgpu_power_preference = "HighPerformance"
