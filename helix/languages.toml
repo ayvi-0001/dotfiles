@@ -47,7 +47,6 @@ args    = ["up", "--method", "stdio"]
 [language-server.lua-language-server]
 command = "lua-language-server"
 
-
 [[language]]
 name             = "python"
 auto-format      = true
@@ -56,34 +55,20 @@ language-servers = ["ruff", "basedpyright"] # "pylsp", "pylyzer"
 indent           = { tab-width = 4, unit = "    " }
 formatter        = { command = "ruff", args = ["format", "-"] }
 
-
 [[language]]
 name                          = "rust"
 shebangs                      = ["rust-script", "cargo"]
 auto-format                   = true
-comment-tokens                = ["//", "///", "//!"]
 language-servers              = ["rust-analyzer"]
 indent                        = { tab-width = 4, unit = "    " }
 persistent-diagnostic-sources = ["rustc", "clippy"]
 formatter                     = { command = "rustfmt" }
-
-[[grammar]]
-name       = "rust"
-source.git = "https://github.com/tree-sitter/tree-sitter-rust"
-source.rev = "0431a2c60828731f27491ee9fdefe25e250ce9c9"
-
 
 [[language]]
 name        = "xit"
 auto-format = true
 indent      = { tab-width = 4, unit = "    " }
 formatter   = { command = "bash", args = ["-c", "xit-sort -"] } # custom script in ~/bin/
-
-[[grammar]]
-name       = "xit"
-source.git = "https://github.com/synaptiko/tree-sitter-xit"
-source.rev = "a4fad351bfa5efdcb379b40c36671413fbe9caac"
-
 
 [[language]]
 name        = "csv"
@@ -92,17 +77,42 @@ scope       = "source.csv"
 auto-format = true
 formatter   = { command = "bash", args = ["-c", "column -t -s, -o, <&0"] }
 
+[[language]]
+name             = "markdown"
+soft-wrap.enable = true
+text-width       = 200
+
+[[language]]
+name             = "sql"
+file-types       = ["sql", "dsql", "sqlx"]
+indent           = { tab-width = 2, unit = "    " }
+auto-format      = true
+language-servers = ["sql-language-server"]
+formatter        = { command = "sqlfluff", args = ["fix -"] }
+
+[[language]]
+name              = "toml"
+language-servers  = ["taplo"]
+indent            = { tab-width = 2, unit = "  " }
+auto-format       = true
+# formatter        = { command = "taplo", args = ["format", "-"] }
+formatter.command = "taplo-helix-fmt" # custom script in ~/bin/
+# https://github.com/helix-editor/helix/issues/3596
+
+[[grammar]]
+name       = "rust"
+source.git = "https://github.com/tree-sitter/tree-sitter-rust"
+source.rev = "0431a2c60828731f27491ee9fdefe25e250ce9c9"
+
+[[grammar]]
+name       = "xit"
+source.git = "https://github.com/synaptiko/tree-sitter-xit"
+source.rev = "a4fad351bfa5efdcb379b40c36671413fbe9caac"
 
 [[grammar]]
 name       = "bash"
 source.git = "https://github.com/tree-sitter/tree-sitter-bash"
 source.rev = "487734f87fd87118028a65a4599352fa99c9cde8"
-
-
-[[language]]
-name             = "markdown"
-soft-wrap.enable = true
-text-width       = 200
 
 [[grammar]]
 name           = "markdown"
@@ -116,36 +126,15 @@ source.git     = "https://github.com/tree-sitter-grammars/tree-sitter-markdown"
 source.rev     = "192407ab5a24bfc24f13332979b5e7967518754a"
 source.subpath = "tree-sitter-markdown-inline"
 
-
 [[grammar]]
 name       = "mermaid"
 source.git = "https://github.com/monaqa/tree-sitter-mermaid"
 source.rev = "90ae195b31933ceb9d079abfa8a3ad0a36fee4cc"
 
-
-[[language]]
-name             = "sql"
-file-types       = ["sql", "dsql", "sqlx"]
-indent           = { tab-width = 2, unit = "    " }
-auto-format      = true
-language-servers = ["sql-language-server"]
-formatter        = { command = "sqlfluff", args = ["fix -"] }
-
 [[grammar]]
 name       = "sql"
 source.git = "https://github.com/DerekStride/tree-sitter-sql"
 source.rev = "9853b887c5e4309de273922b681cc7bc09e30c78"
-
-
-[[language]]
-name             = "toml"
-language-servers = ["taplo"]
-indent           = { tab-width = 2, unit = "  " }
-auto-format      = true
-# formatter        = { command = "taplo", args = ["format", "-"] }
-formatter.command = "taplo-helix-fmt" # custom script in ~/bin/
-# https://github.com/helix-editor/helix/issues/3596
-
 
 [[grammar]]
 name       = "lua"
