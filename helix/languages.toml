@@ -99,6 +99,15 @@ auto-format       = true
 formatter.command = "taplo-helix-fmt" # custom script in ~/bin/
 # https://github.com/helix-editor/helix/issues/3596
 
+[[language]]
+name              = "lua"
+shebangs          = ["lua", "luajit"]
+indent            = { tab-width = 2, unit = "  " }
+language-servers  = ["lua-language-server"]
+auto-format       = true
+formatter.command = "stylua"
+formatter.args    = ["--search-parent-directories", "-"]
+
 [[grammar]]
 name       = "rust"
 source.git = "https://github.com/tree-sitter/tree-sitter-rust"
