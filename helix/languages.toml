@@ -44,6 +44,9 @@ plugins.ruff.preview            = true
 command = "sql-language-server"
 args    = ["up", "--method", "stdio"]
 
+[language-server.lua-language-server]
+command = "lua-language-server"
+
 
 [[language]]
 name             = "python"
@@ -142,3 +145,9 @@ auto-format      = true
 # formatter        = { command = "taplo", args = ["format", "-"] }
 formatter.command = "taplo-helix-fmt" # custom script in ~/bin/
 # https://github.com/helix-editor/helix/issues/3596
+
+
+[[grammar]]
+name       = "lua"
+source.git = "https://github.com/tree-sitter-grammars/tree-sitter-lua"
+source.rev = "68d29aa745b68ae22cbbdb5dcb68c20232521ff6"
