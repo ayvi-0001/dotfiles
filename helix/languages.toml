@@ -131,7 +131,7 @@ formatter        = { command = "sqlfluff", args = ["fix -"] }
 [[grammar]]
 name       = "sql"
 source.git = "https://github.com/DerekStride/tree-sitter-sql"
-source.rev = "8a4578bd200fd1ed73e8cbecbe3c5053a4bcf2f8"
+source.rev = "9853b887c5e4309de273922b681cc7bc09e30c78"
 
 
 [[language]]
