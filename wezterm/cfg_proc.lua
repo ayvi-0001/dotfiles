@@ -5,6 +5,7 @@ function module.apply_to_config(config)
   config.audible_bell = "Disabled"
   config.automatically_reload_config = false
   config.bypass_mouse_reporting_modifiers = "ALT"
+  config.disable_default_key_bindings = true
   config.disable_default_quick_select_patterns = true
   config.hide_mouse_cursor_when_typing = false
   config.log_unknown_escape_sequences = true
