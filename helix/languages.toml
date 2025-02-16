@@ -1,5 +1,3 @@
-# languages.toml
-
 # https://docs.helix-editor.com/languages.html
 # https://github.com/helix-editor/helix/blob/master/languages.toml
 # https://github.com/helix-editor/helix/wiki/Language-Server-Configurations
@@ -10,14 +8,6 @@ args    = ["start"]
 
 [language-server.rust-analyzer]
 command = "rust-analyzer"
-
-[language-server.rust-analyzer.config]
-inlayHints.bindingModeHints.enable             = false
-inlayHints.closingBraceHints.minLines          = 10
-inlayHints.closureReturnTypeHints.enable       = "with_block"
-inlayHints.discriminantHints.enable            = "fieldless"
-inlayHints.lifetimeElisionHints.enable         = "skip_trivial"
-inlayHints.typeHints.hideClosureInitialization = false
 
 [language-server.pylyzer]
 command = "pylyzer"
@@ -44,7 +34,7 @@ plugins.pyflakes.enabled        = true
 plugins.pylint.enabled          = true
 plugins.pyls_mypy.enabled       = false
 plugins.pyls_mypy.live_mode     = false
-plugins.pylsp_mypy.dmypy        = false # does not work in live_mode.
+plugins.pylsp_mypy.dmypy        = false
 plugins.rope_autoimport.enabled = false
 plugins.ruff.enabled            = true
 plugins.ruff.formatEnabled      = true
@@ -57,58 +47,28 @@ args    = ["up", "--method", "stdio"]
 
 [[language]]
 name             = "python"
-language-id      = "python"
-language-servers = ["ruff", "basedpyright"] #, "pylsp"] #, "pylyzer"]
-injection-regex  = "py(thon)?"
 auto-format      = true
 shebangs         = ["python", "uv"]
-roots            = ["pyproject.toml", "setup.py", "poetry.lock", "pyrightconfig.json", "requirements.txt", ".venv/"]
-comment-token    = "#"
-scope            = "source.python"
+language-servers = ["ruff", "basedpyright"] # "pylsp", "pylyzer"
 indent           = { tab-width = 4, unit = "    " }
 formatter        = { command = "ruff", args = ["format", "-"] }
-
-file-types = [
-  "py",
-  "pyi",
-  "py3",
-  "pyw",
-  "ptl",
-  "rpy",
-  "cpy",
-  "ipy",
-  "pyt",
-  { glob = ".python_history" },
-  { glob = ".pythonstartup" },
-  { glob = ".pythonrc" },
-  { glob = "SConstruct" },
-  { glob = "SConscript" },
-]
 
 
 [[language]]
 name                          = "rust"
-scope                         = "source.rust"
-injection-regex               = "rs|rust"
-file-types                    = ["rs"]
-roots                         = ["Cargo.toml", "Cargo.lock"]
 shebangs                      = ["rust-script", "cargo"]
 auto-format                   = true
 comment-tokens                = ["//", "///", "//!"]
-block-comment-tokens          = [{ start = "/*", end = "*/" }, { start = "/**", end = "*/" }, { start = "/*!", end = "*/" }]
 language-servers              = ["rust-analyzer"]
 indent                        = { tab-width = 4, unit = "    " }
 persistent-diagnostic-sources = ["rustc", "clippy"]
 
 
 [[language]]
-name            = "xit"
-auto-format     = true
-scope           = "source.xit"
-injection-regex = "xit"
-file-types      = ["xit"]
-indent          = { tab-width = 4, unit = "    " }
-formatter       = { command = "bash", args = ["-c", "xit-sort -"] } # custom script in ~/bin/
+name        = "xit"
+auto-format = true
+indent      = { tab-width = 4, unit = "    " }
+formatter   = { command = "bash", args = ["-c", "xit-sort -"] } # custom script in ~/bin/
 
 [[grammar]]
 name       = "xit"
@@ -124,66 +84,6 @@ auto-format = true
 formatter   = { command = "bash", args = ["-c", "column -t -s, -o, <&0"] }
 
 
-[[language]]
-name             = "bash"
-scope            = "source.bash"
-injection-regex  = "(shell|bash|zsh|sh)"
-shebangs         = ["sh", "bash", "dash", "zsh"]
-comment-token    = "#"
-language-servers = ["bash-language-server"]
-indent           = { tab-width = 2, unit = "  " }
-
-file-types = [
-  "sh",
-  "bash",
-  "ash",
-  "dash",
-  "ksh",
-  "mksh",
-  "zsh",
-  "zshenv",
-  "zlogin",
-  "zlogout",
-  "zprofile",
-  "zshrc",
-  "eclass",
-  "ebuild",
-  "bazelrc",
-  "Renviron",
-  "zsh-theme",
-  "cshrc",
-  "tcshrc",
-  { glob = "i3/config" },
-  { glob = "sway/config" },
-  { glob = "tmux.conf" },
-  { glob = ".bash_history" },
-  { glob = ".bash_login" },
-  { glob = ".bash_logout" },
-  { glob = ".bash_profile" },
-  { glob = ".bashrc" },
-  { glob = ".profile" },
-  { glob = ".zshenv" },
-  { glob = ".zlogin" },
-  { glob = ".zlogout" },
-  { glob = ".zprofile" },
-  { glob = ".zshrc" },
-  { glob = ".zimrc" },
-  { glob = "APKBUILD" },
-  { glob = ".bash_aliases" },
-  { glob = ".Renviron" },
-  { glob = ".xprofile" },
-  { glob = ".xsession" },
-  { glob = ".xsessionrc" },
-  { glob = ".yashrc" },
-  { glob = ".yash_profile" },
-  { glob = ".hushlogin" },
-  { glob = "*ssh*" },
-  { glob = ".inputrc" },
-  { glob = "crontab" },
-  { glob = "*.rc" },
-  { glob = ".bash_functions" },
-]
-
 [[grammar]]
 name       = "bash"
 source.git = "https://github.com/tree-sitter/tree-sitter-bash"
@@ -191,16 +91,9 @@ source.rev = "487734f87fd87118028a65a4599352fa99c9cde8"
 
 
 [[language]]
-name                 = "markdown"
-scope                = "source.md"
-injection-regex      = "md|markdown"
-file-types           = ["md", "markdown", "mdx", "mkd", "mkdn", "mdwn", "mdown", "markdn", "mdtxt", "mdtext", "workbook", "README", { glob = "PULLREQ_EDITMSG" }]
-roots                = [".marksman.toml"]
-language-servers     = ["marksman", "markdown-oxide"]
-indent               = { tab-width = 2, unit = "  " }
-block-comment-tokens = { start = "<!--", end = "-->" }
-soft-wrap.enable     = true
-text-width           = 200
+name             = "markdown"
+soft-wrap.enable = true
+text-width       = 200
 
 [[grammar]]
 name           = "markdown"
@@ -215,14 +108,6 @@ source.rev     = "192407ab5a24bfc24f13332979b5e7967518754a"
 source.subpath = "tree-sitter-markdown-inline"
 
 
-[[language]]
-name            = "mermaid"
-scope           = "source.mermaid"
-injection-regex = "mermaid"
-file-types      = ["mermaid", "mmd"]
-comment-token   = "%%"
-indent          = { tab-width = 4, unit = "    " }
-
 [[grammar]]
 name       = "mermaid"
 source.git = "https://github.com/monaqa/tree-sitter-mermaid"
@@ -230,39 +115,12 @@ source.rev = "90ae195b31933ceb9d079abfa8a3ad0a36fee4cc"
 
 
 [[language]]
-name            = "git-ignore"
-scope           = "source.gitignore"
-injection-regex = "git-ignore"
-comment-token   = "#"
-grammar         = "gitignore"
-
-file-types = [
-  { glob = ".gitignore_global" },
-  { glob = "git/ignore" },
-  { glob = ".ignore" },
-  { glob = "CODEOWNERS" },
-  { glob = ".config/helix/ignore" },
-  { glob = ".helix/ignore" },
-  { glob = ".*ignore" },
-  { glob = "*.*ignore" },
-  # Additional file types added below for syntax highlighting.
-  { glob = ".*exclude" },
-  { glob = ".*include" },
-  { glob = ".*filter" },
-]
-
-
-[[language]]
-name                 = "sql"
-scope                = "source.sql"
-file-types           = ["sql", "dsql", "sqlx"]
-comment-token        = "--"
-block-comment-tokens = { start = "/*", end = "*/" }
-indent               = { tab-width = 2, unit = "    " }
-injection-regex      = "sql"
-auto-format          = true
-language-servers     = ["sql-language-server"]
-formatter            = { command = "sqlfluff", args = ["fix -"] }
+name             = "sql"
+file-types       = ["sql", "dsql", "sqlx"]
+indent           = { tab-width = 2, unit = "    " }
+auto-format      = true
+language-servers = ["sql-language-server"]
+formatter        = { command = "sqlfluff", args = ["fix -"] }
 
 [[grammar]]
 name       = "sql"
@@ -272,10 +130,6 @@ source.rev = "8a4578bd200fd1ed73e8cbecbe3c5053a4bcf2f8"
 
 [[language]]
 name             = "toml"
-scope            = "source.toml"
-injection-regex  = "toml"
-file-types       = ["toml", { glob = "pdm.lock" }, { glob = "poetry.lock" }, { glob = "Cargo.lock" }, { glob = "uv.lock" }]
-comment-token    = "#"
 language-servers = ["taplo"]
 indent           = { tab-width = 2, unit = "  " }
 auto-format      = true
