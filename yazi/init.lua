@@ -11,8 +11,6 @@ require("custom-shell"):setup {
   save_history = true,
 }
 
-require("full-border"):setup { type = ui.Border.ROUNDED }
-
 -- start: yamb.yazi
 local bookmarks = {}
 local path_sep = package.config:sub(1, 1)
