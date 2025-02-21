@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+PACKAGE="$REGION-docker.pkg.dev/$GOOGLE_CLOUD_QUOTA_PROJECT/$ARTIFACT_REPO/$ARTIFACT_IMAGE"
+
+# gcloud command outputs some text to the terminal like 'Listing items under project..'
+# redirections below are so the only output is the image name.
+exec 3>&1 >/dev/null 2>&1
+
+gcloud artifacts docker images list \
+  "$REGION-docker.pkg.dev/$GOOGLE_CLOUD_QUOTA_PROJECT/$ARTIFACT_REPO" \
+  --filter="package=$PACKAGE" \
+  --sort-by="~UPDATE_TIME" \
+  --limit=1 \
+  --format="value(format(\"{0}@{1}\",package,version))" \
+  | grep "$PACKAGE" >&3
