@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
+strict_env
 
 if has bw; then
+  # bw_ points to a script in ~/bin/ that wraps around the bitwarden cli,
+  # the bitwarden cli is very slow, so this wrapper saves the vault in a
+  # local encrytped 7z archive and retrieves secrets from there.
+  BW_EXEC="$(command -v bw_ || command -v bw)"
   echo 'direnv: setting github cli credentials'
-  if GH_TOKEN="$(bw get item '{{BW_ID_GH_TOKEN_W}}' | jq -r '.fields.[] | select(.name=="GH_TOKEN") | .value' 2>/dev/null)"; then
+  if GH_TOKEN="$("$BW_EXEC" get item '{{BW_ID_GH_TOKEN_W}}' | jq -r '.fields.[] | select(.name=="GH_TOKEN") | .value' 2>/dev/null)"; then
     export GH_TOKEN
+    env_vars_required GH_TOKEN
   fi
 else
   echo 'direnv: bw not found on path'
@@ -18,6 +24,11 @@ if has gcloud; then
   gcloud config set project "{{DEFAULT_GCP_PROJECT_W}}"
 
   # {{This comment will be replaced with specfic GCS/Compute engine resource names}}
+  env_vars_required \
+    CLOUDSDK_ACTIVE_CONFIG_NAME \
+    GCP_PROJECT \
+    GOOGLE_CLOUD_QUOTA_PROJECT \
+    GOOGLE_APPLICATION_CREDENTIALS
 else
   echo 'direnv: gcloud not found on path'
 fi
@@ -32,13 +43,14 @@ fi
 if has bw && test -f ~/.ssh/'{{ID_RSA_W}}'; then
   if ! ssh-add -l | grep -q '{{SSH_HOST_W}}'; then 
     echo 'direnv: adding ssh keys..'
-    tmp_ssh_askpass="$(mktemp -p.)"
+    tmp_ssh_askpass="$(mktemp)"
     # shellcheck disable=SC2064
     trap "rm -f $tmp_ssh_askpass" EXIT INT
 	cat <<- EOF > "$tmp_ssh_askpass"
-	echo "$(bw get password '{{BW_ID_SSH_PASSPHRASE_W}}')"
+	echo "$("$BW_EXEC" get password '{{BW_ID_SSH_PASSPHRASE_W}}')"
 	EOF
     DISPLAY=1 SSH_ASKPASS="$tmp_ssh_askpass" ssh-add ~/.ssh/'{{ID_RSA_W}}' < /dev/null
+    rm -f "$tmp_ssh_askpass"
   fi
 fi
 
@@ -46,14 +58,7 @@ fi
 ssh-add -l
 
 # confirm username and email
-echo "git config user.name = $(git config --get user.name)"
-echo "git config user.email = $(git config --get user.email)"
+echo "git config user.name = $(git config -f .gitconfig --get user.name)"
+echo "git config user.email = $(git config -f .gitconfig --get user.email)"
 
-env_vars_required \
-  SSH_AUTH_SOCK \
-  SSH_AGENT_PID \
-  CLOUDSDK_ACTIVE_CONFIG_NAME \
-  GCP_PROJECT \
-  GOOGLE_CLOUD_QUOTA_PROJECT \
-  GOOGLE_APPLICATION_CREDENTIALS \
-  GH_TOKEN
+env_vars_required SSH_AUTH_SOCK SSH_AGENT_PID
