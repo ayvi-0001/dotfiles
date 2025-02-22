@@ -17,7 +17,7 @@ command -v gum >/dev/null && _has_gum=true || _has_gum=false
 
 if ! 7z t "$archive_path_relative" -p &>/dev/null; then
   if "$_has_gum"; then
-    REPLY="$(gum input --placeholder='password' --prompt=)"
+    REPLY="$(gum input --password --placeholder='password' --prompt=)"
   else
     set +H
     read -rse -p'password: ' 

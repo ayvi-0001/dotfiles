@@ -18,7 +18,7 @@ archive="$(basename "$target_dir").7z"
 command -v gum >/dev/null && _has_gum=true || _has_gum=false
 
 if "$_has_gum"; then
-  REPLY="$(gum input --placeholder='password' --prompt=)"
+  REPLY="$(gum input --password --placeholder='password' --prompt=)"
 else
   set +H
   read -rse -p'password: ' 
