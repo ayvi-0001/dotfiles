@@ -9,6 +9,7 @@ function module.apply_to_config(config)
   config.disable_default_quick_select_patterns = true
   config.hide_mouse_cursor_when_typing = false
   config.log_unknown_escape_sequences = true
+  config.mux_enable_ssh_agent = true
   config.prefer_to_spawn_tabs = true
   config.scroll_to_bottom_on_input = true
   config.switch_to_last_active_tab_when_closing_tab = true
