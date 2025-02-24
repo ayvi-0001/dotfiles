@@ -34,6 +34,7 @@ function module.apply_to_config(config)
 
   config.hide_tab_bar_if_only_one_tab = true
   config.prefer_to_spawn_tabs = true
+  config.show_close_tab_button_in_tabs = false
   config.show_new_tab_button_in_tab_bar = false
   config.show_tab_index_in_tab_bar = true
   config.switch_to_last_active_tab_when_closing_tab = true
@@ -45,22 +46,35 @@ end
 local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 
+local function basename(s)
+  return string.gsub(s, "(.*[/\\])(.*)", "%2")
+end
+
 local function tab_title(tab_info)
+  local pane = tab_info.active_pane
   local title = tab_info.tab_title
+
   if title and #title > 0 then
     return title
   end
-  return tab_info.active_pane.title
+
+  title = pane.title or basename(pane.foreground_process_name)
+  if pane.domain_name then
+    local spacer = #title > 0 and " " or ""
+    title = ("(" .. pane.domain_name .. ")" .. spacer .. title)
+  end
+
+  return title
 end
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
   local edge_background = "#0b0022"
-  local background = "#1b1032"
-  local foreground = "#808080"
+  local background = "#000000"
+  local foreground = "#f0f0ff"
 
   if tab.is_active then
-    background = "#2b2042"
-    foreground = "#89F57C"
+    background = "#f0f0ff"
+    foreground = "#000000"
   elseif hover then
     background = "#3b3052"
     foreground = "#909090"
@@ -68,7 +82,12 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
   local edge_foreground = background
 
-  local title = tab_title(tab)
+  local title = ""
+  if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+    title = tab_title(tab):gsub(".exe", "")
+  else
+    title = tab_title(tab)
+  end
 
   return {
     { Background = { Color = edge_background } },
@@ -76,7 +95,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     { Text = SOLID_LEFT_ARROW },
     { Background = { Color = background } },
     { Foreground = { Color = foreground } },
-    { Text = title },
+    { Text = " " .. title .. " " },
     { Background = { Color = edge_background } },
     { Foreground = { Color = edge_foreground } },
     { Text = SOLID_RIGHT_ARROW },
