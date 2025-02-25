@@ -26,6 +26,10 @@ function module.apply_to_config(config)
     )
   end
 
+  local move_pane_to_new_window = function(window, pane)
+    pane:move_to_new_window()
+  end
+
   config.leader = { key = "Space", mods = "CTRL|SHIFT" }
 
   config.keys = {
@@ -203,6 +207,7 @@ function module.apply_to_config(config)
       { key = "D", action = wezterm.action.SplitPane { direction = "Down", top_level = true } },
       { key = "x", action = wezterm.action.CloseCurrentPane { confirm = false } },
       { key = "f", action = wezterm.action.TogglePaneZoomState },
+      { key = "e", action = wezterm.action_callback(move_pane_to_new_window) },
       { key = "Escape", action = "PopKeyTable" },
     },
 
