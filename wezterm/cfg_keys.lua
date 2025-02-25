@@ -10,6 +10,11 @@ wezterm.on("update-right-status", function(window, pane)
 end)
 
 function module.apply_to_config(config)
+  config.bypass_mouse_reporting_modifiers = "ALT"
+  -- config.debug_key_events = true
+  config.disable_default_key_bindings = true
+  config.treat_left_ctrlalt_as_altgr = true
+
   config.leader = { key = "Space", mods = "CTRL|SHIFT" }
 
   config.keys = {
@@ -17,40 +22,39 @@ function module.apply_to_config(config)
       key = "p",
       mods = "CTRL",
       action = wezterm.action.ActivateKeyTable {
-        name = "pane_mode",
-        timeout_milliseconds = 1000,
+        name = "pane",
+        timeout_milliseconds = 3000,
+        until_unknown = true,
       },
     },
     {
       key = "n",
       mods = "CTRL",
       action = wezterm.action.ActivateKeyTable {
-        name = "resize_mode",
+        name = "resize",
         one_shot = false,
-        timeout_milliseconds = 1000,
+        timeout_milliseconds = 3000,
+        until_unknown = true,
       },
     },
     {
       key = "h",
       mods = "CTRL",
       action = wezterm.action.ActivateKeyTable {
-        name = "move_mode",
-        timeout_milliseconds = 1000,
+        name = "move",
+        one_shot = false,
+        timeout_milliseconds = 3000,
       },
     },
     {
       key = "t",
       mods = "CTRL",
       action = wezterm.action.ActivateKeyTable {
-        name = "tab_mode",
+        name = "tab",
         one_shot = false,
-        timeout_milliseconds = 1000,
+        timeout_milliseconds = 3000,
+        until_unknown = true,
       },
-    },
-    {
-      key = "w",
-      mods = "SHIFT|CTRL",
-      action = wezterm.action.CloseCurrentPane { confirm = false },
     },
     { key = "LeftArrow", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Left" },
     { key = "h", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Left" },
@@ -60,13 +64,13 @@ function module.apply_to_config(config)
     { key = "k", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Up" },
     { key = "DownArrow", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Down" },
     { key = "j", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Down" },
-
+    { key = "+", mods = "CTRL|SHIFT", action = wezterm.action.IncreaseFontSize },
+    { key = "-", mods = "CTRL|SHIFT", action = wezterm.action.DecreaseFontSize },
+    { key = "0", mods = "CTRL", action = wezterm.action.ResetFontSize },
     { key = "H", mods = "ALT", action = wezterm.action.ActivateTabRelative(-1) },
     { key = "L", mods = "ALT", action = wezterm.action.ActivateTabRelative(1) },
-
     { key = "i", mods = "ALT", action = wezterm.action.MoveTabRelative(-1) },
     { key = "o", mods = "ALT", action = wezterm.action.MoveTabRelative(1) },
-
     {
       key = "C",
       mods = "CTRL|SHIFT",
@@ -77,49 +81,18 @@ function module.apply_to_config(config)
     { key = "l", mods = "ALT|LEADER", action = wezterm.action.ShowLauncher },
     { key = "P", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCommandPalette },
     { key = "t", mods = "CTRL|ALT", action = wezterm.action.ReloadConfiguration },
-    { key = "R", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
-    { key = "r", mods = "SUPER", action = wezterm.action.DisableDefaultAssignment },
-    {
-      key = "DownArrow",
-      mods = "CTRL|SHIFT|ALT",
-      action = wezterm.action.DisableDefaultAssignment,
-    },
-    {
-      key = "LeftArrow",
-      mods = "CTRL|SHIFT|ALT",
-      action = wezterm.action.DisableDefaultAssignment,
-    },
-    {
-      key = "RightArrow",
-      mods = "CTRL|SHIFT|ALT",
-      action = wezterm.action.DisableDefaultAssignment,
-    },
-    { key = "UpArrow", mods = "CTRL|SHIFT|ALT", action = wezterm.action.DisableDefaultAssignment },
-    { key = "DownArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
-    { key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
-    { key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
-    { key = "UpArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
-    { key = '"', mods = "CTRL|SHIFT|ALT", action = wezterm.action.DisableDefaultAssignment }, -- SplitVertical
-    { key = "%", mods = "CTRL|SHIFT|ALT", action = wezterm.action.DisableDefaultAssignment }, -- SplitHorizontal
-    { key = "Z", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment }, -- ActivateCopyMode
-    { key = "U", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment }, -- CharSelect
-    { key = "X", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment }, -- ActivateCopyMode
   }
 
   config.key_tables = {
-    resize_mode = {
-      { key = "LeftArrow", action = wezterm.action.AdjustPaneSize { "Left", 5 } },
+    resize = {
       { key = "h", action = wezterm.action.AdjustPaneSize { "Left", 5 } },
-      { key = "DownArrow", action = wezterm.action.AdjustPaneSize { "Down", 5 } },
       { key = "j", action = wezterm.action.AdjustPaneSize { "Down", 5 } },
-      { key = "UpArrow", action = wezterm.action.AdjustPaneSize { "Up", 5 } },
       { key = "k", action = wezterm.action.AdjustPaneSize { "Up", 5 } },
-      { key = "RightArrow", action = wezterm.action.AdjustPaneSize { "Right", 5 } },
       { key = "l", action = wezterm.action.AdjustPaneSize { "Right", 5 } },
       { key = "Escape", action = "PopKeyTable" },
     },
 
-    move_mode = {
+    move = {
       {
         key = "h",
         action = wezterm.action.Multiple {
@@ -137,45 +110,32 @@ function module.apply_to_config(config)
       { key = "Escape", action = "PopKeyTable" },
     },
 
-    tab_mode = {
+    tab = {
       { key = "n", action = wezterm.action.SpawnTab "CurrentPaneDomain" },
       { key = "x", action = wezterm.action.CloseCurrentTab { confirm = false } },
       { key = "h", action = wezterm.action.ActivateTabRelative(-1) },
       { key = "l", action = wezterm.action.ActivateTabRelative(1) },
-
-      { key = "1", action = wezterm.action.ActivateWindow(0) },
-      { key = "2", action = wezterm.action.ActivateWindow(1) },
-      { key = "3", action = wezterm.action.ActivateWindow(2) },
-      { key = "4", action = wezterm.action.ActivateWindow(3) },
-      { key = "5", action = wezterm.action.ActivateWindow(4) },
-      { key = "6", action = wezterm.action.ActivateWindow(5) },
-      { key = "7", action = wezterm.action.ActivateWindow(6) },
-      { key = "8", action = wezterm.action.ActivateWindow(7) },
-      { key = "9", action = wezterm.action.ActivateWindow(8) },
-
+      { key = "`", action = wezterm.action.ActivateLastTab },
+      { key = "t", action = wezterm.action.ShowTabNavigator },
+      { key = "1", action = wezterm.action.ActivateTab(0) },
+      { key = "2", action = wezterm.action.ActivateTab(1) },
+      { key = "3", action = wezterm.action.ActivateTab(2) },
+      { key = "4", action = wezterm.action.ActivateTab(3) },
+      { key = "5", action = wezterm.action.ActivateTab(4) },
+      { key = "6", action = wezterm.action.ActivateTab(5) },
+      { key = "7", action = wezterm.action.ActivateTab(6) },
+      { key = "8", action = wezterm.action.ActivateTab(7) },
+      { key = "9", action = wezterm.action.ActivateTab(8) },
       { key = "Escape", action = "PopKeyTable" },
     },
 
-    pane_mode = {
-      { key = "d", action = wezterm.action.SplitVertical { domain = "CurrentPaneDomain" } },
-      { key = "r", action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" } },
+    pane = {
+      { key = "r", action = wezterm.action.SplitPane { direction = "Right" } },
+      { key = "R", action = wezterm.action.SplitPane { direction = "Right", top_level = true } },
+      { key = "d", action = wezterm.action.SplitPane { direction = "Down" } },
+      { key = "D", action = wezterm.action.SplitPane { direction = "Down", top_level = true } },
       { key = "x", action = wezterm.action.CloseCurrentPane { confirm = false } },
-      {
-        key = "w",
-        action = wezterm.action.Multiple {
-          wezterm.action_callback(
-            function(win, pane)
-              wezterm.mux.spawn_window {
-                args = { "bash", "-il" },
-                width = 150,
-                height = 30,
-                position = { x = 770, y = 400, origin = "ScreenCoordinateSystem" },
-              }
-            end
-          ),
-          wezterm.action.ToggleAlwaysOnTop,
-        },
-      },
+      { key = "f", action = wezterm.action.TogglePaneZoomState },
       { key = "Escape", action = "PopKeyTable" },
     },
   }
