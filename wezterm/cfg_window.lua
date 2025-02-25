@@ -10,7 +10,7 @@ function module.apply_to_config(config)
   }
   config.window_frame = {
     font = wezterm.font { family = "SpaceMono Nerd Font", weight = "Bold" },
-    font_size = 9.0,
+    font_size = 8.3,
     active_titlebar_bg = "#000000",
     inactive_titlebar_bg = "#000000",
   }
