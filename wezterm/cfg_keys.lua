@@ -77,6 +77,15 @@ function module.apply_to_config(config)
         until_unknown = true,
       },
     },
+    {
+      key = "o",
+      mods = "CTRL",
+      action = wezterm.action.ActivateKeyTable {
+        name = "session",
+        timeout_milliseconds = 3000,
+        until_unknown = true,
+      },
+    },
     { key = "LeftArrow", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Left" },
     { key = "h", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Left" },
     { key = "RightArrow", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Right" },
@@ -98,8 +107,6 @@ function module.apply_to_config(config)
       action = wezterm.action.CopyTo "ClipboardAndPrimarySelection",
     },
     { key = "V", mods = "CTRL|SHIFT", action = wezterm.action.PasteFrom "Clipboard" },
-    { key = "L", mods = "CTRL|SHIFT", action = wezterm.action.ShowDebugOverlay },
-    { key = "l", mods = "ALT|LEADER", action = wezterm.action.ShowLauncher },
     { key = "P", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCommandPalette },
     { key = "t", mods = "CTRL|ALT", action = wezterm.action.ReloadConfiguration },
   }
@@ -149,6 +156,23 @@ function module.apply_to_config(config)
       { key = "8", action = wezterm.action.ActivateTab(7) },
       { key = "9", action = wezterm.action.ActivateTab(8) },
       { key = "Escape", action = "PopKeyTable" },
+    },
+
+    session = {
+      { key = "d", action = wezterm.action.ShowDebugOverlay },
+      { key = "h", action = wezterm.action.Hide },
+      { key = "s", action = wezterm.action.Show },
+      { key = "l", action = wezterm.action.ShowLauncher },
+      { key = "q", action = wezterm.action.QuitApplication },
+      { key = "1", action = wezterm.action.ActivateWindow(0) },
+      { key = "2", action = wezterm.action.ActivateWindow(1) },
+      { key = "3", action = wezterm.action.ActivateWindow(2) },
+      { key = "4", action = wezterm.action.ActivateWindow(3) },
+      { key = "5", action = wezterm.action.ActivateWindow(4) },
+      { key = "6", action = wezterm.action.ActivateWindow(5) },
+      { key = "7", action = wezterm.action.ActivateWindow(6) },
+      { key = "8", action = wezterm.action.ActivateWindow(7) },
+      { key = "9", action = wezterm.action.ActivateWindow(8) },
     },
 
     pane = {
