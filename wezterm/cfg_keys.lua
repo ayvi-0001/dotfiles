@@ -1,14 +1,6 @@
 local wezterm = require "wezterm"
 local module = {}
 
-wezterm.on("update-right-status", function(window, pane)
-  local name = window:active_key_table()
-  if name then
-    name = "TABLE: " .. name
-  end
-  window:set_right_status(name or "")
-end)
-
 function module.apply_to_config(config)
   config.bypass_mouse_reporting_modifiers = "ALT"
   -- config.debug_key_events = true

@@ -13,4 +13,6 @@ init.proc.apply_to_config(config)
 init.term.apply_to_config(config)
 init.window.apply_to_config(config)
 
+require "events"
+
 return config
