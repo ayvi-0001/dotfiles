@@ -7,6 +7,25 @@ function module.apply_to_config(config)
   config.disable_default_key_bindings = true
   config.treat_left_ctrlalt_as_altgr = true
 
+  local rename_tab = function(window, pane)
+    window:perform_action(
+      wezterm.action.PromptInputLine {
+        description = wezterm.format {
+          { Attribute = { Intensity = "Bold" } },
+          { Foreground = { AnsiColor = "Fuchsia" } },
+          { Text = "Enter new name for tab" },
+        },
+        initial_value = "",
+        action = wezterm.action_callback(function(_window, _pane, line)
+          if line then
+            window:active_tab():set_title(line)
+          end
+        end),
+      },
+      pane
+    )
+  end
+
   config.leader = { key = "Space", mods = "CTRL|SHIFT" }
 
   config.keys = {
@@ -107,6 +126,7 @@ function module.apply_to_config(config)
       { key = "x", action = wezterm.action.CloseCurrentTab { confirm = false } },
       { key = "h", action = wezterm.action.ActivateTabRelative(-1) },
       { key = "l", action = wezterm.action.ActivateTabRelative(1) },
+      { key = "r", action = wezterm.action_callback(rename_tab) },
       { key = "`", action = wezterm.action.ActivateLastTab },
       { key = "t", action = wezterm.action.ShowTabNavigator },
       { key = "1", action = wezterm.action.ActivateTab(0) },
