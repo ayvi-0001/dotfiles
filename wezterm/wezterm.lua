@@ -13,6 +13,9 @@ init.proc.apply_to_config(config)
 init.term.apply_to_config(config)
 init.window.apply_to_config(config)
 
+local floating_pane = require "floating_pane"
+floating_pane.apply_to_config(config)
+
 require "events"
 
 return config

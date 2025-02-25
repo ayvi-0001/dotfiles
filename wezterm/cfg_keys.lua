@@ -207,6 +207,8 @@ function module.apply_to_config(config)
       { key = "D", action = wezterm.action.SplitPane { direction = "Down", top_level = true } },
       { key = "x", action = wezterm.action.CloseCurrentPane { confirm = false } },
       { key = "f", action = wezterm.action.TogglePaneZoomState },
+      { key = "n", action = wezterm.action.EmitEvent "spawn-new-window" },
+      { key = "w", action = wezterm.action.EmitEvent "toggle-floating-pane" },
       { key = "e", action = wezterm.action_callback(move_pane_to_new_window) },
       { key = "Escape", action = "PopKeyTable" },
     },
