@@ -117,6 +117,23 @@ function module.apply_to_config(config)
       { key = "j", action = wezterm.action.AdjustPaneSize { "Down", 5 } },
       { key = "k", action = wezterm.action.AdjustPaneSize { "Up", 5 } },
       { key = "l", action = wezterm.action.AdjustPaneSize { "Right", 5 } },
+      {
+        key = "w",
+        action = wezterm.action.ActivateKeyTable {
+          name = "resize_window",
+          one_shot = false,
+          until_unknown = true,
+          replace_current = true,
+        },
+      },
+      { key = "Escape", action = "PopKeyTable" },
+    },
+
+    resize_window = {
+      { key = "l", action = wezterm.action.EmitEvent "increase-window-width" },
+      { key = "h", action = wezterm.action.EmitEvent "decrease-window-width" },
+      { key = "j", action = wezterm.action.EmitEvent "increase-window-height" },
+      { key = "k", action = wezterm.action.EmitEvent "decrease-window-height" },
       { key = "Escape", action = "PopKeyTable" },
     },
 
@@ -135,6 +152,10 @@ function module.apply_to_config(config)
           wezterm.action.ActivatePaneDirection "Next",
         },
       },
+      { key = "H", action = wezterm.action.EmitEvent "move-window-left" },
+      { key = "L", action = wezterm.action.EmitEvent "move-window-right" },
+      { key = "K", action = wezterm.action.EmitEvent "move-window-up" },
+      { key = "J", action = wezterm.action.EmitEvent "move-window-down" },
       { key = "Escape", action = "PopKeyTable" },
     },
 
