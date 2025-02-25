@@ -67,6 +67,16 @@ function module.apply_to_config(config)
         until_unknown = true,
       },
     },
+    {
+      key = "s",
+      mods = "CTRL",
+      action = wezterm.action.ActivateKeyTable {
+        name = "scroll",
+        one_shot = false,
+        timeout_milliseconds = 3000,
+        until_unknown = true,
+      },
+    },
     { key = "LeftArrow", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Left" },
     { key = "h", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Left" },
     { key = "RightArrow", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Right" },
@@ -148,6 +158,25 @@ function module.apply_to_config(config)
       { key = "D", action = wezterm.action.SplitPane { direction = "Down", top_level = true } },
       { key = "x", action = wezterm.action.CloseCurrentPane { confirm = false } },
       { key = "f", action = wezterm.action.TogglePaneZoomState },
+      { key = "Escape", action = "PopKeyTable" },
+    },
+
+    scroll = {
+      { key = "k", mods = "", action = wezterm.action.ScrollByLine(-1) },
+      { key = "j", mods = "", action = wezterm.action.ScrollByLine(1) },
+      { key = "b", mods = "", action = wezterm.action.ScrollByPage(-1) },
+      { key = "f", mods = "", action = wezterm.action.ScrollByPage(1) },
+      { key = "u", mods = "", action = wezterm.action.ScrollByPage(-0.5) },
+      { key = "d", mods = "", action = wezterm.action.ScrollByPage(0.5) },
+      { key = "s", mods = "CTRL", action = wezterm.action.PopKeyTable },
+      {
+        key = "c",
+        mods = "CTRL",
+        action = wezterm.action.Multiple {
+          wezterm.action.ScrollToBottom,
+          wezterm.action.PopKeyTable,
+        },
+      },
       { key = "Escape", action = "PopKeyTable" },
     },
   }
