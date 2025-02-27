@@ -1,6 +1,6 @@
 # dotfiles
 
-A collection of my dotfiles/config/scripts, and bash script to symlink them.
+A collection of my dotfiles/config/scripts, and a bash script to symlink them.
 
 While it's mainly focused on development, I wanted to backup and share any of my latest settings, so it also tracks several unrelated files, like configurations for utilities I frequently use or games I play (_though often question why.._).
 
@@ -76,7 +76,7 @@ pattern     = "'{{DIRENV_WHITELIST}}'"
 replacement = '"~/source", "~/work"'
 ```
 
-The config file is run through `eval` first, so it can contain commands/environment variables.
+The config file is run through `eval`, so it can contain commands/environment variables.
 
 ```toml
 [fancontrol.files]
@@ -99,7 +99,7 @@ The process for linking templated files (_also see [diagram](#diagram)_) is:
 
 ## File Structure
 
-All files in the target directory are included except for `README.md`, `.templates/`, and `.ignore/`, (for uncommitted config files, tests, ect). Files starting with 2 leading underscores are included by git but skipped when linking files.
+All files in the target directory are included except for `README.md`, `.templates/`, and `.ignore/` (for uncommitted config files, tests, ect). Files starting with 2 leading underscores are tracked but skipped when linking files.
 
 ```diff
   ┣━━ bash/
@@ -135,7 +135,7 @@ All files in the target directory are included except for `README.md`, `.templat
 Differences on Windows:
 
 - The expected [`ln`](https://schinagl.priv.at/nt/ln/ln.html) command used is the [`Link Shell Extension`](https://schinagl.priv.at/nt/hardlinkshellext/linkshellextension.html) cli, in place of the standard unix command `ln`. If this is detected, the option `--absolute`/`-a` is added.
-- It will check for the package [`gsudo`](https://github.com/gerardog/gsudo), and run `ln -s` with it if found.
+- It will check for the package [`gsudo`](https://github.com/gerardog/gsudo) and run `ln -s` with it if found.
 
 ---
 
@@ -148,8 +148,8 @@ If no args are passed to [`install`](install), all top-level keys in the config 
 # only search config for 2 keys.
 ./install yazi helix
 
-# if a single key has multiple path segments, it must be enclosed in quotes.
-./install '.secret/.ssh'
+# search for 1 key with multiple path segments
+./install .secret/.ssh
 ```
 
 ### Filtering
