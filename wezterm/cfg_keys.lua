@@ -1,7 +1,7 @@
 local wezterm = require "wezterm"
-local module = {}
+local M = {}
 
-function module.apply_to_config(config)
+function M.apply_to_config(config)
   config.allow_win32_input_mode = true
   config.bypass_mouse_reporting_modifiers = "ALT"
   -- config.debug_key_events = true
@@ -258,4 +258,4 @@ function module.apply_to_config(config)
   }
 end
 
-return module
+return M

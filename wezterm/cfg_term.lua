@@ -1,4 +1,4 @@
-local module = {}
+local M = {}
 
 -- Run command to install wezterm TERM definition
 -- tempfile=$(mktemp) \
@@ -6,7 +6,7 @@ local module = {}
 --   && tic -x -o ~/.terminfo $tempfile \
 --   && rm $tempfile
 
-function module.apply_to_config(config)
+function M.apply_to_config(config)
   config.audible_bell = "Disabled"
   config.automatically_reload_config = false
   config.default_prog = { "c:/program files/git/bin/bash.exe", "-il" }
@@ -16,4 +16,4 @@ function module.apply_to_config(config)
   config.term = "wezterm"
 end
 
-return module
+return M

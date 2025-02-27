@@ -1,5 +1,5 @@
 local wezterm = require "wezterm"
-local module = {}
+local M = {}
 
 COMMON_ACCENT = "#afff00"
 COMMON_ACCENT_ALT = "#8a8a8a"
@@ -8,7 +8,7 @@ UI_PANEL_BG = "#020202"
 UI_PANEL_SHADOW = BLACK
 UI_FG = "#f0f0ff"
 
-function module.apply_to_config(config)
+function M.apply_to_config(config)
   config.font = wezterm.font { family = "SpaceMono Nerd Font", weight = "Medium" }
   config.font_size = 9.0
 
@@ -128,4 +128,4 @@ wezterm.on("format-tab-title", function(tab_info, tabs, panes, config, hover, ma
   }
 end)
 
-return module
+return M

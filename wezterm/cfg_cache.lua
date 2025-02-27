@@ -1,10 +1,6 @@
-local module = {}
+local M = {}
 
--- https://github.com/wez/wezterm/discussions/3664
--- https://github.com/wez/wezterm/blob/d0e9a034406f25af035ecd93f771cc723a2bd704/config/src/config.rs#L748-L757
--- https://github.com/wez/wezterm/blob/d0e9a034406f25af035ecd93f771cc723a2bd704/config/src/config.rs#L1903-L1921
-
-function module.apply_to_config(config)
+function M.apply_to_config(config)
   config.glyph_cache_image_cache_size = 768
   config.line_quad_cache_size = 3072
   config.line_state_cache_size = 3072
@@ -15,4 +11,4 @@ function module.apply_to_config(config)
   config.shape_cache_size = 3072
 end
 
-return module
+return M

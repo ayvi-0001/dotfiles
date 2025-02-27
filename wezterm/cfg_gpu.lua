@@ -1,6 +1,6 @@
-local module = {}
+local M = {}
 
-function module.apply_to_config(config)
+function M.apply_to_config(config)
   config.front_end = "WebGpu"
   config.max_fps = 60
   config.prefer_egl = true
@@ -16,4 +16,4 @@ function module.apply_to_config(config)
   }
 end
 
-return module
+return M
