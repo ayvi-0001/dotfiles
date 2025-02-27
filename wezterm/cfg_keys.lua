@@ -2,9 +2,12 @@ local wezterm = require "wezterm"
 local module = {}
 
 function module.apply_to_config(config)
+  config.allow_win32_input_mode = true
   config.bypass_mouse_reporting_modifiers = "ALT"
   -- config.debug_key_events = true
   config.disable_default_key_bindings = true
+  config.disable_default_quick_select_patterns = true
+  config.hide_mouse_cursor_when_typing = false
   config.treat_left_ctrlalt_as_altgr = true
 
   local rename_tab = function(window, pane)

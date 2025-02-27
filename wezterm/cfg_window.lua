@@ -24,19 +24,20 @@ function module.apply_to_config(config)
   config.window_close_confirmation = "NeverPrompt"
   config.window_decorations = "RESIZE"
 
-  config.enable_scroll_bar = false
   config.initial_cols = 280
   config.initial_rows = 60
-  config.scrollback_lines = 20000
+  config.use_resize_increments = true
 
-  config.display_pixel_geometry = "BGR"
-  config.freetype_load_target = "Light"
+  config.enable_scroll_bar = false
+  config.scrollback_lines = 100000
 
   config.hide_tab_bar_if_only_one_tab = true
+  config.prefer_to_spawn_tabs = true
   config.prefer_to_spawn_tabs = true
   config.show_close_tab_button_in_tabs = false
   config.show_new_tab_button_in_tab_bar = false
   config.show_tab_index_in_tab_bar = true
+  config.switch_to_last_active_tab_when_closing_tab = true
   config.switch_to_last_active_tab_when_closing_tab = true
   config.tab_and_split_indices_are_zero_based = true
   config.tab_bar_at_bottom = false
