@@ -114,13 +114,11 @@ language-servers = ["sql-language-server"]
 formatter        = { command = "sqlfluff", args = ["fix", "-"] }
 
 [[language]]
-name              = "toml"
-language-servers  = ["taplo"]
-indent            = { tab-width = 2, unit = "  " }
-auto-format       = true
-# formatter        = { command = "taplo", args = ["format", "-"] }
-formatter.command = "taplo-helix-fmt" # custom script in ~/bin/
-# https://github.com/helix-editor/helix/issues/3596
+name             = "toml"
+indent           = { tab-width = 2, unit = "  " }
+auto-format      = true
+formatter        = { command = "taplo", args = ["format", "-"] }
+language-servers = ["taplo"]
 
 [[language]]
 name              = "lua"

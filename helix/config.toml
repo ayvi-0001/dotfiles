@@ -153,6 +153,13 @@ s = [
   "jump_backward",
 ]
 
+[keys.normal.space.space.f]
+# format current document with taplo,
+# taplo's formatter/lsp can't format a document from stdin while also
+# respecting custom file rules in the workspace config file,
+# and there's no reliable way to pass the document path to taplo fmt --stdin-filepath
+t = "@:sh taplo fmt <C-r>%<ret>:reload<ret>"
+
 [keys.insert]
 "C-[" = "normal_mode"
 # copy line up

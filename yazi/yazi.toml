@@ -1,8 +1,4 @@
-# yazi.toml
-# line above is for $ taplo fmt --stdin-filepath
-
 # https://yazi-rs.github.io/docs/configuration/yazi
-
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
 [manager]
