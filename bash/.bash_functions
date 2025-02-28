@@ -1,4 +1,4 @@
-# shellcheck shell=bash
+#!/usr/bin/env bash
 
 function batdiff() { git diff --name-only --relative --diff-filter=d "$@" | xargs bat --diff; }
 

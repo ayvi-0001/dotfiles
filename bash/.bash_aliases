@@ -1,4 +1,4 @@
-# shellcheck shell=bash
+#!/usr/bin/env bash
 
 alias fp='fzf --bind "enter:become(hx {})" --preview "bat --style=numbers --color=always --line-range :500 {}"'
 
