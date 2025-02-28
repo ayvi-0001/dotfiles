@@ -18,6 +18,9 @@
 	store = manager
 	helper = manager
 
+[http]
+	sslbackend = schannel # openssl
+
 [core]
 	autocrlf = input
 	editor = hx
