@@ -19,14 +19,8 @@ disabled = false
 
 [gcloud]
 detect_env_vars = ["CLOUDSDK_CONFIG"]
-disabled        = false
+format          = "on [$project:$account@$domain]($style) "
 
-
-[gcloud.region_aliases]
-asia-northeast1         = 'an1'
-northamerica-northeast1 = 'ne1'
-us-central1             = 'uc1'
-us-west1                = 'uw1'
 [fill]
 style  = "bold black"
 symbol = "."
