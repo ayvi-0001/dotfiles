@@ -12,14 +12,13 @@ function gpg-kill-agent() { gpgconf --kill gpg-agent; }
 
 
 function yy() {
-  local tmp
-  tmp="$(mktemp "yazi-cwd.XXXXXX" -p"$HOME/.cache/yazi")"
-  # shellcheck disable=2064
-  trap "rm -f -- $tmp" EXIT INT
+  # shellcheck disable=SC2155
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX" -p"$HOME/.cache/yazi")" cwd
   yazi "$@" --cwd-file="$tmp"
-  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-  builtin cd -- "$cwd" || exit 1
+  if cwd="$(command cat -- "$tmp")" && [[ -n "$cwd" ]] && [[ "$cwd" != "$PWD" ]]; then
+    builtin cd -- "$cwd" || exit 1
   fi
+  rm -f -- "$tmp"
 }
 
 alias y=yy
