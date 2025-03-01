@@ -40,7 +40,12 @@ utc_time_offset = "local"
 
 [git_metrics]
 disabled = false
-format   = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+format   = "[+$added]($added_style)/[-$deleted]($deleted_style) "
+
+[git_commit]
+only_detached = false
+tag_disabled  = false
+
 [memory_usage]
 disabled  = true
 format    = "via $symbol[${ram_pct}( | ${swap_pct})]($style) "
