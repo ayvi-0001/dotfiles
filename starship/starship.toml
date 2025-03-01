@@ -11,6 +11,9 @@ scan_timeout    = 30
 [character]
 success_symbol = "[➜ ](bold green)"
 
+[directory]
+use_os_path_sep = false
+
 [direnv]
 disabled = false
 
