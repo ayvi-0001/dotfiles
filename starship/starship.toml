@@ -38,9 +38,6 @@ style           = "bold #f0f0ff"
 time_format     = "%T"
 utc_time_offset = "local"
 
-[shell]
-disabled = false
-
 [memory_usage]
 disabled  = false
 format    = 'via $symbol[${ram_pct}( | ${swap_pct})]($style) '
