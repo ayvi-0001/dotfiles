@@ -34,12 +34,22 @@ function M.apply_to_config(config)
       },
     },
     {
+      key = "`",
+      mods = "CTRL",
+      action = wezterm.action.ActivateKeyTable {
+        name = "disable_wezterm_key_tables",
+        one_shot = false,
+        until_unknown = false,
+      },
+    },
+    {
       key = "h",
       mods = "CTRL",
       action = wezterm.action.ActivateKeyTable {
         name = "move",
         one_shot = false,
         timeout_milliseconds = 3000,
+        replace_current = true,
       },
     },
     {
@@ -50,6 +60,7 @@ function M.apply_to_config(config)
         one_shot = false,
         timeout_milliseconds = 3000,
         until_unknown = true,
+        replace_current = true,
       },
     },
     {
@@ -60,6 +71,7 @@ function M.apply_to_config(config)
         one_shot = false,
         timeout_milliseconds = 3000,
         until_unknown = true,
+        replace_current = true,
       },
     },
     {
@@ -69,6 +81,7 @@ function M.apply_to_config(config)
         name = "session",
         timeout_milliseconds = 3000,
         until_unknown = true,
+        replace_current = true,
       },
     },
     { key = "f", mods = "ALT", action = wezterm.action.EmitEvent "toggle-floating-pane" },
@@ -90,7 +103,6 @@ function M.apply_to_config(config)
     },
     { key = "V", mods = "CTRL|SHIFT", action = wezterm.action.PasteFrom "Clipboard" },
     { key = "P", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCommandPalette },
-    { key = "t", mods = "CTRL|ALT", action = wezterm.action.ReloadConfiguration },
   }
 
   config.key_tables = {
@@ -104,7 +116,6 @@ function M.apply_to_config(config)
         action = wezterm.action.ActivateKeyTable {
           name = "resize_window",
           one_shot = false,
-          until_unknown = true,
           replace_current = true,
         },
       },
@@ -217,6 +228,23 @@ function M.apply_to_config(config)
         },
       },
       { key = "Escape", action = "PopKeyTable" },
+    },
+    disable_wezterm_key_tables = {
+      { key = "n", mods = "CTRL", action = wezterm.action.SendKey { key = "n", mods = "CTRL" } },
+      { key = "p", mods = "CTRL", action = wezterm.action.SendKey { key = "p", mods = "CTRL" } },
+      { key = "t", mods = "CTRL", action = wezterm.action.SendKey { key = "t", mods = "CTRL" } },
+      { key = "h", mods = "CTRL", action = wezterm.action.SendKey { key = "h", mods = "CTRL" } },
+      { key = "o", mods = "CTRL", action = wezterm.action.SendKey { key = "o", mods = "CTRL" } },
+      { key = "f", mods = "ALT", action = wezterm.action.SendKey { key = "f", mods = "ALT" } },
+      { key = "h", mods = "ALT", action = wezterm.action.SendKey { key = "h", mods = "ALT" } },
+      { key = "j", mods = "ALT", action = wezterm.action.SendKey { key = "j", mods = "ALT" } },
+      { key = "k", mods = "ALT", action = wezterm.action.SendKey { key = "k", mods = "ALT" } },
+      { key = "l", mods = "ALT", action = wezterm.action.SendKey { key = "l", mods = "ALT" } },
+      { key = "H", mods = "ALT", action = wezterm.action.SendKey { key = "H", mods = "ALT" } },
+      { key = "L", mods = "ALT", action = wezterm.action.SendKey { key = "L", mods = "ALT" } },
+      { key = "i", mods = "ALT", action = wezterm.action.SendKey { key = "i", mods = "ALT" } },
+      { key = "o", mods = "ALT", action = wezterm.action.SendKey { key = "o", mods = "ALT" } },
+      { key = "`", mods = "CTRL", action = "PopKeyTable" },
     },
   }
 
