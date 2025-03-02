@@ -123,10 +123,14 @@ function M.apply_to_config(config)
     },
 
     resize_window = {
-      { key = "l", action = wezterm.action.EmitEvent "increase-window-width" },
-      { key = "h", action = wezterm.action.EmitEvent "decrease-window-width" },
-      { key = "j", action = wezterm.action.EmitEvent "increase-window-height" },
-      { key = "k", action = wezterm.action.EmitEvent "decrease-window-height" },
+      { key = "h", action = wezterm.action.EmitEvent "increase-to-left" },
+      { key = "H", action = wezterm.action.EmitEvent "decrease-from-left" },
+      { key = "j", action = wezterm.action.EmitEvent "increase-to-bottom" },
+      { key = "J", action = wezterm.action.EmitEvent "decrease-from-bottom" },
+      { key = "k", action = wezterm.action.EmitEvent "increase-to-top" },
+      { key = "K", action = wezterm.action.EmitEvent "decrease-from-top" },
+      { key = "l", action = wezterm.action.EmitEvent "increase-to-right" },
+      { key = "L", action = wezterm.action.EmitEvent "decrease-from-right" },
       { key = "Escape", action = "PopKeyTable" },
     },
 

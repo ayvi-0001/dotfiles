@@ -97,34 +97,54 @@ local _set_inner_size = function(window, dimension, direction, increment)
   wezterm.GLOBAL.window_space[k][dimension] = d
 end
 
+wezterm.on("increase-to-top", function(window, pane)
+  _set_position(window, "y", "up", 25)
+  _set_inner_size(window, "height", "increase", 25)
+end)
+
+wezterm.on("decrease-from-top", function(window, pane)
+  _set_position(window, "y", "down", 25)
+  _set_inner_size(window, "height", "decrease", 25)
+end)
+
+wezterm.on("increase-to-bottom", function(window, pane)
+  _set_inner_size(window, "height", "increase", 25)
+end)
+
+wezterm.on("decrease-from-bottom", function(window, pane)
+  _set_inner_size(window, "height", "decrease", 25)
+end)
+
+wezterm.on("increase-to-left", function(window, pane)
+  _set_position(window, "x", "up", 25)
+  _set_inner_size(window, "width", "increase", 25)
+end)
+
+wezterm.on("decrease-from-left", function(window, pane)
+  _set_position(window, "x", "down", 25)
+  _set_inner_size(window, "width", "decrease", 25)
+end)
+
+wezterm.on("increase-to-right", function(window, pane)
+  _set_inner_size(window, "width", "increase", 25)
+end)
+
+wezterm.on("decrease-from-right", function(window, pane)
+  _set_inner_size(window, "width", "decrease", 25)
+end)
+
 wezterm.on("move-window-left", function(window, pane)
-  _set_position(window, "x", "left", 20)
+  _set_position(window, "x", "left", 25)
 end)
 
 wezterm.on("move-window-right", function(window, pane)
-  _set_position(window, "x", "right", 20)
+  _set_position(window, "x", "right", 25)
 end)
 
 wezterm.on("move-window-up", function(window, pane)
-  _set_position(window, "y", "up", 20)
+  _set_position(window, "y", "up", 25)
 end)
 
 wezterm.on("move-window-down", function(window, pane)
-  _set_position(window, "y", "down", 20)
-end)
-
-wezterm.on("increase-window-height", function(window, pane)
-  _set_inner_size(window, "height", "increase", 50)
-end)
-
-wezterm.on("decrease-window-height", function(window, pane)
-  _set_inner_size(window, "height", "decrease", 50)
-end)
-
-wezterm.on("increase-window-width", function(window, pane)
-  _set_inner_size(window, "width", "increase", 50)
-end)
-
-wezterm.on("decrease-window-width", function(window, pane)
-  _set_inner_size(window, "width", "decrease", 50)
+  _set_position(window, "y", "down", 25)
 end)
