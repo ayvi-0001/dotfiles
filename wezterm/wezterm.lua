@@ -2,6 +2,7 @@ local wezterm = require "wezterm"
 local config = wezterm.config_builder()
 
 require "events"
+require "wezyx"
 
 local cfg = require "cfg_init"
 cfg.apply_to_config(config)

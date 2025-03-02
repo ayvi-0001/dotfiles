@@ -193,12 +193,34 @@ function M.apply_to_config(config)
       { key = "9", action = wezterm.action.ActivateWindow(8) },
     },
 
+    yazi_helix = {
+      { key = "t", action = wezterm.action.EmitEvent "yazi-helix-launch-ide" },
+      { key = "r", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane" },
+      { key = "R", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane-top-level" },
+      { key = "d", action = wezterm.action.EmitEvent "yazi-helix-open-new-bottom-pane" },
+      { key = "D", action = wezterm.action.EmitEvent "yazi-helix-open-new-bottom-pane-top-level" },
+      { key = "h", action = wezterm.action.EmitEvent "yazi-helix-open-in-left-pane" },
+      { key = "j", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-below" },
+      { key = "k", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-above" },
+      { key = "l", action = wezterm.action.EmitEvent "yazi-helix-open-in-right-pane" },
+      { key = "Escape", action = "PopKeyTable" },
+    },
+
     pane = {
       { key = "r", action = wezterm.action.SplitPane { direction = "Right" } },
       { key = "R", action = wezterm.action.SplitPane { direction = "Right", top_level = true } },
       { key = "d", action = wezterm.action.SplitPane { direction = "Down" } },
       { key = "D", action = wezterm.action.SplitPane { direction = "Down", top_level = true } },
       { key = "x", action = wezterm.action.CloseCurrentPane { confirm = false } },
+      {
+        key = "h",
+        action = wezterm.action.ActivateKeyTable {
+          name = "yazi_helix",
+          timeout_milliseconds = 3000,
+          until_unknown = true,
+          replace_current = true,
+        },
+      },
       { key = "f", action = wezterm.action.TogglePaneZoomState },
       { key = "n", action = wezterm.action.EmitEvent "spawn-new-window" },
       { key = "w", action = wezterm.action.EmitEvent "toggle-floating-pane" },
