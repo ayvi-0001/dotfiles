@@ -1,4 +1,6 @@
+local C = require "callbacks"
 local wezterm = require "wezterm"
+
 local M = {}
 
 function M.apply_to_config(config)
@@ -10,31 +12,7 @@ function M.apply_to_config(config)
   config.hide_mouse_cursor_when_typing = false
   config.treat_left_ctrlalt_as_altgr = true
 
-  local rename_tab = function(window, pane)
-    window:perform_action(
-      wezterm.action.PromptInputLine {
-        description = wezterm.format {
-          { Attribute = { Intensity = "Bold" } },
-          { Foreground = { AnsiColor = "Fuchsia" } },
-          { Text = "Enter new name for tab" },
-        },
-        initial_value = "",
-        action = wezterm.action_callback(function(_window, _pane, line)
-          if line then
-            window:active_tab():set_title(line)
-          end
-        end),
-      },
-      pane
-    )
-  end
-
-  local move_pane_to_new_window = function(window, pane)
-    pane:move_to_new_window()
-  end
-
   config.leader = { key = "Space", mods = "CTRL|SHIFT" }
-
   config.keys = {
     {
       key = "p",
@@ -171,7 +149,7 @@ function M.apply_to_config(config)
       { key = "x", action = wezterm.action.CloseCurrentTab { confirm = false } },
       { key = "h", action = wezterm.action.ActivateTabRelative(-1) },
       { key = "l", action = wezterm.action.ActivateTabRelative(1) },
-      { key = "r", action = wezterm.action_callback(rename_tab) },
+      { key = "r", action = wezterm.action_callback(C.rename_tab) },
       { key = "`", action = wezterm.action.ActivateLastTab },
       { key = "t", action = wezterm.action.ShowTabNavigator },
       { key = "1", action = wezterm.action.ActivateTab(0) },
@@ -212,7 +190,7 @@ function M.apply_to_config(config)
       { key = "f", action = wezterm.action.TogglePaneZoomState },
       { key = "n", action = wezterm.action.EmitEvent "spawn-new-window" },
       { key = "w", action = wezterm.action.EmitEvent "toggle-floating-pane" },
-      { key = "e", action = wezterm.action_callback(move_pane_to_new_window) },
+      { key = "e", action = wezterm.action_callback(C.move_pane_to_new_window) },
       { key = "Escape", action = "PopKeyTable" },
     },
 
