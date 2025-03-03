@@ -69,7 +69,6 @@ function M.apply_to_config(config)
       action = wezterm.action.ActivateKeyTable {
         name = "scroll",
         one_shot = false,
-        timeout_milliseconds = 3000,
         until_unknown = true,
         replace_current = true,
       },
