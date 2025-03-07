@@ -7,17 +7,13 @@ require("relative-motions"):setup {
 require("git"):setup()
 
 require("custom-shell"):setup {
-  history_path = "~/.config/yazi/state/yazi_cmd_history",
+  history_path = os.getenv "HOME" .. "/.config/yazi/state/yazi_cmd_history",
   save_history = true,
 }
 
 -- start: yamb.yazi
-local bookmarks = {}
-local path_sep = package.config:sub(1, 1)
-local home_path = ya.target_family() == "windows" and os.getenv "USERPROFILE" or os.getenv "HOME"
-
 require("yamb"):setup {
-  bookmarks = bookmarks,
+  bookmarks = {},
   jump_notify = true,
   cli = "fzf",
   keys = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
