@@ -43,10 +43,11 @@ end
 require("projects"):setup {
   save = {
     method = "lua",
+    lua_save_path = os.getenv "HOME" .. "/.config/yazi/state/projects.json",
   },
   last = {
-    update_after_save = true,
-    update_after_load = true,
+    update_after_save = false,
+    update_after_load = false,
     load_after_start = false,
   },
   merge = {
@@ -55,7 +56,7 @@ require("projects"):setup {
   notify = {
     enable = true,
     title = "Projects",
-    timeout = 3,
+    timeout = 2,
     level = "info",
   },
 }
