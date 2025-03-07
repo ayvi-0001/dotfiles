@@ -32,6 +32,10 @@ args    = ["--stdio"]
 command = "taplo"
 args    = ["lsp", "stdio"]
 
+[language-server.yaml-language-server]
+command = "yaml-language-server"
+args    = ["--stdio"]
+
 [language-server.basedpyright.config]
 basedpyright.analysis.diagnosticMode   = "openFilesOnly"
 basedpyright.analysis.typeCheckingMode = "recommended"
@@ -127,6 +131,12 @@ language-servers  = ["lua-language-server"]
 auto-format       = true
 formatter.command = "stylua"
 formatter.args    = ["--search-parent-directories", "-"]
+
+[[language]]
+name              = "yaml"
+auto-format       = true
+formatter.command = "yamlfmt"
+formatter.args    = ["-"]
 
 [[grammar]]
 name       = "rust"
