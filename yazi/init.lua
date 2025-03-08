@@ -60,6 +60,11 @@ require("projects"):setup {
   },
 }
 
+require("copy-file-contents"):setup {
+  append_char = "\n",
+  notification = true,
+}
+
 require("session"):setup { sync_yanked = true }
 
 require("starship"):setup()
