@@ -70,5 +70,5 @@ require("session"):setup { sync_yanked = true }
 require("starship"):setup()
 
 if os.getenv "YAZI_HIDE_PREVIEW" then
-  require("hide-preview"):entry()
+  require("toggle-pane"):entry "min-preview"
 end

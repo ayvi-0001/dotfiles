@@ -77,11 +77,11 @@ local yazi_helix_launch_ide = function(window, pane)
     direction = "Left",
     cwd = cwd,
     size = 0.25,
-    -- requires yazi-rs/plugins:hide-preview
+    -- requires yazi-rs/plugins:toggle-pane
     -- + following setup added to $YAZI_CONFIG_HOME/init.lua
     -- ```lua
     -- local os = require "os"
-    -- if os.getenv "YAZI_HIDE_PREVIEW" then require("hide-preview"):entry() end
+    -- if os.getenv "YAZI_HIDE_PREVIEW" then require("toggle-pane"):entry("min-preview") end
     --- ```
     set_environment_variables = { YAZI_HIDE_PREVIEW = "1" },
   }

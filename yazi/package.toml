@@ -49,11 +49,6 @@ rev = "ceb053f"
 hash = "778302f3b23e11d787fe8a7b060822d7"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:hide-preview"
-rev = "ceb053f"
-hash = "be2662b6339a9b2557281f4712fecb87"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
 rev = "ceb053f"
 hash = "ebf7329a6716b48eccd79baf48198f30"
