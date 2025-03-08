@@ -108,6 +108,21 @@ name             = "markdown"
 soft-wrap.enable = true
 text-width       = 200
 
+# Following language is to provide auto-formatting for mermaid gantt charts.
+# File types is intentionally left blank, so files with  `.mermaid` or `.mmd`
+# exts will still default to the mermaid lang.
+# Run the command `:lang gantt` to enable auto formatting.
+# Repo for formatter: https://github.com/ayvi-0001/mermaid-gantt-formatter
+[[language]]
+name            = "gantt"
+scope           = "source.mermaid"
+injection-regex = "mermaid"
+file-types      = []
+auto-format     = true
+comment-token   = "%%"
+formatter       = { command = "fmt-mmd-gantt", args = ["-i-"] }
+grammar         = "mermaid"
+
 [[language]]
 name             = "sql"
 file-types       = ["sql", "dsql", "sqlx"]
