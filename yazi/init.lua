@@ -11,6 +11,10 @@ require("custom-shell"):setup {
   save_history = true,
 }
 
+require("full-border"):setup { type = ui.Border.ROUNDED }
+
+require("fg"):setup { default_action = "jump" }
+
 -- start: yamb.yazi
 require("yamb"):setup {
   bookmarks = {},

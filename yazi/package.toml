@@ -1,22 +1,99 @@
-[plugin]
-deps = [
-  { use = "AnirudhG07/custom-shell", rev = "2f3d7a6" },
-  { use = "KKV9/compress", rev = "60b24af" },
-  { use = "MasouShizuka/projects", rev = "ba8d00b" },
-  { use = "Reledia/glow", rev = "5ce76dc" },
-  { use = "Rolv-Apneseth/starship", rev = "4053c8c" },
-  { use = "dawsers/toggle-view", rev = "9ae57f9" },
-  { use = "h-hg/yamb", rev = "108347b" },
-  { use = "yazi-rs/plugins:diff", rev = "600614a" },
-  { use = "yazi-rs/plugins:full-border", rev = "600614a" },
-  { use = "yazi-rs/plugins:git", rev = "600614a" },
-  { use = "yazi-rs/plugins:hide-preview", rev = "600614a" },
-  { use = "yazi-rs/plugins:jump-to-char", rev = "600614a" },
-  { use = "dedukun/relative-motions", rev = "df97039" },
-  { use = "ayvi-0001/git-cd-root-dir", rev = "b12aeec" },
-  { use = "lpnh/fg", rev = "9bba743" },
-  { use = "pirafrank/what-size", rev = "b23e3a4" },
-]
+[[plugin.deps]]
+use = "AnirudhG07/custom-shell"
+rev = "6b4550a"
+hash = "4ef246dc2e1aa982c3cde89d9a599d00"
 
-[flavor]
-deps = [{ use = "kmlupreti/ayu-dark", rev = "8ddf095" }, { use = "BennyOe/tokyo-night", rev = "9e6f899" }]
+[[plugin.deps]]
+use = "KKV9/compress"
+rev = "60b24af"
+hash = "4808a9f0e7aec3b7c0cfadcd0ba8c1f0"
+
+[[plugin.deps]]
+use = "MasouShizuka/projects"
+rev = "4f11ecc"
+hash = "caecdb1b9a69c6393af201a100ff958d"
+
+[[plugin.deps]]
+use = "Reledia/glow"
+rev = "c76bf4f"
+hash = "7246659779ff5bca5f4a461bdab6e8df"
+
+[[plugin.deps]]
+use = "Rolv-Apneseth/starship"
+rev = "6c639b4"
+hash = "3c4878837b2aa730a49b3596da011a9e"
+
+[[plugin.deps]]
+use = "dawsers/toggle-view"
+rev = "9ae57f9"
+hash = "4e8b2b5af016d28364660d132d7e5852"
+
+[[plugin.deps]]
+use = "h-hg/yamb"
+rev = "22af003"
+hash = "7cc42012a7c2099f80064d228feb8d44"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:diff"
+rev = "ceb053f"
+hash = "fb4650dc4e95b9b56dcadab3608dcfed"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "ceb053f"
+hash = "e52c22b8f29459e2be1f271215e5e11c"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "ceb053f"
+hash = "778302f3b23e11d787fe8a7b060822d7"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:hide-preview"
+rev = "ceb053f"
+hash = "be2662b6339a9b2557281f4712fecb87"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:jump-to-char"
+rev = "ceb053f"
+hash = "ebf7329a6716b48eccd79baf48198f30"
+
+[[plugin.deps]]
+use = "dedukun/relative-motions"
+rev = "8103065"
+hash = "54c7df25e82f8d1520d2c85b2072576d"
+
+[[plugin.deps]]
+use = "pirafrank/what-size"
+rev = "b23e3a4"
+hash = "e894fbfcc60c062e8479a928d19c208b"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "ceb053f"
+hash = "ddd4fa874828703a5b062ce89fbc13cd"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "ceb053f"
+hash = "24eb919126d74b7afee7aa771f670b7e"
+
+[[plugin.deps]]
+use = "DreamMaoMao/fg"
+rev = "652d02a"
+hash = "5bb94676de6949ca273cce02f60b7c2b"
+
+[[plugin.deps]]
+use = "ayvi-0001/git-cd-root-dir"
+rev = "115e8ad"
+hash = "440e17505c71b8eafa114fc71ce67e7a"
+
+[[flavor.deps]]
+use = "kmlupreti/ayu-dark"
+rev = "5412a78"
+hash = "952ccafcda0bd8e562f579e2033080d1"
+
+[[flavor.deps]]
+use = "BennyOe/tokyo-night"
+rev = "695dac6"
+hash = "f0f5c785422a8551adabbdffab5c63b5"

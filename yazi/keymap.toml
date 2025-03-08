@@ -14,8 +14,8 @@ prepend_keymap = [
   # end: override builtins
 
   # start: goto
-  { on = ["g", "e"], run = "arrow 99999999", desc = "Move cursor to the bottom" },
   { on = ["g", "C"], run = "cd ~/.cache", desc = "Goto ~/.cache" },
+  { on = ["g", "e"], run = "arrow bot", desc = "Move cursor to the bottom" },
   { on = ["g", "a"], run = "cd a:/", desc = "Goto /a/" },
   #  start: git-cd-root-dir
   { on = ["g", "r"], run = "plugin git-cd-root-dir", desc = "Goto git root directory" },
@@ -26,15 +26,15 @@ prepend_keymap = [
   # end: goto
 
   # start: relative-motions.yazi
-  { on = ["1"], run = "plugin relative-motions --args=1", desc = "move in relative steps" },
-  { on = ["2"], run = "plugin relative-motions --args=2", desc = "move in relative steps" },
-  { on = ["3"], run = "plugin relative-motions --args=3", desc = "move in relative steps" },
-  { on = ["4"], run = "plugin relative-motions --args=4", desc = "move in relative steps" },
-  { on = ["5"], run = "plugin relative-motions --args=5", desc = "move in relative steps" },
-  { on = ["6"], run = "plugin relative-motions --args=6", desc = "move in relative steps" },
-  { on = ["7"], run = "plugin relative-motions --args=7", desc = "move in relative steps" },
-  { on = ["8"], run = "plugin relative-motions --args=8", desc = "move in relative steps" },
-  { on = ["9"], run = "plugin relative-motions --args=9", desc = "Move in relative steps" },
+  { on = ["1"], run = "plugin relative-motions -- 1", desc = "move in relative steps" },
+  { on = ["2"], run = "plugin relative-motions -- 2", desc = "move in relative steps" },
+  { on = ["3"], run = "plugin relative-motions -- 3", desc = "move in relative steps" },
+  { on = ["4"], run = "plugin relative-motions -- 4", desc = "move in relative steps" },
+  { on = ["5"], run = "plugin relative-motions -- 5", desc = "move in relative steps" },
+  { on = ["6"], run = "plugin relative-motions -- 6", desc = "move in relative steps" },
+  { on = ["7"], run = "plugin relative-motions -- 7", desc = "move in relative steps" },
+  { on = ["8"], run = "plugin relative-motions -- 8", desc = "move in relative steps" },
+  { on = ["9"], run = "plugin relative-motions -- 9", desc = "Move in relative steps" },
   # end: relative-motions.yazi
 
   # start: compress.yazi
@@ -50,54 +50,54 @@ prepend_keymap = [
   # end: what-size
 
   # start: arrow.yazi | parent-arrow.yazi
-  { on = "k", run = "plugin arrow --args=-1" },
-  { on = "j", run = "plugin arrow --args=1" },
-  { on = "K", run = "plugin parent-arrow --args=-1" },
-  { on = "J", run = "plugin parent-arrow --args=1" },
+  { on = "k", run = "plugin arrow -- -1" },
+  { on = "j", run = "plugin arrow -- 1" },
+  { on = "K", run = "plugin parent-arrow -- -1" },
+  { on = "J", run = "plugin parent-arrow -- 1" },
   # end: arrow.yazi | parent-arrow.yazi
 
   # start: custom-shell.yazi
-  { on = [";"], run = "plugin custom-shell --args=bash --no-block --orphan --no-confirm", desc = "bash shell" },
-  { on = ["'", "h"], run = "plugin custom-shell --args=history", desc = "Show Custom-shell history" },
-  { on = ["G"], run = """ plugin custom-shell --args='custom bash "gitui -d."' """, desc = "gitui" },
-  { on = ["'", "d"], run = """ plugin custom-shell --args='custom bash "git diff; echo Press enter to exit; read _"' """, desc = "git diff" },
-  { on = ["'", "t"], run = """ plugin custom-shell --args='custom bash "$EDITOR $(mktemp -up.)"' """, desc = "write to tmpfile" },
+  { on = [";"], run = "plugin custom-shell -- bash --no-block --orphan --no-confirm", desc = "bash shell" },
+  { on = ["'", "h"], run = "plugin custom-shell -- history", desc = "Show Custom-shell history" },
+  { on = ["G"], run = """ plugin custom-shell -- 'custom bash "gitui -d."' """, desc = "gitui" },
+  { on = ["'", "d"], run = """ plugin custom-shell -- 'custom bash "git diff; echo Press enter to exit; read _"' """, desc = "git diff" },
+  { on = ["'", "t"], run = """ plugin custom-shell -- 'custom bash "$EDITOR $(mktemp -up.)"' """, desc = "write to tmpfile" },
   # end: custom-shell.yazi
 
   # start: fg.yazi
   # NOTE `g` and `G` swapped from default (usually using ripgrep over fuzzy match)
-  { on = ["f", "g"], run = "plugin fg --args='rg'", desc = "find file by content (ripgrep match)" },
-  { on = ["f", "a"], run = "plugin fg --args='rga'", desc = "find file by content (ripgrep-all)" },
+  { on = ["f", "g"], run = "plugin fg -- rg", desc = "find file by content (ripgrep match)" },
+  { on = ["f", "a"], run = "plugin fg -- rga", desc = "find file by content (ripgrep-all)" },
   { on = ["f", "G"], run = "plugin fg", desc = "find file by content (fuzzy match)" },
-  { on = ["f", "f"], run = "plugin fg --args='fzf'", desc = "find file by filename" },
+  { on = ["f", "f"], run = "plugin fg -- fzf", desc = "find file by filename" },
   # end: fg.yazi
 
   # start: projects.yazi
-  { on = ["P", "s"], run = "plugin projects --args=save", desc = "Save current project" },
-  { on = ["P", "l"], run = "plugin projects --args=load", desc = "Load project" },
-  { on = ["P", "P"], run = "plugin projects --args=load_last", desc = "Load last project" },
-  { on = ["P", "d"], run = "plugin projects --args=delete", desc = "Delete project" },
-  { on = ["P", "D"], run = "plugin projects --args=delete_all", desc = "Delete all projects" },
-  { on = ["P", "m"], run = "plugin projects --args='merge current'", desc = "Merge current tab to other projects" },
-  { on = ["P", "M"], run = "plugin projects --args='merge all'", desc = "Merge current project to other projects" },
-  { on = ["q"], run = "plugin projects --args=quit", desc = "Save last project and exit the process" },
+  { on = ["P", "s"], run = "plugin projects -- save", desc = "Save current project" },
+  { on = ["P", "l"], run = "plugin projects -- load", desc = "Load project" },
+  { on = ["P", "P"], run = "plugin projects -- load_last", desc = "Load last project" },
+  { on = ["P", "d"], run = "plugin projects -- delete", desc = "Delete project" },
+  { on = ["P", "D"], run = "plugin projects -- delete_all", desc = "Delete all projects" },
+  { on = ["P", "m"], run = "plugin projects -- 'merge current'", desc = "Merge current tab to other projects" },
+  { on = ["P", "M"], run = "plugin projects -- 'merge all'", desc = "Merge current project to other projects" },
+  { on = ["q"], run = "plugin projects -- quit", desc = "Save last project and exit the process" },
   # end: projects.yazi
 
   # start: yamb.yazi
-  { on = ["u", "a"], run = "plugin yamb --args=save", desc = "Add bookmark" },
-  { on = ["u", "g"], run = "plugin yamb --args=jump_by_key", desc = "Jump bookmark by key" },
-  { on = ["u", "G"], run = "plugin yamb --args=jump_by_fzf", desc = "Jump bookmark by fzf" },
-  { on = ["u", "d"], run = "plugin yamb --args=delete_by_key", desc = "Delete bookmark by key" },
-  { on = ["u", "D"], run = "plugin yamb --args=delete_by_fzf", desc = "Delete bookmark by fzf" },
-  { on = ["u", "A"], run = "plugin yamb --args=delete_all", desc = "Delete all bookmarks" },
-  { on = ["u", "r"], run = "plugin yamb --args=rename_by_key", desc = "Rename bookmark by key" },
-  { on = ["u", "R"], run = "plugin yamb --args=rename_by_fzf", desc = "Rename bookmark by fzf" },
+  { on = ["u", "a"], run = "plugin yamb -- save", desc = "Add bookmark" },
+  { on = ["u", "g"], run = "plugin yamb -- jump_by_key", desc = "Jump bookmark by key" },
+  { on = ["u", "G"], run = "plugin yamb -- jump_by_fzf", desc = "Jump bookmark by fzf" },
+  { on = ["u", "d"], run = "plugin yamb -- delete_by_key", desc = "Delete bookmark by key" },
+  { on = ["u", "D"], run = "plugin yamb -- delete_by_fzf", desc = "Delete bookmark by fzf" },
+  { on = ["u", "A"], run = "plugin yamb -- delete_all", desc = "Delete all bookmarks" },
+  { on = ["u", "r"], run = "plugin yamb -- rename_by_key", desc = "Rename bookmark by key" },
+  { on = ["u", "R"], run = "plugin yamb -- rename_by_fzf", desc = "Rename bookmark by fzf" },
   # end: yamb.yazi
 
   # start: toggle-view.yazi
-  { on = "<C-1>", run = "plugin toggle-view --args=parent", desc = "Toggle parent" },
-  { on = "<C-2>", run = "plugin toggle-view --args=current", desc = "Toggle current" },
-  { on = "<C-3>", run = "plugin toggle-view --args=preview", desc = "Toggle preview" },
+  { on = "<C-1>", run = "plugin toggle-view -- parent", desc = "Toggle parent" },
+  { on = "<C-2>", run = "plugin toggle-view -- current", desc = "Toggle current" },
+  { on = "<C-3>", run = "plugin toggle-view -- preview", desc = "Toggle preview" },
   # end: toggle-view.yazi
 
   # start: hide-preview.yazi
