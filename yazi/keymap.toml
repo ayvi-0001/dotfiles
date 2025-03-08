@@ -56,13 +56,11 @@ prepend_keymap = [
   { on = "J", run = "plugin parent-arrow -- 1" },
   # end: arrow.yazi | parent-arrow.yazi
 
-  # start: custom-shell.yazi
-  { on = [";"], run = "plugin custom-shell -- bash --no-block --orphan --no-confirm", desc = "bash shell" },
-  { on = ["'", "h"], run = "plugin custom-shell -- history", desc = "Show Custom-shell history" },
-  { on = ["G"], run = """ plugin custom-shell -- 'custom bash "gitui -d."' """, desc = "gitui" },
-  { on = ["'", "d"], run = """ plugin custom-shell -- 'custom bash "git diff; echo Press enter to exit; read _"' """, desc = "git diff" },
-  { on = ["'", "t"], run = """ plugin custom-shell -- 'custom bash "$EDITOR $(mktemp -up.)"' """, desc = "write to tmpfile" },
-  # end: custom-shell.yazi
+  # start: shell
+  { on = ["G"], run = """ shell --block -- bash -c "gitui -d." """, desc = "gitui" },
+  { on = ["'", "d"], run = """ shell --block -- bash -c "git diff; echo Press enter to exit; read _;" """, desc = "git diff" },
+  { on = ["'", "t"], run = """ shell --block -- bash -c "$EDITOR $(mktemp -up.)" """, desc = "write to tmpfile" },
+  # end: shell
 
   # start: fg.yazi
   # NOTE `g` and `G` swapped from default (usually using ripgrep over fuzzy match)

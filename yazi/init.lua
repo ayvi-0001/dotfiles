@@ -6,11 +6,6 @@ require("relative-motions"):setup {
 
 require("git"):setup()
 
-require("custom-shell"):setup {
-  history_path = os.getenv "HOME" .. "/.config/yazi/state/yazi_cmd_history",
-  save_history = true,
-}
-
 require("full-border"):setup { type = ui.Border.ROUNDED }
 
 require("fg"):setup { default_action = "jump" }
