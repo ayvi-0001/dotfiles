@@ -1,12 +1,9 @@
+local utils = require "utils"
 local wezterm = require "wezterm"
 
---[[
-Functions/events for using yazi & helix in wezterm.
-This implementation is only an initial attempt, there's still issues with this,
-like the shell being hardcoded as bash only,
-sending commands to a pane assuming its running helix, even if its not,
-relying on wrapper scripts/external plugins (yazi),
-and likely many more.
+--[[ Functions/events for using yazi & helix in wezterm.
+This is a rough implementation, there's still issues with it,
+like the shell being hardcoded as bash only, relying on external plugins (yazi), etc,
 I plan to revisit this eventually and make a proper plugin out of it.
 
 The callbacks are set to run on these event names:
@@ -43,18 +40,35 @@ config.key_tables = {
 }
 --]]
 
-local _yazi_copy_path_hovered_file = function(window, pane)
-  -- copy the path of the hovered file in yazi
-  window:perform_action(
-    wezterm.action.Multiple {
-      wezterm.action.SendKey { key = "c" },
-      wezterm.action.SendKey { key = "c" },
-    },
-    pane
-  )
+local _yazi_copy_path_hovered_file = function(_, pane)
+  -- NOTE: expects the default keybindings in yazi for copying
+  -- the full path of the hovered file.
+  -- TODO: emit data from yazi another way
+  pane:send_text "cc"
 end
 
 local _helix_open_file_read_from_system_clipboard = function(pane)
+  local function _find_hx_exec(info)
+    if not info then
+      return -1
+    end
+    if utils.basename(tostring(info.executable)):find "hx" then
+      return info.pid
+    else
+      local parent_proc = wezterm.procinfo.get_info_for_pid(info.ppid)
+      if parent_proc then
+        return _find_hx_exec(parent_proc)
+      end
+    end
+    error "pane is not running helix"
+  end
+
+  local info = pane:get_foreground_process_info()
+  local ok, pcall_result = pcall(_find_hx_exec, info)
+  if not ok then
+    return
+  end
+
   -- send typable command `open`/`edit`
   pane:send_text ":o "
   -- send <C-r> to open registers in typable command
@@ -62,6 +76,8 @@ local _helix_open_file_read_from_system_clipboard = function(pane)
   -- enter system clipboard register and return
   pane:send_text "+"
   pane:send_text "\r"
+
+  return ok
 end
 
 local yazi_helix_launch_ide = function(window, pane)
@@ -77,25 +93,27 @@ local yazi_helix_launch_ide = function(window, pane)
     direction = "Left",
     cwd = cwd,
     size = 0.25,
-    -- requires yazi-rs/plugins:toggle-pane
-    -- + following setup added to $YAZI_CONFIG_HOME/init.lua
-    -- ```lua
-    -- local os = require "os"
+    -- requires yazi-rs/plugins:toggle-pane + line below added to $YAZI_CONFIG_HOME/init.lua
     -- if os.getenv "YAZI_HIDE_PREVIEW" then require("toggle-pane"):entry("min-preview") end
-    --- ```
     set_environment_variables = { YAZI_HIDE_PREVIEW = "1" },
   }
 
-  -- sending commands here instead of in args, so if you exit,
+  -- sending commands here instead of args in pane:split(), so if you exit,
   -- it drops back into the shell, rather than closing the pane.
 
-  -- start yazi, requires yazi shell wrapper
-  -- https://yazi-rs.github.io/docs/quick-start#shell-wrapper
-  yazi_pane:send_text "y"
+  --start yazi, https://yazi-rs.github.io/docs/quick-start#shell-wrapper
+  yazi_pane:send_text [[ function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+      builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+  } && y]]
   yazi_pane:send_text "\r"
 
   --start helix
-  pane:send_text "hx"
+  pane:send_text " hx"
   pane:send_text "\r"
 
   -- split pane below helix for terminal
@@ -107,6 +125,10 @@ local yazi_helix_launch_ide = function(window, pane)
   }
   terminal_pane:send_text "\x0c" -- clear buffer
 
+  -- activate helix pane first so yazi opens files in the correct pane
+  pane:activate()
+  wezterm.sleep_ms(100)
+
   -- start in yazi pane
   yazi_pane:activate()
 end
@@ -116,8 +138,10 @@ local yazi_helix_open_in_pane = function(window, pane, direction)
   local _inner = function(_window, _pane)
     local right_pane = _pane:tab():get_pane_direction(direction)
     _yazi_copy_path_hovered_file(_window, _pane)
-    right_pane:activate()
-    _helix_open_file_read_from_system_clipboard(right_pane)
+    local ok = _helix_open_file_read_from_system_clipboard(right_pane)
+    if ok then
+      right_pane:activate()
+    end
   end
   return _inner(window, pane)
 end

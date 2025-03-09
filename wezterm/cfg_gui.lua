@@ -1,4 +1,6 @@
+local utils = require "utils"
 local wezterm = require "wezterm"
+
 local M = {}
 
 COMMON_ACCENT = "#afff00"
@@ -58,7 +60,7 @@ function M.apply_to_config(config)
   config.enable_scroll_bar = false
   config.scrollback_lines = 100000
 
-  config.hide_tab_bar_if_only_one_tab = true
+  config.hide_tab_bar_if_only_one_tab = false
   config.prefer_to_spawn_tabs = true
   config.prefer_to_spawn_tabs = true
   config.show_close_tab_button_in_tabs = false
@@ -75,10 +77,6 @@ end
 local INVERSE_SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_left_hard_divider_inverse
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 
-local function basename(s)
-  return string.gsub(s, "(.*[/\\])(.*)", "%2")
-end
-
 local function tab_title(tab_info)
   local title = tab_info.tab_title
 
@@ -86,11 +84,11 @@ local function tab_title(tab_info)
     return title
   end
 
-  local pane = tab_info.active_pane
-  title = pane.title or basename(pane.foreground_process_name)
-  if pane.domain_name then
+  local pane_info = tab_info.active_pane
+  title = utils.basename(pane_info.title or pane_info.foreground_process_name)
+  if pane_info.domain_name then
     local spacer = #title > 0 and " " or ""
-    title = ("(" .. pane.domain_name .. ")" .. spacer .. title)
+    title = ("(" .. pane_info.domain_name .. ")" .. spacer .. title)
   end
 
   return title
@@ -108,12 +106,7 @@ wezterm.on("format-tab-title", function(tab_info, tabs, panes, config, hover, ma
     edge_foreground = background
   end
 
-  local title = ""
-  if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-    title = tab_title(tab_info):gsub(".exe", "")
-  else
-    title = tab_title(tab_info)
-  end
+  local title = tab_title(tab_info)
 
   return {
     { Background = { Color = edge_background } },
