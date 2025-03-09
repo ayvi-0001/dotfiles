@@ -19,7 +19,6 @@ function M.apply_to_config(config)
       action = wezterm.action.ActivateKeyTable {
         name = "pane",
         timeout_milliseconds = 3000,
-        until_unknown = true,
       },
     },
     {
@@ -47,7 +46,7 @@ function M.apply_to_config(config)
       action = wezterm.action.ActivateKeyTable {
         name = "move",
         one_shot = false,
-        timeout_milliseconds = 3000,
+        timeout_milliseconds = 1000,
         replace_current = true,
       },
     },
@@ -83,8 +82,8 @@ function M.apply_to_config(config)
       },
     },
     { key = "f", mods = "ALT", action = wezterm.action.EmitEvent "toggle-floating-pane" },
-    { key = "h", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Left" },
-    { key = "l", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Right" },
+    { key = "h", mods = "ALT", action = wezterm.action_callback(C.move_focus_or_tab_left) },
+    { key = "l", mods = "ALT", action = wezterm.action_callback(C.move_focus_or_tab_right) },
     { key = "k", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Up" },
     { key = "j", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Down" },
     { key = "+", mods = "CTRL|SHIFT", action = wezterm.action.IncreaseFontSize },

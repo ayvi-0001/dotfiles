@@ -37,4 +37,33 @@ function M.scroll_to_bottom(window, pane)
   )
 end
 
+--- @private
+function M._move_focus_or_tab(window, pane, direction)
+  local adjacent_pane = window:active_tab():get_pane_direction(direction)
+  if adjacent_pane then
+    window:perform_action(wezterm.action.ActivatePaneDirection(direction), pane)
+  elseif direction == "Right" then
+    window:perform_action(wezterm.action.ActivateTabRelative(1), pane)
+  elseif direction == "Left" then
+    window:perform_action(wezterm.action.ActivateTabRelative(-1), pane)
+  end
+  -- do nothing on "Up" and "Down"
+end
+
+function M.move_focus_or_tab_right(window, pane)
+  M._move_focus_or_tab(window, pane, "Right")
+end
+
+function M.move_focus_or_tab_left(window, pane)
+  M._move_focus_or_tab(window, pane, "Left")
+end
+
+function M.move_focus_or_tab_up(window, pane)
+  M._move_focus_or_tab(window, pane, "Up")
+end
+
+function M.move_focus_or_tab_down(window, pane)
+  M._move_focus_or_tab(window, pane, "Down")
+end
+
 return M
