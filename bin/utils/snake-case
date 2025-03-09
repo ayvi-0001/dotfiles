@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-sed -e "s/\W/_/g" < <(tr '[:upper:]' '[:lower:]' <<< "$@")
+sed -e 's/\W/_/g' -e 's/.*/\L&/' <<< "$@"
