@@ -27,4 +27,14 @@ function M.move_pane_to_new_window(window, pane)
   pane:move_to_new_window()
 end
 
+function M.scroll_to_bottom(window, pane)
+  window:perform_action(
+    wezterm.action.Multiple {
+      wezterm.action.ScrollToBottom,
+      wezterm.action.PopKeyTable,
+    },
+    pane
+  )
+end
+
 return M

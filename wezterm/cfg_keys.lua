@@ -243,21 +243,14 @@ function M.apply_to_config(config)
     },
 
     scroll = {
-      { key = "k", mods = "", action = wezterm.action.ScrollByLine(-1) },
-      { key = "j", mods = "", action = wezterm.action.ScrollByLine(1) },
-      { key = "b", mods = "", action = wezterm.action.ScrollByPage(-1) },
-      { key = "f", mods = "", action = wezterm.action.ScrollByPage(1) },
-      { key = "u", mods = "", action = wezterm.action.ScrollByPage(-0.5) },
-      { key = "d", mods = "", action = wezterm.action.ScrollByPage(0.5) },
+      { key = "j", action = wezterm.action.ScrollByLine(1) },
+      { key = "k", action = wezterm.action.ScrollByLine(-1) },
+      { key = "d", action = wezterm.action.ScrollByPage(0.5) },
+      { key = "u", action = wezterm.action.ScrollByPage(-0.5) },
+      { key = "f", action = wezterm.action.ScrollByPage(1) },
+      { key = "b", action = wezterm.action.ScrollByPage(-1) },
+      { key = "c", action = wezterm.action_callback(C.scroll_to_bottom) },
       { key = "s", mods = "CTRL", action = wezterm.action.PopKeyTable },
-      {
-        key = "c",
-        mods = "CTRL",
-        action = wezterm.action.Multiple {
-          wezterm.action.ScrollToBottom,
-          wezterm.action.PopKeyTable,
-        },
-      },
       { key = "Escape", action = "PopKeyTable" },
     },
     disable_wezterm_key_tables = {
