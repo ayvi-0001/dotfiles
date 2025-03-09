@@ -12,7 +12,6 @@ function M.apply_to_config(config)
   config.hide_mouse_cursor_when_typing = false
   config.treat_left_ctrlalt_as_altgr = true
 
-  config.leader = { key = "Space", mods = "CTRL|SHIFT" }
   config.keys = {
     {
       key = "p",
@@ -95,11 +94,18 @@ function M.apply_to_config(config)
     { key = "L", mods = "ALT", action = wezterm.action.ActivateTabRelative(1) },
     { key = "i", mods = "ALT", action = wezterm.action.MoveTabRelative(-1) },
     { key = "o", mods = "ALT", action = wezterm.action.MoveTabRelative(1) },
+    { key = "x", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCopyMode },
+    {
+      key = "f",
+      mods = "CTRL|SHIFT",
+      action = wezterm.action.Search "CurrentSelectionOrEmptyString",
+    },
     {
       key = "C",
       mods = "CTRL|SHIFT",
       action = wezterm.action.CopyTo "ClipboardAndPrimarySelection",
     },
+    { key = " ", mods = "SHIFT|CTRL", action = wezterm.action.QuickSelect },
     { key = "V", mods = "CTRL|SHIFT", action = wezterm.action.PasteFrom "Clipboard" },
     { key = "P", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCommandPalette },
   }
