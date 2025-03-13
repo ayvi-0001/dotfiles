@@ -126,6 +126,7 @@ i = ":toggle lsp.display-inlay-hints"
 o = ":toggle inline-diagnostics.other-lines warning disable"
 s = ":toggle lsp.auto-signature-help"
 x = ":toggle whitespace.render all none"
+w = ":toggle soft-wrap.enable"
 
 [keys.normal.space.space]
 j = "@s <ret>i<ret><esc>d" # split selection on white space
