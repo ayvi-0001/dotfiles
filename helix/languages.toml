@@ -129,7 +129,7 @@ file-types       = ["sql", "dsql", "sqlx"]
 indent           = { tab-width = 2, unit = "  " }
 auto-format      = true
 language-servers = ["sql-language-server"]
-formatter        = { command = "sqlfluff", args = ["fix", "-"] }
+formatter        = { command = "sqlfluff", args = ["format", "-"] }
 
 [[language]]
 name             = "toml"
