@@ -45,8 +45,8 @@ require("projects"):setup {
     lua_save_path = os.getenv "HOME" .. "/.config/yazi/state/projects.json",
   },
   last = {
-    update_after_save = false,
-    update_after_load = false,
+    update_after_save = true,
+    update_after_load = true,
     load_after_start = false,
   },
   merge = {
