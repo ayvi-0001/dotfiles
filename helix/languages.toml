@@ -127,7 +127,7 @@ grammar         = "mermaid"
 name             = "sql"
 file-types       = ["sql", "dsql", "sqlx"]
 indent           = { tab-width = 2, unit = "  " }
-auto-format      = true
+auto-format      = false
 language-servers = ["sql-language-server"]
 formatter        = { command = "sqlfluff", args = ["format", "-"] }
 
