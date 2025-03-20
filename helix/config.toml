@@ -110,6 +110,22 @@ space.t.s = ":toggle lsp.auto-signature-help"
 space.t.x = ":toggle whitespace.render all none"
 space.t.w = ":toggle soft-wrap.enable"
 
+# ccase
+space.c.T   = "@|ccase --to train<ret>"          # Train-Case
+space.c.a   = "@|ccase --to alternating<ret>"    # aLtErNaTiNg CaSe
+space.c.c   = "@|ccase --to camel<ret>"          # camelCase
+space.c.k   = "@|ccase --to kebab<ret>"          # kebab-case
+space.c.p   = "@|ccase --to pascal<ret>"         # PascalCase
+space.c.r   = "@|ccase --to random<ret>"         # rAnDOm caSe
+space.c.s   = "@|ccase --to snake<ret>"          # snake_case
+space.c.t   = "@|ccase --to title<ret>"          # Title Case
+space.c.u.C = "@|ccase --to cobol<ret>"          # COBOL-CASE
+space.c.u.S = "@|ccase --to screamingsnake<ret>" # SCREAMING_SNAKE_CASE
+space.c.u.U = "@|ccase --to upperflat<ret>"      # UPPERFLATCASE
+space.c.u.c = "@|ccase --to uppercamel<ret>"     # UpperCamelCase
+space.c.u.k = "@|ccase --to upperkebab<ret>"     # UPPER-KEBAB-CASE
+space.c.u.s = "@|ccase --to uppersnake<ret>"     # UPPER_SNAKE_CASE
+
 # macros
 space.m.1 = "@%s[^\\x00-\\x7F]+<ret>"          # find non-ascii characters
 space.m.d = "@ P:lang diff<ret>gg"             # paste diff from clipboard
