@@ -84,6 +84,15 @@ hidden      = false
 ignore      = false
 
 [keys.normal]
+C-y = [ # open yazi
+  ':sh rm -f /tmp/unique-file',
+  ':insert-output yazi --chooser-file=/tmp/unique-file',
+  ':open %sh{cat /tmp/unique-file}',
+  ':redraw',
+  ':set mouse false',
+  ':set mouse true',
+]
+
 C-S-s   = ":w!"
 q       = ":q"
 Q       = ":bc"
