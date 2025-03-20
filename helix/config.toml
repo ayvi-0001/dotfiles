@@ -84,68 +84,41 @@ hidden      = false
 ignore      = false
 
 [keys.normal]
-C-S-s = ":w!"
-q     = ":quit" # note: overrides q = "record_macro"
-C-q   = ":bclose"
-ret   = ["open_below", "normal_mode"] # enter key to open_below then re-enter normal mode
-C-A-o = ":config-open"
-C-A-t = ":config-reload"
-f     = ["find_next_char", "select_mode"]
-C-j   = ["goto_next_paragraph"]
-C-k   = ["goto_prev_paragraph"]
-esc   = ["collapse_selection", "keep_primary_selection"]
-H     = "goto_previous_buffer"
-L     = "goto_next_buffer"
-# copy line up
-S-A-up = ["extend_to_line_bounds", "yank", "open_above", "replace_with_yanked", "collapse_selection", "normal_mode"]
-# copy line down
-S-A-down = ["extend_to_line_bounds", "yank", "open_below", "replace_with_yanked", "collapse_selection", "normal_mode"]
-# move line up
-A-K = [
-  "keep_primary_selection",
-  "extend_to_line_bounds",
-  "extend_line_above",
-  "split_selection_on_newline",
-  "select_mode",
-  "goto_line_end_newline",
-  "normal_mode",
-  "rotate_selection_contents_forward",
-  "keep_primary_selection",
-]
-# move line down
-A-J = [
-  "keep_primary_selection",
-  "move_line_down",
-  "extend_to_line_bounds",
-  "extend_line_above",
-  "split_selection_on_newline",
-  "select_mode",
-  "goto_line_end_newline",
-  "normal_mode",
-  "rotate_selection_contents_forward",
-  "keep_primary_selection",
-  "move_line_down",
-]
+C-S-s   = ":w!"
+q       = ":q"
+Q       = ":bc"
+C-q     = ":q!"
+ret     = ["open_below", "normal_mode"]
+f       = ["find_next_char", "normal_mode"]
+C-j     = ["goto_next_paragraph"]
+C-k     = ["goto_prev_paragraph"]
+esc     = ["collapse_selection", "keep_primary_selection"]
+H       = ["goto_previous_buffer"]
+L       = ["goto_next_buffer"]
+space.J = [":clipboard-yank-join"]
 
-[keys.normal.space]
-J = [":clipboard-yank-join"]
+# goto ext
+g.D = "@gd wv"
 
-[keys.normal.space.t]
-c = ":toggle inline-diagnostics.cursor-line warning disable"
-e = ":toggle end-of-line-diagnostics hint disable"
-f = ":toggle auto-format"
-i = ":toggle lsp.display-inlay-hints"
-o = ":toggle inline-diagnostics.other-lines warning disable"
-s = ":toggle lsp.auto-signature-help"
-x = ":toggle whitespace.render all none"
-w = ":toggle soft-wrap.enable"
+# toggle opts
+space.t.c = ":toggle inline-diagnostics.cursor-line warning disable"
+space.t.e = ":toggle end-of-line-diagnostics hint disable"
+space.t.f = ":toggle auto-format"
+space.t.i = ":toggle lsp.display-inlay-hints"
+space.t.o = ":toggle inline-diagnostics.other-lines warning disable"
+space.t.s = ":toggle lsp.auto-signature-help"
+space.t.x = ":toggle whitespace.render all none"
+space.t.w = ":toggle soft-wrap.enable"
 
-[keys.normal.space.space]
-j = "@s <ret>i<ret><esc>d" # split selection on white space
-t = "@%|sed '/^$/d'<ret>|sort -u<ret>" # sort buffer, unique lines + rm empty lines
-d = "@ P:lang diff<ret>gg" # paste diff from clipboard
-# sort paragraph under cursor
-s = [
+# macros
+space.m.1 = "@%s[^\\x00-\\x7F]+<ret>"          # find non-ascii characters
+space.m.d = "@ P:lang diff<ret>gg"             # paste diff from clipboard
+space.m.e = "@%|sed '/^[[:space:]]*$/d'<ret>"  # remove empty lines
+space.m.i = "@%s[^\\x00-\\x7F]+<ret>"          # find non-ascii characters
+space.m.j = "@s <ret>i<ret><esc>d"             # split selection on white space
+space.m.u = "@%|sed '/^$/d'<ret>|sort -u<ret>" # sort buffer, unique lines + rm empty lines
+
+space.m.s = [ # sort paragraph under cursor
   "goto_line_end",
   "goto_prev_paragraph",
   "goto_last_line",
@@ -166,24 +139,52 @@ s = [
   "jump_backward",
 ]
 
-[keys.normal.space.space.f]
-# format current document with taplo,
-# taplo's formatter/lsp can't format a document from stdin while also
-# respecting custom file rules in the workspace config file,
-# and there's no reliable way to pass the document path to taplo fmt --stdin-filepath
-t = "@:sh taplo fmt <C-r>%<ret>:reload<ret>"
+S-A-up = [ # copy line up
+  "extend_to_line_bounds",
+  "yank",
+  "open_above",
+  "replace_with_yanked",
+  "collapse_selection",
+  "normal_mode",
+]
+S-A-down = [ # copy line down
+  "extend_to_line_bounds",
+  "yank",
+  "open_below",
+  "replace_with_yanked",
+  "collapse_selection",
+  "normal_mode",
+]
+S-A-k = [ # move line up
+  "keep_primary_selection",
+  "extend_to_line_bounds",
+  "extend_line_above",
+  "split_selection_on_newline",
+  "select_mode",
+  "goto_line_end_newline",
+  "normal_mode",
+  "rotate_selection_contents_forward",
+  "keep_primary_selection",
+]
+S-A-j = [ # move line down
+  "keep_primary_selection",
+  "move_line_down",
+  "extend_to_line_bounds",
+  "extend_line_above",
+  "split_selection_on_newline",
+  "select_mode",
+  "goto_line_end_newline",
+  "normal_mode",
+  "rotate_selection_contents_forward",
+  "keep_primary_selection",
+  "move_line_down",
+]
 
 [keys.insert]
 "C-[" = "normal_mode"
-# copy line up
-S-A-up = ["normal_mode", "extend_to_line_bounds", "yank", "open_above", "replace_with_yanked", "collapse_selection"]
-# copy line down
-S-A-down = ["normal_mode", "extend_to_line_bounds", "yank", "open_below", "replace_with_yanked", "collapse_selection"]
 
 [keys.select]
-"C-[" = "normal_mode"
-C-j   = ["goto_next_paragraph"]
-C-k   = ["goto_prev_paragraph"]
-
-[keys.select.space]
-J = [":clipboard-yank-join"]
+"C-["   = "normal_mode"
+C-j     = ["goto_next_paragraph"]
+C-k     = ["goto_prev_paragraph"]
+space.J = [":clipboard-yank-join"]
