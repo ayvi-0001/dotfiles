@@ -147,6 +147,15 @@ auto-format       = true
 formatter.command = "stylua"
 formatter.args    = ["--search-parent-directories", "-"]
 
+# echo '; inherits: git-ignore' > "$HELIX_RUNTIME/queries/filter/highlights.scm"
+[[language]]
+name            = "filter"
+scope           = "source.filter"
+injection-regex = "filter"
+file-types      = [{ glob = "*.*filter" }]
+comment-token   = "#"
+grammar         = "gitignore"
+
 [[language]]
 name              = "yaml"
 auto-format       = true
