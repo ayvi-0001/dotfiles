@@ -1,13 +1,13 @@
 theme = "ayu_evolve"
 
 [editor]
-auto-save               = true
 bufferline              = "always"
 clipboard-provider      = "windows"
 color-modes             = true
 completion-timeout      = 10
 cursorline              = true
 default-line-ending     = "lf"
+end-of-line-diagnostics = "hint"
 insert-final-newline    = true
 middle-click-paste      = true
 mouse                   = true
@@ -20,8 +20,19 @@ smart-tab               = { supersede-menu = false }
 terminal                = { command = "c:/program files/git/usr/bin/bash", args = ["-c"] }
 text-width              = 200
 true-color              = true
-whitespace.characters   = { nbsp = "⍽", newline = "⏎", nnbsp = "␣", space = "·", tab = "→", tabpad = "·" } # Tabs will look like "→···" (depending on tab width)
-end-of-line-diagnostics = "hint"
+
+[editor.auto-save]
+focus-lost          = true
+after-delay.enable  = true
+after-delay.timeout = 5000
+
+[editor.whitespace.characters]
+nbsp    = "⍽"
+newline = "⏎"
+nnbsp   = "␣"
+space   = "·"
+tab     = "→"
+tabpad  = "·" # Tabs will look like "→···" (depending on tab width)
 
 [editor.inline-diagnostics]
 cursor-line     = "warning"
