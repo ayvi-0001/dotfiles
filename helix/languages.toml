@@ -75,12 +75,13 @@ args    = ["up", "--method", "stdio"]
 command = "lua-language-server"
 
 [[language]]
-name             = "python"
-auto-format      = true
-shebangs         = ["python", "uv"]
-language-servers = ["ruff", "basedpyright"] # "pylsp", "pylyzer"
-indent           = { tab-width = 4, unit = "    " }
-formatter        = { command = "ruff", args = ["format", "-"] }
+name              = "python"
+auto-format       = true
+shebangs          = ["python", "uv"]
+language-servers  = ["ruff", "basedpyright"]         # "pylsp", "pylyzer"
+indent            = { tab-width = 4, unit = "    " }
+formatter.command = "ruff"
+formatter.args    = ["format", "-"]
 
 [[language]]
 name                          = "rust"
@@ -89,19 +90,21 @@ auto-format                   = true
 language-servers              = ["rust-analyzer"]
 indent                        = { tab-width = 4, unit = "    " }
 persistent-diagnostic-sources = ["rustc", "clippy"]
-formatter                     = { command = "rustfmt" }
+formatter.command             = "rustfmt"
 
 [[language]]
-name        = "xit"
-auto-format = true
-indent      = { tab-width = 4, unit = "    " }
-formatter   = { command = "bash", args = ["-c", "xit-sort -"] } # custom script in ~/bin/
+name              = "xit"
+auto-format       = true
+indent            = { tab-width = 4, unit = "    " }
+formatter.command = "bash"
+formatter.args    = ["-c", "xit-sort -"]             # custom script in ~/bin/
 
 [[language]]
-name       = "csv"
-file-types = ["csv"]
-scope      = "source.csv"
-formatter  = { command = "bash", args = ["-c", "column -t -s, -o, <&0"] }
+name              = "csv"
+file-types        = ["csv"]
+scope             = "source.csv"
+formatter.command = "bash"
+formatter.args    = ["-c", "column -t -s, -o, <&0"]
 
 [[language]]
 name             = "markdown"
@@ -114,29 +117,32 @@ text-width       = 200
 # Run the command `:lang gantt` to enable auto formatting.
 # Repo for formatter: https://github.com/ayvi-0001/mermaid-gantt-formatter
 [[language]]
-name            = "gantt"
-scope           = "source.mermaid"
-injection-regex = "mermaid"
-file-types      = []
-auto-format     = true
-comment-token   = "%%"
-formatter       = { command = "fmt-mmd-gantt", args = ["-i-"] }
-grammar         = "mermaid"
+name              = "gantt"
+scope             = "source.mermaid"
+injection-regex   = "mermaid"
+file-types        = []
+auto-format       = true
+comment-token     = "%%"
+formatter.command = "fmt-mmd-gantt"
+formatter.args    = ["-i-"]
+grammar           = "mermaid"
 
 [[language]]
-name             = "sql"
-file-types       = ["sql", "dsql", "sqlx"]
-indent           = { tab-width = 2, unit = "  " }
-auto-format      = false
-language-servers = ["sql-language-server"]
-formatter        = { command = "sqlfluff", args = ["format", "-"] }
+name              = "sql"
+file-types        = ["sql", "dsql", "sqlx"]
+indent            = { tab-width = 2, unit = "  " }
+auto-format       = false
+language-servers  = ["sql-language-server"]
+formatter.command = "sqlfluff"
+formatter.args    = ["format", "-"]
 
 [[language]]
-name             = "toml"
-indent           = { tab-width = 2, unit = "  " }
-auto-format      = true
-formatter        = { command = "taplo", args = ["format", "-"] }
-language-servers = ["taplo"]
+name              = "toml"
+indent            = { tab-width = 2, unit = "  " }
+auto-format       = true
+formatter.command = "taplo"
+formatter.args    = ["format", "-"]
+language-servers  = ["taplo"]
 
 [[language]]
 name              = "lua"
