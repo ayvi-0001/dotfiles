@@ -17,7 +17,6 @@ scroll-lines            = 4
 search                  = { wrap-around = false }
 shell                   = ["c:/program files/git/usr/bin/bash", "-c"] # Using full path to bash, otherwise Windows might use WSL instead.
 smart-tab               = { supersede-menu = false }
-soft-wrap               = { enable = false, wrap-at-text-width = true }
 terminal                = { command = "c:/program files/git/usr/bin/bash", args = ["-c"] }
 text-width              = 200
 true-color              = true
