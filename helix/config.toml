@@ -2,7 +2,7 @@ theme = "ayu_evolve"
 
 [editor]
 auto-save               = true
-bufferline              = "multiple"
+bufferline              = "always"
 clipboard-provider      = "windows"
 color-modes             = true
 completion-timeout      = 10
