@@ -30,8 +30,8 @@ hash = "7cc42012a7c2099f80064d228feb8d44"
 
 [[plugin.deps]]
 use  = "yazi-rs/plugins:diff"
-rev  = "ceb053f"
-hash = "fb4650dc4e95b9b56dcadab3608dcfed"
+rev  = "79193b3"
+hash = "6f5e71b5d375ed192091c86a78304e9d"
 
 [[plugin.deps]]
 use  = "yazi-rs/plugins:full-border"
