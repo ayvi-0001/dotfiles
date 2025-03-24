@@ -83,6 +83,11 @@ use  = "AnirudhG07/plugins-yazi:copy-file-contents"
 rev  = "524c52c"
 hash = "6cb8c3d1a25318ecbd7e8036db083f9"
 
+[[plugin.deps]]
+use  = "aresler/path-from-root"
+rev  = "7d05b87"
+hash = "46977a29d4349d11465af1817f17d414"
+
 [[flavor.deps]]
 use  = "kmlupreti/ayu-dark"
 rev  = "5412a78"

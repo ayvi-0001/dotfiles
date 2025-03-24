@@ -5,13 +5,16 @@ prepend_keymap = [{ on = "<Esc>", run = "close", desc = "Cancel input" }]
 
 [manager]
 prepend_keymap = [
-  # start: override builtins
-  # Add the '--separator' option to builtin copy commands.
+  # start: copy
+  #  Add the '--separator' option to builtin copy commands.
   { on = ["c", "c"], run = "copy --separator='unix' path", desc = "Copy the file path" },
   { on = ["c", "d"], run = "copy --separator='unix' dirname", desc = "Copy the directory path" },
   { on = ["c", "f"], run = "copy --separator='unix' filename", desc = "Copy the filename" },
   { on = ["c", "n"], run = "copy --separator='unix' name_without_ext", desc = "Copy the filename without extension" },
-  # end: override builtins
+  #  start: path-from-root.yazi
+  { on = ["c", "r"], run = "plugin path-from-root", desc = "Copies path from git root" },
+  #  end: path-from-root.yazi
+  # end: copy
 
   # start: goto
   { on = ["g", "C"], run = "cd ~/.cache", desc = "Goto ~/.cache" },
