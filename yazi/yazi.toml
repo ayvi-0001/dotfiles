@@ -43,7 +43,7 @@ open = [
 ]
 reveal = [
   { run = 'explorer /select,"%1"', orphan = true, desc = "reveal", for = "windows" },
-  { run = '''bash -c "exiftool $(cygpath '%*'); echo 'Press enter to exit'; read _"''', block = true, desc = "show exif", for = "windows" },
+  { run = '''bash -c "clear; exiftool '%1'; echo 'Press enter to exit'; read _"''', block = true, desc = "show exif", for = "windows" },
 ]
 extract = [
   { run = "ya pub extract --list %*", desc = "ya pub extract", for = "windows" },
