@@ -1,50 +1,18 @@
-require("relative-motions"):setup {
-  show_numbers = "relative",
-  show_motion = true,
-  only_motions = false,
-}
+require("relative-motions"):setup { show_numbers = "relative" }
 
 require("git"):setup()
 
-require("full-border"):setup { type = ui.Border.ROUNDED }
+require("full-border"):setup()
 
-require("fg"):setup { default_action = "jump" }
+require("fg"):setup()
 
--- start: yamb.yazi
-require("yamb"):setup {
-  bookmarks = {},
-  jump_notify = true,
-  cli = "fzf",
-  keys = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  path = os.getenv "HOME" .. "/.config/yazi/state/bookmark",
-}
--- end: yamb.yazi
+local bookmarks = os.getenv "HOME" .. "/.config/yazi/state/bookmark"
+require("yamb"):setup { jump_notify = true, cli = "fzf", path = bookmarks }
 
-require("projects"):setup {
-  save = {
-    method = "lua",
-    lua_save_path = os.getenv "HOME" .. "/.config/yazi/state/projects.json",
-  },
-  last = {
-    update_after_save = true,
-    update_after_load = true,
-    load_after_start = false,
-  },
-  merge = {
-    quit_after_merge = false,
-  },
-  notify = {
-    enable = true,
-    title = "Projects",
-    timeout = 2,
-    level = "info",
-  },
-}
+local projects = os.getenv "HOME" .. "/.config/yazi/state/projects.json"
+require("projects"):setup { save = { method = "lua", lua_save_path = projects } }
 
-require("copy-file-contents"):setup {
-  append_char = "\n",
-  notification = true,
-}
+require("copy-file-contents"):setup {}
 
 require("session"):setup { sync_yanked = true }
 
