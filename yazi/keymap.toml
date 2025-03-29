@@ -6,7 +6,7 @@ prepend_keymap = [{ on = "<Esc>", run = "close", desc = "Cancel input" }]
 [manager]
 prepend_keymap = [
   # start: copy
-  #  Add the '--separator' option to builtin copy commands.
+  # add the '--separator' option to builtin copy commands.
   { on = ["c", "c"], run = "copy --separator='unix' path", desc = "Copy the file path" },
   { on = ["c", "d"], run = "copy --separator='unix' dirname", desc = "Copy the directory path" },
   { on = ["c", "f"], run = "copy --separator='unix' filename", desc = "Copy the filename" },
@@ -23,9 +23,6 @@ prepend_keymap = [
   #  start: git-cd-root-dir
   { on = ["g", "r"], run = "plugin git-cd-root-dir", desc = "Goto git root directory" },
   #  end: git-cd-root-dir
-  #  start: follow-symlink.yazi
-  { on = ["g", "l"], run = "plugin follow-symlink", desc = "Follow symlink" },
-  #  end: follow-symlink.yazi
   # end: goto
 
   # start: relative-motions.yazi
@@ -56,12 +53,10 @@ prepend_keymap = [
   { on = "<A-y>", run = "plugin copy-file-contents", desc = "Copy contents of file" },
   # end: copy-file-contents.yazi
 
-  # start: arrow.yazi | parent-arrow.yazi
-  { on = "k", run = "plugin arrow -- -1" },
-  { on = "j", run = "plugin arrow -- 1" },
-  { on = "K", run = "plugin parent-arrow -- -1" },
-  { on = "J", run = "plugin parent-arrow -- 1" },
-  # end: arrow.yazi | parent-arrow.yazi
+  # start: parent-arrow.yazi
+  { on = "K", run = "plugin parent-arrow -1" },
+  { on = "J", run = "plugin parent-arrow 1" },
+  # end: parent-arrow.yazi
 
   # start: shell
   { on = ["G"], run = """ shell --block -- bash -c "gitui -d." """, desc = "gitui" },
