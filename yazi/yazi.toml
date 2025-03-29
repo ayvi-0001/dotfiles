@@ -48,6 +48,7 @@ reveal = [
 extract = [
   { run = "ya pub extract --list %*", desc = "ya pub extract", for = "windows" },
   { run = "7zFM %*", orphan = true, desc = "7zFM", for = "windows" },
+  { run = 'start "" "%1"', orphan = true, desc = "open", for = "windows" },
 ]
 play = [
   { run = "mpv --force-window %*", orphan = true, desc = "mpv", for = "windows" },
