@@ -136,7 +136,6 @@ space.c.u.k = "@|ccase --to upperkebab<ret>"     # UPPER-KEBAB-CASE
 space.c.u.s = "@|ccase --to uppersnake<ret>"     # UPPER_SNAKE_CASE
 
 # macros
-space.m.1 = "@%s[^\\x00-\\x7F]+<ret>"          # find non-ascii characters
 space.m.d = "@ P:lang diff<ret>gg"             # paste diff from clipboard
 space.m.e = "@%|sed '/^[[:space:]]*$/d'<ret>"  # remove empty lines
 space.m.i = "@%s[^\\x00-\\x7F]+<ret>"          # find non-ascii characters
