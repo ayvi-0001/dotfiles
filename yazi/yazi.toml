@@ -32,7 +32,7 @@ ueberzug_offset = [0, 0, 0, 0]
 edit = [
   { run = "hx %*", desc = "helix", block = true, for = "windows" },
   { run = "code %*", desc = "vscode", orphan = true, for = "windows" },
-  { run = 'code -w %*', block = true, desc = "vscode (block)", for = "windows" },
+  { run = "code -w %*", block = true, desc = "vscode (block)", for = "windows" },
 ]
 open = [
   { run = 'start "" "%1"', orphan = true, desc = "open", for = "windows" },
@@ -42,12 +42,12 @@ open = [
   { run = "mpv %*", orphan = true, desc = "mpv", for = "windows" },
 ]
 reveal = [
-  { run = '''explorer /select,"%1"''', orphan = true, desc = "reveal", for = "windows" },
+  { run = 'explorer /select,"%1"', orphan = true, desc = "reveal", for = "windows" },
   { run = '''bash -c "exiftool $(cygpath '%*'); echo 'Press enter to exit'; read _"''', block = true, desc = "show exif", for = "windows" },
 ]
 extract = [
-  { run = '''ya pub extract --list %*''', desc = "extract here", for = "windows" },
-  { run = '''7zFM %*''', orphan = true, desc = "7zFM", for = "windows" },
+  { run = "ya pub extract --list %*", desc = "ya pub extract", for = "windows" },
+  { run = "7zFM %*", orphan = true, desc = "7zFM", for = "windows" },
 ]
 play = [
   { run = "mpv --force-window %*", orphan = true, desc = "mpv", for = "windows" },
