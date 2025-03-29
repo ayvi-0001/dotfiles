@@ -14,6 +14,7 @@ mouse                    = true
 popup-border             = "all"
 rulers                   = [88, 120]
 scroll-lines             = 4
+search.smart-case        = true
 search.wrap-around       = false
 shell                    = ["bash", "-c"]
 smart-tab.supersede-menu = false
@@ -116,6 +117,7 @@ space.t.f = ":toggle auto-format"
 space.t.i = ":toggle lsp.display-inlay-hints"
 space.t.o = ":toggle inline-diagnostics.other-lines warning disable"
 space.t.s = ":toggle lsp.auto-signature-help"
+space.t.C = ":toggle search.smart-case"
 space.t.x = ":toggle whitespace.render all none"
 space.t.w = ":toggle soft-wrap.enable"
 
