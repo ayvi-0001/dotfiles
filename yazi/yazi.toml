@@ -25,7 +25,7 @@ image_delay     = 0
 image_filter    = "lanczos3"
 image_quality   = 90
 sixel_fraction  = 10
-ueberzug_scale  = 1.5
+ueberzug_scale  = 2
 ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
@@ -78,8 +78,8 @@ append_rules = [{ name = "*", use = ["open", "reveal", "edit"] }]
 micro_workers    = 20
 macro_workers    = 20
 bizarre_retry    = 5
-image_alloc      = 1073741824 # 1024MB
-image_bound      = [0, 0]
+image_alloc      = 0 # unlimited
+image_bound      = [0, 0] # unlimited
 suppress_preload = true
 
 [plugin]
