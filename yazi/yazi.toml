@@ -64,16 +64,12 @@ browser = [
 
 [open]
 prepend_rules = [
-  # Remove edit use from default config on directories.
-  { name = "*/", use = ["open", "reveal"] },
-  # Hash files.
-  { name = "*.{sha*,md5}", use = ["edit"] },
-  # Database opener using harlequin.
-  { name = "*.{db,sqlite,sqlite3}", use = ["database"] },
-  # Browser opener.
-  { name = "*.url", use = ["browser", "edit"] },
-  # Additional files not caught in default.
-  { name = "*.{toml,hx,*rc,ini}", use = ["edit"] },
+  { name = "*/", use = ["open", "reveal"] }, # Remove edit use from default config on directories.
+  { name = "*.{osz*,osk}", use = ["open", "extract"] },
+  { mime = "application/sqlite3", use = ["database"] }, # Database opener using harlequin.
+  { name = "*.url", use = ["browser", "edit"] }, # Browser opener.
+  { name = "*.html", use = ["edit", "browser"] },
+  { mime = "image/*", use = ["play", "open", "reveal"] },
 ]
 append_rules = [{ name = "*", use = ["open", "reveal", "edit"] }]
 
