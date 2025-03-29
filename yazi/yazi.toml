@@ -38,7 +38,8 @@ open = [
   { run = 'start "" "%1"', orphan = true, desc = "open", for = "windows" },
   { run = "hx %*", block = true, desc = "helix", for = "windows" },
   { run = "code %*", block = true, desc = "vscode", orphan = true, for = "windows" },
-  { run = '7zFM %*', orphan = true, desc = "7zFM", for = "windows" },
+  { run = "7zFM %*", orphan = true, desc = "7zFM", for = "windows" },
+  { run = "mpv %*", orphan = true, desc = "mpv", for = "windows" },
 ]
 reveal = [
   { run = '''explorer /select,"%1"''', orphan = true, desc = "reveal", for = "windows" },
@@ -49,8 +50,9 @@ extract = [
   { run = '''7zFM %*''', orphan = true, desc = "7zFM", for = "windows" },
 ]
 play = [
-  { run = '''mpv --force-window %*''', orphan = true, for = "windows" },
-  { run = '''photoqt %*''', orphan = true, desc = "photoqt", for = "windows" },
+  { run = "mpv --force-window %*", orphan = true, desc = "mpv", for = "windows" },
+  { run = "mpv --fullscreen %*", block = true, desc = "mpv fs", for = "windows" },
+  { run = "photoqt %*", orphan = true, desc = "photoqt", for = "windows" },
 ]
 database = [
   { run = '''bash -c "harlequin '%*'"''', block = true, desc = "harlequin", for = "windows" },
