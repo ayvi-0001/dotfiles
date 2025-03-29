@@ -25,7 +25,7 @@ undercurl                = true
 
 [editor.auto-save]
 focus-lost          = true
-after-delay.enable  = true
+after-delay.enable  = false
 after-delay.timeout = 5000
 
 [editor.whitespace.characters]
