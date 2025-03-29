@@ -20,25 +20,6 @@ require("yamb"):setup {
 }
 -- end: yamb.yazi
 
--- to enable linemode, add to ~/.config/yazi/yazi.toml
--- [manager]
--- linemode = "size_and_mtime"
-function Linemode:size_and_mtime(job)
-  local time = math.floor(self._file.cha.mtime or 0)
-  if time == 0 then
-    time = ""
-  else
-    time = os.date("%Y-%m-%d %H:%M", time)
-  end
-  local size = self._file:size()
-  if size then
-    return ui.Line(string.format("%s %s", size and ya.readable_size(size) or "-", time))
-  else
-    local folder = cx.active:history(self._file.url)
-    return ui.Line(string.format("%s %s", folder and tostring(#folder.files) or "-", time))
-  end
-end
-
 require("projects"):setup {
   save = {
     method = "lua",
