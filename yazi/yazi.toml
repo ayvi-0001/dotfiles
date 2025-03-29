@@ -75,12 +75,12 @@ prepend_rules = [
 append_rules = [{ name = "*", use = ["open", "reveal", "edit"] }]
 
 [tasks]
-micro_workers    = 10
-macro_workers    = 25
+micro_workers    = 20
+macro_workers    = 20
 bizarre_retry    = 5
 image_alloc      = 1073741824 # 1024MB
 image_bound      = [0, 0]
-suppress_preload = false
+suppress_preload = true
 
 [plugin]
 prepend_fetchers = [{ id = "git", name = "*", run = "git" }]
