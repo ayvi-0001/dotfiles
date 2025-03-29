@@ -74,6 +74,10 @@ args    = ["up", "--method", "stdio"]
 [language-server.lua-language-server]
 command = "lua-language-server"
 
+[language-server.codebook]
+command = "codebook-lsp"
+args    = ["serve"]
+
 [[language]]
 name              = "python"
 auto-format       = true
@@ -110,6 +114,7 @@ formatter.args    = ["-c", "column -t -s, -o, <&0"]
 name             = "markdown"
 soft-wrap.enable = true
 text-width       = 200
+language-servers = ["codebook"]
 
 # Following language is to provide auto-formatting for mermaid gantt charts.
 # File types is intentionally left blank, so files with  `.mermaid` or `.mmd`
