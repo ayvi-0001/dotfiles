@@ -1,25 +1,21 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2155
 
 # shell ---------------------------------------------------------------------
 
 export BASH_COMPLETION_USER_DIR=$HOME/.bash_completion
 export BROWSER=firefox
-export EDITOR=hx
 export PAGER=less
 
 export SHELL=c:/program\ files/git/bin/bash.exe
 export STARSHIP_SHELL="$SHELL"
 
+export EDITOR=hx
+export GIT_EDITOR="$EDITOR"
+
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
-
-# git -----------------------------------------------------------------------
-
-export GIT_EDITOR="$EDITOR"
-export GIT_CONFIG_GLOBAL=$HOME/.gitconfig 
 
 # config---------------------------------------------------------------------
 
