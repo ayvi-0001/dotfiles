@@ -57,11 +57,9 @@ if shopt -q login_shell; then
   # load bash-completion
   test -f "$HOME/.local/share/bash-completion/bash_completion" && . "$_"
 
-  # load ~/.bash_completions
-  test -d "${BASH_COMPLETION_USER_DIR:-~/.bash_completion}" && \
-    for f in "${BASH_COMPLETION_USER_DIR:-~/.bash_completion}"/*; do
-      test -f "$f" && . "$_";
-    done; unset f
+  # load user completions, if any
+  test -d "${BASH_COMPLETION_USER_DIR:-$HOME/.bash_completion}" && \
+    for f in "$_"/*; do test -f "$f" && . "$_"; done; unset f
 
   # set default completions 
   complete -o bashdefault -o default -o nosort -D
