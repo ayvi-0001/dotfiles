@@ -78,6 +78,10 @@ command = "lua-language-server"
 command = "codebook-lsp"
 args    = ["serve"]
 
+[language-server.tailwindcss-ls]
+command = "tailwindcss-language-server"
+args    = ["--stdio"]
+
 [[language]]
 name              = "python"
 auto-format       = true
@@ -172,6 +176,14 @@ name              = "yaml"
 auto-format       = true
 formatter.command = "yamlfmt"
 formatter.args    = ["-"]
+
+[[language]]
+name             = "html"
+language-servers = ["vscode-html-language-server", "tailwindcss-ls"]
+
+[[language]]
+name             = "css"
+language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
 
 [[grammar]]
 name       = "xit"
