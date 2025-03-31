@@ -1,6 +1,6 @@
 This directory is a mix of bash/python scripts.
 
-Some scripts may require modification for use, for example `tailscale status` is used to retrieve device IPs where needed, this may need to be switched out for `read -p` or something another command.
+Some scripts may require modification for use, for example `tailscale status` is used to retrieve device IPs where needed, this may need to be switched out for `read -p` or some other command.
 
 The shebang for some python scripts points to [`uv`](https://docs.astral.sh/uv/), and will look similar to this:
 

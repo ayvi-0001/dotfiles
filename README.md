@@ -2,18 +2,18 @@
 
 A collection of my dotfiles/config/scripts, and a bash script to symlink them.
 
-While it's mainly focused on development, I wanted to backup and share any of my latest settings, so it also tracks several unrelated files, like configurations for utilities I frequently use or games I play (_though often question why.._).
+It's mainly focused on development, but also tracks some unrelated configs files, like utilities I frequently use or games I play (_though often question why.._).
 
-Files are [deployed](#usage) with the [`install`](install) script along with an _uncommitted_ [config file](#config) (`dotfiles.toml`), which lists source/target paths and patterns for templating/obscuring secrets. The [file structure](#file-structure) is organized for convenience and doesn't mimick or determine the destination.
+Files are [deployed](#usage) with the [`install`](install) script along with a [config file](#config) (`dotfiles.toml`) that lists source/dest paths and patterns for templating/obscuring secrets. The [file structure](#file-structure) is organized for convenience and doesn't determine the destination.
 
-There's a private submodule at the path `.secret/` for sensitive files (ssh/gnupg/etc). It's hosted on a local [gitea](https://about.gitea.com/) server and the remote url points to my own [tailnet](https://tailscale.com/kb/1136/tailnet) domain.
+There's a private submodule at `.secret/` for sensitive files (ssh/gnupg/etc). It's hosted on a local [gitea](https://about.gitea.com/) server and the remote url points to my own [tailnet](https://tailscale.com/kb/1136/tailnet) domain.
 
 It follows that this isn't designed to be run in anyone else's environment as is, but hopefully it can serve as a starting point or give you ideas if you are working on a similar process. Feel free to use anything found here and please open an issue if you have any questions or suggestions. &nbsp;(:
 
 ---
 
 > [!NOTE]
-> A lot of my development is currently done on windows using git-bash, if not wsl. Some of these files may have a few quirks and hacky solutions to make things work. Certain scripts expect to be run in a windows environment, but this should be clearly commented.
+> A lot of my development is currently done on windows using git-bash, if not wsl. Some of these files may have a few quirks and hacky solutions to make things work.
 
 ---
 
@@ -31,33 +31,33 @@ It follows that this isn't designed to be run in anyone else's environment as is
 
 ## Config
 
-Each directory has a key in the config file of the same name with the table `files`, and an optional array of table's `templates`. These top-level keys are referenced when [running the install script](#usage).
+Each directory has a key in the config file of the same name, with the table `files` and an optional array of table's `templates`. These top-level keys are referenced when [running the install script](#usage).
 
 <!-- markdownlint-disable MD001 -->
 
 #### `[$DIR.files]`
 
-Keys correspond to the source file (relative to the parent `$DIR`), values point to the target.
+Keys correspond to the source file (relative to the parent `$DIR`), values point to the destination.
 
 ```toml
-# If the target ends in `/`, then the symlink has the same name as the source file.
+# If the destination ends in `/` then the symlink has the same name as the source file.
 [yazi.files]
-"yazi.toml"                   = "~/.config/yazi/"
-"plugins/arrow.yazi/init.lua" = "~/.config/yazi/plugins/arrow.yazi/"
+"yazi.toml"                          = "~/.config/yazi/"
+"plugins/parent-arrow.yazi/init.lua" = "~/.config/yazi/plugins/parent-arrow.yazi/"
 
-# If the target does not end in `/`, the symlink target has the new file name.
+# If the destination doesn't end in `/` then the symlink target has the new file name.
 [envrc.files]
 ".envrc.work" = "~/work/.envrc"
 ```
 
-Folders can be organized in the config file by multiple path segments.
+A key can contain multiple path segments, but it must be enclosed in quotes.
 
 ```toml
-["bin/utils".files] # key must be enclosed in quotes.
-"duplicate-file-names" = "~/bin/"
+["bin/utils".files]
+"fd-dup-file-names" = "~/bin/"
 ```
 
-This would link all the files at `/bin/utils/` only, instead of everything at `/bin/`. The option [`--fd-filter`/`-f`](#filtering) can be used as an alternative.
+This would link all the files at `./bin/utils/` only, instead of everything at `./bin/`. The option [`--fd-filter`/`-f`](#filtering) can be used as an alternative.
 
 #### `[[$DIR.templates]]`
 
@@ -93,7 +93,7 @@ The config file doesn't need to specify which source file has which templates. A
 
 The process for linking templated files (_also see [diagram](#diagram)_) is:
 
-  1. The directory `.templates/` is created (excluded to git by `.gitignore`).
+  1. The directory `.templates/` is created (ignored by git).
   2. If a source file contains a pattern, it's copied to `.templates/` and the patterns in the copied file are replaced.
   3. The copied file is the new source for the symlink.
 
