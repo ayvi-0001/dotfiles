@@ -1,7 +1,9 @@
 local wezterm = require "wezterm"
+
 local M = {}
 
 function M.rename_tab(window, pane)
+  local active_tab = window:active_tab()
   window:perform_action(
     wezterm.action.Multiple {
       "PopKeyTable",
@@ -11,10 +13,10 @@ function M.rename_tab(window, pane)
           { Foreground = { AnsiColor = "Fuchsia" } },
           { Text = "Enter new name for tab" },
         },
-        initial_value = "",
+        initial_value = active_tab:get_title() or "",
         action = wezterm.action_callback(function(_window, _pane, line)
           if line then
-            window:active_tab():set_title(line)
+            active_tab:set_title(line)
           end
         end),
       },
