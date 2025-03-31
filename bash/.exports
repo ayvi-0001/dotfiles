@@ -5,7 +5,6 @@
 
 export BASH_COMPLETION_USER_DIR=$HOME/.bash_completion
 export BROWSER=firefox
-export CLIPBOARD_PROVIDER="$(command -v win32yank || command -v clip)"
 export EDITOR=hx
 export PAGER=less
 
