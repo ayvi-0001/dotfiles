@@ -258,6 +258,7 @@ function M.apply_to_config(config)
       { key = "t", mods = "CTRL", action = wezterm.action.SendKey { key = "t", mods = "CTRL" } },
       { key = "h", mods = "CTRL", action = wezterm.action.SendKey { key = "h", mods = "CTRL" } },
       { key = "o", mods = "CTRL", action = wezterm.action.SendKey { key = "o", mods = "CTRL" } },
+      { key = "s", mods = "CTRL", action = wezterm.action.SendKey { key = "s", mods = "CTRL" } },
       { key = "f", mods = "ALT", action = wezterm.action.SendKey { key = "f", mods = "ALT" } },
       { key = "h", mods = "ALT", action = wezterm.action.SendKey { key = "h", mods = "ALT" } },
       { key = "j", mods = "ALT", action = wezterm.action.SendKey { key = "j", mods = "ALT" } },
