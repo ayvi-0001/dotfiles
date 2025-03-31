@@ -6,7 +6,8 @@ export BASH_COMPLETION_USER_DIR=$HOME/.bash_completion
 export BROWSER=firefox
 export PAGER=less
 
-export SHELL=c:/program\ files/git/bin/bash.exe
+# export SHELL=/c/program\ files/git/bin/bash.exe
+export SHELL=bash
 export STARSHIP_SHELL="$SHELL"
 
 export EDITOR=hx
