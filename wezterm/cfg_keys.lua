@@ -87,7 +87,7 @@ function M.apply_to_config(config)
     { key = "k", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Up" },
     { key = "j", mods = "ALT", action = wezterm.action.ActivatePaneDirection "Down" },
     { key = "+", mods = "CTRL|SHIFT", action = wezterm.action.IncreaseFontSize },
-    { key = "-", mods = "CTRL|SHIFT", action = wezterm.action.DecreaseFontSize },
+    { key = "-", mods = "CTRL", action = wezterm.action.DecreaseFontSize },
     { key = "0", mods = "CTRL", action = wezterm.action.ResetFontSize },
     { key = "H", mods = "ALT", action = wezterm.action.ActivateTabRelative(-1) },
     { key = "L", mods = "ALT", action = wezterm.action.ActivateTabRelative(1) },
