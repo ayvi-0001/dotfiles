@@ -50,8 +50,6 @@ fi
 
 unset _ssh_env
 
-! env | grep -q SSH_AUTH_SOCK && eval "$(ssh-agent -s)"
-
 # completion ----------------------------------------------------------------
 
 # if also a login shell, load completions.
