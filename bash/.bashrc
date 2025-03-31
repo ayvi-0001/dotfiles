@@ -74,9 +74,4 @@ fi
 command -v fzf >/dev/null && eval "$(fzf --bash)"
 command -v zoxide >/dev/null && eval "$(zoxide init bash)"
 command -v direnv >/dev/null && eval "$(direnv hook bash)"
-
-if command -v starship >/dev/null; then
-  function set_win_title(){ echo -ne "\033]0; $(basename "$PWD") \007"; }
-  export starship_precmd_user_func="set_win_title"
-  eval "$(starship init bash)"
-fi
+command -v starship >/dev/null && eval "$(starship init bash)"
