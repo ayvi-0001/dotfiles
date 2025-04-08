@@ -120,7 +120,7 @@ _deploy_files() {
 
   local key key_object templates files patterns_file
 
-  key="$1"
+  key="${1%/}"
   fd_filter="${2:-}"
   key_object="$(jq ".\"$key\"" <<< "$CONFIG")"
   templates="$(jq '.templates // empty' <<< "$key_object")"
