@@ -110,6 +110,7 @@ _replace_patterns() {
   done
 }
 
+_expand_user() { echo "${1/#\~/$HOME}"; }
 
 _deploy_files() {
   if ! test -d "$1"; then
@@ -149,16 +150,15 @@ _deploy_files() {
         "$file found in dir $key/ but no destination path set in config. Skipping file.."
     else
       src_path="$key/$file"
-      dest_dir="$(jq -r ".\"$file\"" <<< "$files")"
-      dest_dir_expanded="${dest_dir/#\~/$HOME}"
+      dest_dir="$(_expand_user "$(jq -r ".\"$file\"" <<< "$files")")"
 
       target_file_name="$(basename "$file")"
-      if ! test -d "$dest_dir_expanded"; then
-        target_file_name="$(basename "$dest_dir_expanded")"
-        dest_dir_expanded="$(dirname "$dest_dir_expanded")"
+      if ! test -d "$dest_dir"; then
+        target_file_name="$(basename "$dest_dir")"
+        dest_dir="$(dirname "$dest_dir")"
       fi
 
-      dest_path="${dest_dir_expanded%/}/$target_file_name"
+      dest_path="${dest_dir%/}/$target_file_name"
 
       # If file contains a pattern from dotfiles.toml, copy the file to the
       # local .templates/ dir and apply the substitutions.
