@@ -82,7 +82,8 @@ image_bound      = [0, 0] # unlimited
 suppress_preload = true
 
 [plugin]
-prepend_fetchers = [{ id = "git", name = "*", run = "git" }]
+prepend_previewers = [{ name = "*.md", run = "glow" }]
+prepend_fetchers   = [{ id = "git", name = "*", run = "git" }]
 
 [input]
 cursor_blink  = true
