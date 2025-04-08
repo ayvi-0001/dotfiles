@@ -46,7 +46,7 @@ max-diagnostics = 10
 [editor.lsp]
 enable                             = true
 display-messages                   = true
-display-progress-messages          = true
+display-progress-messages          = false
 auto-signature-help                = true
 display-inlay-hints                = true
 display-signature-help-docs        = true
