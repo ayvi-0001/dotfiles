@@ -144,11 +144,12 @@ space.c.u.k = "@|ccase --to upperkebab<ret>"     # UPPER-KEBAB-CASE
 space.c.u.s = "@|ccase --to uppersnake<ret>"     # UPPER_SNAKE_CASE
 
 # macros
-space.m.d = "@ P:lang diff<ret>gg"             # paste diff from clipboard
-space.m.e = "@%|sed '/^[[:space:]]*$/d'<ret>"  # remove empty lines
-space.m.i = "@%s[^\\x00-\\x7F]+<ret>"          # find non-ascii characters
-space.m.j = "@s <ret>i<ret><esc>d"             # split selection on white space
-space.m.u = "@%|sed '/^$/d'<ret>|sort -u<ret>" # sort buffer, unique lines + rm empty lines
+space.m.d = "@ P:lang diff<ret>gg"                  # paste diff from clipboard
+space.m.e = "@|sed '/^[[:space:]]*$/d'<ret>"        # remove empty lines
+space.m.i = "@s[^\\x00-\\x7F]+<ret>"                # find non-ascii characters
+space.m.j = "@s <ret>i<ret><esc>d"                  # split selection on white space
+space.m.t = "@<A-!>date +%Y-%m-%dT%H:%M:%S%z<ret>;" # insert local datetime
+space.m.u = "@|sed '/^$/d'<ret>|sort -u<ret>"       # sort buffer, unique lines + rm empty lines
 
 space.m.s = [ # sort paragraph under cursor
   "goto_line_end",
