@@ -82,7 +82,7 @@ image_bound      = [0, 0] # unlimited
 suppress_preload = true
 
 [plugin]
-prepend_previewers = [{ name = "*.md", run = "glow" }]
+prepend_previewers = [{ name = "*.md", run = "glow" }, { mime = "audio/*", run = "exifaudio" }]
 prepend_fetchers   = [{ id = "git", name = "*", run = "git" }]
 
 [input]
