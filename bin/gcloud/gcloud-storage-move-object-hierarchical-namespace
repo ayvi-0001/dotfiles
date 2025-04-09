@@ -1,0 +1,13 @@
+#!/usr/bin/env bash 
+# https://cloud.google.com/storage/docs/copying-renaming-moving-objects#move
+
+set -euo pipefail
+
+BUCKET_NAME="${1//gs:\/\//}"
+SOURCE_OBJECT_NAME="$(jq -rn --arg x "$2" '$x|@uri')"
+DESTINATION_OBJECT_NAME="$(jq -rn --arg x "$3" '$x|@uri')"
+
+curl -X POST \
+  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+  -H "Content-Length: 0" \
+  "https://storage.googleapis.com/storage/v1/b/$BUCKET_NAME/o/$SOURCE_OBJECT_NAME/moveTo/o/$DESTINATION_OBJECT_NAME"
