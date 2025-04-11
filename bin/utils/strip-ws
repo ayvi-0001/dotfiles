@@ -1,0 +1,2 @@
+#!/usr/bin/env bash 
+[ ! -t 0 ] && awk '{$1=$1;print}' </dev/stdin
