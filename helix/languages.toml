@@ -41,8 +41,13 @@ basedpyright.analysis.diagnosticMode   = "openFilesOnly"
 basedpyright.analysis.typeCheckingMode = "recommended"
 
 [language-server.basedpyright.config.basedpyright.analysis.diagnosticSeverityOverrides]
+reportAny                         = "none"
 reportConstantRedefinition        = "none"
+reportExplicitAny                 = "none"
+reportImplicitOverride            = "none"
 reportImplicitStringConcatenation = "none"
+reportInvalidCast                 = "none"
+reportMissingSuperCall            = "none"
 reportMissingTypeStubs            = "none"
 reportPrivateUsage                = "none"
 reportUnknownArgumentType         = "none"
