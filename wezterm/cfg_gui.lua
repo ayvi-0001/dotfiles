@@ -27,7 +27,12 @@ function M.apply_to_config(config)
   }
   config.bold_brightens_ansi_colors = "BrightAndBold"
 
-  config.window_padding = { left = "1cell", right = "1cell" }
+  config.window_padding = {
+    top = "0cell",
+    left = "0.5cell",
+    right = "0.5cell",
+    bottom = "0cell",
+  }
   config.window_frame = {
     font = wezterm.font { family = "SpaceMono Nerd Font", weight = "Bold" },
     font_size = 8.3,
