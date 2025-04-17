@@ -1,6 +1,7 @@
 local wezterm = require "wezterm"
 local config = wezterm.config_builder()
 
+require "window_space"
 require "events"
 require "wezyx"
 
