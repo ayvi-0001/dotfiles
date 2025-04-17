@@ -94,16 +94,8 @@ function M.apply_to_config(config)
     { key = "i", mods = "ALT", action = wezterm.action.MoveTabRelative(-1) },
     { key = "o", mods = "ALT", action = wezterm.action.MoveTabRelative(1) },
     { key = "x", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCopyMode },
-    {
-      key = "f",
-      mods = "CTRL|SHIFT",
-      action = wezterm.action.Search "CurrentSelectionOrEmptyString",
-    },
-    {
-      key = "C",
-      mods = "CTRL|SHIFT",
-      action = wezterm.action.CopyTo "ClipboardAndPrimarySelection",
-    },
+    { key = "f", mods = "CTRL|SHIFT", action = wezterm.action.Search "CurrentSelectionOrEmptyString" },
+    { key = "C", mods = "CTRL|SHIFT", action = wezterm.action.CopyTo "ClipboardAndPrimarySelection" },
     { key = " ", mods = "SHIFT|CTRL", action = wezterm.action.QuickSelect },
     { key = "V", mods = "CTRL|SHIFT", action = wezterm.action.PasteFrom "Clipboard" },
     { key = "P", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCommandPalette },
