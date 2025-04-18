@@ -214,6 +214,8 @@ function M.apply_to_config(config)
       { key = "L", action = wezterm.action.SplitPane { direction = "Left", top_level = true } },
       { key = "u", action = wezterm.action.SplitPane { direction = "Up" } },
       { key = "U", action = wezterm.action.SplitPane { direction = "Up", top_level = true } },
+      { key = "3", action = wezterm.action.ActivateKeyTable { name = "pane_33" } },
+      { key = "6", action = wezterm.action.ActivateKeyTable { name = "pane_66" } },
       { key = "h", action = wezterm.action.ActivateKeyTable { name = "yazi_helix" } },
       { key = "i", action = wezterm.action.ActivateKeyTable { name = "pane_index" } },
       { key = "f", action = wezterm.action.TogglePaneZoomState },
@@ -234,6 +236,28 @@ function M.apply_to_config(config)
       { key = "8", action = wezterm.action.ActivatePaneByIndex(7) },
       { key = "9", action = wezterm.action.ActivatePaneByIndex(8) },
       { key = "Escape", action = "PopKeyTable" },
+    },
+
+    pane_33 = {
+      { key = "r", action = wezterm.action.SplitPane { direction = "Right", size = { Percent = 33 } } },
+      { key = "R", action = wezterm.action.SplitPane { direction = "Right", size = { Percent = 33 }, top_level = true } },
+      { key = "l", action = wezterm.action.SplitPane { direction = "Left", size = { Percent = 33 } } },
+      { key = "L", action = wezterm.action.SplitPane { direction = "Left", size = { Percent = 33 }, top_level = true } },
+      { key = "u", action = wezterm.action.SplitPane { direction = "Up", size = { Percent = 33 } } },
+      { key = "U", action = wezterm.action.SplitPane { direction = "Up", size = { Percent = 33 }, top_level = true } },
+      { key = "d", action = wezterm.action.SplitPane { direction = "Down", size = { Percent = 33 } } },
+      { key = "D", action = wezterm.action.SplitPane { direction = "Down", size = { Percent = 33 }, top_level = true } },
+    },
+
+    pane_66 = {
+      { key = "r", action = wezterm.action.SplitPane { direction = "Right", size = { Percent = 66 } } },
+      { key = "R", action = wezterm.action.SplitPane { direction = "Right", size = { Percent = 66 }, top_level = true } },
+      { key = "l", action = wezterm.action.SplitPane { direction = "Left", size = { Percent = 66 } } },
+      { key = "L", action = wezterm.action.SplitPane { direction = "Left", size = { Percent = 66 }, top_level = true } },
+      { key = "u", action = wezterm.action.SplitPane { direction = "Up", size = { Percent = 66 } } },
+      { key = "U", action = wezterm.action.SplitPane { direction = "Up", size = { Percent = 66 }, top_level = true } },
+      { key = "d", action = wezterm.action.SplitPane { direction = "Down", size = { Percent = 66 } } },
+      { key = "D", action = wezterm.action.SplitPane { direction = "Down", size = { Percent = 66 }, top_level = true } },
     },
 
     scroll = {
