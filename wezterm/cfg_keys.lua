@@ -218,11 +218,22 @@ function M.apply_to_config(config)
       { key = "6", action = wezterm.action.ActivateKeyTable { name = "pane_66" } },
       { key = "h", action = wezterm.action.ActivateKeyTable { name = "yazi_helix" } },
       { key = "i", action = wezterm.action.ActivateKeyTable { name = "pane_index" } },
+      { key = "s", mods = "CTRL", action = wezterm.action.ActivateKeyTable { name = "pane_select" } },
+      { key = "s", action = wezterm.action.PaneSelect { show_pane_ids = true } },
       { key = "f", action = wezterm.action.TogglePaneZoomState },
       { key = "n", action = wezterm.action.EmitEvent "spawn-new-window" },
       { key = "w", action = wezterm.action.EmitEvent "toggle-floating-pane" },
       { key = "e", action = wezterm.action_callback(C.move_pane_to_new_window) },
       { key = "x", action = wezterm.action.CloseCurrentPane { confirm = false } },
+      { key = "Escape", action = "PopKeyTable" },
+    },
+
+    pane_select = {
+      { key = "t", action = wezterm.action.PaneSelect { mode = "MoveToNewTab", show_pane_ids = true } },
+      { key = "w", action = wezterm.action.PaneSelect { mode = "MoveToNewWindow", show_pane_ids = true } },
+      { key = "a", action = wezterm.action.PaneSelect { mode = "SwapWithActive", show_pane_ids = true } },
+      { key = "f", action = wezterm.action.PaneSelect { mode = "SwapWithActiveKeepFocus", show_pane_ids = true } },
+      { key = "Escape", action = "PopKeyTable" },
     },
 
     pane_index = {
