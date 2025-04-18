@@ -191,6 +191,7 @@ function M.apply_to_config(config)
 
     yazi_helix = {
       { key = "t", action = wezterm.action.EmitEvent "yazi-helix-launch-ide" },
+      { key = "w", action = wezterm.action.EmitEvent "yazi-helix-open-new-window" },
       { key = "r", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane" },
       { key = "R", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane-top-level" },
       { key = "d", action = wezterm.action.EmitEvent "yazi-helix-open-new-bottom-pane" },

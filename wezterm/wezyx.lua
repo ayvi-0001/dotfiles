@@ -1,5 +1,6 @@
 local utils = require "utils"
 local wezterm = require "wezterm"
+local window_space = require "window_space"
 
 --[[ Functions/events for using yazi & helix in wezterm.
 This is a rough implementation, there's still issues with it,
@@ -40,14 +41,14 @@ config.key_tables = {
 }
 --]]
 
-local _yazi_copy_path_hovered_file = function(_, pane)
+local _yazi_copy_path_hovered_file = function(window, pane)
   -- NOTE: expects the default keybindings in yazi for copying
   -- the full path of the hovered file.
   -- TODO: emit data from yazi another way
   pane:send_text "cc"
 end
 
-local _helix_open_file_read_from_system_clipboard = function(pane)
+local _helix_open_file_read_from_system_clipboard = function(window, pane, file)
   local function _find_hx_exec(info)
     if not info then
       return -1
@@ -69,13 +70,17 @@ local _helix_open_file_read_from_system_clipboard = function(pane)
     return
   end
 
-  -- send typable command `open`/`edit`
-  pane:send_text ":o "
-  -- send <C-r> to open registers in typable command
-  pane:send_text "\x12"
-  -- enter system clipboard register and return
-  pane:send_text "+"
-  pane:send_text "\r"
+  if file then
+    pane:send_text(":o " .. file .. "\r")
+  else
+    -- send typable command `open`/`edit` + opening quote surrounding path
+    pane:send_text ":o '"
+    -- send <C-r> to open registers in typable command
+    pane:send_text "\x12"
+    -- enter system clipboard register and return + closing quote for path
+    pane:send_text "+'"
+    pane:send_text "\r"
+  end
 
   return ok
 end
@@ -87,9 +92,11 @@ local yazi_helix_launch_ide = function(window, pane)
   local tab = select(1, pane:move_to_new_tab())
   tab:activate()
 
+  local default_prog = wezterm.gui.gui_windows()[1]:effective_config()["default_prog"]
+
   -- split pane for yazi on left-hand side
   local yazi_pane = pane:split {
-    args = { "bash", "-il" },
+    args = default_prog,
     direction = "Left",
     cwd = cwd,
     size = 0.25,
@@ -118,7 +125,7 @@ local yazi_helix_launch_ide = function(window, pane)
 
   -- split pane below helix for terminal
   local terminal_pane = pane:split {
-    args = { "bash", "-il" },
+    args = default_prog,
     direction = "Bottom",
     cwd = cwd,
     size = 0.3,
@@ -134,13 +141,17 @@ local yazi_helix_launch_ide = function(window, pane)
 end
 
 -- Open the hovered path in yazi into an adjacent helix pane.
-local yazi_helix_open_in_pane = function(window, pane, direction)
+local yazi_helix_open_in_pane = function(window, pane, direction, file)
   local _inner = function(_window, _pane)
     local right_pane = _pane:tab():get_pane_direction(direction)
-    _yazi_copy_path_hovered_file(_window, _pane)
-    local ok = _helix_open_file_read_from_system_clipboard(right_pane)
-    if ok then
-      right_pane:activate()
+    if not file then
+      _yazi_copy_path_hovered_file(_window, _pane)
+      local ok = _helix_open_file_read_from_system_clipboard(window, right_pane)
+      if ok then
+        right_pane:activate()
+      end
+    else
+      _helix_open_file_read_from_system_clipboard(window, right_pane, file)
     end
   end
   return _inner(window, pane)
@@ -157,15 +168,26 @@ local yazi_helix_open_new_pane = function(window, pane, direction, top_level)
       size = 0.5,
       top_level = top_level or false,
     }
-    _helix_open_file_read_from_system_clipboard(new_pane)
+    _helix_open_file_read_from_system_clipboard(window, new_pane)
   end
   return _inner(window, pane)
+end
+
+-- Open the hovered path in yazi into a new helix window.
+local yazi_helix_open_new_window = function(window, pane)
+  _yazi_copy_path_hovered_file(window, pane)
+  local _, new_pane, new_window = window_space.spawn_window_and_set_dimensions(0.5, "local", { "hx" })
+  _helix_open_file_read_from_system_clipboard(new_window, new_pane)
 end
 
 -- set callbacks for yazi/helix events.
 
 wezterm.on("yazi-helix-launch-ide", function(window, pane)
   yazi_helix_launch_ide(window, pane)
+end)
+
+wezterm.on("yazi-helix-open-new-window", function(window, pane)
+  yazi_helix_open_new_window(window, pane)
 end)
 
 -- callbacks to open in new panes
