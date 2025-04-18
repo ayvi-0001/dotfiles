@@ -215,11 +215,15 @@ function M.apply_to_config(config)
       { key = "u", action = wezterm.action.SplitPane { direction = "Up" } },
       { key = "U", action = wezterm.action.SplitPane { direction = "Up", top_level = true } },
       { key = "h", action = wezterm.action.ActivateKeyTable { name = "yazi_helix" } },
+      { key = "i", action = wezterm.action.ActivateKeyTable { name = "pane_index" } },
       { key = "f", action = wezterm.action.TogglePaneZoomState },
       { key = "n", action = wezterm.action.EmitEvent "spawn-new-window" },
       { key = "w", action = wezterm.action.EmitEvent "toggle-floating-pane" },
       { key = "e", action = wezterm.action_callback(C.move_pane_to_new_window) },
       { key = "x", action = wezterm.action.CloseCurrentPane { confirm = false } },
+    },
+
+    pane_index = {
       { key = "1", action = wezterm.action.ActivatePaneByIndex(0) },
       { key = "2", action = wezterm.action.ActivatePaneByIndex(1) },
       { key = "3", action = wezterm.action.ActivatePaneByIndex(2) },
@@ -243,6 +247,7 @@ function M.apply_to_config(config)
       { key = "s", mods = "CTRL", action = wezterm.action.PopKeyTable },
       { key = "Escape", action = "PopKeyTable" },
     },
+
     disable_wezterm_key_tables = {
       { key = "n", mods = "CTRL", action = wezterm.action.SendKey { key = "n", mods = "CTRL" } },
       { key = "p", mods = "CTRL", action = wezterm.action.SendKey { key = "p", mods = "CTRL" } },
