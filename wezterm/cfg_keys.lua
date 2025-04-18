@@ -200,6 +200,7 @@ function M.apply_to_config(config)
       { key = "j", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-below" },
       { key = "k", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-above" },
       { key = "l", action = wezterm.action.EmitEvent "yazi-helix-open-in-right-pane" },
+      { key = "S", action = wezterm.action.EmitEvent "trigger-hx-with-scrollback" },
       { key = "Escape", action = "PopKeyTable" },
     },
 

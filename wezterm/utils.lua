@@ -10,4 +10,21 @@ function M.basename(s)
   return name
 end
 
+function M.write(filename, text)
+  if not filename then
+    filename = os.tmpname()
+  end
+
+  local f = io.open(filename, "w+")
+  if not f then
+    error("failed to write file: " .. filename)
+  end
+
+  f:write(text or "")
+  f:flush()
+  f:close()
+
+  return filename
+end
+
 return M

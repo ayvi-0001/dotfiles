@@ -190,6 +190,12 @@ wezterm.on("yazi-helix-open-new-window", function(window, pane)
   yazi_helix_open_new_window(window, pane)
 end)
 
+wezterm.on("trigger-hx-with-scrollback", function(window, pane)
+  local text = pane:get_lines_as_text(pane:get_dimensions().scrollback_rows)
+  local filename = utils.write(nil, text)
+  window_space.spawn_window_and_set_dimensions(0.5, "local", { "hx", filename })
+end)
+
 -- callbacks to open in new panes
 
 wezterm.on("yazi-helix-open-new-right-pane", function(window, pane)
