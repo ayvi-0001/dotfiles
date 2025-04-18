@@ -11,7 +11,11 @@ UI_PANEL_SHADOW = BLACK
 UI_FG = "#f0f0ff"
 
 function M.apply_to_config(config)
-  config.font = wezterm.font { family = "SpaceMono Nerd Font", weight = "Medium" }
+  config.font = wezterm.font {
+    family = "SpaceMono Nerd Font",
+    weight = "Medium",
+    harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+  }
   config.font_size = 9.0
 
   config.color_scheme_dirs = { wezterm.config_dir .. "/colors" }
