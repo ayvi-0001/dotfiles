@@ -13,7 +13,7 @@ function gpg-kill-agent() { gpgconf --kill gpg-agent; }
 
 function yy() {
   # shellcheck disable=SC2155
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX" -p"$HOME/.cache/yazi")" cwd
+  local tmp="$(mktemp -p ~/.cache/yazi -- yazi-cwd.XXXXXX)" cwd
   yazi "$@" --cwd-file="$tmp"
   if cwd="$(command cat -- "$tmp")" && [[ -n "$cwd" ]] && [[ "$cwd" != "$PWD" ]]; then
     builtin cd -- "$cwd" || exit 1
