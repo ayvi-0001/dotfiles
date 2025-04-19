@@ -1,3 +1,4 @@
+local wezterm = require "wezterm"
 local M = {}
 
 function M.apply_to_config(config)
@@ -5,15 +6,13 @@ function M.apply_to_config(config)
   config.max_fps = 60
   config.prefer_egl = true
   config.webgpu_power_preference = "HighPerformance"
-  config.webgpu_preferred_adapter = {
-    backend = "Vulkan",
-    device = 10115,
-    device_type = "DiscreteGpu",
-    driver = "NVIDIA",
-    driver_info = "566.36",
-    name = "NVIDIA GeForce RTX 4070 SUPER",
-    vendor = 4318,
-  }
+
+  for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
+    if gpu.backend == "Dx12" and gpu.device_type == "DiscreteGpu" then
+      config.webgpu_preferred_adapter = gpu
+      break
+    end
+  end
 end
 
 return M
