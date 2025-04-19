@@ -191,6 +191,11 @@ name             = "css"
 language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
 
 [[grammar]]
+name       = "rust"
+source.git = "https://github.com/tree-sitter/tree-sitter-rust"
+source.rev = "3691201b01cacb2f96ffca4c632c4e938bfacd88"
+
+[[grammar]]
 name       = "xit"
 source.git = "https://github.com/synaptiko/tree-sitter-xit"
 source.rev = "a4fad351bfa5efdcb379b40c36671413fbe9caac"
