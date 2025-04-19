@@ -220,7 +220,7 @@ source.rev = "90ae195b31933ceb9d079abfa8a3ad0a36fee4cc"
 [[grammar]]
 name       = "sql"
 source.git = "https://github.com/DerekStride/tree-sitter-sql"
-source.rev = "9853b887c5e4309de273922b681cc7bc09e30c78"
+source.rev = "b0bf4ffab7bec3a97bab31833e50b5671206d40c"
 
 [[grammar]]
 name       = "lua"
