@@ -153,7 +153,7 @@ function M.apply_to_config(config)
     },
 
     tab = {
-      { key = "n", action = wezterm.action.SpawnTab "CurrentPaneDomain" },
+      { key = "n", action = wezterm.action_callback(C.spawn_default_prog_in_new_tab) },
       { key = "x", action = wezterm.action.CloseCurrentTab { confirm = false } },
       { key = "h", action = wezterm.action.ActivateTabRelative(-1) },
       { key = "l", action = wezterm.action.ActivateTabRelative(1) },

@@ -68,4 +68,13 @@ function M.move_focus_or_tab_down(window, pane)
   M._move_focus_or_tab(window, pane, "Down")
 end
 
+function M.spawn_default_prog_in_new_tab(window, pane)
+  window:perform_action(
+    wezterm.action.SpawnCommandInNewTab {
+      args = window:effective_config()["default_prog"],
+    },
+    pane
+  )
+end
+
 return M
