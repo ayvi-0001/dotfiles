@@ -56,7 +56,7 @@ function M.apply_to_config(config)
       action = wezterm.action.ActivateKeyTable {
         name = "tab",
         one_shot = false,
-        timeout_milliseconds = 3000,
+        timeout_milliseconds = 1000,
         until_unknown = true,
         replace_current = true,
       },
