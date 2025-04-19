@@ -179,6 +179,7 @@ function M.apply_to_config(config)
       { key = "s", action = wezterm.action.Show },
       { key = "l", action = wezterm.action.ShowLauncher },
       { key = "q", action = wezterm.action.QuitApplication },
+      { key = "w", action = wezterm.action_callback(C.launch_workspace) },
       { key = "1", action = wezterm.action.ActivateWindow(0) },
       { key = "2", action = wezterm.action.ActivateWindow(1) },
       { key = "3", action = wezterm.action.ActivateWindow(2) },

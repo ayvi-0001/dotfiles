@@ -77,4 +77,46 @@ function M.spawn_default_prog_in_new_tab(window, pane)
   )
 end
 
+function M.launch_workspace(window, pane)
+  local home = wezterm.home_dir
+
+  local workspaces = {}
+  local workspace_names = wezterm.mux.get_workspace_names()
+  for i in pairs(workspace_names) do
+    table.insert(workspaces, i, { id = home, label = workspace_names[i] })
+  end
+
+  window:perform_action(
+    wezterm.action.InputSelector {
+      action = wezterm.action_callback(function(inner_window, inner_pane, id, label)
+        if not id and not label then
+          wezterm.log_info "cancelled"
+        else
+          wezterm.log_info("id = " .. id)
+          wezterm.log_info("label = " .. label)
+          inner_window:perform_action(
+            wezterm.action.SwitchToWorkspace {
+              name = label,
+              spawn = {
+                label = "Workspace: " .. label,
+                cwd = id,
+              },
+            },
+            inner_pane
+          )
+        end
+      end),
+      title = "Choose Workspace",
+      choices = workspaces,
+      fuzzy = true,
+      fuzzy_description = wezterm.format {
+        { Attribute = { Intensity = "Bold" } },
+        { Foreground = { AnsiColor = "Fuchsia" } },
+        { Text = "Fuzzy find and/or make a workspace: " },
+      },
+    },
+    pane
+  )
+end
+
 return M
