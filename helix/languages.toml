@@ -87,6 +87,11 @@ args    = ["serve"]
 command = "tailwindcss-language-server"
 args    = ["--stdio"]
 
+[language-server.typescript-language-server]
+command         = "typescript-language-server"
+args            = ["--stdio"]
+config.hostInfo = "helix"
+
 [[language]]
 name              = "python"
 auto-format       = true
@@ -186,11 +191,38 @@ formatter.command = "yamlfmt"
 formatter.args    = ["-"]
 
 [[language]]
+name              = "javascript"
+auto-format       = true
+formatter.command = "prettier"
+formatter.args    = ["--parser=typescript"]
+
+[[language]]
+name              = "typescript"
+auto-format       = true
+formatter.command = "prettier"
+formatter.args    = ["--parser=typescript"]
+
+[[language]]
+name              = "jsx"
+auto-format       = true
+formatter.command = "prettier"
+formatter.args    = ["--parser=typescript"]
+language-servers  = ["typescript-language-server", "tailwindcss-ls"]
+
+[[language]]
+name              = "tsx"
+auto-format       = true
+formatter.command = "prettier"
+formatter.args    = ["--parser=typescript"]
+language-servers  = ["typescript-language-server", "tailwindcss-ls"]
+
+[[language]]
 name             = "html"
 language-servers = ["vscode-html-language-server", "tailwindcss-ls"]
 
 [[language]]
 name             = "css"
+file-types       = ["css", "scss", "tcss"]
 language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
 
 [[grammar]]
