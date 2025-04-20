@@ -92,6 +92,7 @@ args    = ["serve"]
 [language-server.tailwindcss-ls]
 command = "tailwindcss-language-server"
 args    = ["--stdio"]
+config  = { userLanguages = { rust = "html", "*.rs" = "html" } }
 
 [language-server.typescript-language-server]
 command         = "typescript-language-server"
@@ -111,7 +112,7 @@ formatter.args    = ["format", "-"]
 name                          = "rust"
 shebangs                      = ["rust-script", "cargo"]
 auto-format                   = true
-language-servers              = ["rust-analyzer"]
+language-servers              = ["rust-analyzer", "tailwindcss-ls"]
 indent                        = { tab-width = 4, unit = "    " }
 persistent-diagnostic-sources = ["rustc", "clippy"]
 formatter.command             = "rustfmt"
