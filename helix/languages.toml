@@ -12,6 +12,9 @@ command = "rust-analyzer"
 [language-server.rust-analyzer.config.check]
 command = "clippy"
 
+[language-server.rust-analyzer.config.cargo]
+features = "all"
+
 [language-server.pylyzer]
 command = "pylyzer"
 args    = ["--server"]
