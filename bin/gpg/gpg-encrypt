@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+gpg --no-symkey-cache --symmetric --cipher-algo AES256 "$1"
+# decrypt w/ gpg --decrypt "$1"
