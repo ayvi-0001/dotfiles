@@ -96,6 +96,7 @@ C-y = [ # open yazi
 
 q       = ":q"
 Q       = ":bc"
+C-S-q   = ":bc!"
 C-q     = ":q!"
 ret     = ["open_below", "normal_mode"]
 f       = ["find_next_char", "normal_mode"]
