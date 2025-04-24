@@ -87,7 +87,7 @@ ignore      = false
 [keys.normal]
 C-y = [ # open yazi
   ':sh rm -f /tmp/unique-file',
-  ':insert-output yazi --chooser-file=/tmp/unique-file',
+  ':insert-output YAZI_CONFIG_HOME=$HOME/.config/yazi yazi --chooser-file=/tmp/unique-file',
   ':open %sh{cat /tmp/unique-file}',
   ':redraw',
   ':set mouse false',
