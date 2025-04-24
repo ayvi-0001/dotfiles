@@ -118,15 +118,17 @@ C-S-s = "save_selection"
 g.D = "@gd wv"
 
 # toggle opts
-space.t.c = ":toggle inline-diagnostics.cursor-line warning disable"
-space.t.e = ":toggle end-of-line-diagnostics hint disable"
-space.t.f = ":toggle auto-format"
-space.t.i = ":toggle lsp.display-inlay-hints"
-space.t.o = ":toggle inline-diagnostics.other-lines warning disable"
-space.t.s = ":toggle lsp.auto-signature-help"
-space.t.C = ":toggle search.smart-case"
-space.t.x = ":toggle whitespace.render all none"
-space.t.w = ":toggle soft-wrap.enable"
+space.t.C   = ":toggle search.smart-case"
+space.t.a.d = ":toggle auto-save.after-delay.enable"
+space.t.a.f = ":toggle auto-save.focus-lost"
+space.t.c   = ":toggle inline-diagnostics.cursor-line warning disable"
+space.t.e   = ":toggle end-of-line-diagnostics hint disable"
+space.t.f   = ":toggle auto-format"
+space.t.i   = ":toggle lsp.display-inlay-hints"
+space.t.o   = ":toggle inline-diagnostics.other-lines warning disable"
+space.t.s   = ":toggle lsp.auto-signature-help"
+space.t.w   = ":toggle soft-wrap.enable"
+space.t.x   = ":toggle whitespace.render all none"
 
 # ccase
 space.c.T   = "@|ccase --to train<ret>"          # Train-Case
