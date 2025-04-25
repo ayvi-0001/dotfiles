@@ -122,6 +122,7 @@ name              = "xit"
 auto-format       = true
 indent            = { tab-width = 4, unit = "    " }
 formatter.command = "bash"
+language-servers  = ["codebook"]
 formatter.args    = ["-c", "xit-sort -"]             # custom script in ~/bin/
 
 [[language]]
@@ -139,6 +140,12 @@ auto-format       = true
 formatter.command = "prettier"
 formatter.args    = ["--parser=markdown"]
 language-servers  = ["codebook"]
+
+[[language]]
+name             = "text"
+scope            = "source.text"
+file-types       = ["txt"]
+language-servers = ["codebook"]
 
 # Following language is to provide auto-formatting for mermaid gantt charts.
 # File types is intentionally left blank, so files with  `.mermaid` or `.mmd`
