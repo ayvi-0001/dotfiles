@@ -16,14 +16,6 @@ prepend_keymap = [
   #  end: path-from-root.yazi
   # end: copy
 
-  # start: goto
-  { on = ["g", "C"], run = "cd ~/.cache", desc = "Goto ~/.cache" },
-  { on = ["g", "e"], run = "arrow bot", desc = "Move cursor to the bottom" },
-  { on = ["g", "a"], run = "cd a:/", desc = "Goto /a/" },
-  #  start: git-cd-root-dir
-  { on = ["g", "r"], run = "plugin git-cd-root-dir", desc = "Goto git root directory" },
-  #  end: git-cd-root-dir
-  # end: goto
 
   # start: relative-motions.yazi
   { on = ["m"], run = "plugin relative-motions", desc = "Trigger a new relative motion" },
@@ -99,4 +91,41 @@ prepend_keymap = [
   { on = ["<C-e>"], run = "seek 5" },
   { on = ["<C-y>"], run = "seek -5" },
   # end: glow.yazi
+
+  # start: goto
+  { on = ["g", "C"], run = "cd ~/.cache", desc = "Goto ~/.cache" },
+  { on = ["g", "e"], run = "arrow bot", desc = "Move cursor to the bottom" },
+  { on = ["g", "D"], run = "cd ~/Downloads", desc = "Goto Downloads" },
+  #  start: git-cd-root-dir.yazi
+  { on = ["g", "r"], run = "plugin git-cd-root-dir", desc = "Goto git root directory" },
+  #  end: git-cd-root-dir.yazi
+  #  start: goto-drives
+  { on = ["g", "d", "a"], run = "cd a:", desc = "Goto /a/" },
+  { on = ["g", "d", "b"], run = "cd b:", desc = "Goto /b/" },
+  { on = ["g", "d", "c"], run = "cd c:", desc = "Goto /c/" },
+  { on = ["g", "d", "d"], run = "cd d:", desc = "Goto /d/" },
+  { on = ["g", "d", "e"], run = "cd e:", desc = "Goto /e/" },
+  { on = ["g", "d", "f"], run = "cd f:", desc = "Goto /f/" },
+  { on = ["g", "d", "g"], run = "cd g:", desc = "Goto /g/" },
+  { on = ["g", "d", "h"], run = "cd h:", desc = "Goto /h/" },
+  { on = ["g", "d", "i"], run = "cd i:", desc = "Goto /i/" },
+  { on = ["g", "d", "j"], run = "cd j:", desc = "Goto /j/" },
+  { on = ["g", "d", "k"], run = "cd k:", desc = "Goto /k/" },
+  { on = ["g", "d", "l"], run = "cd l:", desc = "Goto /l/" },
+  { on = ["g", "d", "m"], run = "cd m:", desc = "Goto /m/" },
+  { on = ["g", "d", "n"], run = "cd n:", desc = "Goto /n/" },
+  { on = ["g", "d", "o"], run = "cd o:", desc = "Goto /o/" },
+  { on = ["g", "d", "p"], run = "cd p:", desc = "Goto /p/" },
+  { on = ["g", "d", "q"], run = "cd q:", desc = "Goto /q/" },
+  { on = ["g", "d", "r"], run = "cd r:", desc = "Goto /r/" },
+  { on = ["g", "d", "s"], run = "cd s:", desc = "Goto /s/" },
+  { on = ["g", "d", "t"], run = "cd t:", desc = "Goto /t/" },
+  { on = ["g", "d", "u"], run = "cd u:", desc = "Goto /u/" },
+  { on = ["g", "d", "v"], run = "cd v:", desc = "Goto /v/" },
+  { on = ["g", "d", "w"], run = "cd w:", desc = "Goto /w/" },
+  { on = ["g", "d", "x"], run = "cd x:", desc = "Goto /x/" },
+  { on = ["g", "d", "y"], run = "cd y:", desc = "Goto /y/" },
+  { on = ["g", "d", "z"], run = "cd z:", desc = "Goto /z/" },
+  #  end: goto-drives
+  # end: goto
 ]
