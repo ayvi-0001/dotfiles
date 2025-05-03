@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
+
 scrcpy \
+  --select-usb \
   --keyboard=uhid \
+  --stay-awake \
   --max-fps=60 \
   --max-size=1920 \
   --no-audio \
   --shortcut-mod=lsuper \
   --video-codec=h265 \
-  -K "$@"
+  "$@"
