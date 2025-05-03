@@ -8,7 +8,7 @@ alias lt='ls --tree'
 alias gcat='gcloud storage cat'
 alias gcp='gcloud storage cp'
 alias gdu='gcloud storage du'
-alias gls='gcloud storage ls'
+alias gls='gcloud storage ls --readable-sizes'
 alias gmv='gcloud storage mv'
 alias grm='gcloud storage rm'
 
@@ -30,4 +30,3 @@ alias rmv='rclone move'
 alias rmvt='rclone moveto'
 alias rrm='rclone delete'
 alias rrmdir='rclone rmdir'
-
