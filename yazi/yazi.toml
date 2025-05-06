@@ -70,6 +70,7 @@ prepend_rules = [
   { mime = "application/sqlite3", use = ["database"] }, # Database opener using harlequin.
   { name = "*.url", use = ["browser", "edit"] }, # Browser opener.
   { name = "*.html", use = ["edit", "browser"] },
+  { mime = "image/svg+xml", use = ["browser", "edit"] },
   { mime = "image/*", use = ["play", "open", "reveal"] },
 ]
 append_rules = [{ name = "*", use = ["open", "reveal", "edit"] }]
