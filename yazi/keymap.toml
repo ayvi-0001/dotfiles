@@ -18,7 +18,7 @@ prepend_keymap = [
 
 
   # start: relative-motions.yazi
-  { on = ["m"], run = "plugin relative-motions", desc = "Trigger a new relative motion" },
+  { on = ["M"], run = "plugin relative-motions", desc = "Trigger a new relative motion" },
   # end: relative-motions.yazi
 
   # start: compress.yazi
