@@ -59,7 +59,8 @@ database = [
   { run = '''bash -c "harlequin '%*'"''', block = true, desc = "harlequin", for = "windows" },
 ]
 browser = [
-  { run = '''bash -c "cat '%*' | grep URL= | cut -d= -f2- | xargs $BROWSER"''', orphan = true, desc = "browser", for = "windows" },
+  { run = '''bash -c "$BROWSER '%*'"''', orphan = true, desc = "browser", for = "windows" },
+  { run = '''bash -c "cat '%*' | grep URL= | cut -d= -f2- | xargs $BROWSER"''', orphan = true, desc = "browser-shortcut", for = "windows" },
 ]
 
 [open]
