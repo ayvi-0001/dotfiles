@@ -107,6 +107,10 @@ H       = ["goto_previous_buffer"]
 L       = ["goto_next_buffer"]
 space.J = [":clipboard-yank-join"]
 
+space.l.c = ":lsp-workspace-command"
+space.l.r = ":lsp-restart"
+space.l.s = ":lsp-stop"
+
 C-o   = "no_op"
 C-i   = "no_op"
 C-s   = "no_op"
