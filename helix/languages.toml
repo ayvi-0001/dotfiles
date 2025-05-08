@@ -129,8 +129,9 @@ formatter.args    = ["-c", "xit-sort -"]             # custom script in ~/bin/
 name              = "csv"
 file-types        = ["csv"]
 scope             = "source.csv"
+auto-format       = false
 formatter.command = "bash"
-formatter.args    = ["-c", "column -t -s, -o, <&0"]
+formatter.args    = ["-c", "align-csv-columns<&0"] # custom script in ~/bin/
 
 [[language]]
 name              = "markdown"
