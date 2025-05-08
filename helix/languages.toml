@@ -140,7 +140,7 @@ text-width        = 200
 auto-format       = true
 formatter.command = "prettier"
 formatter.args    = ["--parser=markdown"]
-language-servers  = ["codebook"]
+language-servers  = ["marksman", "codebook"]
 
 [[language]]
 name             = "text"
