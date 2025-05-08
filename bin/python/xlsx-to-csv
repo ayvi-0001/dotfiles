@@ -1,13 +1,24 @@
-#!/usr/bin/env python
+#!/usr/bin/env -S uv run -s
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "pandas",
+#   "openpyxl",
+# ]
+# ///
 
 import sys
 from pathlib import Path
 
 from pandas import DataFrame, read_excel
 
-fp: Path = Path(f"{sys.argv[1]}")
-new_file_name: str = "%s.csv" % (
-    "".join(c.lower() if c.isalnum() else "_" for c in fp.stem)
+fp: Path = Path(sys.argv[1])
+# fmt: off
+nfp: Path = (
+    fp
+    .with_name("".join(c.lower() if c.isalnum() else "_" for c in fp.stem))
+    .with_suffix(".csv")
 )
-df: DataFrame = read_excel(io=fp.as_posix())
-df.to_csv(new_file_name, index=False)
+# fmt: on
+df: DataFrame = read_excel(io=fp)
+df.to_csv(path_or_buf=nfp, index=False)
