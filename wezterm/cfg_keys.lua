@@ -132,23 +132,23 @@ function M.apply_to_config(config)
 
     move = {
       {
-        key = "h",
+        key = "H",
         action = wezterm.action.Multiple {
           wezterm.action.RotatePanes "CounterClockwise",
           wezterm.action.ActivatePaneDirection "Prev",
         },
       },
       {
-        key = "l",
+        key = "L",
         action = wezterm.action.Multiple {
           wezterm.action.RotatePanes "Clockwise",
           wezterm.action.ActivatePaneDirection "Next",
         },
       },
-      { key = "H", action = wezterm.action.EmitEvent "move-window-left" },
-      { key = "L", action = wezterm.action.EmitEvent "move-window-right" },
-      { key = "K", action = wezterm.action.EmitEvent "move-window-up" },
-      { key = "J", action = wezterm.action.EmitEvent "move-window-down" },
+      { key = "h", action = wezterm.action.EmitEvent "move-window-left" },
+      { key = "l", action = wezterm.action.EmitEvent "move-window-right" },
+      { key = "k", action = wezterm.action.EmitEvent "move-window-up" },
+      { key = "j", action = wezterm.action.EmitEvent "move-window-down" },
       { key = "Escape", action = "PopKeyTable" },
     },
 
