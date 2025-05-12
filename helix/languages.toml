@@ -116,6 +116,7 @@ language-servers              = ["rust-analyzer", "tailwindcss-ls"]
 indent                        = { tab-width = 4, unit = "    " }
 persistent-diagnostic-sources = ["rustc", "clippy"]
 formatter.command             = "rustfmt"
+formatter.args                = ["+nightly"]
 
 [[language]]
 name              = "xit"
