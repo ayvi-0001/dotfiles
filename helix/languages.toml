@@ -162,8 +162,8 @@ injection-regex   = "mermaid"
 file-types        = []
 auto-format       = true
 comment-token     = "%%"
-formatter.command = "fmt-mmd-gantt"
-formatter.args    = ["-i-"]
+formatter.command = "mmdc-fmt"
+formatter.args    = ["-t", "gantt", "-i", "-"]
 grammar           = "mermaid"
 
 [[language]]
