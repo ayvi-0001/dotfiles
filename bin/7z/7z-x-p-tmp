@@ -18,14 +18,15 @@ tmp_archive="$tmp_dir/$archive_name"
 
 function _cleanup {
   if command -v bleachbit_console >/dev/null; then
-    cd "$(dirname "$tmp_dir")"
+    cd "$(dirname "$tmp_dir")" || exit
     bleachbit_console --shred "$(basename "$tmp_dir")"
   else
+    cd "$(dirname "$tmp_dir")" || exit
     rm -fr "$tmp_dir"
   fi
 }
 
-trap _cleanup EXIT SIGINT
+trap _cleanup EXIT
 
 command -v gum >/dev/null && _has_gum=true || _has_gum=false
 
