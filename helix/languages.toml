@@ -178,7 +178,7 @@ formatter.args    = ["format", "-"]
 [[language]]
 name              = "toml"
 indent            = { tab-width = 2, unit = "  " }
-auto-format       = true
+auto-format       = false                          # taplo fmt with stdin won't respect file specfic rules in .taplo.toml
 formatter.command = "taplo"
 formatter.args    = ["format", "-"]
 language-servers  = ["taplo"]
