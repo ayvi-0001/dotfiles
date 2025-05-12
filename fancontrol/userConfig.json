@@ -1,5 +1,5 @@
 {
-  "__VERSION__": "217",
+  "__VERSION__": "224",
   "Main": {
     "Controls": [
       {
@@ -19,16 +19,16 @@
           "Name": "Fan 1 - NVIDIA GeForce RTX 4070 SUPER",
           "NickName": "Fan 1 - NVIDIA GeForce RTX 4070 SUPER"
         },
-        "SelectedCommandStepDown": 8.0,
-        "SelectedCommandStepUp": 8.0,
+        "SelectedCommandStepDown": 8,
+        "SelectedCommandStepUp": 8,
         "SelectedFanCurve": {
           "CommandMode": 0,
-          "Deadband": 3.0,
-          "IdleTemperature": 45.0,
+          "Deadband": 3,
+          "IdleTemperature": 45,
           "IsHidden": false,
-          "LoadTemperature": 73.0,
-          "MaxFanSpeed": 95.0,
-          "MinFanSpeed": 40.0,
+          "LoadTemperature": 73,
+          "MaxFanSpeed": 95,
+          "MinFanSpeed": 40,
           "Name": "auto-gpu",
           "SelectedResponseTime": 2,
           "SelectedTempSource": {
@@ -37,7 +37,7 @@
             "Name": "GPU",
             "NickName": "GPU"
           },
-          "Step": 2.0
+          "Step": 2
         },
         "SelectedOffset": 0,
         "SelectedStart": 0,
@@ -60,16 +60,16 @@
           "Name": "Fan 2 - NVIDIA GeForce RTX 4070 SUPER",
           "NickName": "Fan 2 - NVIDIA GeForce RTX 4070 SUPER"
         },
-        "SelectedCommandStepDown": 8.0,
-        "SelectedCommandStepUp": 8.0,
+        "SelectedCommandStepDown": 8,
+        "SelectedCommandStepUp": 8,
         "SelectedFanCurve": {
           "CommandMode": 0,
-          "Deadband": 3.0,
-          "IdleTemperature": 45.0,
+          "Deadband": 3,
+          "IdleTemperature": 45,
           "IsHidden": false,
-          "LoadTemperature": 73.0,
-          "MaxFanSpeed": 95.0,
-          "MinFanSpeed": 40.0,
+          "LoadTemperature": 73,
+          "MaxFanSpeed": 95,
+          "MinFanSpeed": 40,
           "Name": "auto-gpu",
           "SelectedResponseTime": 2,
           "SelectedTempSource": {
@@ -78,7 +78,7 @@
             "Name": "GPU",
             "NickName": "GPU"
           },
-          "Step": 2.0
+          "Step": 2
         },
         "SelectedOffset": 0,
         "SelectedStart": 0,
@@ -142,16 +142,16 @@
           "Name": "CPU Fan",
           "NickName": "cooler"
         },
-        "SelectedCommandStepDown": 8.0,
-        "SelectedCommandStepUp": 8.0,
+        "SelectedCommandStepDown": 8,
+        "SelectedCommandStepUp": 8,
         "SelectedFanCurve": {
           "CommandMode": 0,
-          "Deadband": 3.0,
-          "IdleTemperature": 40.0,
+          "Deadband": 3,
+          "IdleTemperature": 40,
           "IsHidden": false,
-          "LoadTemperature": 70.0,
-          "MaxFanSpeed": 95.0,
-          "MinFanSpeed": 50.0,
+          "LoadTemperature": 70,
+          "MaxFanSpeed": 95,
+          "MinFanSpeed": 50,
           "Name": "auto-cpu",
           "SelectedResponseTime": 2,
           "SelectedTempSource": {
@@ -160,7 +160,7 @@
             "Name": "Core (Tctl/Tdie)",
             "NickName": "Core (Tctl/Tdie)"
           },
-          "Step": 5.0
+          "Step": 5
         },
         "SelectedOffset": 0,
         "SelectedStart": 0,
@@ -224,16 +224,16 @@
           "Name": "Chassis Fan #2",
           "NickName": "top"
         },
-        "SelectedCommandStepDown": 8.0,
-        "SelectedCommandStepUp": 8.0,
+        "SelectedCommandStepDown": 8,
+        "SelectedCommandStepUp": 8,
         "SelectedFanCurve": {
           "CommandMode": 0,
-          "Deadband": 3.0,
-          "IdleTemperature": 40.0,
+          "Deadband": 3,
+          "IdleTemperature": 40,
           "IsHidden": false,
-          "LoadTemperature": 70.0,
-          "MaxFanSpeed": 95.0,
-          "MinFanSpeed": 50.0,
+          "LoadTemperature": 70,
+          "MaxFanSpeed": 95,
+          "MinFanSpeed": 50,
           "Name": "auto-cpu",
           "SelectedResponseTime": 2,
           "SelectedTempSource": {
@@ -242,7 +242,7 @@
             "Name": "Core (Tctl/Tdie)",
             "NickName": "Core (Tctl/Tdie)"
           },
-          "Step": 5.0
+          "Step": 5
         },
         "SelectedOffset": 0,
         "SelectedStart": 28,
@@ -306,8 +306,8 @@
           "Name": "Chassis Fan #3",
           "NickName": "back"
         },
-        "SelectedCommandStepDown": 8.0,
-        "SelectedCommandStepUp": 8.0,
+        "SelectedCommandStepDown": 8,
+        "SelectedCommandStepUp": 8,
         "SelectedFanCurve": {
           "CommandMode": 0,
           "IsHidden": false,
@@ -371,16 +371,16 @@
               "Name": "Chassis Fan #2",
               "NickName": "top"
             },
-            "SelectedCommandStepDown": 8.0,
-            "SelectedCommandStepUp": 8.0,
+            "SelectedCommandStepDown": 8,
+            "SelectedCommandStepUp": 8,
             "SelectedFanCurve": {
               "CommandMode": 0,
-              "Deadband": 3.0,
-              "IdleTemperature": 40.0,
+              "Deadband": 3,
+              "IdleTemperature": 40,
               "IsHidden": false,
-              "LoadTemperature": 70.0,
-              "MaxFanSpeed": 95.0,
-              "MinFanSpeed": 50.0,
+              "LoadTemperature": 70,
+              "MaxFanSpeed": 95,
+              "MinFanSpeed": 50,
               "Name": "auto-cpu",
               "SelectedResponseTime": 2,
               "SelectedTempSource": {
@@ -389,7 +389,7 @@
                 "Name": "Core (Tctl/Tdie)",
                 "NickName": "Core (Tctl/Tdie)"
               },
-              "Step": 5.0
+              "Step": 5
             },
             "SelectedOffset": 0,
             "SelectedStart": 28,
@@ -463,16 +463,16 @@
           "Name": "Chipset Fan",
           "NickName": "moba"
         },
-        "SelectedCommandStepDown": 8.0,
-        "SelectedCommandStepUp": 8.0,
+        "SelectedCommandStepDown": 8,
+        "SelectedCommandStepUp": 8,
         "SelectedFanCurve": {
           "CommandMode": 0,
-          "Deadband": 3.0,
-          "IdleTemperature": 40.0,
+          "Deadband": 3,
+          "IdleTemperature": 40,
           "IsHidden": false,
-          "LoadTemperature": 70.0,
-          "MaxFanSpeed": 95.0,
-          "MinFanSpeed": 50.0,
+          "LoadTemperature": 70,
+          "MaxFanSpeed": 95,
+          "MinFanSpeed": 50,
           "Name": "auto-cpu",
           "SelectedResponseTime": 2,
           "SelectedTempSource": {
@@ -481,7 +481,7 @@
             "Name": "Core (Tctl/Tdie)",
             "NickName": "Core (Tctl/Tdie)"
           },
-          "Step": 5.0
+          "Step": 5
         },
         "SelectedOffset": 0,
         "SelectedStart": 27,
@@ -499,8 +499,8 @@
         "Name": "AIO Pump",
         "NickName": "none",
         "PairedFanSensor": null,
-        "SelectedCommandStepDown": 8.0,
-        "SelectedCommandStepUp": 8.0,
+        "SelectedCommandStepDown": 8,
+        "SelectedCommandStepUp": 8,
         "SelectedFanCurve": null,
         "SelectedOffset": 0,
         "SelectedStart": 0,
@@ -518,8 +518,8 @@
         "Name": "Chassis Fan #1",
         "NickName": "none",
         "PairedFanSensor": null,
-        "SelectedCommandStepDown": 8.0,
-        "SelectedCommandStepUp": 8.0,
+        "SelectedCommandStepDown": 8,
+        "SelectedCommandStepUp": 8,
         "SelectedFanCurve": null,
         "SelectedOffset": 0,
         "SelectedStart": 0,
@@ -537,8 +537,8 @@
         "Name": "CPU Optional Fan",
         "NickName": "none",
         "PairedFanSensor": null,
-        "SelectedCommandStepDown": 8.0,
-        "SelectedCommandStepUp": 8.0,
+        "SelectedCommandStepDown": 8,
+        "SelectedCommandStepUp": 8,
         "SelectedFanCurve": null,
         "SelectedOffset": 0,
         "SelectedStart": 0,
@@ -571,12 +571,12 @@
     "FanCurves": [
       {
         "CommandMode": 0,
-        "Deadband": 3.0,
-        "IdleTemperature": 45.0,
+        "Deadband": 3,
+        "IdleTemperature": 45,
         "IsHidden": false,
-        "LoadTemperature": 73.0,
-        "MaxFanSpeed": 95.0,
-        "MinFanSpeed": 40.0,
+        "LoadTemperature": 73,
+        "MaxFanSpeed": 95,
+        "MinFanSpeed": 40,
         "Name": "auto-gpu",
         "SelectedResponseTime": 2,
         "SelectedTempSource": {
@@ -585,16 +585,16 @@
           "Name": "GPU",
           "NickName": "GPU"
         },
-        "Step": 2.0
+        "Step": 2
       },
       {
         "CommandMode": 0,
-        "Deadband": 3.0,
-        "IdleTemperature": 40.0,
+        "Deadband": 3,
+        "IdleTemperature": 40,
         "IsHidden": false,
-        "LoadTemperature": 70.0,
-        "MaxFanSpeed": 95.0,
-        "MinFanSpeed": 50.0,
+        "LoadTemperature": 70,
+        "MaxFanSpeed": 95,
+        "MinFanSpeed": 50,
         "Name": "auto-cpu",
         "SelectedResponseTime": 2,
         "SelectedTempSource": {
@@ -603,7 +603,7 @@
           "Name": "Core (Tctl/Tdie)",
           "NickName": "Core (Tctl/Tdie)"
         },
-        "Step": 5.0
+        "Step": 5
       },
       {
         "CommandMode": 0,
@@ -668,16 +668,16 @@
             "Name": "Chassis Fan #2",
             "NickName": "top"
           },
-          "SelectedCommandStepDown": 8.0,
-          "SelectedCommandStepUp": 8.0,
+          "SelectedCommandStepDown": 8,
+          "SelectedCommandStepUp": 8,
           "SelectedFanCurve": {
             "CommandMode": 0,
-            "Deadband": 3.0,
-            "IdleTemperature": 40.0,
+            "Deadband": 3,
+            "IdleTemperature": 40,
             "IsHidden": false,
-            "LoadTemperature": 70.0,
-            "MaxFanSpeed": 95.0,
-            "MinFanSpeed": 50.0,
+            "LoadTemperature": 70,
+            "MaxFanSpeed": 95,
+            "MinFanSpeed": 50,
             "Name": "auto-cpu",
             "SelectedResponseTime": 2,
             "SelectedTempSource": {
@@ -686,7 +686,7 @@
               "Name": "Core (Tctl/Tdie)",
               "NickName": "Core (Tctl/Tdie)"
             },
-            "Step": 5.0
+            "Step": 5
           },
           "SelectedOffset": 0,
           "SelectedStart": 28,
