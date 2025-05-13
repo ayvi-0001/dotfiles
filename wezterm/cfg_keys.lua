@@ -32,15 +32,6 @@ function M.apply_to_config(config)
       },
     },
     {
-      key = "`",
-      mods = "CTRL",
-      action = wezterm.action.ActivateKeyTable {
-        name = "disable_wezterm_key_tables",
-        one_shot = false,
-        until_unknown = false,
-      },
-    },
-    {
       key = "h",
       mods = "CTRL",
       action = wezterm.action.ActivateKeyTable {
@@ -79,6 +70,22 @@ function M.apply_to_config(config)
         timeout_milliseconds = 3000,
         until_unknown = true,
         replace_current = true,
+      },
+    },
+    {
+      key = "F9",
+      action = wezterm.action.ActivateKeyTable {
+        name = "disable_wezterm_key_tables",
+        until_unknown = false,
+      },
+    },
+    {
+      key = "F9",
+      mods = "CTRL",
+      action = wezterm.action.ActivateKeyTable {
+        name = "disable_wezterm_key_tables",
+        one_shot = false,
+        until_unknown = false,
       },
     },
     { key = "f", mods = "ALT", action = wezterm.action.EmitEvent "toggle-floating-pane" },
@@ -301,7 +308,7 @@ function M.apply_to_config(config)
       { key = "L", mods = "ALT", action = wezterm.action.SendKey { key = "L", mods = "ALT" } },
       { key = "i", mods = "ALT", action = wezterm.action.SendKey { key = "i", mods = "ALT" } },
       { key = "o", mods = "ALT", action = wezterm.action.SendKey { key = "o", mods = "ALT" } },
-      { key = "`", mods = "CTRL", action = "PopKeyTable" },
+      { key = "F9", mods = "NONE", action = "PopKeyTable" },
     },
   }
 
