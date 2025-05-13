@@ -1,104 +1,104 @@
 [[plugin.deps]]
-use  = "KKV9/compress"
-rev  = "60b24af"
-hash = "4808a9f0e7aec3b7c0cfadcd0ba8c1f0"
+use = "KKV9/compress"
+rev = "60b24af"
+hash = "ee025be766240cc98e671754ac836da3"
 
 [[plugin.deps]]
-use  = "MasouShizuka/projects"
-rev  = "4f11ecc"
-hash = "caecdb1b9a69c6393af201a100ff958d"
+use = "MasouShizuka/projects"
+rev = "4f11ecc"
+hash = "17fa17295d27864f62875f06a77f72e7"
 
 [[plugin.deps]]
-use  = "Reledia/glow"
-rev  = "c76bf4f"
-hash = "7246659779ff5bca5f4a461bdab6e8df"
+use = "Reledia/glow"
+rev = "2da96e3"
+hash = "f9ee1436e3b853508d87f7d49dce56e6"
 
 [[plugin.deps]]
-use  = "Rolv-Apneseth/starship"
-rev  = "6c639b4"
-hash = "3c4878837b2aa730a49b3596da011a9e"
+use = "Rolv-Apneseth/starship"
+rev = "6fde3b2"
+hash = "7ddb7a790746fd91ecdd0350cc5a5d8c"
 
 [[plugin.deps]]
-use  = "dawsers/toggle-view"
-rev  = "9ae57f9"
-hash = "4e8b2b5af016d28364660d132d7e5852"
+use = "dawsers/toggle-view"
+rev = "9ae57f9"
+hash = "9d291f6cecb1f1f5542fc18177d5c107"
 
 [[plugin.deps]]
-use  = "h-hg/yamb"
-rev  = "22af003"
+use = "h-hg/yamb"
+rev = "22af003"
 hash = "7cc42012a7c2099f80064d228feb8d44"
 
 [[plugin.deps]]
-use  = "yazi-rs/plugins:diff"
-rev  = "79193b3"
-hash = "6f5e71b5d375ed192091c86a78304e9d"
+use = "yazi-rs/plugins:diff"
+rev = "55bf699"
+hash = "7a08e303167d5b655c06da6d570f0333"
 
 [[plugin.deps]]
-use  = "yazi-rs/plugins:full-border"
-rev  = "ceb053f"
-hash = "e52c22b8f29459e2be1f271215e5e11c"
+use = "yazi-rs/plugins:full-border"
+rev = "55bf699"
+hash = "1f3dad061209081a6b04dd6ff2cb06c7"
 
 [[plugin.deps]]
-use  = "yazi-rs/plugins:git"
-rev  = "ceb053f"
-hash = "778302f3b23e11d787fe8a7b060822d7"
+use = "yazi-rs/plugins:git"
+rev = "55bf699"
+hash = "e0ada736ea676c2bbb3ec705a49526ef"
 
 [[plugin.deps]]
-use  = "yazi-rs/plugins:jump-to-char"
-rev  = "ceb053f"
-hash = "ebf7329a6716b48eccd79baf48198f30"
+use = "yazi-rs/plugins:jump-to-char"
+rev = "55bf699"
+hash = "a670c03eb3760812e044a24f94cedc55"
 
 [[plugin.deps]]
-use  = "dedukun/relative-motions"
-rev  = "8103065"
-hash = "54c7df25e82f8d1520d2c85b2072576d"
+use = "dedukun/relative-motions"
+rev = "ce2e890"
+hash = "23915860e59348bf4166778bb0e606f7"
 
 [[plugin.deps]]
-use  = "pirafrank/what-size"
-rev  = "b23e3a4"
-hash = "e894fbfcc60c062e8479a928d19c208b"
+use = "pirafrank/what-size"
+rev = "f1c6b69"
+hash = "6e789212eb41d937bab04877ca361099"
 
 [[plugin.deps]]
-use  = "yazi-rs/plugins:toggle-pane"
-rev  = "ceb053f"
-hash = "ddd4fa874828703a5b062ce89fbc13cd"
+use = "yazi-rs/plugins:toggle-pane"
+rev = "55bf699"
+hash = "f3853bbdd1da2fad09d059ab5464abfd"
 
 [[plugin.deps]]
-use  = "yazi-rs/plugins:mount"
-rev  = "ceb053f"
-hash = "24eb919126d74b7afee7aa771f670b7e"
+use = "yazi-rs/plugins:mount"
+rev = "55bf699"
+hash = "dd97eede8e20e59cd2604e8006e470e2"
 
 [[plugin.deps]]
-use  = "DreamMaoMao/fg"
-rev  = "652d02a"
-hash = "5bb94676de6949ca273cce02f60b7c2b"
-
-[[plugin.deps]]
-use  = "ayvi-0001/git-cd-root-dir"
-rev  = "115e8ad"
+use = "ayvi-0001/git-cd-root-dir"
+rev = "115e8ad"
 hash = "440e17505c71b8eafa114fc71ce67e7a"
 
 [[plugin.deps]]
-use  = "AnirudhG07/plugins-yazi:copy-file-contents"
-rev  = "524c52c"
-hash = "6cb8c3d1a25318ecbd7e8036db083f9"
+use = "AnirudhG07/plugins-yazi:copy-file-contents"
+rev = "524c52c"
+hash = "27c50e6bc15c09096505b805b238ade0"
 
 [[plugin.deps]]
-use  = "aresler/path-from-root"
-rev  = "7d05b87"
+use = "aresler/path-from-root"
+rev = "7d05b87"
 hash = "46977a29d4349d11465af1817f17d414"
 
 [[plugin.deps]]
-use  = "Sonico98/exifaudio"
-rev  = "7ff7141"
+use = "Sonico98/exifaudio"
+rev = "7ff7141"
 hash = "666ccba55119fba4c25b8ad354b2855c"
 
-[[flavor.deps]]
-use  = "kmlupreti/ayu-dark"
-rev  = "5412a78"
-hash = "952ccafcda0bd8e562f579e2033080d1"
+[[plugin.deps]]
+use = "josephschmitt/auto-layout"
+rev = "626a601"
+hash = "747a700c90fffc5b187a6094fd0661b0"
 
 [[flavor.deps]]
-use  = "BennyOe/tokyo-night"
-rev  = "695dac6"
-hash = "f0f5c785422a8551adabbdffab5c63b5"
+use = "kmlupreti/ayu-dark"
+rev = "5f600aa"
+hash = "a05f94b9a20b64d814c7631074d65c4a"
+
+[[flavor.deps]]
+use = "BennyOe/tokyo-night"
+rev = "b3950bf"
+hash = "319ce574cdb2865baf4323db90456504"
