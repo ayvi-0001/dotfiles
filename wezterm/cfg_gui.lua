@@ -52,6 +52,8 @@ function M.apply_to_config(config)
     border_top_color = _G.COMMON_ACCENT,
   }
 
+  config.default_cursor_style = "BlinkingBlock"
+
   config.adjust_window_size_when_changing_font_size = false
   config.inactive_pane_hsb = { saturation = 0.9, brightness = 0.8 }
   config.window_background_opacity = 0.8
