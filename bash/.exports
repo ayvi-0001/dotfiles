@@ -37,7 +37,7 @@ export PYTHONPYCACHEPREFIX=$HOME/.cache/pycache
 export RCLONE_CACHE_DIR=$HOME/.cache/rclone
 export RUFF_CACHE_DIR=$HOME/.cache/ruff
 export UV_CACHE_DIR=$HOME/.cache/uv
-export _ZO_DATA_DIR=$HOME/.local/share/zoxide/
+export _ZO_DATA_DIR=$HOME/.local/share/zoxide
 export npm_config_cache=$HOME/.cache/npm
 
 # history -------------------------------------------------------------------
@@ -54,8 +54,8 @@ export NODE_REPL_HISTORY=''
 
 # source/executables --------------------------------------------------------
 
-export ADB=$HOME/source/platform-tools-latest-windows/platform-tools/adb.exe
-export HELIX_RUNTIME=$HOME/source/repos/helix/runtime
+export ADB=~/source/platform-tools-latest-windows/platform-tools/adb.exe
+export HELIX_RUNTIME=~/source/helix/runtime
 export YAZI_FILE_ONE=/c/program\ files/git/usr/bin/file.exe
 
 export OPENSSL_CONF=C:/Program\ Files/Git/mingw64/etc/ssl/openssl.cnf
@@ -85,3 +85,7 @@ export FZF_ALT_C_OPTS="
 # uv-------------------------------------------------------------------------
 
 export UV_TOOL_DIR=$HOME/.local/share/uv/tools
+
+# rclone---------------------------------------------------------------------
+
+export RCLONE_HUMAN_READABLE=1
