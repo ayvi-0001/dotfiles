@@ -3,11 +3,10 @@
 # shell ---------------------------------------------------------------------
 
 export BASH_COMPLETION_USER_DIR=$HOME/.bash_completion
-export BROWSER=firefox
+export BROWSER=c:/program\ files/zen\ browser/zen.exe
 export PAGER=less
 
-# export SHELL=/c/program\ files/git/bin/bash.exe
-export SHELL=bash
+export SHELL=/c/program\ files/git/bin/bash.exe
 export STARSHIP_SHELL="$SHELL"
 
 export EDITOR=hx
