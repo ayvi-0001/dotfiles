@@ -14,7 +14,7 @@ if [[ $- == *i* ]] && shopt -q login_shell; then
       cache_home=~/.cache/home && mkdir -p "$cache_home"
 
       if command -v fd >/dev/null; then
-        bw_session_file="$(fd -u --base-directory="$cache_home" -- 'bw_session')"
+        bw_session_file="$(fd -ua --base-directory="$cache_home" -- 'bw_session')"
       else
         bw_session_file="$(find "$cache_home" -iname '*.bw_session*')"
       fi
