@@ -31,8 +31,6 @@ export YAZI_CONFIG_HOME=$HOME/.config/yazi
 
 # cache ---------------------------------------------------------------------
 
-export BLACK_CACHE_DIR=$HOME/.cache/black
-export MYPY_CACHE_DIR=$HOME/.cache/mypy
 export PYTHONPYCACHEPREFIX=$HOME/.cache/pycache
 export RCLONE_CACHE_DIR=$HOME/.cache/rclone
 export RUFF_CACHE_DIR=$HOME/.cache/ruff
