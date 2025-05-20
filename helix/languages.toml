@@ -243,41 +243,14 @@ file-types       = ["css", "scss", "tcss"]
 language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
 
 [[grammar]]
-name       = "rust"
-source.git = "https://github.com/tree-sitter/tree-sitter-rust"
-source.rev = "3691201b01cacb2f96ffca4c632c4e938bfacd88"
-
-[[grammar]]
 name       = "xit"
 source.git = "https://github.com/synaptiko/tree-sitter-xit"
 source.rev = "a4fad351bfa5efdcb379b40c36671413fbe9caac"
 
 [[grammar]]
-name       = "bash"
-source.git = "https://github.com/tree-sitter/tree-sitter-bash"
-source.rev = "487734f87fd87118028a65a4599352fa99c9cde8"
-
-[[grammar]]
-name           = "markdown"
-source.git     = "https://github.com/tree-sitter-grammars/tree-sitter-markdown"
-source.rev     = "192407ab5a24bfc24f13332979b5e7967518754a"
-source.subpath = "tree-sitter-markdown"
-
-[[grammar]]
-name           = "markdown_inline"
-source.git     = "https://github.com/tree-sitter-grammars/tree-sitter-markdown"
-source.rev     = "192407ab5a24bfc24f13332979b5e7967518754a"
-source.subpath = "tree-sitter-markdown-inline"
-
-[[grammar]]
 name       = "mermaid"
 source.git = "https://github.com/monaqa/tree-sitter-mermaid"
 source.rev = "90ae195b31933ceb9d079abfa8a3ad0a36fee4cc"
-
-[[grammar]]
-name       = "sql"
-source.git = "https://github.com/DerekStride/tree-sitter-sql"
-source.rev = "b0bf4ffab7bec3a97bab31833e50b5671206d40c"
 
 [[grammar]]
 name       = "lua"
