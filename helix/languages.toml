@@ -256,3 +256,8 @@ source.rev = "90ae195b31933ceb9d079abfa8a3ad0a36fee4cc"
 name       = "lua"
 source.git = "https://github.com/tree-sitter-grammars/tree-sitter-lua"
 source.rev = "db16e76558122e834ee214c8dc755b4a3edc82a9"
+
+[[grammar]]
+name = "csv"
+source.git = "https://github.com/weartist/rainbow-csv-tree-sitter"
+source.rev = "fbf125bcedb15080980e8afaf69c4374412e5844"
