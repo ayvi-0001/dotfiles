@@ -19,7 +19,16 @@ show_milliseconds = true
 disabled = false
 
 [status]
-disabled = false
+disabled              = false
+format                = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
+map_symbol            = true
+not_executable_symbol = " "
+not_found_symbol      = "󱉶 "
+pipestatus            = true
+pipestatus_format     = '\[$pipestatus\] => [$symbol$common_meaning$signal_name$maybe_int]($style) '
+sigint_symbol         = " "
+signal_symbol         = "󱐋 "
+symbol                = " "
 
 [gcloud]
 detect_env_vars = ["CLOUDSDK_CONFIG"]
