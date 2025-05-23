@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-hx "tmp.$(date +%y.%m.%d.%H%M%S).${1:-hx}"
+hx "tmp.$(date +%y.%m.%d.%H%M%S).${1:-txt}"

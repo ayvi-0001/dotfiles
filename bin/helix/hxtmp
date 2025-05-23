@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-hx "$(mktemp -up. "tmp.XXXXXXXXXX.${1:-hx}")"
+hx "$(mktemp -up. --suffix ".${1:-txt}")"
