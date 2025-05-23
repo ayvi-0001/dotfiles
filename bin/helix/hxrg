@@ -1,4 +1,26 @@
 #!/usr/bin/env bash
+
 args=("$@")
-line_number="$(rg -uan -m 1 "$@" --no-filename | tr -s ' ' | cut -d: -f1 | head -n1)"
-rg -ual "${args[@]:0:1}" | xargs hx +"$line_number" "${args[@]:1:${#args[*]}}"
+
+line_number="$(
+  rg \
+    --unrestricted \
+    --follow \
+    --line-number \
+    --sort modified \
+    --no-filename \
+    -m 1 -- "$@" \
+    | tr -s ' ' | cut -d: -f1 | head -n1
+)"
+
+# In some shells on Windows '/' is automatically expanded. Use '//' instead.
+case "$(uname -s)" in CYGWIN*|MINGW*|MSYS_NT*) path_sep='//';; *) path_sep='/'; esac
+
+rg \
+  --unrestricted \
+  --follow \
+  --path-separator "$path_sep" \
+  --files-with-matches \
+  --sort modified \
+  -0 -- "${args[@]:0:1}" \
+  | xargs --null hx +"$line_number" "${args[@]:1:${#args[*]}}"
