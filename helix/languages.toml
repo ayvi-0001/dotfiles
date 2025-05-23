@@ -102,7 +102,7 @@ config.hostInfo = "helix"
 [[language]]
 name              = "python"
 shebangs          = ["python", "uv"]
-language-servers  = ["ruff", "basedpyright"]         # "pylsp", "pylyzer"
+language-servers  = ["ruff", "basedpyright"] # "pylsp", "pylyzer"
 indent            = { tab-width = 4, unit = "    " }
 auto-format       = true
 formatter.command = "ruff"
@@ -160,11 +160,16 @@ name              = "gantt"
 scope             = "source.mermaid"
 injection-regex   = "mermaid"
 file-types        = []
+indent            = { tab-width = 2, unit = "  " }
 auto-format       = true
 comment-token     = "%%"
 formatter.command = "mmdc-fmt"
 formatter.args    = ["-t", "gantt", "-i", "-"]
 grammar           = "mermaid"
+
+[[language]]
+name   = "mermaid"
+indent = { tab-width = 2, unit = "  " }
 
 [[language]]
 name              = "sql"
