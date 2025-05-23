@@ -18,6 +18,8 @@ require("session"):setup { sync_yanked = true }
 
 require("starship"):setup()
 
+require("zoxide"):setup { update_db = true }
+
 if os.getenv "YAZI_HIDE_PREVIEW" then
   require("toggle-pane"):entry "min-preview"
 end
