@@ -85,6 +85,15 @@ args    = ["up", "--method", "stdio"]
 [language-server.lua-language-server]
 command = "lua-language-server"
 
+[language-server.lua-language-server.config.Lua]
+"workspace.library" = ["~/.local/share/lua/lib"]
+"hint.enable"       = true
+"hint.arrayIndex"   = "Enable"
+"hint.setType"      = true
+"hint.paramName"    = "All"
+"hint.paramType"    = true
+"hint.await"        = true
+
 [language-server.codebook]
 command = "codebook-lsp"
 args    = ["serve"]
