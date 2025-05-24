@@ -12,7 +12,7 @@ alias gls='gcloud storage ls --readable-sizes'
 alias gmv='gcloud storage mv'
 alias grm='gcloud storage rm'
 
-alias bathelp='bat --language=help'
+alias bathelp='bat --plain --language=help'
 
 alias bb='bleachbit_console'
 

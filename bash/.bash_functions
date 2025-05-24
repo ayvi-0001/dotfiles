@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-function batdiff() { git diff --name-only --relative --diff-filter=d "$@" | xargs bat --diff; }
+function batdiff() { git diff --name-only --relative --diff-filter=d "$@" | xargs "$(which bat)" --diff; }
 
-function help() { "$@" --help 2>&1 | bathelp; } && complete -F _comp_command help
+function help() { "$@" --help 2>&1 | bat --plain --language=help; } && complete -F _comp_command help
 
 function git-cd-root() { cd "$(git rev-parse --show-toplevel)" || return 1; }
 
