@@ -5,8 +5,8 @@ hash = "ee025be766240cc98e671754ac836da3"
 
 [[plugin.deps]]
 use = "MasouShizuka/projects"
-rev = "4f11ecc"
-hash = "17fa17295d27864f62875f06a77f72e7"
+rev = "df44165"
+hash = "d5e132ed6e9073a43c155ab753074abb"
 
 [[plugin.deps]]
 use = "Reledia/glow"
