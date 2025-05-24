@@ -35,9 +35,7 @@ function cd_up() { builtin cd "$(printf "%0.s../" $(seq 1 "${1:-0}" ))"; } \
 
 
 # `bw_` points to wrapper script in ~/bin for bitwarden cli
-if command -v bw_ >/dev/null 2>&1; then
-  function bw() { "$(which bw_)" "$@"; }
-fi
+command -v bw_ >/dev/null && function bw() { "$(which bw_)" "$@"; }
 
 
 function 7z() {
@@ -62,6 +60,11 @@ function rg() {
 # Use fd for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
 function _fzf_compgen_path() { fd --hidden --follow --exclude ".git" . "$1"; }
-
 # Use fd to generate the list for directory completion
 function _fzf_compgen_dir() { fd --type d --hidden --follow --exclude ".git" . "$1"; }
+
+
+# some completion scripts still reference old bash-completion functions,
+# wrapping around a couple of them that were causing issues.
+function  _split_longopt { _comp__split_longopt "$@"; } 
+function  _filedir { _comp_compgen_filedir "$@"; } 
