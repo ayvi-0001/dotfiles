@@ -1,6 +1,8 @@
-local wezterm = require "wezterm"
+local wezterm = require "wezterm" --[[@as Wezterm]]
 
-wezterm.on("update-right-status", function(window, pane)
+---@param window Window
+---@param _ Pane
+wezterm.on("update-right-status", function(window, _)
   local name = window:active_key_table()
   if name then
     name = "TABLE: " .. name .. "  "

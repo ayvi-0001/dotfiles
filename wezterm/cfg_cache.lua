@@ -1,5 +1,7 @@
 local M = {}
 
+---@param config Config
+---@return nil
 function M.apply_to_config(config)
   config.glyph_cache_image_cache_size = 512
   config.line_quad_cache_size = 2048

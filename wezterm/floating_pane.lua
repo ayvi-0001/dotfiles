@@ -1,9 +1,11 @@
-local wezterm = require "wezterm"
+local wezterm = require "wezterm" --[[@as Wezterm]]
 local window_space = require "window_space"
 
 local M = {}
 
-wezterm.on("toggle-floating-pane", function(window, pane)
+---@param window Window
+---@param pane Pane
+wezterm.on("toggle-floating-pane", function(window, pane) ---@diagnostic disable-line: unused-local
   local domain = wezterm.mux.get_domain "local-floating"
   local gui_windows = wezterm.gui.gui_windows()
 
@@ -30,6 +32,10 @@ wezterm.on("toggle-floating-pane", function(window, pane)
   end
 end)
 
+--- need to add binding to emit event, e.g.
+--- `{ key = "F", mods = "ALT", action = wezterm.action.EmitEvent "toggle-floating-pane" }`
+---@param config Config
+---@return nil
 function M.apply_to_config(config)
   if not config.unix_domains then
     config.unix_domains = {}
@@ -38,8 +44,6 @@ function M.apply_to_config(config)
     name = "local-floating",
     connect_automatically = false,
   })
-  -- need to add binding to emit event, e.g.,
-  -- { key = "F", mods = "ALT", action = wezterm.action.EmitEvent "toggle-floating-pane" }
 end
 
 return M

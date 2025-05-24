@@ -1,7 +1,10 @@
-local wezterm = require "wezterm"
+local wezterm = require "wezterm" --[[@as Wezterm]]
 
 local M = {}
 
+---@param window Window
+---@param pane Pane
+---@returns nil
 function M.rename_tab(window, pane)
   local active_tab = window:active_tab()
   window:perform_action(
@@ -14,7 +17,11 @@ function M.rename_tab(window, pane)
           { Text = "Enter new name for tab" },
         },
         initial_value = active_tab:get_title() or "",
-        action = wezterm.action_callback(function(_window, _pane, line)
+        ---@param inner_window Window
+        ---@param inner_pane Pane
+        ---@param line? string
+        ---@return nil
+        action = wezterm.action_callback(function(inner_window, inner_pane, line) ---@diagnostic disable-line: unused-local
           if line then
             active_tab:set_title(line)
           end
@@ -25,10 +32,16 @@ function M.rename_tab(window, pane)
   )
 end
 
-function M.move_pane_to_new_window(window, pane)
+---@param window Window
+---@param pane Pane
+---@returns nil
+function M.move_pane_to_new_window(window, pane) ---@diagnostic disable-line: unused-local
   pane:move_to_new_window()
 end
 
+---@param window Window
+---@param pane Pane
+---@returns nil
 function M.scroll_to_bottom(window, pane)
   window:perform_action(
     wezterm.action.Multiple {
@@ -39,7 +52,18 @@ function M.scroll_to_bottom(window, pane)
   )
 end
 
---- @private
+---@enum
+local DIRECTION = {
+  up = "Up",
+  down = "Down",
+  left = "Left",
+  right = "Right",
+}
+
+---@param window Window
+---@param pane Pane
+---@param direction Direction
+---@private
 function M._move_focus_or_tab(window, pane, direction)
   local adjacent_pane = window:active_tab():get_pane_direction(direction)
   if adjacent_pane then
@@ -52,22 +76,37 @@ function M._move_focus_or_tab(window, pane, direction)
   -- do nothing on "Up" and "Down"
 end
 
+---@param window Window
+---@param pane Pane
+---@returns nil
 function M.move_focus_or_tab_right(window, pane)
-  M._move_focus_or_tab(window, pane, "Right")
+  M._move_focus_or_tab(window, pane, DIRECTION.right)
 end
 
+---@param window Window
+---@param pane Pane
+---@returns nil
 function M.move_focus_or_tab_left(window, pane)
-  M._move_focus_or_tab(window, pane, "Left")
+  M._move_focus_or_tab(window, pane, DIRECTION.left)
 end
 
+---@param window Window
+---@param pane Pane
+---@returns nil
 function M.move_focus_or_tab_up(window, pane)
-  M._move_focus_or_tab(window, pane, "Up")
+  M._move_focus_or_tab(window, pane, DIRECTION.up)
 end
 
+---@param window Window
+---@param pane Pane
+---@returns nil
 function M.move_focus_or_tab_down(window, pane)
-  M._move_focus_or_tab(window, pane, "Down")
+  M._move_focus_or_tab(window, pane, DIRECTION.down)
 end
 
+---@param window Window
+---@param pane Pane
+---@returns nil
 function M.spawn_default_prog_in_new_tab(window, pane)
   window:perform_action(
     wezterm.action.SpawnCommandInNewTab {
@@ -77,6 +116,22 @@ function M.spawn_default_prog_in_new_tab(window, pane)
   )
 end
 
+---@param window Window
+---@param pane Pane
+---@returns nil
+function M.spawn_default_prog_in_new_tab_in_home(window, pane)
+  window:perform_action(
+    wezterm.action.SpawnCommandInNewTab {
+      args = window:effective_config()["default_prog"],
+      cwd = "~/",
+    },
+    pane
+  )
+end
+
+---@param window Window
+---@param pane Pane
+---@returns nil
 function M.launch_workspace(window, pane)
   local home = wezterm.home_dir
 
@@ -88,6 +143,11 @@ function M.launch_workspace(window, pane)
 
   window:perform_action(
     wezterm.action.InputSelector {
+      ---@param inner_window Window
+      ---@param inner_pane Pane
+      ---@param id string
+      ---@param label string
+      ---@return nil
       action = wezterm.action_callback(function(inner_window, inner_pane, id, label)
         if not id and not label then
           wezterm.log_info "cancelled"
@@ -119,6 +179,9 @@ function M.launch_workspace(window, pane)
   )
 end
 
+---@param window Window
+---@param pane Pane
+---@returns nil
 function M.create_workspace(window, pane)
   window:perform_action(
     wezterm.action.PromptInputLine {
@@ -127,13 +190,17 @@ function M.create_workspace(window, pane)
         { Foreground = { AnsiColor = "Fuchsia" } },
         { Text = "Enter name for new workspace" },
       },
-      action = wezterm.action_callback(function(_window, _pane, line)
+      ---@param inner_window Window
+      ---@param inner_pane Pane
+      ---@param line string
+      ---@return nil
+      action = wezterm.action_callback(function(inner_window, inner_pane, line)
         if line then
-          _window:perform_action(
+          inner_window:perform_action(
             wezterm.action.SwitchToWorkspace {
               name = line,
             },
-            _pane
+            inner_pane
           )
         end
       end),

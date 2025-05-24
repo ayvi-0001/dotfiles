@@ -1,6 +1,9 @@
-local wezterm = require "wezterm"
+local wezterm = require "wezterm" --[[@as Wezterm]]
+
 local M = {}
 
+---@param config Config
+---@return nil
 function M.apply_to_config(config)
   config.front_end = "WebGpu"
   config.max_fps = 60

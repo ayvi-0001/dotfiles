@@ -1,4 +1,4 @@
-local wezterm = require "wezterm"
+local wezterm = require "wezterm" --[[@as Wezterm]]
 
 local E = {}
 
@@ -7,19 +7,25 @@ local E = {}
 -- and are used to move and resize the window through custom events.
 -- this is unfinished and very experimental.
 
+---@param ratio number
+---@param domain string
+---@param args? string[]
+---@return MuxTabObj, Pane, Window
 E.spawn_window_and_set_dimensions = function(ratio, domain, args)
   local screen = wezterm.gui.screens().active
   local width, height = screen.width * ratio, screen.height * ratio
   local x = (screen.width - width) / 2
   local y = (screen.height - height) / 2
 
-  local tab, pane, window = wezterm.mux.spawn_window {
+  local mux_tab, pane, mux_window = wezterm.mux.spawn_window {
     args = args,
     position = { x = x, y = y, origin = "ActiveScreen" },
     domain = { DomainName = domain or "local" },
   }
 
-  local k = "window-" .. window:window_id()
+  local gui_window = mux_window:gui_window() --[[@as Window]]
+
+  local k = "window-" .. mux_window:window_id()
 
   if not wezterm.GLOBAL.window_space then
     wezterm.GLOBAL.window_space = {}
@@ -31,11 +37,12 @@ E.spawn_window_and_set_dimensions = function(ratio, domain, args)
   wezterm.GLOBAL.window_space[k]["pixel_height"] = height
   wezterm.GLOBAL.window_space[k]["pixel_width"] = width
 
-  window:gui_window():set_inner_size(width, height)
-  return tab, pane, window
+  gui_window:set_inner_size(width, height)
+  return mux_tab, pane, gui_window
 end
 
-wezterm.on("gui-startup", function(cmd)
+---@param cmd? any
+wezterm.on("gui-startup", function(cmd) ---@diagnostic disable-line: unused-local
   -- local args = {}
   -- if cmd then
   --   args = cmd.args
@@ -43,10 +50,15 @@ wezterm.on("gui-startup", function(cmd)
   E.spawn_window_and_set_dimensions(0.8, "local")
 end)
 
-wezterm.on("spawn-new-window", function(window, pane)
+wezterm.on("spawn-new-window", function(_, _)
   E.spawn_window_and_set_dimensions(0.8, "local")
 end)
 
+---@param window Window
+---@param axis "x"|"y"
+---@param direction "right"|"down"|"left"|"up"
+---@param increment integer
+---@private
 E.set_position = function(window, axis, direction, increment)
   if not window then
     return
@@ -73,6 +85,11 @@ E.set_position = function(window, axis, direction, increment)
   wezterm.GLOBAL.window_space[k][axis] = d
 end
 
+---@param window Window
+---@param dimension "width"|"height"
+---@param direction "increase"|"decrease"
+---@param increment integer
+---@private
 E.set_inner_size = function(window, dimension, direction, increment)
   if not window then
     return
@@ -102,55 +119,55 @@ E.set_inner_size = function(window, dimension, direction, increment)
   wezterm.GLOBAL.window_space[k][dimension] = d
 end
 
-wezterm.on("increase-to-top", function(window, pane)
+wezterm.on("increase-to-top", function(window, _)
   E.set_position(window, "y", "up", 25)
   E.set_inner_size(window, "height", "increase", 25)
 end)
 
-wezterm.on("decrease-from-top", function(window, pane)
+wezterm.on("decrease-from-top", function(window, _)
   E.set_position(window, "y", "down", 25)
   E.set_inner_size(window, "height", "decrease", 25)
 end)
 
-wezterm.on("increase-to-bottom", function(window, pane)
+wezterm.on("increase-to-bottom", function(window, _)
   E.set_inner_size(window, "height", "increase", 25)
 end)
 
-wezterm.on("decrease-from-bottom", function(window, pane)
+wezterm.on("decrease-from-bottom", function(window, _)
   E.set_inner_size(window, "height", "decrease", 25)
 end)
 
-wezterm.on("increase-to-left", function(window, pane)
+wezterm.on("increase-to-left", function(window, _)
   E.set_position(window, "x", "up", 25)
   E.set_inner_size(window, "width", "increase", 25)
 end)
 
-wezterm.on("decrease-from-left", function(window, pane)
+wezterm.on("decrease-from-left", function(window, _)
   E.set_position(window, "x", "down", 25)
   E.set_inner_size(window, "width", "decrease", 25)
 end)
 
-wezterm.on("increase-to-right", function(window, pane)
+wezterm.on("increase-to-right", function(window, _)
   E.set_inner_size(window, "width", "increase", 25)
 end)
 
-wezterm.on("decrease-from-right", function(window, pane)
+wezterm.on("decrease-from-right", function(window, _)
   E.set_inner_size(window, "width", "decrease", 25)
 end)
 
-wezterm.on("move-window-left", function(window, pane)
+wezterm.on("move-window-left", function(window, _)
   E.set_position(window, "x", "left", 25)
 end)
 
-wezterm.on("move-window-right", function(window, pane)
+wezterm.on("move-window-right", function(window, _)
   E.set_position(window, "x", "right", 25)
 end)
 
-wezterm.on("move-window-up", function(window, pane)
+wezterm.on("move-window-up", function(window, _)
   E.set_position(window, "y", "up", 25)
 end)
 
-wezterm.on("move-window-down", function(window, pane)
+wezterm.on("move-window-down", function(window, _)
   E.set_position(window, "y", "down", 25)
 end)
 

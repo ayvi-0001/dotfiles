@@ -1,5 +1,5 @@
 local utils = require "utils"
-local wezterm = require "wezterm"
+local wezterm = require "wezterm" --[[@as Wezterm]]
 
 local M = {}
 
@@ -10,6 +10,8 @@ UI_PANEL_BG = "#020202"
 UI_PANEL_SHADOW = BLACK
 UI_FG = "#f0f0ff"
 
+---@param config Config
+---@return nil
 function M.apply_to_config(config)
   config.font = wezterm.font {
     family = "SpaceMono Nerd Font",
@@ -73,7 +75,6 @@ function M.apply_to_config(config)
 
   config.hide_tab_bar_if_only_one_tab = false
   config.prefer_to_spawn_tabs = true
-  config.prefer_to_spawn_tabs = true
   config.show_close_tab_button_in_tabs = false
   config.show_new_tab_button_in_tab_bar = false
   config.show_tab_index_in_tab_bar = true
@@ -88,6 +89,8 @@ end
 local INVERSE_SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_left_hard_divider_inverse
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 
+---@param tab_info TabInformation
+---@return string
 local function tab_title(tab_info)
   local title = tab_info.tab_title
 
@@ -105,6 +108,14 @@ local function tab_title(tab_info)
   return title
 end
 
+---@param tab_info TabInformation
+---@param tabs TabInformation[]
+---@param panes PaneInformation[]
+---@param config Config
+---@param hover boolean
+---@param max_width number
+---@return table
+---@diagnostic disable-next-line: unused-local
 wezterm.on("format-tab-title", function(tab_info, tabs, panes, config, hover, max_width)
   local background = _G.COMMON_ACCENT_ALT
   local foreground = _G.UI_PANEL_SHADOW

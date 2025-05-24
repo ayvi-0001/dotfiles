@@ -1,11 +1,14 @@
 local M = {}
 
--- Run command to install wezterm TERM definition
--- tempfile=$(mktemp) \
---   && curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo \
---   && tic -x -o ~/.terminfo $tempfile \
---   && rm $tempfile
-
+--- Run command to install wezterm TERM definition
+--- ```bash
+--- tempfile=$(mktemp) \
+---   && curl -o $tempfile https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo \
+---   && tic -x -o ~/.terminfo $tempfile \
+---   && rm $tempfile
+---```
+---@param config Config
+---@return nil
 function M.apply_to_config(config)
   config.audible_bell = "Disabled"
   config.automatically_reload_config = false

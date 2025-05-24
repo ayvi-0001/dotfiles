@@ -1,5 +1,5 @@
 local utils = require "utils"
-local wezterm = require "wezterm"
+local wezterm = require "wezterm" --[[@as Wezterm]]
 local window_space = require "window_space"
 
 --[[ Functions/events for using yazi & helix in wezterm.
@@ -41,14 +41,23 @@ config.key_tables = {
 }
 --]]
 
-local _yazi_copy_path_hovered_file = function(window, pane)
+---@param _ Window
+---@param pane Pane
+---@returns nil
+local _yazi_copy_path_hovered_file = function(_, pane)
   -- NOTE: expects the default keybindings in yazi for copying
   -- the full path of the hovered file.
   -- TODO: emit data from yazi another way
   pane:send_text "cc"
 end
 
-local _helix_open_file_read_from_system_clipboard = function(window, pane, file)
+---@param _ Window
+---@param pane Pane
+---@param file? string
+---@return boolean
+local _helix_open_file_read_from_system_clipboard = function(_, pane, file)
+  ---@param info LocalProcessInfo
+  ---@return number
   local function _find_hx_exec(info)
     if not info then
       return -1
@@ -65,9 +74,9 @@ local _helix_open_file_read_from_system_clipboard = function(window, pane, file)
   end
 
   local info = pane:get_foreground_process_info()
-  local ok, pcall_result = pcall(_find_hx_exec, info)
+  local ok, _ = pcall(_find_hx_exec, info)
   if not ok then
-    return
+    return false
   end
 
   if file then
@@ -85,7 +94,10 @@ local _helix_open_file_read_from_system_clipboard = function(window, pane, file)
   return ok
 end
 
-local yazi_helix_launch_ide = function(window, pane)
+---@param _ Window
+---@param pane Pane
+---@returns nil
+local yazi_helix_launch_ide = function(_, pane)
   local pid = wezterm.procinfo.pid()
   local cwd = wezterm.procinfo.current_working_dir_for_pid(pid)
 
@@ -140,8 +152,16 @@ local yazi_helix_launch_ide = function(window, pane)
   yazi_pane:activate()
 end
 
--- Open the hovered path in yazi into an adjacent helix pane.
+---Open the hovered path in yazi into an adjacent helix pane.
+---@param window Window
+---@param pane Pane
+---@param direction string
+---@param file? string
+---@return nil
 local yazi_helix_open_in_pane = function(window, pane, direction, file)
+  ---@param _window Window
+  ---@param _pane Pane
+  ---@return nil
   local _inner = function(_window, _pane)
     local right_pane = _pane:tab():get_pane_direction(direction)
     if not file then
@@ -157,8 +177,16 @@ local yazi_helix_open_in_pane = function(window, pane, direction, file)
   return _inner(window, pane)
 end
 
--- Open the hovered path in yazi into a new helix pane.
+---Open the hovered path in yazi into a new helix pane.
+---@param window Window
+---@param pane Pane
+---@param direction string
+---@param top_level boolean
+---@return nil
 local yazi_helix_open_new_pane = function(window, pane, direction, top_level)
+  ---@param _window Window
+  ---@param _pane Pane
+  ---@return nil
   local _inner = function(_window, _pane)
     _yazi_copy_path_hovered_file(_window, _pane)
     local new_pane = _pane:split {
@@ -173,7 +201,10 @@ local yazi_helix_open_new_pane = function(window, pane, direction, top_level)
   return _inner(window, pane)
 end
 
--- Open the hovered path in yazi into a new helix window.
+---Open the hovered path in yazi into a new helix window.
+---@param window Window
+---@param pane Pane
+---@returns nil
 local yazi_helix_open_new_window = function(window, pane)
   _yazi_copy_path_hovered_file(window, pane)
   local _, new_pane, new_window = window_space.spawn_window_and_set_dimensions(0.5, "local", { "hx" })
@@ -182,15 +213,21 @@ end
 
 -- set callbacks for yazi/helix events.
 
+---@param window Window
+---@param pane Pane
 wezterm.on("yazi-helix-launch-ide", function(window, pane)
   yazi_helix_launch_ide(window, pane)
 end)
 
+---@param window Window
+---@param pane Pane
 wezterm.on("yazi-helix-open-new-window", function(window, pane)
   yazi_helix_open_new_window(window, pane)
 end)
 
-wezterm.on("trigger-hx-with-scrollback", function(window, pane)
+---@param window Window
+---@param pane Pane
+wezterm.on("trigger-hx-with-scrollback", function(window, pane) ---@diagnostic disable-line: unused-local
   local text = pane:get_lines_as_text(pane:get_dimensions().scrollback_rows)
   local filename = utils.write(nil, text)
   window_space.spawn_window_and_set_dimensions(0.5, "local", { "hx", filename })
@@ -198,36 +235,52 @@ end)
 
 -- callbacks to open in new panes
 
+---@param window Window
+---@param pane Pane
 wezterm.on("yazi-helix-open-new-right-pane", function(window, pane)
   yazi_helix_open_new_pane(window, pane, "Right", false)
 end)
 
+---@param window Window
+---@param pane Pane
 wezterm.on("yazi-helix-open-new-right-pane-top-level", function(window, pane)
   yazi_helix_open_new_pane(window, pane, "Right", true)
 end)
 
+---@param window Window
+---@param pane Pane
 wezterm.on("yazi-helix-open-new-bottom-pane", function(window, pane)
   yazi_helix_open_new_pane(window, pane, "Bottom", false)
 end)
 
+---@param window Window
+---@param pane Pane
 wezterm.on("yazi-helix-open-new-bottom-pane-top-level", function(window, pane)
   yazi_helix_open_new_pane(window, pane, "Bottom", true)
 end)
 
 -- callbacks to open in existing panes
 
+---@param window Window
+---@param pane Pane
 wezterm.on("yazi-helix-open-in-left-pane", function(window, pane)
   yazi_helix_open_in_pane(window, pane, "Left")
 end)
 
+---@param window Window
+---@param pane Pane
 wezterm.on("yazi-helix-open-in-pane-below", function(window, pane)
   yazi_helix_open_in_pane(window, pane, "Down")
 end)
 
+---@param window Window
+---@param pane Pane
 wezterm.on("yazi-helix-open-in-pane-above", function(window, pane)
   yazi_helix_open_in_pane(window, pane, "Up")
 end)
 
+---@param window Window
+---@param pane Pane
 wezterm.on("yazi-helix-open-in-right-pane", function(window, pane)
   yazi_helix_open_in_pane(window, pane, "Right")
 end)
