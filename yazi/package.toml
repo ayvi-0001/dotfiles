@@ -93,6 +93,11 @@ use = "josephschmitt/auto-layout"
 rev = "626a601"
 hash = "747a700c90fffc5b187a6094fd0661b0"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:types"
+rev = "43ff052"
+hash = "57b118f2649c1bb76eb42e1ec39511e6"
+
 [[flavor.deps]]
 use = "kmlupreti/ayu-dark"
 rev = "5f600aa"
