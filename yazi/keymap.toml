@@ -16,6 +16,9 @@ prepend_keymap = [
   #  end: path-from-root.yazi
   # end: copy
 
+  # start: linemode
+  { on = ["m", "S"], run = ["sort size --reverse", "linemode size", "sort natural --reverse=no"], desc = "Linemode: size (recursive)" },
+  # end: linemode
 
   # start: relative-motions.yazi
   { on = ["M"], run = "plugin relative-motions", desc = "Trigger a new relative motion" },
