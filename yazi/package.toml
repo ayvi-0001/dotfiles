@@ -70,8 +70,8 @@ hash = "c0b6cd7dc830b96e77e5c8a71eec7926"
 
 [[plugin.deps]]
 use = "ayvi-0001/git-cd-root-dir"
-rev = "c3ec827"
-hash = "62d1d770fcad14533b2d6e0ebe3d489c"
+rev = "78860da"
+hash = "91555948d626c1bd8dc698915ac9c5d9"
 
 [[plugin.deps]]
 use = "AnirudhG07/plugins-yazi:copy-file-contents"
