@@ -3,7 +3,7 @@
 [input]
 prepend_keymap = [{ on = "<Esc>", run = "close", desc = "Cancel input" }]
 
-[manager]
+[mgr]
 prepend_keymap = [
   # start: copy
   # add the '--separator' option to builtin copy commands.
