@@ -30,22 +30,22 @@ hash = "7cc42012a7c2099f80064d228feb8d44"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "43ff052"
+rev = "a54b96a"
 hash = "47865a70cade14a0b9b6bc6a54f16bdb"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "43ff052"
+rev = "a54b96a"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "43ff052"
+rev = "a54b96a"
 hash = "bf6f074cd41ee33c3360341d168f9733"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "43ff052"
+rev = "a54b96a"
 hash = "30fc0b37f03a597b92d387268319450f"
 
 [[plugin.deps]]
@@ -60,12 +60,12 @@ hash = "fca231a128488a554823374f8f6d5241"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "43ff052"
-hash = "7c2e9d76c32931b949eccb694759f746"
+rev = "a54b96a"
+hash = "d5d4f3527592da5fbe77fd6f51815f80"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "43ff052"
+rev = "a54b96a"
 hash = "c0b6cd7dc830b96e77e5c8a71eec7926"
 
 [[plugin.deps]]
@@ -95,8 +95,8 @@ hash = "747a700c90fffc5b187a6094fd0661b0"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:types"
-rev = "43ff052"
-hash = "57b118f2649c1bb76eb42e1ec39511e6"
+rev = "a54b96a"
+hash = "b32060d4c292c9ef6d493de470e3ed1f"
 
 [[flavor.deps]]
 use = "kmlupreti/ayu-dark"
