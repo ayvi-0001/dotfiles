@@ -3,6 +3,8 @@ dark  = "tokyo-night"
 light = "tokyo-night"
 
 [tabs]
+active    = { bg = "blue", bold = true }
+inactive  = { fg = "blue", bg = "black" }
 sep_inner = { open = "", close = "" }
 sep_outer = { open = "", close = "" }
 
