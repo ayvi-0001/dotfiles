@@ -14,6 +14,7 @@ function M.apply_to_config(config)
   config.hide_mouse_cursor_when_typing = false
   config.treat_left_ctrlalt_as_altgr = true
 
+  config.leader = { key = "-", mods = "CMD" }
   config.keys = {
     {
       key = "p",
@@ -80,15 +81,16 @@ function M.apply_to_config(config)
       action = wezterm.action.ActivateCopyMode,
     },
     {
-      key = "F9",
+      key = "d",
+      mods = "LEADER",
       action = wezterm.action.ActivateKeyTable {
         name = "disable_wezterm_key_tables",
         until_unknown = false,
       },
     },
     {
-      key = "F9",
-      mods = "CTRL",
+      key = "D",
+      mods = "LEADER|SHIFT",
       action = wezterm.action.ActivateKeyTable {
         name = "disable_wezterm_key_tables",
         one_shot = false,
@@ -126,7 +128,6 @@ function M.apply_to_config(config)
           name = "resize_window",
           one_shot = false,
           replace_current = true,
-          until_unknown = true,
         },
       },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
@@ -316,7 +317,7 @@ function M.apply_to_config(config)
       { key = "L", mods = "ALT", action = wezterm.action.SendKey { key = "L", mods = "ALT" } },
       { key = "i", mods = "ALT", action = wezterm.action.SendKey { key = "i", mods = "ALT" } },
       { key = "o", mods = "ALT", action = wezterm.action.SendKey { key = "o", mods = "ALT" } },
-      { key = "F9", mods = "NONE", action = "PopKeyTable" },
+      { key = "d", mods = "LEADER", action = "PopKeyTable" },
     },
 
     copy_mode = {
