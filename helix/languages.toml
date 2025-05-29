@@ -147,7 +147,7 @@ formatter.args    = ["-c", "align-csv-columns<&0"] # custom script in ~/bin/
 name              = "markdown"
 soft-wrap.enable  = true
 text-width        = 200
-language-servers  = ["marksman", "codebook"]
+language-servers  = ["markdown-oxide", "marksman", "codebook"]
 auto-format       = true
 formatter.command = "prettier"
 formatter.args    = ["--parser=markdown", "--stdin-filename", "%{buffer_name}"]
