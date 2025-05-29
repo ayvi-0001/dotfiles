@@ -84,8 +84,11 @@ image_bound      = [0, 0] # unlimited
 suppress_preload = true
 
 [plugin]
-prepend_previewers = [{ name = "*.md", run = "glow" }, { mime = "audio/*", run = "exifaudio" }]
-prepend_fetchers   = [{ id = "git", name = "*", run = "git" }]
+prepend_previewers = [
+  { name = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },
+  { mime = "audio/*", run = "exifaudio" },
+]
+prepend_fetchers = [{ id = "git", name = "*", run = "git" }]
 
 [input]
 cursor_blink  = true

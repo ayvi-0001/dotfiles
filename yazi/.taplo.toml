@@ -20,7 +20,7 @@ trailing_newline      = true
 
 [[rule]]
 include = ["yazi.toml"]
-keys    = ["opener"]
+keys    = ["opener", "plugin"]
 
 [rule.formatting]
 column_width = 100
