@@ -7,30 +7,54 @@ local E = {}
 -- and are used to move and resize the window through custom events.
 -- this is unfinished and very experimental.
 
----@param ratio number
----@param domain string
----@param args? string[]
+---@class SpawnWindowOpts
+---@field ratio number
+---@field domain string
+---@field screen_name? "active"|"main"|string = "active"
+---@field offsets? { x?: number, y?: number }
+---@field args? string[]
+
+---@param opts SpawnWindowOpts
 ---@return MuxTabObj, Pane, Window
-E.spawn_window_and_set_dimensions = function(ratio, domain, args)
-  local screen = wezterm.gui.screens().active
-  local width, height = screen.width * ratio, screen.height * ratio
-  local x = (screen.width - width) / 2
-  local y = (screen.height - height) / 2
+E.spawn_window_and_set_dimensions = function(opts)
+  local screen
+  local screen_name = opts.screen_name or "main"
+  if screen_name == "active" then
+    screen = wezterm.gui.screens().active
+  elseif screen_name == "main" then
+    screen = wezterm.gui.screens().main
+  else
+    screen = wezterm.gui.screens().by_name[screen_name]
+  end
+
+  local width, height = screen.width * opts.ratio, screen.height * opts.ratio
+  local x = screen.x
+  local y = screen.y
+
+  if opts.offsets then
+    if opts.offsets.x then
+      x = x + opts.offsets.x
+    end
+    if opts.offsets.y then
+      y = y + opts.offsets.y
+    end
+  end
+
+  x = x + ((screen.width - width) / 2)
+  y = y + ((screen.height - height) / 2)
 
   local mux_tab, pane, mux_window = wezterm.mux.spawn_window {
-    args = args,
+    args = opts.args,
     position = { x = x, y = y, origin = "ActiveScreen" },
-    domain = { DomainName = domain or "local" },
+    domain = { DomainName = opts.domain or "local" },
   }
 
   local gui_window = mux_window:gui_window() --[[@as Window]]
 
   local k = "window-" .. mux_window:window_id()
-
   if not wezterm.GLOBAL.window_space then
     wezterm.GLOBAL.window_space = {}
   end
-
   wezterm.GLOBAL.window_space[k] = {}
   wezterm.GLOBAL.window_space[k]["x"] = x
   wezterm.GLOBAL.window_space[k]["y"] = y
@@ -41,17 +65,19 @@ E.spawn_window_and_set_dimensions = function(ratio, domain, args)
   return mux_tab, pane, gui_window
 end
 
----@param cmd? any
+---@param cmd? any[]
 wezterm.on("gui-startup", function(cmd) ---@diagnostic disable-line: unused-local
   -- local args = {}
   -- if cmd then
   --   args = cmd.args
   -- end
-  E.spawn_window_and_set_dimensions(0.8, "local")
+  E.spawn_window_and_set_dimensions { ratio = 0.8, domain = "local" }
 end)
 
-wezterm.on("spawn-new-window", function(_, _)
-  E.spawn_window_and_set_dimensions(0.8, "local")
+---@param window Window
+---@param pane Pane
+wezterm.on("spawn-new-window", function(window, pane) ---@diagnostic disable-line: unused-local
+  E.spawn_window_and_set_dimensions { ratio = 0.8, domain = "local" }
 end)
 
 ---@param window Window

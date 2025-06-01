@@ -6,17 +6,18 @@ local M = {}
 ---@param window Window
 ---@param pane Pane
 wezterm.on("toggle-floating-pane", function(window, pane) ---@diagnostic disable-line: unused-local
-  local domain = wezterm.mux.get_domain "local-floating"
+  local domain_name = "local-floating"
+  local domain = wezterm.mux.get_domain(domain_name)
   local gui_windows = wezterm.gui.gui_windows()
 
   if domain then
     if not domain:has_any_panes() then
       local default_prog = gui_windows[1]:effective_config()["default_prog"]
-      window_space.spawn_window_and_set_dimensions(0.4, "local-floating", default_prog)
+      window_space.spawn_window_and_set_dimensions { ratio = 0.4, domain = domain_name, args = default_prog }
     else
       local floating_pane
       for i in pairs(gui_windows) do
-        if gui_windows[i]:active_pane():get_domain_name() == "local-floating" then
+        if gui_windows[i]:active_pane():get_domain_name() == domain_name then
           floating_pane = gui_windows[i]
         end
       end

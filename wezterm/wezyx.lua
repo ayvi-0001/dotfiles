@@ -207,7 +207,7 @@ end
 ---@returns nil
 local yazi_helix_open_new_window = function(window, pane)
   _yazi_copy_path_hovered_file(window, pane)
-  local _, new_pane, new_window = window_space.spawn_window_and_set_dimensions(0.5, "local", { "hx" })
+  local _, new_pane, new_window = window_space.spawn_window_and_set_dimensions { ratio = 0.5, domain = "local", args = { "hx" } }
   _helix_open_file_read_from_system_clipboard(new_window, new_pane)
 end
 
@@ -230,7 +230,11 @@ end)
 wezterm.on("trigger-hx-with-scrollback", function(window, pane) ---@diagnostic disable-line: unused-local
   local text = pane:get_lines_as_text(pane:get_dimensions().scrollback_rows)
   local filename = utils.write(nil, text)
-  window_space.spawn_window_and_set_dimensions(0.5, "local", { "hx", filename })
+  window_space.spawn_window_and_set_dimensions {
+    ratio = 0.5,
+    domain = "local",
+    args = { "hx", filename },
+  }
 end)
 
 -- callbacks to open in new panes
