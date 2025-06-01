@@ -123,7 +123,7 @@ function M.spawn_default_prog_in_new_tab_in_home(window, pane)
   window:perform_action(
     wezterm.action.SpawnCommandInNewTab {
       args = window:effective_config()["default_prog"],
-      cwd = "~/",
+      cwd = wezterm.home_dir,
     },
     pane
   )

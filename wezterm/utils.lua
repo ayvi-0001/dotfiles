@@ -13,7 +13,7 @@ function M.basename(s)
   return name
 end
 
----@param filename string
+---@param filename string?
 ---@param text string
 ---@return string
 function M.write(filename, text)
