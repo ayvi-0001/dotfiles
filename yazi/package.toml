@@ -1,7 +1,7 @@
 [[plugin.deps]]
 use = "KKV9/compress"
-rev = "60b24af"
-hash = "ee025be766240cc98e671754ac836da3"
+rev = "a29f1d2"
+hash = "7b84e9f52bc5777755adb2dab38b4c1c"
 
 [[plugin.deps]]
 use = "MasouShizuka/projects"
