@@ -65,21 +65,6 @@ E.spawn_window_and_set_dimensions = function(opts)
   return mux_tab, pane, gui_window
 end
 
----@param cmd? any[]
-wezterm.on("gui-startup", function(cmd) ---@diagnostic disable-line: unused-local
-  -- local args = {}
-  -- if cmd then
-  --   args = cmd.args
-  -- end
-  E.spawn_window_and_set_dimensions { ratio = 0.8, domain = "local" }
-end)
-
----@param window Window
----@param pane Pane
-wezterm.on("spawn-new-window", function(window, pane) ---@diagnostic disable-line: unused-local
-  E.spawn_window_and_set_dimensions { ratio = 0.8, domain = "local" }
-end)
-
 ---@param window Window
 ---@param axis "x"|"y"
 ---@param direction "right"|"down"|"left"|"up"
