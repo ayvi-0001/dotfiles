@@ -6,10 +6,10 @@ require("full-border"):setup()
 
 require("fg"):setup()
 
-local bookmarks = os.getenv "HOME" .. "/.config/yazi/state/bookmark"
+local bookmarks = os.getenv "YAZI_CONFIG_HOME" .. "/state/bookmark"
 require("yamb"):setup { jump_notify = true, cli = "fzf", path = bookmarks }
 
-local projects = os.getenv "HOME" .. "/.config/yazi/state/projects.json"
+local projects = os.getenv "YAZI_CONFIG_HOME" .. "/state/projects.json"
 require("projects"):setup { save = { method = "lua", lua_save_path = projects } }
 
 require("copy-file-contents"):setup {}
