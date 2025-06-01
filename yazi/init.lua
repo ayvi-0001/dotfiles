@@ -16,6 +16,8 @@ require("copy-file-contents"):setup {}
 
 require("session"):setup { sync_yanked = true }
 
+require("wezyx"):setup {}
+
 require("starship"):setup()
 
 require("zoxide"):setup { update_db = true }
