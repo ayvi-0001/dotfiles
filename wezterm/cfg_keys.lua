@@ -224,8 +224,6 @@ function M.apply_to_config(config)
     },
 
     pane = {
-      { key = "3", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_33" } },
-      { key = "6", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_66" } },
       { key = "r", mods = "NONE", action = wezterm.action.SplitPane { direction = "Right" } },
       { key = "R", mods = "NONE", action = wezterm.action.SplitPane { direction = "Right", top_level = true } },
       { key = "d", mods = "NONE", action = wezterm.action.SplitPane { direction = "Down" } },
@@ -234,6 +232,10 @@ function M.apply_to_config(config)
       { key = "L", mods = "NONE", action = wezterm.action.SplitPane { direction = "Left", top_level = true } },
       { key = "u", mods = "NONE", action = wezterm.action.SplitPane { direction = "Up" } },
       { key = "U", mods = "NONE", action = wezterm.action.SplitPane { direction = "Up", top_level = true } },
+      { key = "2", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_25" } },
+      { key = "3", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_33" } },
+      { key = "6", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_66" } },
+      { key = "7", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_75" } },
       { key = "h", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "yazi_helix" } },
       { key = "i", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_index" } },
       { key = "s", mods = "CTRL", action = wezterm.action.ActivateKeyTable { name = "pane_select" } },
@@ -245,6 +247,11 @@ function M.apply_to_config(config)
       { key = "x", mods = "NONE", action = wezterm.action.CloseCurrentPane { confirm = false } },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
     },
+
+    pane_25 = create_sized_pane_key_table(25),
+    pane_33 = create_sized_pane_key_table(33),
+    pane_66 = create_sized_pane_key_table(66),
+    pane_75 = create_sized_pane_key_table(75),
 
     pane_select = {
       { key = "t", mods = "NONE", action = wezterm.action.PaneSelect { mode = "MoveToNewTab", show_pane_ids = true } },
@@ -265,28 +272,6 @@ function M.apply_to_config(config)
       { key = "8", mods = "NONE", action = wezterm.action.ActivatePaneByIndex(7) },
       { key = "9", mods = "NONE", action = wezterm.action.ActivatePaneByIndex(8) },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
-    },
-
-    pane_33 = {
-      { key = "r", mods = "NONE", action = wezterm.action.SplitPane { direction = "Right", size = { Percent = 33 } } },
-      { key = "R", mods = "NONE", action = wezterm.action.SplitPane { direction = "Right", size = { Percent = 33 }, top_level = true } },
-      { key = "l", mods = "NONE", action = wezterm.action.SplitPane { direction = "Left", size = { Percent = 33 } } },
-      { key = "L", mods = "NONE", action = wezterm.action.SplitPane { direction = "Left", size = { Percent = 33 }, top_level = true } },
-      { key = "u", mods = "NONE", action = wezterm.action.SplitPane { direction = "Up", size = { Percent = 33 } } },
-      { key = "U", mods = "NONE", action = wezterm.action.SplitPane { direction = "Up", size = { Percent = 33 }, top_level = true } },
-      { key = "d", mods = "NONE", action = wezterm.action.SplitPane { direction = "Down", size = { Percent = 33 } } },
-      { key = "D", mods = "NONE", action = wezterm.action.SplitPane { direction = "Down", size = { Percent = 33 }, top_level = true } },
-    },
-
-    pane_66 = {
-      { key = "r", mods = "NONE", action = wezterm.action.SplitPane { direction = "Right", size = { Percent = 66 } } },
-      { key = "R", mods = "NONE", action = wezterm.action.SplitPane { direction = "Right", size = { Percent = 66 }, top_level = true } },
-      { key = "l", mods = "NONE", action = wezterm.action.SplitPane { direction = "Left", size = { Percent = 66 } } },
-      { key = "L", mods = "NONE", action = wezterm.action.SplitPane { direction = "Left", size = { Percent = 66 }, top_level = true } },
-      { key = "u", mods = "NONE", action = wezterm.action.SplitPane { direction = "Up", size = { Percent = 66 } } },
-      { key = "U", mods = "NONE", action = wezterm.action.SplitPane { direction = "Up", size = { Percent = 66 }, top_level = true } },
-      { key = "d", mods = "NONE", action = wezterm.action.SplitPane { direction = "Down", size = { Percent = 66 } } },
-      { key = "D", mods = "NONE", action = wezterm.action.SplitPane { direction = "Down", size = { Percent = 66 }, top_level = true } },
     },
 
     scroll = {
@@ -383,6 +368,24 @@ function M.apply_to_config(config)
       action = wezterm.action.Nop,
     },
   }
+end
+
+---@param percent integer
+---@return Key[]
+---@diagnostic disable-next-line: lowercase-global
+function create_sized_pane_key_table(percent)
+  local key_table = {
+    { key = "r", mods = "NONE", action = wezterm.action.SplitPane { direction = "Right", size = { Percent = percent } } },
+    { key = "R", mods = "NONE", action = wezterm.action.SplitPane { direction = "Right", size = { Percent = percent }, top_level = true } },
+    { key = "l", mods = "NONE", action = wezterm.action.SplitPane { direction = "Left", size = { Percent = percent } } },
+    { key = "L", mods = "NONE", action = wezterm.action.SplitPane { direction = "Left", size = { Percent = percent }, top_level = true } },
+    { key = "u", mods = "NONE", action = wezterm.action.SplitPane { direction = "Up", size = { Percent = percent } } },
+    { key = "U", mods = "NONE", action = wezterm.action.SplitPane { direction = "Up", size = { Percent = percent }, top_level = true } },
+    { key = "d", mods = "NONE", action = wezterm.action.SplitPane { direction = "Down", size = { Percent = percent } } },
+    { key = "D", mods = "NONE", action = wezterm.action.SplitPane { direction = "Down", size = { Percent = percent }, top_level = true } },
+  }
+
+  return key_table
 end
 
 return M
