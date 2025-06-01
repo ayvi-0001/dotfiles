@@ -69,7 +69,6 @@ end
 ---@param axis "x"|"y"
 ---@param direction "right"|"down"|"left"|"up"
 ---@param increment integer
----@private
 E.set_position = function(window, axis, direction, increment)
   if not window then
     return
@@ -100,7 +99,6 @@ end
 ---@param dimension "width"|"height"
 ---@param direction "increase"|"decrease"
 ---@param increment integer
----@private
 E.set_inner_size = function(window, dimension, direction, increment)
   if not window then
     return
@@ -130,56 +128,57 @@ E.set_inner_size = function(window, dimension, direction, increment)
   wezterm.GLOBAL.window_space[k][dimension] = d
 end
 
-wezterm.on("increase-to-top", function(window, _)
-  E.set_position(window, "y", "up", 25)
-  E.set_inner_size(window, "height", "increase", 25)
-end)
+---@class WindowSpaceOpts
+---@field enable_window_resize_events? boolean
+---@field enable_window_move_events? boolean
 
-wezterm.on("decrease-from-top", function(window, _)
-  E.set_position(window, "y", "down", 25)
-  E.set_inner_size(window, "height", "decrease", 25)
-end)
+---@param opts WindowSpaceOpts
+function E.setup(opts)
+  if opts.enable_window_resize_events then
+    wezterm.on("increase-to-top", function(window, _)
+      E.set_position(window, "y", "up", 25)
+      E.set_inner_size(window, "height", "increase", 25)
+    end)
+    wezterm.on("decrease-from-top", function(window, _)
+      E.set_position(window, "y", "down", 25)
+      E.set_inner_size(window, "height", "decrease", 25)
+    end)
+    wezterm.on("increase-to-bottom", function(window, _)
+      E.set_inner_size(window, "height", "increase", 25)
+    end)
+    wezterm.on("decrease-from-bottom", function(window, _)
+      E.set_inner_size(window, "height", "decrease", 25)
+    end)
+    wezterm.on("increase-to-left", function(window, _)
+      E.set_position(window, "x", "up", 25)
+      E.set_inner_size(window, "width", "increase", 25)
+    end)
+    wezterm.on("decrease-from-left", function(window, _)
+      E.set_position(window, "x", "down", 25)
+      E.set_inner_size(window, "width", "decrease", 25)
+    end)
+    wezterm.on("increase-to-right", function(window, _)
+      E.set_inner_size(window, "width", "increase", 25)
+    end)
+    wezterm.on("decrease-from-right", function(window, _)
+      E.set_inner_size(window, "width", "decrease", 25)
+    end)
+  end
 
-wezterm.on("increase-to-bottom", function(window, _)
-  E.set_inner_size(window, "height", "increase", 25)
-end)
-
-wezterm.on("decrease-from-bottom", function(window, _)
-  E.set_inner_size(window, "height", "decrease", 25)
-end)
-
-wezterm.on("increase-to-left", function(window, _)
-  E.set_position(window, "x", "up", 25)
-  E.set_inner_size(window, "width", "increase", 25)
-end)
-
-wezterm.on("decrease-from-left", function(window, _)
-  E.set_position(window, "x", "down", 25)
-  E.set_inner_size(window, "width", "decrease", 25)
-end)
-
-wezterm.on("increase-to-right", function(window, _)
-  E.set_inner_size(window, "width", "increase", 25)
-end)
-
-wezterm.on("decrease-from-right", function(window, _)
-  E.set_inner_size(window, "width", "decrease", 25)
-end)
-
-wezterm.on("move-window-left", function(window, _)
-  E.set_position(window, "x", "left", 25)
-end)
-
-wezterm.on("move-window-right", function(window, _)
-  E.set_position(window, "x", "right", 25)
-end)
-
-wezterm.on("move-window-up", function(window, _)
-  E.set_position(window, "y", "up", 25)
-end)
-
-wezterm.on("move-window-down", function(window, _)
-  E.set_position(window, "y", "down", 25)
-end)
+  if opts.enable_window_move_events then
+    wezterm.on("move-window-left", function(window, _)
+      E.set_position(window, "x", "left", 25)
+    end)
+    wezterm.on("move-window-right", function(window, _)
+      E.set_position(window, "x", "right", 25)
+    end)
+    wezterm.on("move-window-up", function(window, _)
+      E.set_position(window, "y", "up", 25)
+    end)
+    wezterm.on("move-window-down", function(window, _)
+      E.set_position(window, "y", "down", 25)
+    end)
+  end
+end
 
 return E
