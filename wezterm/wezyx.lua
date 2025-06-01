@@ -2,10 +2,22 @@ local utils = require "utils"
 local wezterm = require "wezterm" --[[@as Wezterm]]
 local window_space = require "window_space"
 
---[[ Functions/events for using yazi & helix in wezterm.
-This is a rough implementation, there's still issues with it,
-like the shell being hardcoded as bash only, relying on external plugins (yazi), etc,
-I plan to revisit this eventually and make a proper plugin out of it.
+--[[
+Functions/events for using yazi & helix in wezterm.
+*This is still a work-in-progress and has minimal documentation.*
+
+Requires the Yazi plugin `yazi-rs/plugins:toggle-pane`, plus the following line added
+to $YAZI_CONFIG_HOME/init.lua
+
+```lua
+if os.getenv "YAZI_HIDE_PREVIEW" then require("toggle-pane"):entry("min-preview") end
+```
+
+Requires an additional setup in Yazi to subscribe to messages from this module,
+it's not currently a standalone plugin, but can be viewed in this same repo
+at [`wezyx.yazi`](https://github.com/ayvi-0001/dotfiles/tree/main/yazi/plugins/wezyx.yazi).
+
+---
 
 The callbacks are set to run on these event names:
   - yazi-helix-launch-ide
@@ -17,6 +29,8 @@ The callbacks are set to run on these event names:
   - yazi-helix-open-in-pane-below
   - yazi-helix-open-in-pane-above
   - yazi-helix-open-in-right-pane
+  - yazi-helix-open-new-window
+  - trigger-hx-with-scrollback
 
 Example setting for keybinds:
 config.keys = {
@@ -25,9 +39,10 @@ config.keys = {
 config.key_tables = {
   pane = {
     { key = "h", action = wezterm.action.ActivateKeyTable { name = "yazi_helix" } },
+    { key = "Escape", action = "PopKeyTable" },
   },
   yazi_helix = {
-    { key = "t", action = wezterm.action.EmitEvent "yazi-helix-launch-ide" },
+    { key = "i", action = wezterm.action.EmitEvent "yazi-helix-launch-ide" },
     { key = "r", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane" },
     { key = "R", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane-top-level" },
     { key = "d", action = wezterm.action.EmitEvent "yazi-helix-open-new-bottom-pane" },
@@ -36,6 +51,7 @@ config.key_tables = {
     { key = "j", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-below" },
     { key = "k", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-above" },
     { key = "l", action = wezterm.action.EmitEvent "yazi-helix-open-in-right-pane" },
+    { key = "w", action = wezterm.action.EmitEvent "yazi-helix-open-new-window" },
     { key = "Escape", action = "PopKeyTable" },
   },
 }
@@ -43,19 +59,9 @@ config.key_tables = {
 
 ---@param _ Window
 ---@param pane Pane
----@returns nil
-local _yazi_copy_path_hovered_file = function(_, pane)
-  -- NOTE: expects the default keybindings in yazi for copying
-  -- the full path of the hovered file.
-  -- TODO: emit data from yazi another way
-  pane:send_text "cc"
-end
-
----@param _ Window
----@param pane Pane
 ---@param file? string
 ---@return boolean
-local _helix_open_file_read_from_system_clipboard = function(_, pane, file)
+local open_with_helix = function(_, pane, file)
   ---@param info LocalProcessInfo
   ---@return number
   local function _find_hx_exec(info)
@@ -80,15 +86,18 @@ local _helix_open_file_read_from_system_clipboard = function(_, pane, file)
   end
 
   if file then
-    pane:send_text(":o " .. file .. "\r")
-  else
-    -- send typable command `open`/`edit` + opening quote surrounding path
-    pane:send_text ":o '"
-    -- send <C-r> to open registers in typable command
-    pane:send_text "\x12"
-    -- enter system clipboard register and return + closing quote for path
-    pane:send_text "+'"
-    pane:send_text "\r"
+    pane:send_paste(":o '" .. file .. "'\r")
+    -- the case below is from a previous version where the file would be opened in helix
+    -- by reading the system clipboard register. it's no longer used.
+    --
+    -- else
+    --   -- send typable command `open`/`edit` + opening quote surrounding path
+    --   pane:send_text ":o '"
+    --   -- send <C-r> to open registers in typable command
+    --   pane:send_text "\x12"
+    --   -- enter system clipboard register and return + closing quote for path
+    --   pane:send_text "+'"
+    --   pane:send_text "\r"
   end
 
   return ok
@@ -112,8 +121,6 @@ local yazi_helix_launch_ide = function(_, pane)
     direction = "Left",
     cwd = cwd,
     size = 0.25,
-    -- requires yazi-rs/plugins:toggle-pane + line below added to $YAZI_CONFIG_HOME/init.lua
-    -- if os.getenv "YAZI_HIDE_PREVIEW" then require("toggle-pane"):entry("min-preview") end
     set_environment_variables = { YAZI_HIDE_PREVIEW = "1" },
   }
 
@@ -124,9 +131,8 @@ local yazi_helix_launch_ide = function(_, pane)
   yazi_pane:send_text [[ function y() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
     yazi "$@" --cwd-file="$tmp"
-    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-      builtin cd -- "$cwd"
-    fi
+    IFS= read -r -d '' cwd < "$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
     rm -f -- "$tmp"
   } && y]]
   yazi_pane:send_text "\r"
@@ -152,6 +158,43 @@ local yazi_helix_launch_ide = function(_, pane)
   yazi_pane:activate()
 end
 
+---Publish a message to _all_ yazi instances.
+---Payload is encoded as json before being sent to receivers.
+---@param payload { [string]: string|number }
+local ya_pub_wezyx = function(payload)
+  wezterm.run_child_process {
+    "ya",
+    "pub-to",
+    "0",
+    "wezyx",
+    "--json",
+    wezterm.json_encode(payload),
+  }
+end
+
+---This function first publishes a message to yazi, only the instance with the
+---matching wezterm pane id will execute the callback.
+---The target yazi instance will save the hovered url in yazi's cache dir.
+---The hovered url will be saved in a file named `yazi-hovered-wezterm-pane-$WEZTERM_PANE`,
+---and this function will read and return the contents.
+---@param pane_id number
+---@return string
+local yazi_read_hovered_path = function(pane_id)
+  ya_pub_wezyx { fn = "cache_hovered_url", wezterm_pane = pane_id }
+
+  local yazi_cache_dir = wezterm.home_dir .. "/.cache/yazi"
+  local file_template = "yazi-hovered-wezterm-pane-"
+  local filename = yazi_cache_dir .. "/" .. file_template .. tostring(pane_id)
+  filename = filename:gsub("\\", "/")
+
+  local file = io.open(filename, "rb")
+  assert(file, "error: failed to open file " .. filename)
+  local path = file:read "*a" --[[@as string]]
+  file:close()
+
+  return path
+end
+
 ---Open the hovered path in yazi into an adjacent helix pane.
 ---@param window Window
 ---@param pane Pane
@@ -165,13 +208,12 @@ local yazi_helix_open_in_pane = function(window, pane, direction, file)
   local _inner = function(_window, _pane)
     local right_pane = _pane:tab():get_pane_direction(direction)
     if not file then
-      _yazi_copy_path_hovered_file(_window, _pane)
-      local ok = _helix_open_file_read_from_system_clipboard(window, right_pane)
+      local ok = open_with_helix(_window, right_pane, yazi_read_hovered_path(_pane:pane_id()))
       if ok then
         right_pane:activate()
       end
     else
-      _helix_open_file_read_from_system_clipboard(window, right_pane, file)
+      open_with_helix(window, right_pane, file)
     end
   end
   return _inner(window, pane)
@@ -181,34 +223,33 @@ end
 ---@param window Window
 ---@param pane Pane
 ---@param direction string
----@param top_level boolean
+---@param top_level boolean?
 ---@return nil
 local yazi_helix_open_new_pane = function(window, pane, direction, top_level)
-  ---@param _window Window
+  ---@param _ Window
   ---@param _pane Pane
   ---@return nil
-  local _inner = function(_window, _pane)
-    _yazi_copy_path_hovered_file(_window, _pane)
-    local new_pane = _pane:split {
-      domain = "DefaultDomain",
+  local _inner = function(_, _pane)
+    _pane:split {
       direction = direction,
-      args = { "hx" },
+      args = { "hx", yazi_read_hovered_path(_pane:pane_id()) },
       size = 0.5,
       top_level = top_level or false,
     }
-    _helix_open_file_read_from_system_clipboard(window, new_pane)
   end
   return _inner(window, pane)
 end
 
 ---Open the hovered path in yazi into a new helix window.
----@param window Window
+---@param _ Window
 ---@param pane Pane
 ---@returns nil
-local yazi_helix_open_new_window = function(window, pane)
-  _yazi_copy_path_hovered_file(window, pane)
-  local _, new_pane, new_window = window_space.spawn_window_and_set_dimensions { ratio = 0.5, domain = "local", args = { "hx" } }
-  _helix_open_file_read_from_system_clipboard(new_window, new_pane)
+local yazi_helix_open_new_window = function(_, pane)
+  window_space.spawn_window_and_set_dimensions {
+    ratio = 0.5,
+    domain = "local",
+    args = { "hx", yazi_read_hovered_path(pane:pane_id()) },
+  }
 end
 
 -- set callbacks for yazi/helix events.
