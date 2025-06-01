@@ -7,7 +7,19 @@ wezterm.on("gui-startup", function(cmd) ---@diagnostic disable-line: unused-loca
   -- if cmd then
   --   args = cmd.args
   -- end
-  window_space.spawn_window_and_set_dimensions { ratio = 0.8, domain = "local" }
+  window_space.spawn_window_and_set_dimensions {
+    ratio = 0.8,
+    domain = "local",
+    offsets = { x = 0, y = -30 },
+    screen_name = "DISPLAY1: QG221Q on NVIDIA GeForce RTX 4070 SUPER",
+  }
+  window_space.spawn_window_and_set_dimensions {
+    ratio = 0.9,
+    domain = "local",
+    screen_name = "DISPLAY2: Generic PnP Monitor on NVIDIA GeForce RTX 4070 SUPER",
+    offsets = { x = 0, y = -30 },
+    args = { "bash", "-c", "gsudo btop4win" },
+  }
 end)
 
 ---@param window Window
