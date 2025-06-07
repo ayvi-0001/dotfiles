@@ -195,6 +195,7 @@ function M.apply_to_config(config)
       { key = "s", mods = "NONE", action = wezterm.action.Show },
       { key = "l", mods = "NONE", action = wezterm.action.ShowLauncher },
       { key = "q", mods = "NONE", action = wezterm.action.QuitApplication },
+      { key = "f", mods = "NONE", action = wezterm.action.ToggleFullScreen },
       { key = "w", mods = "NONE", action = wezterm.action_callback(callbacks.launch_workspace) },
       { key = "n", mods = "NONE", action = wezterm.action_callback(callbacks.create_workspace) },
       { key = "1", mods = "NONE", action = wezterm.action.ActivateWindow(0) },
