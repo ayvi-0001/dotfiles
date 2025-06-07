@@ -42,6 +42,13 @@ end
 ---@param window Window
 ---@param pane Pane
 ---@returns nil
+function M.move_pane_to_new_tab(window, pane) ---@diagnostic disable-line: unused-local
+  pane:move_to_new_tab():activate()
+end
+
+---@param window Window
+---@param pane Pane
+---@returns nil
 function M.scroll_to_bottom(window, pane)
   window:perform_action(
     wezterm.action.Multiple {
