@@ -3,6 +3,6 @@
   "runtime.version": "Lua 5.4",
   "workspace.useGitIgnore": false,
   "workspace.library": [
-    "~/.config/wezterm/wezterm-types/"
+    "./types"
   ]
 }
