@@ -40,8 +40,6 @@ wezterm.on("spawn-new-window", function(window, pane) ---@diagnostic disable-lin
   window_space.spawn_window_and_set_dimensions { ratio = 0.8, cwd = cwd, domain = "local" }
 end)
 
-end)
-
 ---@param window Window
 ---@param _ Pane
 wezterm.on("update-right-status", function(window, _)

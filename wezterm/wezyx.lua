@@ -2,12 +2,11 @@ local utils = require "utils"
 local wezterm = require "wezterm" --[[@as Wezterm]]
 local window_space = require "window_space"
 
---[[
-Functions/events for using yazi & helix in wezterm.
+--[[ # Module for using Yazi & Helix in Wezterm.
 *This is still a work-in-progress and has minimal documentation.*
 
 Requires the Yazi plugin `yazi-rs/plugins:toggle-pane`, plus the following line added
-to $YAZI_CONFIG_HOME/init.lua
+to `$YAZI_CONFIG_HOME/init.lua`
 
 ```lua
 if os.getenv "YAZI_HIDE_PREVIEW" then require("toggle-pane"):entry("min-preview") end
@@ -15,85 +14,73 @@ if os.getenv "YAZI_HIDE_PREVIEW" then require("toggle-pane"):entry("min-preview"
 
 Requires an additional setup in Yazi to subscribe to messages from this module,
 it's not currently a standalone plugin, but can be viewed in this same repo
-at [`wezyx.yazi`](https://github.com/ayvi-0001/dotfiles/tree/main/yazi/plugins/wezyx.yazi).
+at [`yazi/plugins/wezyx.yazi`](https://github.com/ayvi-0001/dotfiles/tree/main/yazi/plugins/wezyx.yazi).
 
 ---
 
-The callbacks are set to run on these event names:
-  - yazi-helix-launch-ide
-  - yazi-helix-open-new-right-pane
-  - yazi-helix-open-new-right-pane-top-level
-  - yazi-helix-open-new-bottom-pane
-  - yazi-helix-open-new-bottom-pane-top-level
-  - yazi-helix-open-in-left-pane
-  - yazi-helix-open-in-pane-below
-  - yazi-helix-open-in-pane-above
-  - yazi-helix-open-in-right-pane
-  - yazi-helix-open-new-window
-  - trigger-hx-with-scrollback
+## Callback events
 
-Example setting for keybinds:
+ - yazi-helix-launch-ide
+ - yazi-helix-open-new-window
+ - trigger-hx-with-scrollback
+ - yazi-helix-open-new-right-pane
+ - yazi-helix-open-new-right-pane-top-level
+ - yazi-helix-open-new-bottom-pane
+ - yazi-helix-open-new-bottom-pane-top-level
+ - yazi-helix-open-in-left-pane
+ - yazi-helix-open-in-pane-below
+ - yazi-helix-open-in-pane-above
+ - yazi-helix-open-in-right-pane
+
+### Example setting for keybinds:
+
+```lua
 config.keys = {
   { key = "p", mods = "CTRL", action = wezterm.action.ActivateKeyTable { name = "pane" } },
 }
 config.key_tables = {
   pane = {
-    { key = "h", action = wezterm.action.ActivateKeyTable { name = "yazi_helix" } },
+    { key = "h", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "yazi_helix" } },
     { key = "Escape", action = "PopKeyTable" },
   },
   yazi_helix = {
-    { key = "i", action = wezterm.action.EmitEvent "yazi-helix-launch-ide" },
-    { key = "r", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane" },
-    { key = "R", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane-top-level" },
-    { key = "d", action = wezterm.action.EmitEvent "yazi-helix-open-new-bottom-pane" },
-    { key = "D", action = wezterm.action.EmitEvent "yazi-helix-open-new-bottom-pane-top-level" },
-    { key = "h", action = wezterm.action.EmitEvent "yazi-helix-open-in-left-pane" },
-    { key = "j", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-below" },
-    { key = "k", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-above" },
-    { key = "l", action = wezterm.action.EmitEvent "yazi-helix-open-in-right-pane" },
-    { key = "w", action = wezterm.action.EmitEvent "yazi-helix-open-new-window" },
-    { key = "Escape", action = "PopKeyTable" },
+    { key = "i", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-launch-ide" },
+    { key = "w", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-new-window" },
+    { key = "r", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane" },
+    { key = "R", mods = "SHIFT", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane-top-level" },
+    { key = "d", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-new-bottom-pane" },
+    { key = "D", mods = "SHIFT", action = wezterm.action.EmitEvent "yazi-helix-open-new-bottom-pane-top-level" },
+    { key = "h", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-left-pane" },
+    { key = "j", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-below" },
+    { key = "k", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-above" },
+    { key = "l", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-right-pane" },
+    { key = "S", mods = "SHIFT", action = wezterm.action.EmitEvent "trigger-hx-with-scrollback" },
+    { key = "Escape", mods = "NONE", action = "PopKeyTable" },
   },
 }
+```
 --]]
+local M = {}
 
----@param _ Window
----@param pane Pane
----@param file? string
----@return boolean
-local open_with_helix = function(_, pane, file)
-  local ok = pcall(utils.find_parent_executable, pane:get_foreground_process_info(), "hx")
-  if not ok then
-    return false
-  end
-
-  if file then
-    pane:send_paste(":o " .. file .. "\r")
-    -- the case below is from a previous version where the file would be opened in helix
-    -- by reading the system clipboard register. it's no longer used.
-    --
-    -- else
-    --   -- send typable command `open`/`edit` + opening quote surrounding path
-    --   pane:send_text ":o '"
-    --   -- send <C-r> to open registers in typable command
-    --   pane:send_text "\x12"
-    --   -- enter system clipboard register and return + closing quote for path
-    --   pane:send_text "+'"
-    --   pane:send_text "\r"
-  end
-
-  return ok
-end
-
--- moves your active pane to a new tab
--- send a SIGINT to the active pane incase any program is currently running, then launches helix
--- pane split 25% to the left and launches yazi
--- pane splits another 30% down from the helix tab, for terminal commands, clears buffer (ignore any startup messages on a new shell e.g. direnv,etc.)
--- the new tab is then moved back to the index of the original active tab
--- if the original tab had a title, it's set on the new tab
+---Creates a tab with Yazi as the file explorer, Helix as the text editor, and an additional pane for a terminal.
+---
+---  +-------------------------------------------+
+---  |      |                                    |
+---  |      |                                    |
+---  |      |               helix                |
+---  | yazi |                                    |
+---  |      |                                    |
+---  |      |------------------------------------|
+---  |      |              terminal              |
+---  +-------------------------------------------+
+---
+---Moves your active pane to a new tab.
+---Send SIGINT to the active pane, then launches Helix.
+---Pane split 25% to the left and launches Yazi.
+---Pane splits another 30% down from the Helix tab, for terminal commands, clears buffer (ignore any startup messages on a new shell e.g. direnv,etc.).
+---Original tab title is preserved and the new tab is moved back to the original index.
 ---@param window Window
 ---@param pane Pane
----@returns nil
 local yazi_helix_launch_ide = function(window, pane)
   local pid = wezterm.procinfo.pid()
   local cwd = wezterm.procinfo.current_working_dir_for_pid(pid) or pane:get_current_working_dir()
@@ -110,7 +97,7 @@ local yazi_helix_launch_ide = function(window, pane)
     end
   end
 
-  local tab = select(1, pane:move_to_new_tab())
+  local tab = pane:move_to_new_tab()
   tab:activate()
 
   if active_tab_title then
@@ -131,6 +118,7 @@ local yazi_helix_launch_ide = function(window, pane)
   -- sending commands here instead of args in pane:split(), so if you exit,
   -- it drops back into the shell, rather than closing the pane.
 
+  -- launch yazi
   -- https://yazi-rs.github.io/docs/quick-start#shell-wrapper
   local yazi_shell_wrapper = [[ function y() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -139,10 +127,11 @@ local yazi_helix_launch_ide = function(window, pane)
     [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
     rm -f -- "$tmp"
   } && y]]
-  -- launch yazi
   yazi_pane:send_text(yazi_shell_wrapper .. "\r")
+
   -- launch helix
   pane:send_text " hx\r"
+
   -- split pane below helix for terminal
   local terminal_pane = pane:split {
     args = default_prog,
@@ -150,16 +139,19 @@ local yazi_helix_launch_ide = function(window, pane)
     cwd = cwd,
     size = 0.3,
   }
+
   -- clear buffer
   terminal_pane:send_text "\x0c"
+
   -- activate helix pane first so yazi opens files in the correct pane
   pane:activate()
   wezterm.sleep_ms(100)
+
   -- start in yazi pane
   yazi_pane:activate()
 end
 
----Publish a message to _all_ yazi instances.
+---Publish a message to _all_ Yazi instances.
 ---Payload is encoded as json before being sent to receivers.
 ---@param payload { [string]: string|number }
 local ya_pub_wezyx = function(payload)
@@ -173,9 +165,9 @@ local ya_pub_wezyx = function(payload)
   }
 end
 
----This function first publishes a message to yazi, only the instance with the
+---This function first publishes a message to Yazi, only the instance with the
 ---matching wezterm pane id will execute the callback.
----The target yazi instance will save the hovered url in yazi's cache dir.
+---The target yazi instance will save the hovered url in Yazi's cache dir.
 ---The hovered url will be saved in a file named `yazi-target-paths-wezterm-pane-$WEZTERM_PANE`,
 ---and this function will read and return the contents.
 ---@param pane_id number
@@ -196,7 +188,24 @@ local yazi_read_target_paths = function(pane_id)
   return path
 end
 
----Open the hovered path in yazi into an adjacent helix pane.
+---@param _ Window
+---@param pane Pane
+---@param file? string
+---@return boolean
+local open_with_helix = function(_, pane, file)
+  local ok = pcall(utils.find_parent_executable, pane:get_foreground_process_info(), "hx")
+  if not ok then
+    return ok
+  end
+
+  if file ~= nil and file ~= "" then
+    pane:send_paste(":o " .. file .. "\r")
+  end
+
+  return ok
+end
+
+---Open the selected/hovered url(s) in Yazi into an adjacent Helix pane.
 ---@param window Window
 ---@param pane Pane
 ---@param direction string
@@ -220,7 +229,7 @@ local yazi_helix_open_in_pane = function(window, pane, direction, file)
   return _inner(window, pane)
 end
 
----Open the hovered path in yazi into a new helix pane.
+---Open the selected/hovered url(s) in Yazi into a new Helix pane.
 ---@param window Window
 ---@param pane Pane
 ---@param direction "Right" | "Left" | "Top" | "Bottom"
@@ -241,10 +250,9 @@ local yazi_helix_open_new_pane = function(window, pane, direction, top_level)
   return _inner(window, pane)
 end
 
----Open the hovered path in yazi into a new helix window.
+---Open the selected/hovered url(s) in Yazi into a new Helix window.
 ---@param _ Window
 ---@param pane Pane
----@returns nil
 local yazi_helix_open_new_window = function(_, pane)
   window_space.spawn_window_and_set_dimensions {
     ratio = 0.5,
@@ -253,22 +261,22 @@ local yazi_helix_open_new_window = function(_, pane)
   }
 end
 
--- set callbacks for yazi/helix events.
+-------------------------------------- CALLBACKS ---------------------------------------
 
----@param window Window
----@param pane Pane
+---@see wezyx.lua:97
+---@overload fun(window: Window, pane: Pane)
 wezterm.on("yazi-helix-launch-ide", function(window, pane)
   yazi_helix_launch_ide(window, pane)
 end)
 
----@param window Window
----@param pane Pane
+---Open the selected/hovered url(s) from Yazi in Helix into a new window.
+---@overload fun(window: Window, pane: Pane)
 wezterm.on("yazi-helix-open-new-window", function(window, pane)
   yazi_helix_open_new_window(window, pane)
 end)
 
----@param window Window
----@param pane Pane
+---Capture the entire scrollback and visible area of the active pane, write it to a file and then open that file in the Helix editor.
+---@overload fun(window: Window, pane: Pane)
 wezterm.on("trigger-hx-with-scrollback", function(window, pane) ---@diagnostic disable-line: unused-local
   local text = pane:get_lines_as_text(pane:get_dimensions().scrollback_rows)
   local filename = utils.write(nil, text)
@@ -279,54 +287,54 @@ wezterm.on("trigger-hx-with-scrollback", function(window, pane) ---@diagnostic d
   }
 end)
 
--- callbacks to open in new panes
-
----@param window Window
----@param pane Pane
+---Open the selected/hovered url(s) from Yazi in Helix, split horizontally, with the new pane on the right.
+---@overload fun(window: Window, pane: Pane)
 wezterm.on("yazi-helix-open-new-right-pane", function(window, pane)
   yazi_helix_open_new_pane(window, pane, "Right", false)
 end)
 
----@param window Window
----@param pane Pane
+---Open the selected/hovered url(s) from Yazi in Helix, split horizontally, with the new pane on the right.
+---Rather than splitting the active pane, split the entire window.
+---@overload fun(window: Window, pane: Pane)
 wezterm.on("yazi-helix-open-new-right-pane-top-level", function(window, pane)
   yazi_helix_open_new_pane(window, pane, "Right", true)
 end)
 
----@param window Window
----@param pane Pane
+---Open the selected/hovered url(s) from Yazi in Helix, split horizontally, with the new pane on the bottom.
+---@overload fun(window: Window, pane: Pane)
 wezterm.on("yazi-helix-open-new-bottom-pane", function(window, pane)
   yazi_helix_open_new_pane(window, pane, "Bottom", false)
 end)
 
----@param window Window
----@param pane Pane
+---Open the selected/hovered url(s) from Yazi in Helix, split horizontally, with the new pane on the bottom.
+---Rather than splitting the active pane, split the entire window.
+---@overload fun(window: Window, pane: Pane)
 wezterm.on("yazi-helix-open-new-bottom-pane-top-level", function(window, pane)
   yazi_helix_open_new_pane(window, pane, "Bottom", true)
 end)
 
--- callbacks to open in existing panes
-
----@param window Window
----@param pane Pane
+---Open the selected/hovered url(s) from Yazi into an _existing_ pane on the left running Helix.
+---@overload fun(window: Window, pane: Pane)
 wezterm.on("yazi-helix-open-in-left-pane", function(window, pane)
   yazi_helix_open_in_pane(window, pane, "Left")
 end)
 
----@param window Window
----@param pane Pane
+---Open the selected/hovered url(s) from Yazi into an _existing_ pane on the bottom running Helix.
+---@overload fun(window: Window, pane: Pane)
 wezterm.on("yazi-helix-open-in-pane-below", function(window, pane)
   yazi_helix_open_in_pane(window, pane, "Down")
 end)
 
----@param window Window
----@param pane Pane
+---Open the selected/hovered url(s) from Yazi into an _existing_ pane on the top running Helix.
+---@overload fun(window: Window, pane: Pane)
 wezterm.on("yazi-helix-open-in-pane-above", function(window, pane)
   yazi_helix_open_in_pane(window, pane, "Up")
 end)
 
----@param window Window
----@param pane Pane
+---Open the selected/hovered url(s) from Yazi into an _existing_ pane on the right running Helix.
+---@overload fun(window: Window, pane: Pane)
 wezterm.on("yazi-helix-open-in-right-pane", function(window, pane)
   yazi_helix_open_in_pane(window, pane, "Right")
 end)
+
+return M -- NOTE: currently unused, for future setup function.
