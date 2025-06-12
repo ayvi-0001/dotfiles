@@ -62,25 +62,7 @@ config.key_tables = {
 ---@param file? string
 ---@return boolean
 local open_with_helix = function(_, pane, file)
-  ---@param info LocalProcessInfo
-  ---@return number
-  local function _find_hx_exec(info)
-    if not info then
-      return -1
-    end
-    if utils.basename(tostring(info.executable)):find "hx" then
-      return info.pid
-    else
-      local parent_proc = wezterm.procinfo.get_info_for_pid(info.ppid)
-      if parent_proc then
-        return _find_hx_exec(parent_proc)
-      end
-    end
-    error "pane is not running helix"
-  end
-
-  local info = pane:get_foreground_process_info()
-  local ok, _ = pcall(_find_hx_exec, info)
+  local ok = pcall(utils.find_parent_executable, pane:get_foreground_process_info(), "hx")
   if not ok then
     return false
   end

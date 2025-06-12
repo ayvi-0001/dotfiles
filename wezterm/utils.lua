@@ -45,4 +45,27 @@ function M.get_url_file_path(url)
   return file_path
 end
 
+---@param info LocalProcessInfo?
+---@param name string
+---@return LocalProcessInfo?
+function M.find_parent_executable(info, name)
+  if not info then
+    wezterm.log_error "find_parent_executable: no info passed."
+    return
+  end
+  if info.name:find(name) then
+    return info
+  else
+    local parent_proc = wezterm.procinfo.get_info_for_pid(info.ppid)
+    if parent_proc then
+      return M.find_parent_executable(parent_proc, name)
+    end
+  end
+
+  local err_msg = "find_parent_executable: parent process `" .. name .. "` not found in adjacent pane."
+  local windows = wezterm.gui.gui_windows()
+  windows[1]:toast_notification("Wezterm", err_msg, nil, 4000)
+  error(err_msg)
+end
+
 return M
