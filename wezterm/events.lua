@@ -1,31 +1,45 @@
+local utils = require "utils"
 local wezterm = require "wezterm" --[[@as Wezterm]]
 local window_space = require "window_space"
 
----@param cmd? any[]
+---@param cmd { args?: string[]?, cwd?: string, set_environment_variables?: table<[string], string>, domain: { ["DomainName"]:  string }, position: {x: integer, y: integer, origin: PositionOrigin}, width?: integer?, height?: integer?, workspace?: string? }
 wezterm.on("gui-startup", function(cmd) ---@diagnostic disable-line: unused-local
-  -- local args = {}
-  -- if cmd then
-  --   args = cmd.args
-  -- end
-  window_space.spawn_window_and_set_dimensions {
+  local _, primary_pane, primary_window = window_space.spawn_window_and_set_dimensions {
     ratio = 0.8,
     domain = "local",
     offsets = { x = 0, y = -30 },
     screen_name = "DISPLAY1: QG221Q on NVIDIA GeForce RTX 4070 SUPER",
   }
-  window_space.spawn_window_and_set_dimensions {
+  -- start with 3 tabs
+  primary_window:mux_window():spawn_tab {}
+  primary_window:mux_window():spawn_tab {}
+
+  local secondary_tab, secondary_pane, _ = window_space.spawn_window_and_set_dimensions {
     ratio = 0.9,
     domain = "local",
     screen_name = "DISPLAY2: Generic PnP Monitor on NVIDIA GeForce RTX 4070 SUPER",
     offsets = { x = 0, y = -30 },
-    args = { "bash", "-c", "gsudo btop4win" },
+    args = { "bash", "-c", "sudo btop4win" },
   }
+  secondary_pane:split {
+    args = { "bash", "-c", "sudo bandwhich --show-dns --total-utilization" },
+    direction = "Bottom",
+    size = 0.3,
+  }
+  secondary_tab:set_title "btop4win/bandwhich"
+
+  primary_pane:activate()
 end)
 
 ---@param window Window
 ---@param pane Pane
 wezterm.on("spawn-new-window", function(window, pane) ---@diagnostic disable-line: unused-local
-  window_space.spawn_window_and_set_dimensions { ratio = 0.8, domain = "local" }
+  local cwd = pane:get_current_working_dir()
+  ---@cast cwd Url
+  cwd = utils.get_url_file_path(cwd)
+  window_space.spawn_window_and_set_dimensions { ratio = 0.8, cwd = cwd, domain = "local" }
+end)
+
 end)
 
 ---@param window Window

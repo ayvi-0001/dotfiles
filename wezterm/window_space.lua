@@ -9,7 +9,8 @@ local E = {}
 
 ---@class SpawnWindowOpts
 ---@field ratio number
----@field domain string
+---@field domain? string
+---@field cwd? string
 ---@field screen_name? "active"|"main"|string = "active"
 ---@field offsets? { x?: number, y?: number }
 ---@field args? string[]
@@ -45,6 +46,7 @@ E.spawn_window_and_set_dimensions = function(opts)
 
   local mux_tab, pane, mux_window = wezterm.mux.spawn_window {
     args = opts.args,
+    cwd = opts.cwd,
     position = { x = x, y = y, origin = "ActiveScreen" },
     domain = { DomainName = opts.domain or "local" },
   }
