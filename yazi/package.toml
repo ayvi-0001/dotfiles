@@ -1,17 +1,17 @@
 [[plugin.deps]]
 use = "KKV9/compress"
-rev = "a29f1d2"
-hash = "7b84e9f52bc5777755adb2dab38b4c1c"
+rev = "9fc8fe0"
+hash = "2ad086899bf368fba211a33d8f68c39d"
 
 [[plugin.deps]]
 use = "MasouShizuka/projects"
-rev = "96af237"
-hash = "4ed75718525437a6fdff1c44109b4ad0"
+rev = "7037dd5"
+hash = "9a4524dc938af1d30f2d115be7b64900"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
-rev = "428d43a"
-hash = "73b1c5d91575dea1a49c66302860797"
+rev = "6a0f3f7"
+hash = "d5a74d95c2e8194ac352c5e10e81e64f"
 
 [[plugin.deps]]
 use = "dawsers/toggle-view"
@@ -25,28 +25,28 @@ hash = "7cc42012a7c2099f80064d228feb8d44"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "c0ad8a3"
+rev = "aeca767"
 hash = "47865a70cade14a0b9b6bc6a54f16bdb"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "c0ad8a3"
+rev = "aeca767"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "c0ad8a3"
+rev = "aeca767"
 hash = "bf6f074cd41ee33c3360341d168f9733"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "c0ad8a3"
+rev = "aeca767"
 hash = "30fc0b37f03a597b92d387268319450f"
 
 [[plugin.deps]]
 use = "dedukun/relative-motions"
-rev = "ce2e890"
-hash = "23915860e59348bf4166778bb0e606f7"
+rev = "2e3b617"
+hash = "b67ee12053113983273e9118a7d1272b"
 
 [[plugin.deps]]
 use = "pirafrank/what-size"
@@ -55,13 +55,13 @@ hash = "fca231a128488a554823374f8f6d5241"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "c0ad8a3"
+rev = "aeca767"
 hash = "d5d4f3527592da5fbe77fd6f51815f80"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "c0ad8a3"
-hash = "c0b6cd7dc830b96e77e5c8a71eec7926"
+rev = "aeca767"
+hash = "277ba273e5d3d647feb5808d0fe4e4e0"
 
 [[plugin.deps]]
 use = "ayvi-0001/git-cd-root-dir"
@@ -70,18 +70,18 @@ hash = "91555948d626c1bd8dc698915ac9c5d9"
 
 [[plugin.deps]]
 use = "AnirudhG07/plugins-yazi:copy-file-contents"
-rev = "49975ae"
-hash = "a61930b827d8f1ef8fa016409de458ed"
+rev = "71545f4"
+hash = "f8530ee84fee95dbcc26bb1d8d8019c7"
 
 [[plugin.deps]]
 use = "aresler/path-from-root"
-rev = "7d05b87"
-hash = "46977a29d4349d11465af1817f17d414"
+rev = "22b6fb5"
+hash = "98cdb2e889b73c4d4a8945f166486605"
 
 [[plugin.deps]]
 use = "Sonico98/exifaudio"
-rev = "7ff7141"
-hash = "666ccba55119fba4c25b8ad354b2855c"
+rev = "e766cd2"
+hash = "5fd39bf4e88d6a046d4b81691a38d615"
 
 [[plugin.deps]]
 use = "josephschmitt/auto-layout"
@@ -90,12 +90,12 @@ hash = "747a700c90fffc5b187a6094fd0661b0"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:types"
-rev = "c0ad8a3"
-hash = "64f396bcd385d726d1b8fad01932b89e"
+rev = "aeca767"
+hash = "c255054d6a70754db6cb96b97ad1ccd7"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "c0ad8a3"
+rev = "aeca767"
 hash = "2bdc137505b8d9a0cc867a57d0e99b01"
 
 [[flavor.deps]]
