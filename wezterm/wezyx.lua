@@ -68,7 +68,7 @@ local open_with_helix = function(_, pane, file)
   end
 
   if file then
-    pane:send_paste(":o '" .. file .. "'\r")
+    pane:send_paste(":o " .. file .. "\r")
     -- the case below is from a previous version where the file would be opened in helix
     -- by reading the system clipboard register. it's no longer used.
     --
@@ -85,17 +85,39 @@ local open_with_helix = function(_, pane, file)
   return ok
 end
 
----@param _ Window
+-- moves your active pane to a new tab
+-- send a SIGINT to the active pane incase any program is currently running, then launches helix
+-- pane split 25% to the left and launches yazi
+-- pane splits another 30% down from the helix tab, for terminal commands, clears buffer (ignore any startup messages on a new shell e.g. direnv,etc.)
+-- the new tab is then moved back to the index of the original active tab
+-- if the original tab had a title, it's set on the new tab
+---@param window Window
 ---@param pane Pane
 ---@returns nil
-local yazi_helix_launch_ide = function(_, pane)
+local yazi_helix_launch_ide = function(window, pane)
   local pid = wezterm.procinfo.pid()
-  local cwd = wezterm.procinfo.current_working_dir_for_pid(pid)
+  local cwd = wezterm.procinfo.current_working_dir_for_pid(pid) or pane:get_current_working_dir()
+  local active_tab_title = window:active_tab():get_title()
+
+  window:perform_action(wezterm.action.SendKey { key = "c", mods = "CTRL" }, pane)
+
+  local default_prog = window:effective_config()["default_prog"]
+
+  local active_tab_index ---@type integer
+  for _, item in ipairs(window:mux_window():tabs_with_info()) do
+    if item.is_active then
+      active_tab_index = item.index
+    end
+  end
 
   local tab = select(1, pane:move_to_new_tab())
   tab:activate()
 
-  local default_prog = wezterm.gui.gui_windows()[1]:effective_config()["default_prog"]
+  if active_tab_title then
+    tab:set_title(active_tab_title)
+  end
+
+  window:perform_action(wezterm.action.MoveTab(active_tab_index), pane)
 
   -- split pane for yazi on left-hand side
   local yazi_pane = pane:split {
@@ -109,20 +131,18 @@ local yazi_helix_launch_ide = function(_, pane)
   -- sending commands here instead of args in pane:split(), so if you exit,
   -- it drops back into the shell, rather than closing the pane.
 
-  --start yazi, https://yazi-rs.github.io/docs/quick-start#shell-wrapper
-  yazi_pane:send_text [[ function y() {
+  -- https://yazi-rs.github.io/docs/quick-start#shell-wrapper
+  local yazi_shell_wrapper = [[ function y() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
     yazi "$@" --cwd-file="$tmp"
     IFS= read -r -d '' cwd < "$tmp"
     [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
     rm -f -- "$tmp"
   } && y]]
-  yazi_pane:send_text "\r"
-
-  --start helix
-  pane:send_text " hx"
-  pane:send_text "\r"
-
+  -- launch yazi
+  yazi_pane:send_text(yazi_shell_wrapper .. "\r")
+  -- launch helix
+  pane:send_text " hx\r"
   -- split pane below helix for terminal
   local terminal_pane = pane:split {
     args = default_prog,
@@ -130,12 +150,11 @@ local yazi_helix_launch_ide = function(_, pane)
     cwd = cwd,
     size = 0.3,
   }
-  terminal_pane:send_text "\x0c" -- clear buffer
-
+  -- clear buffer
+  terminal_pane:send_text "\x0c"
   -- activate helix pane first so yazi opens files in the correct pane
   pane:activate()
   wezterm.sleep_ms(100)
-
   -- start in yazi pane
   yazi_pane:activate()
 end
@@ -204,7 +223,7 @@ end
 ---Open the hovered path in yazi into a new helix pane.
 ---@param window Window
 ---@param pane Pane
----@param direction string
+---@param direction "Right" | "Left" | "Top" | "Bottom"
 ---@param top_level boolean?
 ---@return nil
 local yazi_helix_open_new_pane = function(window, pane, direction, top_level)
