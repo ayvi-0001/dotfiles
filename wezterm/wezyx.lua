@@ -176,15 +176,15 @@ end
 ---This function first publishes a message to yazi, only the instance with the
 ---matching wezterm pane id will execute the callback.
 ---The target yazi instance will save the hovered url in yazi's cache dir.
----The hovered url will be saved in a file named `yazi-hovered-wezterm-pane-$WEZTERM_PANE`,
+---The hovered url will be saved in a file named `yazi-target-paths-wezterm-pane-$WEZTERM_PANE`,
 ---and this function will read and return the contents.
 ---@param pane_id number
 ---@return string
-local yazi_read_hovered_path = function(pane_id)
-  ya_pub_wezyx { fn = "cache_hovered_url", wezterm_pane = pane_id }
+local yazi_read_target_paths = function(pane_id)
+  ya_pub_wezyx { fn = "cache_target_paths", wezterm_pane = pane_id }
 
   local yazi_cache_dir = wezterm.home_dir .. "/.cache/yazi"
-  local file_template = "yazi-hovered-wezterm-pane-"
+  local file_template = "yazi-target-paths-wezterm-pane-"
   local filename = yazi_cache_dir .. "/" .. file_template .. tostring(pane_id)
   filename = filename:gsub("\\", "/")
 
@@ -209,7 +209,7 @@ local yazi_helix_open_in_pane = function(window, pane, direction, file)
   local _inner = function(_window, _pane)
     local right_pane = _pane:tab():get_pane_direction(direction)
     if not file then
-      local ok = open_with_helix(_window, right_pane, yazi_read_hovered_path(_pane:pane_id()))
+      local ok = open_with_helix(_window, right_pane, yazi_read_target_paths(_pane:pane_id()))
       if ok then
         right_pane:activate()
       end
@@ -233,7 +233,7 @@ local yazi_helix_open_new_pane = function(window, pane, direction, top_level)
   local _inner = function(_, _pane)
     _pane:split {
       direction = direction,
-      args = { "hx", yazi_read_hovered_path(_pane:pane_id()) },
+      args = { "hx", yazi_read_target_paths(_pane:pane_id()) },
       size = 0.5,
       top_level = top_level or false,
     }
@@ -249,7 +249,7 @@ local yazi_helix_open_new_window = function(_, pane)
   window_space.spawn_window_and_set_dimensions {
     ratio = 0.5,
     domain = "local",
-    args = { "hx", yazi_read_hovered_path(pane:pane_id()) },
+    args = { "hx", yazi_read_target_paths(pane:pane_id()) },
   }
 end
 
