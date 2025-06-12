@@ -52,10 +52,8 @@ prepend_keymap = [
   # end: shell
 
   # start: fg.yazi
-  # NOTE `g` and `G` swapped from default (usually using ripgrep over fuzzy match)
   { on = ["f", "g"], run = "plugin fg -- rg", desc = "find file by content (ripgrep match)" },
   { on = ["f", "a"], run = "plugin fg -- rga", desc = "find file by content (ripgrep-all)" },
-  { on = ["f", "G"], run = "plugin fg", desc = "find file by content (fuzzy match)" },
   { on = ["f", "f"], run = "plugin fg -- fzf", desc = "find file by filename" },
   # end: fg.yazi
 
