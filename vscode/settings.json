@@ -63,6 +63,7 @@
   "ruff.nativeServer": "on",
   "security.workspace.trust.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
+  "svg.preview.mode": "svg",
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
