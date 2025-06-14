@@ -37,15 +37,6 @@ function cd_up() { builtin cd "$(printf "%0.s../" $(seq 1 "${1:-0}" ))"; } \
 command -v bw_ >/dev/null && function bw() { "$(which bw_)" "$@"; }
 
 
-function 7z() {
-  declare -a default_args
-  [[ ! "$*" =~ -slsl[[:space:]]* ]] && default_args+=(-slsl)
-  [[ ! "$*" =~ -ba[[:space:]]* ]] && default_args+=(-ba)
-  [[ ! "$*" =~ -spf2[[:space:]]* ]] && default_args+=(-spf2)
-  command 7z "${default_args[@]}" "$@"
-}
-
-
 function rg() {
   # The --path-separator option for rg must be exactly one byte,
   # but in git-bash, '/' is expanded to 'C:/Program Files/Git/'.
