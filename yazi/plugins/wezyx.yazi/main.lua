@@ -33,7 +33,7 @@ local get_target_paths = function()
   else
     local hovered_url = get_active_hovered().url
     if not hovered_url then
-      ya.err "error: could not determine hovered url in yazi."
+      ya.err "error: could not determine selected/hovered url(s) in yazi."
       return
     end
 
@@ -60,7 +60,9 @@ local ya_assert = function(v, msg, level)
   return v
 end
 
----Save the current hovered path in yazi's cache_dir.
+---Save target urls in a file in yazi's cache_dir.
+---If any files are selected, those will be the targeted paths.
+---If no files are selected, then it will default to the hovered url.
 ---Filename template is 'yazi-target-paths-wezterm-pane-$WEZTERM_PANE'.
 ---@param body Sendable
 ---@async
