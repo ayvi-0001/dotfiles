@@ -99,6 +99,13 @@ command         = "typescript-language-server"
 args            = ["--stdio"]
 config.hostInfo = "helix"
 
+# copy of `vscode-json-language-server` for formatting json5/jsonc
+# except with validation set to false disabled.
+[language-server.vscode-json-language-server-no-validate]
+command = "vscode-json-language-server"
+args    = ["--stdio"]
+config  = { provideFormatter = true, json = { validate = { enable = false } } }
+
 [[language]]
 name              = "python"
 shebangs          = ["python", "uv"]
@@ -246,6 +253,18 @@ language-servers = ["vscode-html-language-server", "tailwindcss-ls"]
 name             = "css"
 file-types       = ["css", "scss", "tcss"]
 language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
+
+[[language]]
+name             = "json5"
+auto-format      = true
+language-servers = ["vscode-json-language-server-no-validate"]
+indent           = { tab-width = 2, unit = "  " }
+
+[[language]]
+name             = "jsonc"
+auto-format      = true
+language-servers = ["vscode-json-language-server-no-validate"]
+indent           = { tab-width = 2, unit = "  " }
 
 [[grammar]]
 name       = "xit"
