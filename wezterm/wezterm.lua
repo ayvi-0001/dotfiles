@@ -11,6 +11,10 @@ require "events"
 require "wezyx"
 
 require("cfg_init").apply_to_config(config)
-require("floating_pane").apply_to_config(config)
+
+require("floating_pane").apply_to_config(config, {
+  connect_automatically = false,
+  serve_command = { "wezterm-mux-server", "--daemonize", "--", "bash", "-il" },
+})
 
 return config

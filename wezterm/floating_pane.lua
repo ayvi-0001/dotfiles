@@ -33,18 +33,21 @@ wezterm.on("toggle-floating-pane", function(window, pane) ---@diagnostic disable
   end
 end)
 
---- need to add binding to emit event, e.g.
---- `{ key = "F", mods = "ALT", action = wezterm.action.EmitEvent "toggle-floating-pane" }`
+---Need to add binding to emit event, e.g.
+---```lua
+--- { key = "F", mods = "ALT", action = wezterm.action.EmitEvent "toggle-floating-pane" }
+---```
 ---@param config Config
+---@param unix_domain? UnixDomain
 ---@return nil
-function M.apply_to_config(config)
+function M.apply_to_config(config, unix_domain)
   if not config.unix_domains then
     config.unix_domains = {}
   end
-  table.insert(config.unix_domains, {
-    name = "local-floating",
-    connect_automatically = false,
-  })
+
+  local floating_pane_domain = unix_domain or {}
+  floating_pane_domain.name = "local-floating"
+  table.insert(config.unix_domains, floating_pane_domain)
 end
 
 return M
