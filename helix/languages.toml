@@ -34,14 +34,6 @@ run            = "onSave"
 command = "basedpyright-langserver"
 args    = ["--stdio"]
 
-[language-server.taplo]
-command = "taplo"
-args    = ["lsp", "stdio"]
-
-[language-server.yaml-language-server]
-command = "yaml-language-server"
-args    = ["--stdio"]
-
 [language-server.basedpyright.config]
 basedpyright.analysis.diagnosticMode   = "openFilesOnly"
 basedpyright.analysis.typeCheckingMode = "recommended"
@@ -61,6 +53,14 @@ reportUnknownLambdaType           = "none"
 reportUnknownMemberType           = "none"
 reportUnknownVariableType         = "none"
 reportUnusedCallResult            = "none"
+
+[language-server.taplo]
+command = "taplo"
+args    = ["lsp", "stdio"]
+
+[language-server.yaml-language-server]
+command = "yaml-language-server"
+args    = ["--stdio"]
 
 [language-server.pylsp]
 command = "pylsp"
@@ -102,7 +102,7 @@ config.hostInfo = "helix"
 [[language]]
 name              = "python"
 shebangs          = ["python", "uv"]
-language-servers  = ["ruff", "basedpyright"] # "pylsp", "pylyzer"
+language-servers  = ["ruff", "basedpyright"] # "ty", "pylsp", "pylyzer"
 indent            = { tab-width = 4, unit = "    " }
 auto-format       = true
 formatter.command = "ruff"
@@ -197,7 +197,7 @@ auto-format       = true
 formatter.command = "stylua"
 formatter.args    = ["--search-parent-directories", "-", "--stdin-filepath", "%{buffer_name}"]
 
-# echo '; inherits: git-ignore' > "$HELIX_RUNTIME/queries/filter/highlights.scm"
+# mkdir -p "$HELIX_RUNTIME/queries/filter" && echo '; inherits: git-ignore' > "$HELIX_RUNTIME/queries/filter/highlights.scm"
 [[language]]
 name            = "filter"
 scope           = "source.filter"
