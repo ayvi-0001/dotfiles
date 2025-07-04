@@ -98,6 +98,7 @@ q       = ":q"
 Q       = ":bc"
 C-S-q   = ":bc!"
 C-q     = ":q!"
+C-r     = ":rla"
 ret     = ["open_below", "normal_mode"]
 f       = ["find_next_char", "normal_mode"]
 C-j     = ["goto_next_paragraph"]
