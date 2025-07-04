@@ -11,8 +11,9 @@ wezterm.on("gui-startup", function(cmd) ---@diagnostic disable-line: unused-loca
     screen_name = "DISPLAY1: QG221Q on NVIDIA GeForce RTX 4070 SUPER",
   }
   -- start with 3 tabs
-  primary_window:mux_window():spawn_tab {}
-  primary_window:mux_window():spawn_tab {}
+  local mux_window = primary_window:mux_window()
+  mux_window:spawn_tab {}
+  mux_window:spawn_tab {}
 
   local secondary_tab, secondary_pane, _ = window_space.spawn_window_and_set_dimensions {
     ratio = 0.9,
@@ -28,6 +29,7 @@ wezterm.on("gui-startup", function(cmd) ---@diagnostic disable-line: unused-loca
   }
   secondary_tab:set_title "btop4win/bandwhich"
 
+  primary_window:focus()
   primary_pane:activate()
 end)
 
