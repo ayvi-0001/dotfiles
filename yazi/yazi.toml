@@ -89,6 +89,10 @@ prepend_previewers = [
   { mime = "audio/*", run = "exifaudio" },
 ]
 prepend_fetchers = [{ id = "git", name = "*", run = "git" }]
+append_previewers = [
+  { mime = "application/*", run = 'piper -- exiftool "$1"' },
+  { name = "*", run = 'piper -- bat -p --color=always "$1"' },
+]
 
 [input]
 cursor_blink  = true
