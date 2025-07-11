@@ -22,6 +22,7 @@ terminal                 = { command = "bash", args = ["-c"] }
 text-width               = 200
 true-color               = true
 undercurl                = true
+editor-config            = true
 
 [editor.auto-save]
 focus-lost          = true
