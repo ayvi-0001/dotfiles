@@ -38,7 +38,7 @@ tab     = "→"
 tabpad  = "·" # Tabs will look like "→···" (depending on tab width)
 
 [editor.inline-diagnostics]
-cursor-line     = "warning"
+cursor-line     = "hint"
 other-lines     = "disable"
 prefix-len      = 1
 max-wrap        = 20
