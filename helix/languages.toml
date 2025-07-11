@@ -121,8 +121,8 @@ shebangs          = ["python", "uv"]
 language-servers  = ["ruff", "basedpyright"] # "ty", "pylsp", "pylyzer"
 indent            = { tab-width = 4, unit = "    " }
 auto-format       = true
-formatter.command = "ruff"
-formatter.args    = ["format", "-", "--stdin-filename", "%{buffer_name}"]
+formatter.command = "bash"
+formatter.args    = ["-c", "ruff check --fix --extend-select I --silent --stdin-filename %{buffer_name} - | ruff format - --stdin-filename %{buffer_name}"]
 
 [[language]]
 name                          = "rust"
