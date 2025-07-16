@@ -14,89 +14,30 @@ function M.apply_to_config(config)
   config.hide_mouse_cursor_when_typing = false
   config.treat_left_ctrlalt_as_altgr = true
 
+  local key_tables = {
+    pane = { name = "pane", timeout_milliseconds = 3000 },
+    resize = { name = "resize", one_shot = false, timeout_milliseconds = 3000, until_unknown = true },
+    resize_window = { name = "resize_window", one_shot = false, replace_current = true },
+    move = { name = "move", one_shot = false, timeout_milliseconds = 1000, replace_current = true },
+    tab = { name = "tab", one_shot = false, timeout_milliseconds = 1000, until_unknown = true, replace_current = true },
+    scroll = { name = "scroll", one_shot = false, until_unknown = true, replace_current = true },
+    session = { name = "session", timeout_milliseconds = 3000, until_unknown = true, replace_current = true },
+    disable_one_shot = { name = "disable_key_tables", until_unknown = false },
+    disable = { name = "disable_key_tables", one_shot = false, until_unknown = false },
+  }
+
   config.leader = { key = "-", mods = "CMD" }
+
   config.keys = {
-    {
-      key = "p",
-      mods = "CTRL",
-      action = wezterm.action.ActivateKeyTable {
-        name = "pane",
-        timeout_milliseconds = 3000,
-      },
-    },
-    {
-      key = "n",
-      mods = "CTRL",
-      action = wezterm.action.ActivateKeyTable {
-        name = "resize",
-        one_shot = false,
-        timeout_milliseconds = 3000,
-        until_unknown = true,
-      },
-    },
-    {
-      key = "h",
-      mods = "CTRL",
-      action = wezterm.action.ActivateKeyTable {
-        name = "move",
-        one_shot = false,
-        timeout_milliseconds = 1000,
-        replace_current = true,
-      },
-    },
-    {
-      key = "t",
-      mods = "CTRL",
-      action = wezterm.action.ActivateKeyTable {
-        name = "tab",
-        one_shot = false,
-        timeout_milliseconds = 1000,
-        until_unknown = true,
-        replace_current = true,
-      },
-    },
-    {
-      key = "s",
-      mods = "CTRL",
-      action = wezterm.action.ActivateKeyTable {
-        name = "scroll",
-        one_shot = false,
-        until_unknown = true,
-        replace_current = true,
-      },
-    },
-    {
-      key = "o",
-      mods = "CTRL",
-      action = wezterm.action.ActivateKeyTable {
-        name = "session",
-        timeout_milliseconds = 3000,
-        until_unknown = true,
-        replace_current = true,
-      },
-    },
-    {
-      key = "x",
-      mods = "CTRL|SHIFT",
-      action = wezterm.action.ActivateCopyMode,
-    },
-    {
-      key = "d",
-      mods = "LEADER",
-      action = wezterm.action.ActivateKeyTable {
-        name = "disable_wezterm_key_tables",
-        until_unknown = false,
-      },
-    },
-    {
-      key = "D",
-      mods = "LEADER|SHIFT",
-      action = wezterm.action.ActivateKeyTable {
-        name = "disable_wezterm_key_tables",
-        one_shot = false,
-        until_unknown = false,
-      },
-    },
+    { key = "p", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["pane"]) },
+    { key = "n", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["resize"]) },
+    { key = "h", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["move"]) },
+    { key = "t", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["tab"]) },
+    { key = "s", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["scroll"]) },
+    { key = "o", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["session"]) },
+    { key = "d", mods = "LEADER", action = wezterm.action.ActivateKeyTable(key_tables["disable_one_shot"]) },
+    { key = "D", mods = "LEADER|SHIFT", action = wezterm.action.ActivateKeyTable(key_tables["disable"]) },
+    { key = "x", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCopyMode },
     { key = "f", mods = "ALT", action = wezterm.action.EmitEvent "toggle-floating-pane" },
     { key = "h", mods = "ALT", action = wezterm.action_callback(callbacks.move_focus_or_tab_left) },
     { key = "l", mods = "ALT", action = wezterm.action_callback(callbacks.move_focus_or_tab_right) },
@@ -122,14 +63,7 @@ function M.apply_to_config(config)
       { key = "j", mods = "NONE", action = wezterm.action.AdjustPaneSize { "Down", 5 } },
       { key = "k", mods = "NONE", action = wezterm.action.AdjustPaneSize { "Up", 5 } },
       { key = "l", mods = "NONE", action = wezterm.action.AdjustPaneSize { "Right", 5 } },
-      {
-        key = "w",
-        action = wezterm.action.ActivateKeyTable {
-          name = "resize_window",
-          one_shot = false,
-          replace_current = true,
-        },
-      },
+      { key = "w", action = wezterm.action.ActivateKeyTable(key_tables["resize_window"]) },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
     },
 
@@ -201,14 +135,14 @@ function M.apply_to_config(config)
       { key = "i", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-launch-ide" },
       { key = "w", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-new-window" },
       { key = "r", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane" },
-      { key = "R", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane-top-level" },
+      { key = "R", mods = "SHIFT", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane-top-level" },
       { key = "d", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-new-bottom-pane" },
-      { key = "D", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-new-bottom-pane-top-level" },
+      { key = "D", mods = "SHIFT", action = wezterm.action.EmitEvent "yazi-helix-open-new-bottom-pane-top-level" },
       { key = "h", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-left-pane" },
       { key = "j", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-below" },
       { key = "k", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-above" },
       { key = "l", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-right-pane" },
-      { key = "S", mods = "NONE", action = wezterm.action.EmitEvent "trigger-hx-with-scrollback" },
+      { key = "S", mods = "SHIFT", action = wezterm.action.EmitEvent "trigger-hx-with-scrollback" },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
     },
 
@@ -276,25 +210,6 @@ function M.apply_to_config(config)
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
     },
 
-    disable_wezterm_key_tables = {
-      { key = "n", mods = "CTRL", action = wezterm.action.SendKey { key = "n", mods = "CTRL" } },
-      { key = "p", mods = "CTRL", action = wezterm.action.SendKey { key = "p", mods = "CTRL" } },
-      { key = "t", mods = "CTRL", action = wezterm.action.SendKey { key = "t", mods = "CTRL" } },
-      { key = "h", mods = "CTRL", action = wezterm.action.SendKey { key = "h", mods = "CTRL" } },
-      { key = "o", mods = "CTRL", action = wezterm.action.SendKey { key = "o", mods = "CTRL" } },
-      { key = "s", mods = "CTRL", action = wezterm.action.SendKey { key = "s", mods = "CTRL" } },
-      { key = "f", mods = "ALT", action = wezterm.action.SendKey { key = "f", mods = "ALT" } },
-      { key = "h", mods = "ALT", action = wezterm.action.SendKey { key = "h", mods = "ALT" } },
-      { key = "j", mods = "ALT", action = wezterm.action.SendKey { key = "j", mods = "ALT" } },
-      { key = "k", mods = "ALT", action = wezterm.action.SendKey { key = "k", mods = "ALT" } },
-      { key = "l", mods = "ALT", action = wezterm.action.SendKey { key = "l", mods = "ALT" } },
-      { key = "H", mods = "ALT", action = wezterm.action.SendKey { key = "H", mods = "ALT" } },
-      { key = "L", mods = "ALT", action = wezterm.action.SendKey { key = "L", mods = "ALT" } },
-      { key = "i", mods = "ALT", action = wezterm.action.SendKey { key = "i", mods = "ALT" } },
-      { key = "o", mods = "ALT", action = wezterm.action.SendKey { key = "o", mods = "ALT" } },
-      { key = "d", mods = "LEADER", action = "PopKeyTable" },
-    },
-
     copy_mode = {
       { key = "h", mods = "NONE", action = wezterm.action.CopyMode "MoveLeft" },
       { key = "j", mods = "NONE", action = wezterm.action.CopyMode "MoveDown" },
@@ -324,6 +239,9 @@ function M.apply_to_config(config)
       { key = "d", mods = "CTRL", action = wezterm.action.CopyMode { MoveByPage = 0.5 } },
       { key = "u", mods = "CTRL", action = wezterm.action.CopyMode { MoveByPage = -0.5 } },
       { key = ";", mods = "ALT", action = wezterm.action.CopyMode "MoveToSelectionOtherEnd" },
+      { key = "q", mods = "NONE", action = wezterm.action.Multiple { "ScrollToBottom", { CopyMode = "Close" } } },
+      { key = "c", mods = "CTRL", action = wezterm.action.Multiple { "ScrollToBottom", { CopyMode = "Close" } } },
+      { key = "Escape", mods = "NONE", action = wezterm.action.Multiple { "ScrollToBottom", { CopyMode = "Close" } } },
       {
         key = "y",
         mods = "NONE",
@@ -332,9 +250,25 @@ function M.apply_to_config(config)
           { Multiple = { "ScrollToBottom", { CopyMode = "Close" } } },
         },
       },
-      { key = "q", mods = "NONE", action = wezterm.action.Multiple { "ScrollToBottom", { CopyMode = "Close" } } },
-      { key = "c", mods = "CTRL", action = wezterm.action.Multiple { "ScrollToBottom", { CopyMode = "Close" } } },
-      { key = "Escape", mods = "NONE", action = wezterm.action.Multiple { "ScrollToBottom", { CopyMode = "Close" } } },
+    },
+
+    disable_key_tables = {
+      { key = "n", mods = "CTRL", action = wezterm.action.SendKey { key = "n", mods = "CTRL" } },
+      { key = "p", mods = "CTRL", action = wezterm.action.SendKey { key = "p", mods = "CTRL" } },
+      { key = "t", mods = "CTRL", action = wezterm.action.SendKey { key = "t", mods = "CTRL" } },
+      { key = "h", mods = "CTRL", action = wezterm.action.SendKey { key = "h", mods = "CTRL" } },
+      { key = "o", mods = "CTRL", action = wezterm.action.SendKey { key = "o", mods = "CTRL" } },
+      { key = "s", mods = "CTRL", action = wezterm.action.SendKey { key = "s", mods = "CTRL" } },
+      { key = "f", mods = "ALT", action = wezterm.action.SendKey { key = "f", mods = "ALT" } },
+      { key = "h", mods = "ALT", action = wezterm.action.SendKey { key = "h", mods = "ALT" } },
+      { key = "j", mods = "ALT", action = wezterm.action.SendKey { key = "j", mods = "ALT" } },
+      { key = "k", mods = "ALT", action = wezterm.action.SendKey { key = "k", mods = "ALT" } },
+      { key = "l", mods = "ALT", action = wezterm.action.SendKey { key = "l", mods = "ALT" } },
+      { key = "H", mods = "ALT", action = wezterm.action.SendKey { key = "H", mods = "ALT" } },
+      { key = "L", mods = "ALT", action = wezterm.action.SendKey { key = "L", mods = "ALT" } },
+      { key = "i", mods = "ALT", action = wezterm.action.SendKey { key = "i", mods = "ALT" } },
+      { key = "o", mods = "ALT", action = wezterm.action.SendKey { key = "o", mods = "ALT" } },
+      { key = "d", mods = "LEADER", action = "PopKeyTable" },
     },
   }
 
