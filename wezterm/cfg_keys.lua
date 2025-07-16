@@ -146,20 +146,8 @@ function M.apply_to_config(config)
     },
 
     move = {
-      {
-        key = "H",
-        action = wezterm.action.Multiple {
-          wezterm.action.RotatePanes "CounterClockwise",
-          wezterm.action.ActivatePaneDirection "Prev",
-        },
-      },
-      {
-        key = "L",
-        action = wezterm.action.Multiple {
-          wezterm.action.RotatePanes "Clockwise",
-          wezterm.action.ActivatePaneDirection "Next",
-        },
-      },
+      { key = "H", mods = "SHIFT", action = wezterm.action_callback(callbacks.rotate_pane_left) },
+      { key = "L", mods = "SHIFT", action = wezterm.action_callback(callbacks.rotate_pane_right) },
       { key = "h", mods = "NONE", action = wezterm.action.EmitEvent "move-window-left" },
       { key = "l", mods = "NONE", action = wezterm.action.EmitEvent "move-window-right" },
       { key = "k", mods = "NONE", action = wezterm.action.EmitEvent "move-window-up" },

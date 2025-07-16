@@ -139,6 +139,32 @@ end
 ---@param window Window
 ---@param pane Pane
 ---@returns nil
+function M.rotate_pane_left(window, pane)
+  window:perform_action(
+    wezterm.action.Multiple {
+      wezterm.action.RotatePanes "CounterClockwise",
+      wezterm.action.ActivatePaneDirection "Prev",
+    },
+    pane
+  )
+end
+
+---@param window Window
+---@param pane Pane
+---@returns nil
+function M.rotate_pane_right(window, pane)
+  window:perform_action(
+    wezterm.action.Multiple {
+      wezterm.action.RotatePanes "Clockwise",
+      wezterm.action.ActivatePaneDirection "Next",
+    },
+    pane
+  )
+end
+
+---@param window Window
+---@param pane Pane
+---@returns nil
 function M.launch_workspace(window, pane)
   local home = wezterm.home_dir
 
