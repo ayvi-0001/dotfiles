@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+set -u; gcloud projects describe "${CLOUDSDK_CORE_PROJECT:-$1}" --format="value(projectNumber)"
