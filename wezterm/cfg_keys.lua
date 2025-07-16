@@ -1,5 +1,6 @@
 local callbacks = require "callbacks"
 local wezterm = require "wezterm" --[[@as Wezterm]]
+local window_space = require "window_space"
 
 local M = {}
 
@@ -167,7 +168,7 @@ function M.apply_to_config(config)
       { key = "n", mods = "NONE", action = wezterm.action.EmitEvent "spawn-new-window" },
       { key = "w", mods = "NONE", action = wezterm.action.EmitEvent "toggle-floating-pane" },
       { key = "e", mods = "NONE", action = wezterm.action_callback(callbacks.move_pane_to_new_tab) },
-      { key = "E", mods = "SHIFT", action = wezterm.action_callback(callbacks.move_pane_to_new_window) },
+      { key = "E", mods = "SHIFT", action = wezterm.action_callback(window_space.move_pane_to_new_window) },
       { key = "x", mods = "NONE", action = wezterm.action.CloseCurrentPane { confirm = false } },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
     },

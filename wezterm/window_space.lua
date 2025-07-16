@@ -21,6 +21,7 @@ require("window_space").setup {
 
 Module functions:
   - spawn_window_and_set_dimensions
+  - move_pane_to_new_window
 
 Module events:
   - "increase-to-top"
@@ -100,6 +101,27 @@ function E.spawn_window_and_set_dimensions(opts)
 
   gui_window:set_inner_size(width, height)
   return mux_tab, pane, gui_window
+end
+
+---@param window Window
+---@param pane Pane
+---@returns nil
+function E.move_pane_to_new_window(window, pane)
+  local _, new_mux_window = pane:move_to_new_window()
+  local new_window = new_mux_window:gui_window()
+
+  local ck = _window_key(window)
+  local nk = _window_key(new_window)
+
+  wezterm.GLOBAL.window_space[nk] = wezterm.GLOBAL.window_space[ck]
+
+  local x = wezterm.GLOBAL.window_space[nk]["x"]
+  local y = wezterm.GLOBAL.window_space[nk]["y"]
+  local pixel_width = wezterm.GLOBAL.window_space[nk]["pixel_width"]
+  local pixel_height = wezterm.GLOBAL.window_space[nk]["pixel_height"]
+
+  new_window:set_position(x, y)
+  new_window:set_inner_size(pixel_width, pixel_height)
 end
 
 ---@param window Window
