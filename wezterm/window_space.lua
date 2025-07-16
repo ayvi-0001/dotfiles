@@ -2,10 +2,45 @@ local wezterm = require "wezterm" --[[@as Wezterm]]
 
 local E = {}
 
--- events below are for setting the size of spawned gui windows and centering them on the screen.
--- the x/y coordinates and dimensions are saved in wezterm's global in-memory table,
--- and are used to move and resize the window through custom events.
--- this is unfinished and very experimental.
+--[[
+Module for setting the size of spawned/detached gui windows and centering them on the screen.
+Window coordinates & dimensions are saved in wezterm's global in-memory table,
+and are used to move and resize the window through custom events.
+
+Load into wezterm.lua
+
+```lua
+require("window_space").setup {
+  enable_window_resize_events = true,
+  enable_window_move_events = true,
+  -- optional
+  resize_increment = 25
+  move_increment = 25 
+}
+```
+
+Module functions:
+  - spawn_window_and_set_dimensions
+
+Module events:
+  - "increase-to-top"
+  - "decrease-from-top"
+  - "increase-to-bottom"
+  - "decrease-from-bottom"
+  - "increase-to-left"
+  - "decrease-from-left"
+  - "increase-to-right"
+  - "decrease-from-right"
+  - "move-window-left"
+  - "move-window-right"
+  - "move-window-up"
+  - "move-window-down"
+--]]
+
+---@param window Window
+local function _window_key(window)
+  return "window-" .. window:window_id()
+end
 
 ---@class SpawnWindowOpts
 ---@field ratio number
@@ -17,7 +52,7 @@ local E = {}
 
 ---@param opts SpawnWindowOpts
 ---@return MuxTabObj, Pane, Window
-E.spawn_window_and_set_dimensions = function(opts)
+function E.spawn_window_and_set_dimensions(opts)
   local screen
   local screen_name = opts.screen_name or "main"
   if screen_name == "active" then
@@ -53,7 +88,7 @@ E.spawn_window_and_set_dimensions = function(opts)
 
   local gui_window = mux_window:gui_window() --[[@as Window]]
 
-  local k = "window-" .. mux_window:window_id()
+  local k = _window_key(gui_window)
   if not wezterm.GLOBAL.window_space then
     wezterm.GLOBAL.window_space = {}
   end
@@ -71,12 +106,12 @@ end
 ---@param axis "x"|"y"
 ---@param direction "right"|"down"|"left"|"up"
 ---@param increment integer
-E.set_position = function(window, axis, direction, increment)
+function E._set_position(window, axis, direction, increment)
   if not window then
     return
   end
 
-  local k = "window-" .. window:window_id()
+  local k = _window_key(window)
   if not wezterm.GLOBAL.window_space[k] then
     return
   end
@@ -101,13 +136,12 @@ end
 ---@param dimension "width"|"height"
 ---@param direction "increase"|"decrease"
 ---@param increment integer
-E.set_inner_size = function(window, dimension, direction, increment)
+function E._set_inner_size(window, dimension, direction, increment)
   if not window then
     return
   end
 
-  local k = "window-" .. window:window_id()
-
+  local k = _window_key(window)
   if not wezterm.GLOBAL.window_space[k] then
     return
   end
@@ -133,52 +167,58 @@ end
 ---@class WindowSpaceOpts
 ---@field enable_window_resize_events? boolean
 ---@field enable_window_move_events? boolean
+---@field resize_increment? integer=25
+---@field move_increment? integer=25
 
 ---@param opts WindowSpaceOpts
 function E.setup(opts)
   if opts.enable_window_resize_events then
+    local resize_increment = opts.resize_increment or 25
+
     wezterm.on("increase-to-top", function(window, _)
-      E.set_position(window, "y", "up", 25)
-      E.set_inner_size(window, "height", "increase", 25)
+      E._set_position(window, "y", "up", resize_increment)
+      E._set_inner_size(window, "height", "increase", resize_increment)
     end)
     wezterm.on("decrease-from-top", function(window, _)
-      E.set_position(window, "y", "down", 25)
-      E.set_inner_size(window, "height", "decrease", 25)
+      E._set_position(window, "y", "down", resize_increment)
+      E._set_inner_size(window, "height", "decrease", resize_increment)
     end)
     wezterm.on("increase-to-bottom", function(window, _)
-      E.set_inner_size(window, "height", "increase", 25)
+      E._set_inner_size(window, "height", "increase", resize_increment)
     end)
     wezterm.on("decrease-from-bottom", function(window, _)
-      E.set_inner_size(window, "height", "decrease", 25)
+      E._set_inner_size(window, "height", "decrease", resize_increment)
     end)
     wezterm.on("increase-to-left", function(window, _)
-      E.set_position(window, "x", "up", 25)
-      E.set_inner_size(window, "width", "increase", 25)
+      E._set_position(window, "x", "up", resize_increment)
+      E._set_inner_size(window, "width", "increase", resize_increment)
     end)
     wezterm.on("decrease-from-left", function(window, _)
-      E.set_position(window, "x", "down", 25)
-      E.set_inner_size(window, "width", "decrease", 25)
+      E._set_position(window, "x", "down", resize_increment)
+      E._set_inner_size(window, "width", "decrease", resize_increment)
     end)
     wezterm.on("increase-to-right", function(window, _)
-      E.set_inner_size(window, "width", "increase", 25)
+      E._set_inner_size(window, "width", "increase", resize_increment)
     end)
     wezterm.on("decrease-from-right", function(window, _)
-      E.set_inner_size(window, "width", "decrease", 25)
+      E._set_inner_size(window, "width", "decrease", resize_increment)
     end)
   end
 
   if opts.enable_window_move_events then
+    local move_increment = opts.move_increment or 25
+
     wezterm.on("move-window-left", function(window, _)
-      E.set_position(window, "x", "left", 25)
+      E._set_position(window, "x", "left", move_increment)
     end)
     wezterm.on("move-window-right", function(window, _)
-      E.set_position(window, "x", "right", 25)
+      E._set_position(window, "x", "right", move_increment)
     end)
     wezterm.on("move-window-up", function(window, _)
-      E.set_position(window, "y", "up", 25)
+      E._set_position(window, "y", "up", move_increment)
     end)
     wezterm.on("move-window-down", function(window, _)
-      E.set_position(window, "y", "down", 25)
+      E._set_position(window, "y", "down", move_increment)
     end)
   end
 end
