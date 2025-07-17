@@ -11,7 +11,7 @@ client_renderer=3 # Direct3D 11
 client_vsync=1
 client_zero_copy=true
 decoder_software=0 # hardware
-lient_windowed=0
+client_windowed=0
 network_raw_audio=1 # uncompressed
 
 # HOST
