@@ -25,23 +25,23 @@ hash = "7cc42012a7c2099f80064d228feb8d44"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "aeca767"
+rev = "1ab21d4"
 hash = "47865a70cade14a0b9b6bc6a54f16bdb"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "aeca767"
+rev = "1ab21d4"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "aeca767"
-hash = "bf6f074cd41ee33c3360341d168f9733"
+rev = "1ab21d4"
+hash = "63b6c222bf2103b3023389dde5e2ecfe"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "aeca767"
-hash = "30fc0b37f03a597b92d387268319450f"
+rev = "1ab21d4"
+hash = "d2f04875bbd4ed3dd5696e8c4b094fde"
 
 [[plugin.deps]]
 use = "dedukun/relative-motions"
@@ -55,13 +55,13 @@ hash = "62251f94eb67648d42cdfcfb8be0fad2"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "aeca767"
-hash = "d5d4f3527592da5fbe77fd6f51815f80"
+rev = "1ab21d4"
+hash = "d6f60c24d8c0cf57a855bf46115b2502"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "aeca767"
-hash = "277ba273e5d3d647feb5808d0fe4e4e0"
+rev = "1ab21d4"
+hash = "f10a14e823382d90fab5b3ee54cb38fe"
 
 [[plugin.deps]]
 use = "ayvi-0001/git-cd-root-dir"
@@ -90,13 +90,13 @@ hash = "747a700c90fffc5b187a6094fd0661b0"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:types"
-rev = "aeca767"
-hash = "c255054d6a70754db6cb96b97ad1ccd7"
+rev = "1ab21d4"
+hash = "1e047e1b13b5e3fc6ab1f5d0d04a14e2"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "aeca767"
-hash = "2bdc137505b8d9a0cc867a57d0e99b01"
+rev = "1ab21d4"
+hash = "2143a53182dbbe935a1abd1623424aa5"
 
 [[plugin.deps]]
 use = "boydaihungst/save-clipboard-to-file"
