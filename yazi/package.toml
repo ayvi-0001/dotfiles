@@ -80,8 +80,8 @@ hash = "98cdb2e889b73c4d4a8945f166486605"
 
 [[plugin.deps]]
 use = "Sonico98/exifaudio"
-rev = "e766cd2"
-hash = "5fd39bf4e88d6a046d4b81691a38d615"
+rev = "4506f9d"
+hash = "4761fffb60a12d37096c34a356380cdf"
 
 [[plugin.deps]]
 use = "josephschmitt/auto-layout"
