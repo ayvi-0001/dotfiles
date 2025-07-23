@@ -1,5 +1,5 @@
 {
-  "__VERSION__": "227",
+  "__VERSION__": "228",
   "Main": {
     "Controls": [
       {
@@ -786,6 +786,6 @@
       "Enabled": true,
       "ZeroRPMOverride": false
     },
-    "SensorCount": 24
+    "SensorCount": 26
   }
 }
