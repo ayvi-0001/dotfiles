@@ -128,7 +128,7 @@
           ]
         ],
         "Enable": true,
-        "ForceApply": false,
+        "ForceApply": true,
         "Identifier": "/lpc/nct6798d/control/1",
         "IsHidden": false,
         "ManualControl": false,
