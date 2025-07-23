@@ -5,8 +5,8 @@ hash = "2ad086899bf368fba211a33d8f68c39d"
 
 [[plugin.deps]]
 use = "MasouShizuka/projects"
-rev = "7037dd5"
-hash = "9a4524dc938af1d30f2d115be7b64900"
+rev = "a5e33db"
+hash = "3de26efded35814ba3e55e28f1c389a4"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
