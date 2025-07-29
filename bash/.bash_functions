@@ -38,16 +38,6 @@ function cd_up() { builtin cd "$(printf "%0.s../" $(seq 1 "${1:-0}" ))"; } \
 command -v bw_ >/dev/null && function bw() { "$(which bw_)" "$@"; }
 
 
-function rg() {
-  # The --path-separator option for rg must be exactly one byte,
-  # but in git-bash, '/' is expanded to 'C:/Program Files/Git/'.
-  # Use '//' instead.
-  declare -a default_args
-  [[ ! "$*" =~ --path-separator ]] && default_args+=(--path-separator '//')
-  command rg "${default_args[@]}" "$@"
-}
-
-
 # Use fd for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
 function _fzf_compgen_path() { fd --hidden --follow --exclude ".git" . "$1"; }
