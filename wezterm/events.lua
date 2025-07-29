@@ -35,11 +35,20 @@ end)
 
 ---@param window Window
 ---@param pane Pane
-wezterm.on("spawn-new-window", function(window, pane) ---@diagnostic disable-line: unused-local
+wezterm.on("spawn-new-window-80%", function(window, pane) ---@diagnostic disable-line: unused-local
   local cwd = pane:get_current_working_dir()
   ---@cast cwd Url
   cwd = utils.get_url_file_path(cwd)
   window_space.spawn_window_and_set_dimensions { ratio = 0.8, cwd = cwd, domain = "local" }
+end)
+
+---@param window Window
+---@param pane Pane
+wezterm.on("spawn-new-window-50%", function(window, pane) ---@diagnostic disable-line: unused-local
+  local cwd = pane:get_current_working_dir()
+  ---@cast cwd Url
+  cwd = utils.get_url_file_path(cwd)
+  window_space.spawn_window_and_set_dimensions { ratio = 0.5, cwd = cwd, domain = "local" }
 end)
 
 ---@param window Window
