@@ -143,6 +143,7 @@ function M.apply_to_config(config)
       { key = "j", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-below" },
       { key = "k", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-above" },
       { key = "l", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-right-pane" },
+      { key = "t", mods = "NONE", action = wezterm.action.EmitEvent "yazi-open-new-tab" },
       { key = "S", mods = "SHIFT", action = wezterm.action.EmitEvent "trigger-hx-with-scrollback" },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
     },

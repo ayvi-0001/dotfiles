@@ -261,6 +261,35 @@ local yazi_helix_open_new_window = function(_, pane)
   }
 end
 
+---Open a new tab with a current directory of the hovered file in Yazi.
+---If the hovered file is not a directory, get the directory of that file.
+---Move the new tab to the index of the current tab + 1.
+---Set the title to the new current working directory.
+---@param window Window
+---@param pane Pane
+wezterm.on("yazi-open-new-tab", function(window, pane)
+  local mux_window = window:mux_window()
+  local active_tab_index ---@type integer
+  for _, item in ipairs(mux_window:tabs_with_info()) do
+    if item.is_active then
+      active_tab_index = item.index
+    end
+  end
+
+  local hovered_url = yazi_read_target_paths(pane:pane_id())
+
+  local target_dir
+  if pcall(wezterm.read_dir, hovered_url) then
+    target_dir = hovered_url
+  else
+    target_dir = hovered_url:match "^(.*)[/\\]"
+  end
+
+  local tab = mux_window:spawn_tab { cwd = target_dir }
+  tab:set_title(utils.basename(target_dir))
+  window:perform_action(wezterm.action.MoveTab(active_tab_index + 1), tab:active_pane())
+end)
+
 -------------------------------------- CALLBACKS ---------------------------------------
 
 ---@see wezyx.lua:97
