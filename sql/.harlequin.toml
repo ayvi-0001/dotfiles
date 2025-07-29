@@ -5,4 +5,3 @@ adapter    = "sqlite"
 limit      = 100000
 mode       = "rw"
 show_files = "./"
-theme      = "github-dark"
