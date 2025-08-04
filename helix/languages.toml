@@ -260,6 +260,12 @@ name             = "html"
 language-servers = ["vscode-html-language-server", "tailwindcss-ls"]
 
 [[language]]
+name              = "xml"
+auto-format       = true
+formatter.command = "prettier"
+formatter.args    = ["--parser=html", "--stdin-filepath", "%{buffer_name}"]
+
+[[language]]
 name             = "css"
 file-types       = ["css", "scss", "tcss"]
 language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
