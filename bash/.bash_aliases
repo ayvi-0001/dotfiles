@@ -6,7 +6,9 @@ export MSYS2_ARG_CONV_EXCL='--path-separator' # disable windows path expansion f
 alias rg='rg --path-separator=/'
 
 alias ls='lsd -a -F'
-alias lt='ls --tree'
+alias lt='lsd -a -F --tree'
+alias lsc='lsd --classic'
+alias l='ls -l'
 
 alias gcat='gcloud storage cat'
 alias gcp='gcloud storage cp'
