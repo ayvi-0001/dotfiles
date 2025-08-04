@@ -64,6 +64,65 @@ end
 
 ---@param window Window
 ---@param pane Pane
+function M.zoom_in(window, pane)
+  window:perform_action(wezterm.action.IncreaseFontSize, pane)
+
+  local overrides = window:get_config_overrides() or {}
+  local effective_config = window:effective_config()
+
+  if not overrides.window_frame then
+    if not wezterm.GLOBAL.origin_window_frame_font_size then
+      wezterm.GLOBAL.origin_window_frame_font_size = effective_config.window_frame["font_size"]
+    end
+
+    overrides.window_frame = effective_config.window_frame or {}
+  end
+
+  overrides.window_frame["font_size"] = overrides.window_frame.font_size + 0.5
+  window:set_config_overrides(overrides)
+end
+
+---@param window Window
+---@param pane Pane
+function M.zoom_out(window, pane)
+  window:perform_action(wezterm.action.DecreaseFontSize, pane)
+
+  local overrides = window:get_config_overrides() or {}
+  local effective_config = window:effective_config()
+
+  if not overrides.window_frame then
+    if not wezterm.GLOBAL.origin_window_frame_font_size then
+      wezterm.GLOBAL.origin_window_frame_font_size = effective_config.window_frame["font_size"]
+    end
+
+    overrides.window_frame = effective_config.window_frame or {}
+  end
+
+  overrides.window_frame["font_size"] = overrides.window_frame.font_size - 0.5
+  window:set_config_overrides(overrides)
+end
+
+---@param window Window
+---@param pane Pane
+function M.zoom_reset(window, pane)
+  window:perform_action(wezterm.action.ResetFontSize, pane)
+
+  local overrides = window:get_config_overrides() or {}
+  local effective_config = window:effective_config()
+
+  if not overrides.window_frame then
+    overrides.window_frame = effective_config.window_frame or {}
+  end
+  if not wezterm.GLOBAL.origin_window_frame_font_size then
+    wezterm.GLOBAL.origin_window_frame_font_size = effective_config.window_frame["font_size"]
+  end
+
+  overrides.window_frame["font_size"] = wezterm.GLOBAL.origin_window_frame_font_size
+  window:set_config_overrides(overrides)
+end
+
+---@param window Window
+---@param pane Pane
 ---@returns nil
 function M.scroll_to_bottom(window, pane)
   window:perform_action(
