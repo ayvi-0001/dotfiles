@@ -147,7 +147,7 @@
         "SelectedFanCurve": {
           "CommandMode": 0,
           "Deadband": 3,
-          "IdleTemperature": 40,
+          "IdleTemperature": 35,
           "IsHidden": false,
           "LoadTemperature": 70,
           "MaxFanSpeed": 100,
@@ -229,7 +229,7 @@
         "SelectedFanCurve": {
           "CommandMode": 0,
           "Deadband": 3,
-          "IdleTemperature": 40,
+          "IdleTemperature": 35,
           "IsHidden": false,
           "LoadTemperature": 70,
           "MaxFanSpeed": 100,
@@ -376,7 +376,7 @@
             "SelectedFanCurve": {
               "CommandMode": 0,
               "Deadband": 3,
-              "IdleTemperature": 40,
+              "IdleTemperature": 35,
               "IsHidden": false,
               "LoadTemperature": 70,
               "MaxFanSpeed": 100,
@@ -468,7 +468,7 @@
         "SelectedFanCurve": {
           "CommandMode": 0,
           "Deadband": 3,
-          "IdleTemperature": 40,
+          "IdleTemperature": 35,
           "IsHidden": false,
           "LoadTemperature": 70,
           "MaxFanSpeed": 100,
@@ -590,7 +590,7 @@
       {
         "CommandMode": 0,
         "Deadband": 3,
-        "IdleTemperature": 40,
+        "IdleTemperature": 35,
         "IsHidden": false,
         "LoadTemperature": 70,
         "MaxFanSpeed": 100,
@@ -673,7 +673,7 @@
           "SelectedFanCurve": {
             "CommandMode": 0,
             "Deadband": 3,
-            "IdleTemperature": 40,
+            "IdleTemperature": 35,
             "IsHidden": false,
             "LoadTemperature": 70,
             "MaxFanSpeed": 100,
