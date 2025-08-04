@@ -155,6 +155,7 @@ name              = "markdown"
 soft-wrap.enable  = true
 text-width        = 200
 language-servers  = ["markdown-oxide", "marksman", "codebook"]
+indent            = { tab-width = 4, unit = "    " }
 auto-format       = true
 formatter.command = "prettier"
 formatter.args    = ["--parser=markdown", "--stdin-filename", "%{buffer_name}"]
