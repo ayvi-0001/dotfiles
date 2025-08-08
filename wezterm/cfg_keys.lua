@@ -16,8 +16,8 @@ function M.apply_to_config(config)
   config.treat_left_ctrlalt_as_altgr = true
 
   local key_tables = {
-    pane = { name = "pane", timeout_milliseconds = 3000 },
-    resize = { name = "resize", one_shot = false, timeout_milliseconds = 3000, until_unknown = true },
+    pane = { name = "pane", timeout_milliseconds = 3000, replace_current = true },
+    resize_pane = { name = "resize_pane", one_shot = false, replace_current = true },
     resize_window = { name = "resize_window", one_shot = false, replace_current = true },
     move = { name = "move", one_shot = false, timeout_milliseconds = 1000, replace_current = true },
     tab = { name = "tab", one_shot = false, timeout_milliseconds = 1000, until_unknown = true, replace_current = true },
@@ -31,7 +31,7 @@ function M.apply_to_config(config)
 
   config.keys = {
     { key = "p", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["pane"]) },
-    { key = "n", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["resize"]) },
+    { key = "n", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["resize_pane"]) },
     { key = "h", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["move"]) },
     { key = "t", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["tab"]) },
     { key = "s", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["scroll"]) },
@@ -59,11 +59,15 @@ function M.apply_to_config(config)
   }
 
   config.key_tables = {
-    resize = {
-      { key = "h", mods = "NONE", action = wezterm.action.AdjustPaneSize { "Left", 5 } },
-      { key = "j", mods = "NONE", action = wezterm.action.AdjustPaneSize { "Down", 5 } },
-      { key = "k", mods = "NONE", action = wezterm.action.AdjustPaneSize { "Up", 5 } },
-      { key = "l", mods = "NONE", action = wezterm.action.AdjustPaneSize { "Right", 5 } },
+    resize_pane = {
+      { key = "h", mods = "NONE", action = wezterm.action_callback(callbacks.pane_size_increase_to_left) },
+      { key = "H", mods = "SHIFT", action = wezterm.action_callback(callbacks.pane_size_decrease_from_left) },
+      { key = "j", mods = "NONE", action = wezterm.action_callback(callbacks.pane_size_increase_to_bottom) },
+      { key = "J", mods = "SHIFT", action = wezterm.action_callback(callbacks.pane_size_decrease_from_bottom) },
+      { key = "k", mods = "NONE", action = wezterm.action_callback(callbacks.pane_size_increase_to_top) },
+      { key = "K", mods = "SHIFT", action = wezterm.action_callback(callbacks.pane_size_decrease_from_top) },
+      { key = "l", mods = "NONE", action = wezterm.action_callback(callbacks.pane_size_increase_to_right) },
+      { key = "L", mods = "SHIFT", action = wezterm.action_callback(callbacks.pane_size_decrease_from_right) },
       { key = "w", action = wezterm.action.ActivateKeyTable(key_tables["resize_window"]) },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
     },

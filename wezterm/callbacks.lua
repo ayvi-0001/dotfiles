@@ -68,9 +68,10 @@ function M.zoom_in(window, pane)
   window:perform_action(wezterm.action.IncreaseFontSize, pane)
 
   local overrides = window:get_config_overrides() or {}
-  local effective_config = window:effective_config()
 
   if not overrides.window_frame then
+    local effective_config = window:effective_config()
+
     if not wezterm.GLOBAL.origin_window_frame_font_size then
       wezterm.GLOBAL.origin_window_frame_font_size = effective_config.window_frame["font_size"]
     end
@@ -88,9 +89,10 @@ function M.zoom_out(window, pane)
   window:perform_action(wezterm.action.DecreaseFontSize, pane)
 
   local overrides = window:get_config_overrides() or {}
-  local effective_config = window:effective_config()
 
   if not overrides.window_frame then
+    local effective_config = window:effective_config()
+
     if not wezterm.GLOBAL.origin_window_frame_font_size then
       wezterm.GLOBAL.origin_window_frame_font_size = effective_config.window_frame["font_size"]
     end
@@ -119,6 +121,106 @@ function M.zoom_reset(window, pane)
 
   overrides.window_frame["font_size"] = wezterm.GLOBAL.origin_window_frame_font_size
   window:set_config_overrides(overrides)
+end
+
+---@param window Window
+---@param pane Pane
+function M.pane_size_increase_to_top(window, pane)
+  local pane_up = pane:tab():get_pane_direction "Up"
+  if pane_up ~= nil then
+    pane_up:activate()
+    window:perform_action(wezterm.action.AdjustPaneSize { "Up", 5 }, window:active_pane())
+    pane:activate()
+  end
+end
+
+---@param window Window
+---@param pane Pane
+function M.pane_size_decrease_from_top(window, pane)
+  local pane_up = pane:tab():get_pane_direction "Up"
+  if pane_up ~= nil then
+    pane_up:activate()
+    window:perform_action(wezterm.action.AdjustPaneSize { "Down", 5 }, window:active_pane())
+    pane:activate()
+  end
+end
+
+---@param window Window
+---@param pane Pane
+function M.pane_size_increase_to_bottom(window, pane)
+  local pane_down = pane:tab():get_pane_direction "Down"
+  if pane_down ~= nil then
+    pane_down:activate()
+    window:perform_action(wezterm.action.AdjustPaneSize { "Down", 5 }, window:active_pane())
+    pane:activate()
+  end
+end
+
+---@param window Window
+---@param pane Pane
+function M.pane_size_decrease_from_bottom(window, pane)
+  local pane_down = pane:tab():get_pane_direction "Down"
+  if pane_down ~= nil then
+    pane_down:activate()
+    window:perform_action(wezterm.action.AdjustPaneSize { "Up", 5 }, window:active_pane())
+    pane:activate()
+  end
+end
+
+---@param window Window
+---@param pane Pane
+function M.pane_size_increase_to_right(window, pane)
+  local pane_left = pane:tab():get_pane_direction "Left"
+  local pane_right = pane:tab():get_pane_direction "Right"
+  if pane_right == nil then
+    return
+  elseif pane_left ~= nil then
+    pane_right:activate()
+    window:perform_action(wezterm.action.AdjustPaneSize { "Right", 5 }, window:active_pane())
+    pane:activate()
+  else
+    window:perform_action(wezterm.action.AdjustPaneSize { "Right", 5 }, window:active_pane())
+  end
+end
+
+---@param window Window
+---@param pane Pane
+function M.pane_size_decrease_from_right(window, pane)
+  local pane_left = pane:tab():get_pane_direction "Left"
+  local pane_right = pane:tab():get_pane_direction "Right"
+  if pane_right == nil then
+    return
+  elseif pane_left ~= nil then
+    pane_right:activate()
+    window:perform_action(wezterm.action.AdjustPaneSize { "Left", 5 }, window:active_pane())
+    pane:activate()
+  else
+    window:perform_action(wezterm.action.AdjustPaneSize { "Left", 5 }, window:active_pane())
+  end
+end
+
+---@param window Window
+---@param pane Pane
+function M.pane_size_increase_to_left(window, pane)
+  if pane:tab():get_pane_direction "Left" then
+    window:perform_action(wezterm.action.AdjustPaneSize { "Left", 5 }, window:active_pane())
+  end
+end
+
+---@param window Window
+---@param pane Pane
+function M.pane_size_decrease_from_left(window, pane)
+  local pane_left = pane:tab():get_pane_direction "Left"
+  local pane_right = pane:tab():get_pane_direction "Right"
+  if pane_left == nil then
+    return
+  elseif pane_right ~= nil then
+    pane_left:activate()
+    window:perform_action(wezterm.action.AdjustPaneSize { "Right", 5 }, window:active_pane())
+    pane:activate()
+  else
+    window:perform_action(wezterm.action.AdjustPaneSize { "Right", 5 }, window:active_pane())
+  end
 end
 
 ---@param window Window
