@@ -8,26 +8,38 @@ wezterm.on("gui-startup", function(cmd) ---@diagnostic disable-line: unused-loca
     ratio = 0.8,
     domain = "local",
     offsets = { x = 0, y = -30 },
-    screen_name = "DISPLAY1: QG221Q on NVIDIA GeForce RTX 4070 SUPER",
+    screen_name = "active",
   }
-  -- start with 3 tabs
   local mux_window = primary_window:mux_window()
   mux_window:spawn_tab {}
   mux_window:spawn_tab {}
+  mux_window:spawn_tab {}
 
-  local secondary_tab, secondary_pane, _ = window_space.spawn_window_and_set_dimensions {
-    ratio = 0.9,
-    domain = "local",
-    screen_name = "DISPLAY2: Generic PnP Monitor on NVIDIA GeForce RTX 4070 SUPER",
-    offsets = { x = 0, y = -30 },
-    args = { "bash", "-c", "sudo btop4win" },
-  }
-  secondary_pane:split {
-    args = { "bash", "-c", "sudo bandwhich --show-dns --total-utilization" },
-    direction = "Bottom",
-    size = 0.3,
-  }
-  secondary_tab:set_title "btop4win/bandwhich"
+  local screens = {}
+  for screen in pairs(wezterm.gui.screens().by_name) do
+    table.insert(screens, screen)
+  end
+
+  if #screens > 1 then
+    -- reverse order of screens array first
+    table.sort(screens, function(x, y)
+      return x < y
+    end)
+
+    local secondary_tab, secondary_pane, _ = window_space.spawn_window_and_set_dimensions {
+      ratio = 0.9,
+      domain = "local",
+      screen_name = screens[2],
+      offsets = { x = 0, y = -30 },
+      args = { "bash", "-c", "sudo btop4win" },
+    }
+    secondary_pane:split {
+      args = { "bash", "-c", "sudo bandwhich --show-dns --total-utilization" },
+      direction = "Bottom",
+      size = 0.3,
+    }
+    secondary_tab:set_title "btop4win/bandwhich"
+  end
 
   primary_window:focus()
   primary_pane:activate()
