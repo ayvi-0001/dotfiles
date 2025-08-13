@@ -20,7 +20,7 @@ function M.apply_to_config(config)
     resize_pane = { name = "resize_pane", one_shot = false, replace_current = true },
     resize_window = { name = "resize_window", one_shot = false, replace_current = true },
     move = { name = "move", one_shot = false, timeout_milliseconds = 1000, replace_current = true },
-    tab = { name = "tab", one_shot = false, timeout_milliseconds = 1000, until_unknown = true, replace_current = true },
+    tab = { name = "tab", one_shot = true, replace_current = true },
     scroll = { name = "scroll", one_shot = false, until_unknown = true, replace_current = true },
     session = { name = "session", timeout_milliseconds = 3000, until_unknown = true, replace_current = true },
     disable_one_shot = { name = "disable_key_tables", until_unknown = false },
@@ -95,8 +95,10 @@ function M.apply_to_config(config)
     },
 
     tab = {
-      { key = "n", mods = "NONE", action = wezterm.action_callback(callbacks.spawn_default_prog_in_new_tab) },
-      { key = "z", mods = "NONE", action = wezterm.action_callback(callbacks.spawn_default_prog_in_new_tab_in_home) },
+      { key = "n", mods = "NONE", action = wezterm.action_callback(callbacks.spawn_tab_cb { at_current_index = false, at_cwd = true }) },
+      { key = "n", mods = "ALT", action = wezterm.action_callback(callbacks.spawn_tab_cb { at_current_index = true, at_cwd = true }) },
+      { key = "z", mods = "NONE", action = wezterm.action_callback(callbacks.spawn_tab_cb { at_current_index = false, at_cwd = false }) },
+      { key = "z", mods = "ALT", action = wezterm.action_callback(callbacks.spawn_tab_cb { at_current_index = true, at_cwd = false }) },
       { key = "x", mods = "NONE", action = wezterm.action.CloseCurrentTab { confirm = false } },
       { key = "h", mods = "NONE", action = wezterm.action.ActivateTabRelative(-1) },
       { key = "l", mods = "NONE", action = wezterm.action.ActivateTabRelative(1) },

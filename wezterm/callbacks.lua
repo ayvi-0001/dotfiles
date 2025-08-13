@@ -288,29 +288,38 @@ function M.move_focus_or_tab_down(window, pane)
   M._move_focus_or_tab(window, pane, DIRECTION.down)
 end
 
----@param window Window
----@param pane Pane
----@returns nil
-function M.spawn_default_prog_in_new_tab(window, pane)
-  window:perform_action(
-    wezterm.action.SpawnCommandInNewTab {
-      args = window:effective_config()["default_prog"],
-    },
-    pane
-  )
-end
+---Returns a callback to open a new tab.
+---If `at_index` is true, the new tab will spawn at the current tab index + 1.
+---If `at_cwd` is true, the new tab will spawn at the current working directory,
+---if not, it will spawn at the users home directory.
+---@diagnostic disable: unused-local
+---@param opts { at_current_index?: boolean, at_cwd?: boolean }
+function M.spawn_tab_cb(opts)
+  ---@param window Window
+  ---@param pane Pane
+  return function(window, pane)
+    local active_tab_index ---@type integer
+    if opts.at_current_index then
+      for _, item in ipairs(window:mux_window():tabs_with_info()) do
+        if item.is_active then
+          active_tab_index = item.index + 1
+        end
+      end
+    end
 
----@param window Window
----@param pane Pane
----@returns nil
-function M.spawn_default_prog_in_new_tab_in_home(window, pane)
-  window:perform_action(
-    wezterm.action.SpawnCommandInNewTab {
-      args = window:effective_config()["default_prog"],
-      cwd = wezterm.home_dir,
-    },
-    pane
-  )
+    local cmd = {}
+    cmd.args = window:effective_config()["default_prog"]
+
+    if opts.at_cwd == false then
+      cmd.cwd = wezterm.home_dir
+    end
+
+    window:perform_action(wezterm.action.SpawnCommandInNewTab(cmd), pane)
+
+    if opts.at_current_index then
+      window:perform_action(wezterm.action.MoveTab(active_tab_index), window:active_pane())
+    end
+  end
 end
 
 ---@param window Window
