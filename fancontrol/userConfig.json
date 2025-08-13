@@ -1,5 +1,5 @@
 {
-  "__VERSION__": "228",
+  "__VERSION__": "230",
   "Main": {
     "Controls": [
       {
@@ -547,6 +547,7 @@
     ],
     "CustomSensors": [
       {
+        "AllowMissingSensor": false,
         "Identifier": "Mix/max-ryzen-7-5800x",
         "IsHidden": false,
         "Name": "max-ryzen-7-5800x",
@@ -786,6 +787,6 @@
       "Enabled": true,
       "ZeroRPMOverride": false
     },
-    "SensorCount": 26
+    "SensorCount": 24
   }
 }
