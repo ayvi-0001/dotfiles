@@ -34,7 +34,7 @@ else
   echo 'direnv: gcloud not found on path'
 fi
 
-if ! env | grep -q SSH_AUTH_SOCK; then 
+if ! printenv SSH_AUTH_SOCK; then 
   echo 'direnv: starting ssh agent..'
   eval "$(ssh-agent -s)"
   # If SSH_AUTH_SOCK is not a valid socket, re-run ssh-agent.
