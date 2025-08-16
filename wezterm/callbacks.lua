@@ -4,7 +4,7 @@ local M = {}
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.rename_tab(window, pane)
   local active_tab = window:active_tab()
   window:perform_action(
@@ -34,14 +34,14 @@ end
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.move_pane_to_new_window(window, pane) ---@diagnostic disable-line: unused-local
   pane:move_to_new_window()
 end
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.move_pane_to_new_tab(window, pane) ---@diagnostic disable-line: unused-local
   local active_tab_title = window:active_tab():get_title()
 
@@ -64,6 +64,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
+---@return nil
 function M.zoom_in(window, pane)
   window:perform_action(wezterm.action.IncreaseFontSize, pane)
 
@@ -85,6 +86,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
+---@return nil
 function M.zoom_out(window, pane)
   window:perform_action(wezterm.action.DecreaseFontSize, pane)
 
@@ -106,6 +108,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
+---@return nil
 function M.zoom_reset(window, pane)
   window:perform_action(wezterm.action.ResetFontSize, pane)
 
@@ -125,6 +128,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
+---@return nil
 function M.pane_size_increase_to_top(window, pane)
   local pane_up = pane:tab():get_pane_direction "Up"
   if pane_up ~= nil then
@@ -136,6 +140,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
+---@return nil
 function M.pane_size_decrease_from_top(window, pane)
   local pane_up = pane:tab():get_pane_direction "Up"
   if pane_up ~= nil then
@@ -147,6 +152,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
+---@return nil
 function M.pane_size_increase_to_bottom(window, pane)
   local pane_down = pane:tab():get_pane_direction "Down"
   if pane_down ~= nil then
@@ -158,6 +164,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
+---@return nil
 function M.pane_size_decrease_from_bottom(window, pane)
   local pane_down = pane:tab():get_pane_direction "Down"
   if pane_down ~= nil then
@@ -169,6 +176,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
+---@return nil
 function M.pane_size_increase_to_right(window, pane)
   local pane_left = pane:tab():get_pane_direction "Left"
   local pane_right = pane:tab():get_pane_direction "Right"
@@ -185,6 +193,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
+---@return nil
 function M.pane_size_decrease_from_right(window, pane)
   local pane_left = pane:tab():get_pane_direction "Left"
   local pane_right = pane:tab():get_pane_direction "Right"
@@ -201,6 +210,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
+---@return nil
 function M.pane_size_increase_to_left(window, pane)
   if pane:tab():get_pane_direction "Left" then
     window:perform_action(wezterm.action.AdjustPaneSize { "Left", 5 }, window:active_pane())
@@ -209,6 +219,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
+---@return nil
 function M.pane_size_decrease_from_left(window, pane)
   local pane_left = pane:tab():get_pane_direction "Left"
   local pane_right = pane:tab():get_pane_direction "Right"
@@ -225,7 +236,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.scroll_to_bottom(window, pane)
   window:perform_action(
     wezterm.action.Multiple {
@@ -247,6 +258,7 @@ local DIRECTION = {
 ---@param window Window
 ---@param pane Pane
 ---@param direction Direction
+---@return nil
 ---@private
 function M._move_focus_or_tab(window, pane, direction)
   local adjacent_pane = window:active_tab():get_pane_direction(direction)
@@ -262,28 +274,28 @@ end
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.move_focus_or_tab_right(window, pane)
   M._move_focus_or_tab(window, pane, DIRECTION.right)
 end
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.move_focus_or_tab_left(window, pane)
   M._move_focus_or_tab(window, pane, DIRECTION.left)
 end
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.move_focus_or_tab_up(window, pane)
   M._move_focus_or_tab(window, pane, DIRECTION.up)
 end
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.move_focus_or_tab_down(window, pane)
   M._move_focus_or_tab(window, pane, DIRECTION.down)
 end
@@ -294,6 +306,7 @@ end
 ---if not, it will spawn at the users home directory.
 ---@diagnostic disable: unused-local
 ---@param opts { at_current_index?: boolean, at_cwd?: boolean }
+---@return fun(window: Window, pane: Pane): nil
 function M.spawn_tab_cb(opts)
   ---@param window Window
   ---@param pane Pane
@@ -324,7 +337,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.rotate_pane_left(window, pane)
   window:perform_action(
     wezterm.action.Multiple {
@@ -337,7 +350,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.rotate_pane_right(window, pane)
   window:perform_action(
     wezterm.action.Multiple {
@@ -350,7 +363,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.launch_workspace(window, pane)
   local home = wezterm.home_dir
 
@@ -400,7 +413,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.create_workspace(window, pane)
   window:perform_action(
     wezterm.action.PromptInputLine {
