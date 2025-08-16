@@ -3,17 +3,35 @@
 # Adds files in directory to an archive of the same name in $pwd.
 # Eliminates duplication of root folder in archive.
 # Prompts for password to encrypt archive.
-# First argument is the directory path. Any following args are passed to 7z.
+# The _final_ argument is the directory path.
+# _If_ there are any additional arguments before the directory, those are passed to 7z.
 # Process runs in the background and prints PID before returning control to user.
 
 set -euo pipefail
 [[ -n "${DEBUG:-}" ]] && set -x
 
-target_dir="${1%/}"
-archive="$(basename "$target_dir").7z"
+declare target_dir
+declare -a _7z_opts
+
+if [[ "$#" -lt 1 ]]; then
+  # There are no arguments.
+  { echo >&2 'missing path to dir'; exit 2; }
+elif [[ "$#" -eq 1 ]]; then
+  # There is only 1 argument, use it as the directory to archive.
+  target_dir="${1%/}"
+elif [[ "$#" -gt 1 ]]; then
+  # There are multiple arguments, use the last argument as the directory to archive,
+  # and use and leading arguments as options for 7z.
+  args=("$@")
+  arridx=("${!args[@]}")
+  target_dir="${args[-1]%/}"
+  _7z_opts+=("${args[@]:${arridx[0]}:${arridx[-1]}}")
+fi
 
 ! test -d "$target_dir" \
-  && { echo >&2 'first argument must be a directory'; exit 1; }
+  && { echo >&2 "error: $target_dir is not a directory"; exit 1; }
+
+archive="$(basename "$target_dir").7z"
 
 command -v gum >/dev/null && _has_gum=true || _has_gum=false
 
@@ -25,7 +43,7 @@ else
   set -H
 fi
 
-7z a "${@:2}" -ssp -ssw -mmt=on -mtr=on -mhe -p"$REPLY" \
+7z a "${_7z_opts[@]}" -ssp -ssw -mmt=on -mtr=on -mhe -p"$REPLY" \
   -- "$archive" "$(realpath --relative-base=. "$target_dir")/." >/dev/null & 
 
 echo "PID=$!"
