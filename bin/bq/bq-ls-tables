@@ -1,0 +1,58 @@
+#!/usr/bin/env -S uv run -s
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#   "google-cloud-bigquery",
+# ]
+# ///
+
+import asyncio
+import collections.abc as collections
+import re
+import sys
+import typing as t
+import warnings
+
+from google.cloud import bigquery
+
+CLIENT = bigquery.Client()
+
+type _FutureLike[T] = asyncio.Future[T] | collections.Awaitable[T]
+
+
+async def list_tables(dataset: bigquery.Dataset, table_filter: str | None) -> None:
+    tables = t.cast(
+        "collections.Iterable[bigquery.Table]",
+        CLIENT.list_tables(dataset, max_results=1000),
+    )
+    for table in tables:
+        if table_filter:
+            if re.findall(table_filter, f"{table.table_id}"):
+                sys.stdout.write(f"{table.full_table_id}\n")
+        else:
+            sys.stdout.write(f"{table.full_table_id}\n")
+
+
+async def run_tasks(table_filter: str | None) -> None:
+    datasets = t.cast(
+        "collections.Iterable[bigquery.Dataset]",
+        CLIENT.list_datasets(include_all=True, max_results=10000),
+    )
+
+    tasks: list[_FutureLike[None]] = []
+    for dataset in datasets:
+        tasks.append(list_tables(dataset, table_filter))
+
+    await asyncio.gather(*tasks)
+
+
+warnings.filterwarnings("ignore", category=Warning)
+
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop_policy().get_event_loop()
+
+    table_filter: str = ""
+    if len(sys.argv) > 1:
+        table_filter = sys.argv[1]
+
+    loop.run_until_complete(future=run_tasks(table_filter))
