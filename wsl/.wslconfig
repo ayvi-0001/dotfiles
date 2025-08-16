@@ -1,4 +1,5 @@
 [wsl2]
+debugShell=true
 guiApplications=false
 localhostForwarding=true
 memory=8GB
