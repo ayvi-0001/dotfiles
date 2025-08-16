@@ -55,6 +55,7 @@
 [diff]
 	tool = hx
 	colorMoved = default
+	algorithm = histogram
 
 [credential "{{GITEA_URL}}"]
 	username = {{GITEA_USERNAME}}
