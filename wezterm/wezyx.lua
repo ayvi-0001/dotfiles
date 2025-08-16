@@ -62,6 +62,8 @@ config.key_tables = {
 --]]
 local M = {}
 
+local YAZI_CACHE_DIR = wezterm.home_dir .. "/.cache/yazi"
+
 ---Creates a tab with Yazi as the file explorer, Helix as the text editor, and an additional pane for a terminal.
 ---
 ---  +-------------------------------------------+
@@ -175,9 +177,8 @@ end
 local yazi_read_target_paths = function(pane_id)
   ya_pub_wezyx { fn = "cache_target_paths", wezterm_pane = pane_id }
 
-  local yazi_cache_dir = wezterm.home_dir .. "/.cache/yazi"
   local file_template = "yazi-target-paths-wezterm-pane-"
-  local filename = yazi_cache_dir .. "/" .. file_template .. tostring(pane_id)
+  local filename = YAZI_CACHE_DIR .. "/" .. file_template .. tostring(pane_id)
   filename = filename:gsub("\\", "/")
 
   local file = io.open(filename, "rb")
@@ -190,19 +191,18 @@ end
 
 ---@param _ Window
 ---@param pane Pane
----@param file? string
+---@param file string
 ---@return boolean
 local open_with_helix = function(_, pane, file)
-  local ok = pcall(utils.find_parent_executable, pane:get_foreground_process_info(), "hx")
-  if not ok then
-    return ok
+  if not pcall(utils.find_parent_executable, pane:get_foreground_process_info(), "hx") then
+    return false
   end
 
   if file ~= nil and file ~= "" then
     pane:send_paste(":o " .. file .. "\r")
   end
 
-  return ok
+  return true
 end
 
 ---Open the selected/hovered url(s) in Yazi into an adjacent Helix pane.
