@@ -40,6 +40,7 @@ Module events:
 --]]
 
 ---@param window Window
+---@return string
 local function _window_key(window)
   return "window-" .. window:window_id()
 end
@@ -106,7 +107,7 @@ end
 
 ---@param window Window
 ---@param pane Pane
----@returns nil
+---@return nil
 function M.move_pane_to_new_window(window, pane)
   local _, new_mux_window = pane:move_to_new_window()
   local new_window = new_mux_window:gui_window()
@@ -130,6 +131,7 @@ end
 ---@param axis "x"|"y"
 ---@param direction "right"|"down"|"left"|"up"
 ---@param increment integer
+---@return nil
 function M._set_position(window, axis, direction, increment)
   if not window then
     return
@@ -161,6 +163,7 @@ end
 ---@param dimension "width"|"height"
 ---@param direction "increase"|"decrease"
 ---@param increment integer
+---@return nil
 function M._set_inner_size(window, dimension, direction, increment)
   if not window then
     return
@@ -196,6 +199,7 @@ end
 ---@field move_increment? integer=25
 
 ---@param opts WindowSpaceOpts
+---@return nil
 function M.setup(opts)
   if opts.enable_window_resize_events then
     local resize_increment = opts.resize_increment or 25
