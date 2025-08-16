@@ -29,6 +29,9 @@
 	pager = delta
 	symlinks = true
 
+[gc]
+	reflogexpire = 90
+
 [receive]
 	advertisePushOptions = true
 	procReceiveRefs = refs/for
