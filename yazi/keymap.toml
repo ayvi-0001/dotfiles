@@ -41,7 +41,7 @@ prepend_keymap = [
   # end: copy-file-contents.yazi
 
   # start: save-clipboard-to-file.yazi
-  { on = ["p", "c"], run = "plugin save-clipboard-to-file", desc = "Paste clipboard content to file and hover after created" },
+  { on = "<A-p>", run = "plugin save-clipboard-to-file", desc = "Paste clipboard content to file and hover after created" },
   # end: save-clipboard-to-file.yazi
 
   # start: parent-arrow.yazi
