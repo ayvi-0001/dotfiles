@@ -5,6 +5,9 @@
 [includeIf "gitdir:{{GIT_INCLUDEIF_DIR_1}}/**"]
 	path = {{GIT_INCLUDEIF_CONFIG_1}}
 
+[url "git@gist.github.com:"]
+    pushinsteadOf = https://gist.github.com/
+
 [push]
 	autoSetupRemote = true
 
