@@ -8,22 +8,6 @@
 [url "git@gist.github.com:"]
     pushinsteadOf = https://gist.github.com/
 
-[push]
-	autoSetupRemote = true
-
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-
-[credential]
-	store = manager
-	helper = manager
-
-[http]
-	sslbackend = schannel # openssl
-
 [core]
 	autocrlf = false
 	editor = hx
@@ -36,6 +20,49 @@
 	commitGraph = true
 	# fsmonitor = true
 	# untrackedcache = true
+
+[credential]
+	store = manager
+	helper = manager
+
+[http]
+	sslbackend = schannel # openssl
+
+[push]
+	autoSetupRemote = true
+
+[alias]
+	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	lg3 = log --pretty=oneline --graph --decorate --all
+	lg4 = log --log-size --decorate=full --stat
+	lg = lg1
+	nccommit = commit --allow-empty-message -m ''
+	ignore = "!gi() { IFS=\",\"; curl -L -s \"https://www.toptal.com/developers/gitignore/api/$*\" | tee .gitignore;}; gi"
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	tool = hx
+	colorMoved = default
+	algorithm = histogram
+
+[delta]
+	navigate = true # use n and N to move between diff sections
+	side-by-side = true
+	hyperlinks = true
+	hyperlinks-file-link-format = "file://{path}:{line}"
+	line-numbers = true
+	# delta detects terminal colors automatically;
+	# set one of {dark,light} = true to disable auto-detection
+	dark = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 
 [gc]
 	reflogexpire = 90
@@ -57,33 +84,6 @@
 
 [interactive]
 	diffFilter = delta --color-only --dark --paging=never --syntax-theme base16-256 --diff-so-fancy
-
-[alias]
-	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
-	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-	lg3 = log --pretty=oneline --graph --decorate --all
-	lg4 = log --log-size --decorate=full --stat
-	lg = lg1
-	nccommit = commit --allow-empty-message -m ''
-	ignore = "!gi() { IFS=\",\"; curl -L -s \"https://www.toptal.com/developers/gitignore/api/$*\" | tee .gitignore;}; gi"
-
-[delta]
-	navigate = true # use n and N to move between diff sections
-	side-by-side = true
-	hyperlinks = true
-	hyperlinks-file-link-format = "file://{path}:{line}"
-	line-numbers = true
-	# delta detects terminal colors automatically;
-	# set one of {dark,light} = true to disable auto-detection
-	dark = true
-
-[merge]
-	conflictstyle = diff3
-
-[diff]
-	tool = hx
-	colorMoved = default
-	algorithm = histogram
 
 [credential "{{GITEA_URL}}"]
 	username = {{GITEA_USERNAME}}
