@@ -22,7 +22,7 @@
 	sslbackend = schannel # openssl
 
 [core]
-	autocrlf = input
+	autocrlf = false
 	editor = hx
 	# fscache = true
 	longpaths = true
