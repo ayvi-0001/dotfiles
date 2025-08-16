@@ -1,22 +1,23 @@
-#!/usr/bin/env python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.12"
+# ///
 
 import sys
 import typing as t
-from collections.abc import Iterable, Iterator
-
-T = t.TypeVar("T")
+from collections.abc import Callable, Iterable, Iterator
 
 STDIN: t.TextIO = sys.stdin
-stdin_text: str = STDIN.read()
+STDIN_TEXT: str = STDIN.read()
 
-if not stdin_text:
+if not STDIN_TEXT:
     sys.exit(1)
 
 
-def unique_everseen(
+def unique_everseen[T](
     iterable: Iterable[T],
-    key_iterable: t.Callable[..., T] | None = None,
-    key_yield: t.Callable[..., T] | None = None,
+    key_iterable: Callable[[T], T] | None = None,
+    key_yield: Callable[[T], T] | None = None,
 ) -> Iterator[T]:
     unique: set[T] = set()
 
@@ -32,15 +33,22 @@ def unique_everseen(
                 yield item
 
 
-lines: list[str] = stdin_text.splitlines(keepends=True)
+def main(stdin_text: str) -> None:
+    lines: list[str] = stdin_text.splitlines()
 
-unique_lines: Iterable[str] = unique_everseen(
-    lines[::-1],
-    lambda l: l.rstrip("\n").strip(),
-    lambda l: f"{l}\n",
-)
+    # trailing whitespace removed, but leading whitespace preserved.
+    # remove/update key_iterable to change behaviour
+    unique_lines: Iterable[str] = unique_everseen(
+        iterable=lines[::-1],
+        key_iterable=lambda i: i.rstrip(),
+        key_yield=lambda y: f"{y}\n",
+    )
 
-for line in list(unique_lines)[::-1]:
-    sys.stdout.write(line)
+    for line in list(unique_lines)[::-1]:
+        sys.stdout.write(line)
 
-sys.exit(0)
+    sys.exit(0)
+
+
+if __name__ == "__main__":
+    main(STDIN_TEXT)
