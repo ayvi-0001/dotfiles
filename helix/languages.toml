@@ -137,6 +137,12 @@ formatter.command             = "rustfmt"
 formatter.args                = ["+nightly"]
 
 [[language]]
+name             = "env"
+language-servers = ["bash-language-server"]
+indent           = { tab-width = 2, unit = "  " }
+grammar          = "bash"
+
+[[language]]
 name              = "xit"
 indent            = { tab-width = 4, unit = "    " }
 language-servers  = ["codebook"]
