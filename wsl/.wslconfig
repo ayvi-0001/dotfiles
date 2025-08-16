@@ -1,8 +1,8 @@
 [wsl2]
 guiApplications=false
 localhostForwarding=true
-memory=2GB
+memory=8GB
 nestedVirtualization=false
 networkingMode=mirrored
-processors=2
+processors=8
 swap=0
