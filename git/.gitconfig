@@ -31,6 +31,7 @@
 
 [uploadpack]
 	allowfilter = true
+	allowAnySHA1InWant = true
 
 [interactive]
 	diffFilter = delta --color-only --dark --paging=never --syntax-theme base16-256 --diff-so-fancy
