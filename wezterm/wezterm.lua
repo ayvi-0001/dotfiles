@@ -17,4 +17,6 @@ require("floating_pane").apply_to_config(config, {
   serve_command = { "wezterm-mux-server", "--daemonize", "--", "bash", "-il" },
 })
 
+require("docker").apply_to_config(config)
+
 return config
