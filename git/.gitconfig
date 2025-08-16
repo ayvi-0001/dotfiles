@@ -29,6 +29,9 @@
 	pager = delta
 	symlinks = true
 
+[receive]
+	advertisePushOptions = true
+
 [fetch]
 	writeCommitGraph = true
 
