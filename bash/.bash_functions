@@ -26,7 +26,7 @@ alias y=yy
 
 # Overrides the `start` command that comes with git-bash,
 # which fails to open directories with spaces.
-function start() { command "$COMSPEC" //c start "$(cygpath -m "$(realpath "$@")")"; }
+function start() { MSYS_NO_PATHCONV=1 command "$COMSPEC" /c start "$(cygpath -m "$(realpath "$@")")"; }
 
 
 # Type cd.. 3 to traverse up 3 directories
