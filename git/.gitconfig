@@ -28,6 +28,8 @@
 	longpaths = true
 	pager = delta
 	symlinks = true
+	# fsmonitor = true
+	# untrackedcache = true
 
 [gc]
 	reflogexpire = 90
