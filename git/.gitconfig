@@ -62,11 +62,13 @@
 	ignore = "!gi() { IFS=\",\"; curl -L -s \"https://www.toptal.com/developers/gitignore/api/$*\" | tee .gitignore;}; gi"
 
 [delta]
-	navigate = true
+	navigate = true # use n and N to move between diff sections
 	side-by-side = true
 	hyperlinks = true
 	hyperlinks-file-link-format = "file://{path}:{line}"
 	line-numbers = true
+	# delta detects terminal colors automatically;
+	# set one of {dark,light} = true to disable auto-detection
 	dark = true
 
 [merge]
