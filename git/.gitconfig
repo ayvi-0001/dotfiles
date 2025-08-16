@@ -28,6 +28,7 @@
 	longpaths = true
 	pager = delta
 	symlinks = true
+	quotePath = false
 	commitGraph = true
 	# fsmonitor = true
 	# untrackedcache = true
