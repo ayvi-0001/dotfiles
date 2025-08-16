@@ -29,6 +29,9 @@
 	pager = delta
 	symlinks = true
 
+[uploadpack]
+	allowfilter = true
+
 [interactive]
 	diffFilter = delta --color-only --dark --paging=never --syntax-theme base16-256 --diff-so-fancy
 
