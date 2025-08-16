@@ -38,6 +38,7 @@ args    = ["--stdio"]
 basedpyright.analysis.diagnosticMode          = "workspace"
 basedpyright.analysis.typeCheckingMode        = "all"
 basedpyright.analysis.inlayHints.genericTypes = true
+basedpyright.analysis.disableOrganizeImports  = true
 
 [language-server.basedpyright.config.basedpyright.analysis.diagnosticSeverityOverrides]
 reportAny                         = "none"
