@@ -29,6 +29,9 @@
 	pager = delta
 	symlinks = true
 
+[safe]
+	directory = *
+
 [uploadpack]
 	allowfilter = true
 	allowAnySHA1InWant = true
