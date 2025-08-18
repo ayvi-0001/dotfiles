@@ -73,14 +73,14 @@ function M.apply_to_config(config)
     },
 
     resize_window = {
-      { key = "h", mods = "NONE", action = wezterm.action.EmitEvent "increase-to-left" },
-      { key = "H", mods = "SHIFT", action = wezterm.action.EmitEvent "decrease-from-left" },
-      { key = "j", mods = "NONE", action = wezterm.action.EmitEvent "increase-to-bottom" },
-      { key = "J", mods = "SHIFT", action = wezterm.action.EmitEvent "decrease-from-bottom" },
-      { key = "k", mods = "NONE", action = wezterm.action.EmitEvent "increase-to-top" },
-      { key = "K", mods = "SHIFT", action = wezterm.action.EmitEvent "decrease-from-top" },
-      { key = "l", mods = "NONE", action = wezterm.action.EmitEvent "increase-to-right" },
-      { key = "L", mods = "SHIFT", action = wezterm.action.EmitEvent "decrease-from-right" },
+      { key = "h", mods = "NONE", action = wezterm.action.EmitEvent "resize-window-increase-to-left" },
+      { key = "H", mods = "SHIFT", action = wezterm.action.EmitEvent "resize-window-decrease-from-left" },
+      { key = "j", mods = "NONE", action = wezterm.action.EmitEvent "resize-window-increase-to-bottom" },
+      { key = "J", mods = "SHIFT", action = wezterm.action.EmitEvent "resize-window-decrease-from-bottom" },
+      { key = "k", mods = "NONE", action = wezterm.action.EmitEvent "resize-window-increase-to-top" },
+      { key = "K", mods = "SHIFT", action = wezterm.action.EmitEvent "resize-window-decrease-from-top" },
+      { key = "l", mods = "NONE", action = wezterm.action.EmitEvent "resize-window-increase-to-right" },
+      { key = "L", mods = "SHIFT", action = wezterm.action.EmitEvent "resize-window-decrease-from-right" },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
     },
 

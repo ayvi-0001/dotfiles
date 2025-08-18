@@ -205,39 +205,39 @@ function M.setup(opts)
     local resize_increment = opts.resize_increment or 25
 
     ---@overload fun(window: Window, _: Pane): nil
-    wezterm.on("increase-to-top", function(window, _)
+    wezterm.on("resize-window-increase-to-top", function(window, _)
       M._set_position(window, "y", "up", resize_increment)
       M._set_inner_size(window, "height", "increase", resize_increment)
     end)
     ---@overload fun(window: Window, _: Pane): nil
-    wezterm.on("decrease-from-top", function(window, _)
+    wezterm.on("resize-window-decrease-from-top", function(window, _)
       M._set_position(window, "y", "down", resize_increment)
       M._set_inner_size(window, "height", "decrease", resize_increment)
     end)
     ---@overload fun(window: Window, _: Pane): nil
-    wezterm.on("increase-to-bottom", function(window, _)
+    wezterm.on("resize-window-increase-to-bottom", function(window, _)
       M._set_inner_size(window, "height", "increase", resize_increment)
     end)
     ---@overload fun(window: Window, _: Pane): nil
-    wezterm.on("decrease-from-bottom", function(window, _)
+    wezterm.on("resize-window-decrease-from-bottom", function(window, _)
       M._set_inner_size(window, "height", "decrease", resize_increment)
     end)
     ---@overload fun(window: Window, _: Pane): nil
-    wezterm.on("increase-to-left", function(window, _)
+    wezterm.on("resize-window-increase-to-left", function(window, _)
       M._set_position(window, "x", "up", resize_increment)
       M._set_inner_size(window, "width", "increase", resize_increment)
     end)
     ---@overload fun(window: Window, _: Pane): nil
-    wezterm.on("decrease-from-left", function(window, _)
+    wezterm.on("resize-window-decrease-from-left", function(window, _)
       M._set_position(window, "x", "down", resize_increment)
       M._set_inner_size(window, "width", "decrease", resize_increment)
     end)
     ---@overload fun(window: Window, _: Pane): nil
-    wezterm.on("increase-to-right", function(window, _)
+    wezterm.on("resize-window-increase-to-right", function(window, _)
       M._set_inner_size(window, "width", "increase", resize_increment)
     end)
     ---@overload fun(window: Window, _: Pane): nil
-    wezterm.on("decrease-from-right", function(window, _)
+    wezterm.on("resize-window-decrease-from-right", function(window, _)
       M._set_inner_size(window, "width", "decrease", resize_increment)
     end)
   end
