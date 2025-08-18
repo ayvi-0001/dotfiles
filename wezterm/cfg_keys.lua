@@ -187,8 +187,6 @@ function M.apply_to_config(config)
     pane_75 = create_sized_pane_key_table(75),
 
     pane_select = {
-      { key = "t", mods = "NONE", action = wezterm.action.PaneSelect { mode = "MoveToNewTab", show_pane_ids = true } },
-      { key = "w", mods = "NONE", action = wezterm.action.PaneSelect { mode = "MoveToNewWindow", show_pane_ids = true } },
       { key = "a", mods = "NONE", action = wezterm.action.PaneSelect { mode = "SwapWithActive", show_pane_ids = true } },
       { key = "f", mods = "NONE", action = wezterm.action.PaneSelect { mode = "SwapWithActiveKeepFocus", show_pane_ids = true } },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
