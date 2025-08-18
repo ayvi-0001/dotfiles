@@ -169,8 +169,9 @@ function M.apply_to_config(config)
       { key = "7", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_75" } },
       { key = "h", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "yazi_helix" } },
       { key = "i", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_index" } },
-      { key = "s", mods = "CTRL", action = wezterm.action.ActivateKeyTable { name = "pane_select" } },
       { key = "s", mods = "NONE", action = wezterm.action.PaneSelect { show_pane_ids = true } },
+      { key = "s", mods = "CTRL", action = wezterm.action.PaneSelect { mode = "SwapWithActive", show_pane_ids = true } },
+      { key = "s", mods = "CTRL|ALT", action = wezterm.action.PaneSelect { mode = "SwapWithActiveKeepFocus", show_pane_ids = true } },
       { key = "f", mods = "NONE", action = wezterm.action.TogglePaneZoomState },
       { key = "n", mods = "NONE", action = wezterm.action.EmitEvent "spawn-new-window-80%" },
       { key = "N", mods = "SHIFT", action = wezterm.action.EmitEvent "spawn-new-window-50%" },
@@ -185,12 +186,6 @@ function M.apply_to_config(config)
     pane_33 = create_sized_pane_key_table(33),
     pane_66 = create_sized_pane_key_table(66),
     pane_75 = create_sized_pane_key_table(75),
-
-    pane_select = {
-      { key = "a", mods = "NONE", action = wezterm.action.PaneSelect { mode = "SwapWithActive", show_pane_ids = true } },
-      { key = "f", mods = "NONE", action = wezterm.action.PaneSelect { mode = "SwapWithActiveKeepFocus", show_pane_ids = true } },
-      { key = "Escape", mods = "NONE", action = "PopKeyTable" },
-    },
 
     pane_index = {
       { key = "1", mods = "NONE", action = wezterm.action.ActivatePaneByIndex(0) },
