@@ -126,6 +126,29 @@ function M.move_pane_to_new_window(window, pane)
   new_window:set_inner_size(pixel_width, pixel_height)
 end
 
+---@param window Window
+---@param pane Pane
+---@returns nil
+function M.move_pane_to_new_tab(window, pane) ---@diagnostic disable-line: unused-local
+  local active_tab_title = window:active_tab():get_title()
+
+  local active_tab_index ---@type integer
+  for _, item in ipairs(window:mux_window():tabs_with_info()) do
+    if item.is_active then
+      active_tab_index = item.index + 1
+    end
+  end
+
+  local tab = pane:move_to_new_tab()
+  tab:activate()
+
+  if active_tab_title then
+    tab:set_title(active_tab_title)
+  end
+
+  window:perform_action(wezterm.action.MoveTab(active_tab_index), pane)
+end
+
 ---@private
 ---@param window Window
 ---@param axis "x"|"y"
@@ -268,6 +291,9 @@ function M.setup(opts)
     ---@overload fun(window: Window, _: Pane): nil
     wezterm.on("move-pane-to-new-window", function(window, pane)
       M.move_pane_to_new_window(window, pane)
+    end)
+    wezterm.on("move-pane-to-new-tab", function(window, pane)
+      M.move_pane_to_new_tab(window, pane)
     end)
   end
 end

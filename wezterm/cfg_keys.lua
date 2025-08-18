@@ -175,7 +175,7 @@ function M.apply_to_config(config)
       { key = "n", mods = "NONE", action = wezterm.action.EmitEvent "spawn-new-window-80%" },
       { key = "N", mods = "SHIFT", action = wezterm.action.EmitEvent "spawn-new-window-50%" },
       { key = "w", mods = "NONE", action = wezterm.action.EmitEvent "toggle-floating-pane" },
-      { key = "e", mods = "NONE", action = wezterm.action_callback(callbacks.move_pane_to_new_tab) },
+      { key = "e", mods = "NONE", action = wezterm.action.EmitEvent "move-pane-to-new-tab" },
       { key = "E", mods = "SHIFT", action = wezterm.action.EmitEvent "move-pane-to-new-window" },
       { key = "x", mods = "NONE", action = wezterm.action.CloseCurrentPane { confirm = false } },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
