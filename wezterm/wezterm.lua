@@ -5,6 +5,7 @@ local config = wezterm.config_builder()
 require("window_space").setup {
   enable_window_resize_events = true,
   enable_window_move_events = true,
+  enable_pane_move_events = true,
 }
 
 require "events"

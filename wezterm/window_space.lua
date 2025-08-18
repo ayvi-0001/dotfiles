@@ -195,6 +195,7 @@ end
 ---@class WindowSpaceOpts
 ---@field enable_window_resize_events? boolean
 ---@field enable_window_move_events? boolean
+---@field enable_pane_move_events? boolean
 ---@field resize_increment? integer=25
 ---@field move_increment? integer=25
 
@@ -260,6 +261,13 @@ function M.setup(opts)
     ---@overload fun(window: Window, _: Pane): nil
     wezterm.on("move-window-down", function(window, _)
       M._set_position(window, "y", "down", move_increment)
+    end)
+  end
+
+  if opts.enable_pane_move_events then
+    ---@overload fun(window: Window, _: Pane): nil
+    wezterm.on("move-pane-to-new-window", function(window, pane)
+      M.move_pane_to_new_window(window, pane)
     end)
   end
 end
