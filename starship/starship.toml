@@ -43,7 +43,7 @@ disabled        = false
 format          = "[$time]($style) "
 style           = "bold #f0f0ff"
 time_format     = "%T"
-utc_time_offset = "local"
+utc_time_offset = "-7"
 
 [git_metrics]
 disabled = false
