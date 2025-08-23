@@ -2,7 +2,7 @@
 
 # clear bw session key.
 if command -v fd >/dev/null; then
-  fd -utf 'bw_session' ~/.cache/home -x rm -f
+  fd -utf 'bw_session' ~/.cache/.bw -x rm -f
 else
-  find ~/.cache/home -type f -iname '*bw_session*' -delete
+  find ~/.cache/.bw -type f -iname '*bw_session*' -delete
 fi
