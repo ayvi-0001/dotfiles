@@ -2,8 +2,7 @@
 
 alias fp='fzf --bind "enter:become(hx {})" --preview "bat --style=numbers --color=always --line-range :500 {}"'
 
-export MSYS2_ARG_CONV_EXCL='--path-separator' # disable windows path expansion for '/'
-alias rg='rg --path-separator=/'
+alias rg='MSYS2_ARG_CONV_EXCL=--path-separator rg --path-separator=/'
 
 alias ls='lsd -a -F'
 alias lt='lsd -a -F --tree'
