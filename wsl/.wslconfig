@@ -6,5 +6,5 @@ memory=8GB
 nestedVirtualization=false
 networkingMode=mirrored
 processors=8
-swap=0
+# swap=0
 swapFile=%Temp%\swap.vhdx
