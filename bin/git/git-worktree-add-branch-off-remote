@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+case "$1" in
+  -h | --help) {
+	cat <<- EOF
+	Usage: git-worktree-add-branch-off-remote [NEW_LOCAL_BRANCH_NAME] [REMOTE_NAME] [REMOTE_BRANCH_NAME]
+
+	Create a new worktree and branch based off an existing remote branch.
+	Worktree is placed in the parent directory of the main repo.
+
+	./
+	├── main-repo/
+	└── new-worktree/
+	EOF
+    exit 0
+  } ;;
+esac
+
+NEW_LOCAL_BRANCH_NAME="$1"
+REMOTE_NAME="$2"
+REMOTE_BRANCH_NAME="$3"
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+# Worktrees placed just outside the parent git directory
+WORKTREE_PATH="$(realpath --canonicalize-missing "$REPO_ROOT/../$NEW_LOCAL_BRANCH_NAME")"
+
+git worktree add --detach -- "$WORKTREE_PATH" "$REMOTE_NAME"/"$REMOTE_BRANCH_NAME"
+
+cd "$WORKTREE_PATH"
+
+git checkout -b "$NEW_LOCAL_BRANCH_NAME"
