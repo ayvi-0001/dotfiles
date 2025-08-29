@@ -208,6 +208,8 @@ language-servers = ["codebook"]
 # exts will still default to the mermaid lang.
 # Run the command `:lang gantt` to enable auto formatting.
 # Repo for formatter: https://github.com/ayvi-0001/mermaid-gantt-formatter
+# Must run following command first:
+# $ mkdir -p "$HELIX_RUNTIME/queries/gantt" && echo '; inherits: mermaid' > "$HELIX_RUNTIME/queries/gantt/highlights.scm"
 [[language]]
 name            = "gantt"
 scope           = "source.mermaid"
@@ -258,7 +260,8 @@ auto-format      = true
   command = "stylua"
   args    = ["--search-parent-directories", "-", "--stdin-filepath", "%{buffer_name}"]
 
-# mkdir -p "$HELIX_RUNTIME/queries/filter" && echo '; inherits: git-ignore' > "$HELIX_RUNTIME/queries/filter/highlights.scm"
+# Must run following command first:
+# $ mkdir -p "$HELIX_RUNTIME/queries/filter" && echo '; inherits: git-ignore' > "$HELIX_RUNTIME/queries/filter/highlights.scm"
 [[language]]
 name            = "filter"
 scope           = "source.filter"
