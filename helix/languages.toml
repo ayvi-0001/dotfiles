@@ -9,52 +9,54 @@ args    = ["start"]
 [language-server.rust-analyzer]
 command = "rust-analyzer"
 
-[language-server.rust-analyzer.config.check]
-command = "clippy"
-
-[language-server.rust-analyzer.config.cargo]
-features = "all"
+  [language-server.rust-analyzer.config]
+  check.command  = "clippy"
+  cargo.features = "all"
 
 [language-server.pylyzer]
 command = "pylyzer"
 args    = ["--server"]
 
 [language-server.ruff]
-command     = "ruff"
-args        = ["server", "-q", "--preview"]
-environment = { "RUFF_TRACE" = "messages" }
+command = "ruff"
+args    = ["server", "-q", "--preview"]
 
-[language-server.ruff.config.settings]
-format.preview = true
-lint.preview   = true
-logLevel       = "debug"
-run            = "onSave"
+  [language-server.ruff.environment]
+  RUFF_TRACE = "messages"
+
+  [language-server.ruff.config.settings]
+  format.preview = true
+  lint.preview   = true
+  logLevel       = "debug"
+  run            = "onSave"
 
 [language-server.basedpyright]
 command = "basedpyright-langserver"
 args    = ["--stdio"]
 
-[language-server.basedpyright.config]
-basedpyright.analysis.diagnosticMode          = "workspace"
-basedpyright.analysis.typeCheckingMode        = "all"
-basedpyright.analysis.inlayHints.genericTypes = true
-basedpyright.analysis.disableOrganizeImports  = true
+  [language-server.basedpyright.config.basedpyright]
+  disableOrganizeImports = true
 
-[language-server.basedpyright.config.basedpyright.analysis.diagnosticSeverityOverrides]
-reportAny                         = "none"
-reportConstantRedefinition        = "none"
-reportExplicitAny                 = "none"
-reportImplicitOverride            = "none"
-reportImplicitStringConcatenation = "none"
-reportInvalidCast                 = "none"
-reportMissingSuperCall            = "none"
-reportMissingTypeStubs            = "none"
-reportPrivateUsage                = "none"
-reportUnknownArgumentType         = "none"
-reportUnknownLambdaType           = "none"
-reportUnknownMemberType           = "none"
-reportUnknownVariableType         = "none"
-reportUnusedCallResult            = "none"
+    [language-server.basedpyright.config.basedpyright.analysis]
+    diagnosticMode          = "workspace"
+    typeCheckingMode        = "all"
+    inlayHints.genericTypes = true
+
+      [language-server.basedpyright.config.basedpyright.analysis.diagnosticSeverityOverrides]
+      reportAny                         = "none"
+      reportConstantRedefinition        = "none"
+      reportExplicitAny                 = "none"
+      reportImplicitOverride            = "none"
+      reportImplicitStringConcatenation = "none"
+      reportInvalidCast                 = "none"
+      reportMissingSuperCall            = "none"
+      reportMissingTypeStubs            = "none"
+      reportPrivateUsage                = "none"
+      reportUnknownArgumentType         = "none"
+      reportUnknownLambdaType           = "none"
+      reportUnknownMemberType           = "none"
+      reportUnknownVariableType         = "none"
+      reportUnusedCallResult            = "none"
 
 [language-server.taplo]
 command = "taplo"
@@ -67,18 +69,18 @@ args    = ["--stdio"]
 [language-server.pylsp]
 command = "pylsp"
 
-[language-server.pylsp.config.pylsp]
-plugins.black.enabled           = false
-plugins.isort.enabled           = true
-plugins.pyflakes.enabled        = true
-plugins.pylint.enabled          = true
-plugins.pyls_mypy.enabled       = false
-plugins.pyls_mypy.live_mode     = false
-plugins.pylsp_mypy.dmypy        = false
-plugins.rope_autoimport.enabled = false
-plugins.ruff.enabled            = true
-plugins.ruff.formatEnabled      = true
-plugins.ruff.preview            = true
+  [language-server.pylsp.config.pylsp]
+  plugins.black.enabled           = false
+  plugins.isort.enabled           = true
+  plugins.pyflakes.enabled        = true
+  plugins.pylint.enabled          = true
+  plugins.pyls_mypy.enabled       = false
+  plugins.pyls_mypy.live_mode     = false
+  plugins.pylsp_mypy.dmypy        = false
+  plugins.rope_autoimport.enabled = false
+  plugins.ruff.enabled            = true
+  plugins.ruff.formatEnabled      = true
+  plugins.ruff.preview            = true
 
 [language-server.sql-language-server]
 command = "sql-language-server"
@@ -87,14 +89,14 @@ args    = ["up", "--method", "stdio"]
 [language-server.lua-language-server]
 command = "lua-language-server"
 
-[language-server.lua-language-server.config.Lua]
-"workspace.useGitIgnore" = false
-"hint.enable"            = true
-"hint.arrayIndex"        = "Enable"
-"hint.setType"           = true
-"hint.paramName"         = "All"
-"hint.paramType"         = true
-"hint.await"             = true
+  [language-server.lua-language-server.config.Lua]
+  "workspace.useGitIgnore" = false
+  "hint.enable"            = true
+  "hint.arrayIndex"        = "Enable"
+  "hint.setType"           = true
+  "hint.paramName"         = "All"
+  "hint.paramType"         = true
+  "hint.await"             = true
 
 [language-server.codebook]
 command = "codebook-lsp"
@@ -103,28 +105,37 @@ args    = ["serve"]
 [language-server.tailwindcss-ls]
 command = "tailwindcss-language-server"
 args    = ["--stdio"]
-config  = { userLanguages = { rust = "html", "*.rs" = "html" } }
+
+  [language-server.tailwindcss-ls.config]
+  userLanguages = { rust = "html", "*.rs" = "html" }
 
 [language-server.typescript-language-server]
-command         = "typescript-language-server"
-args            = ["--stdio"]
-config.hostInfo = "helix"
+command = "typescript-language-server"
+args    = ["--stdio"]
+
+  [language-server.typescript-language-server.config]
+  hostInfo = "helix"
 
 # copy of `vscode-json-language-server` for formatting json5/jsonc
 # except with validation set to false disabled.
 [language-server.vscode-json-language-server-no-validate]
 command = "vscode-json-language-server"
 args    = ["--stdio"]
-config  = { provideFormatter = true, json = { validate = { enable = false } } }
+
+  [language-server.vscode-json-language-server-no-validate.config]
+  provideFormatter     = true
+  json.validate.enable = false
 
 [[language]]
-name              = "python"
-shebangs          = ["python", "uv"]
-language-servers  = ["ruff", "basedpyright"] # "ty", "pylsp", "pylyzer"
-indent            = { tab-width = 4, unit = "    " }
-auto-format       = true
-formatter.command = "bash"
-formatter.args    = ["-c", "ruff check --fix --extend-select I --silent --stdin-filename %{buffer_name} - | ruff format - --stdin-filename %{buffer_name}"]
+name             = "python"
+shebangs         = ["python", "uv"]
+language-servers = ["ruff", "basedpyright"] # "ty", "pylsp", "pylyzer"
+indent           = { tab-width = 4, unit = "    " }
+auto-format      = true
+
+  [language.formatter]
+  command = "bash"
+  args    = ["-c", "ruff check --fix --extend-select I --silent --stdin-filename '%sh{realpath '%{buffer_name}'}' - | ruff format - --stdin-filename '%sh{realpath '%{buffer_name}'}'"]
 
 [[language]]
 name                          = "rust"
@@ -133,8 +144,10 @@ auto-format                   = true
 language-servers              = ["rust-analyzer", "tailwindcss-ls"]
 indent                        = { tab-width = 4, unit = "    " }
 persistent-diagnostic-sources = ["rustc", "clippy"]
-formatter.command             = "rustfmt"
-formatter.args                = ["+nightly"]
+
+  [language.formatter]
+  command = "rustfmt"
+  args    = ["+nightly"]
 
 [[language]]
 name             = "env"
@@ -143,30 +156,36 @@ indent           = { tab-width = 2, unit = "  " }
 grammar          = "bash"
 
 [[language]]
-name              = "xit"
-indent            = { tab-width = 4, unit = "    " }
-language-servers  = ["codebook"]
-auto-format       = true
-formatter.command = "bash"
-formatter.args    = ["-c", "xit-sort"] # custom script in ~/bin/
+name             = "xit"
+indent           = { tab-width = 4, unit = "    " }
+language-servers = ["codebook"]
+auto-format      = true
+
+  [language.formatter]
+  command = "bash"
+  args    = ["-c", "xit-sort"] # custom script in ~/bin/
 
 [[language]]
-name              = "csv"
-file-types        = ["csv"]
-scope             = "source.csv"
-auto-format       = false
-formatter.command = "bash"
-formatter.args    = ["-c", "align-csv-columns<&0"] # custom script in ~/bin/
+name        = "csv"
+file-types  = ["csv"]
+scope       = "source.csv"
+auto-format = false
+
+  [language.formatter]
+  command = "bash"
+  args    = ["-c", "align-csv-columns<&0"] # custom script in ~/bin/
 
 [[language]]
-name              = "markdown"
-soft-wrap.enable  = true
-text-width        = 200
-language-servers  = ["markdown-oxide", "marksman", "codebook"]
-indent            = { tab-width = 4, unit = "    " }
-auto-format       = true
-formatter.command = "prettier"
-formatter.args    = ["--parser=markdown", "--stdin-filename", "%{buffer_name}"]
+name             = "markdown"
+soft-wrap.enable = true
+text-width       = 200
+language-servers = ["markdown-oxide", "marksman", "codebook"]
+indent           = { tab-width = 4, unit = "    " }
+auto-format      = true
+
+  [language.formatter]
+  command = "prettier"
+  args    = ["--parser=markdown", "--stdin-filename", "%{buffer_name}"]
 
 [[language]]
 name             = "text"
@@ -181,46 +200,54 @@ language-servers = ["codebook"]
 # Run the command `:lang gantt` to enable auto formatting.
 # Repo for formatter: https://github.com/ayvi-0001/mermaid-gantt-formatter
 [[language]]
-name              = "gantt"
-scope             = "source.mermaid"
-injection-regex   = "mermaid"
-file-types        = []
-indent            = { tab-width = 2, unit = "  " }
-auto-format       = true
-comment-token     = "%%"
-formatter.command = "mmdc-fmt"
-formatter.args    = ["-t", "gantt", "-i", "-"]
-grammar           = "mermaid"
+name            = "gantt"
+scope           = "source.mermaid"
+injection-regex = "mermaid"
+file-types      = []
+indent          = { tab-width = 2, unit = "  " }
+auto-format     = true
+comment-token   = "%%"
+grammar         = "mermaid"
+
+  [language.formatter]
+  command = "mmdc-fmt"
+  args    = ["-t", "gantt", "-i", "-"]
 
 [[language]]
 name   = "mermaid"
 indent = { tab-width = 2, unit = "  " }
 
 [[language]]
-name              = "sql"
-file-types        = ["sql", "dsql", "sqlx"]
-indent            = { tab-width = 2, unit = "  " }
-language-servers  = ["sql-language-server"]
-auto-format       = false
-formatter.command = "sqlfluff"
-formatter.args    = ["format", "-", "--stdin-filename", "%{buffer_name}"]
+name             = "sql"
+file-types       = ["sql", "dsql", "sqlx"]
+indent           = { tab-width = 2, unit = "  " }
+language-servers = ["sql-language-server"]
+auto-format      = false
+
+  [language.formatter]
+  command = "sqlfluff"
+  args    = ["format", "-", "--stdin-filename", "%{buffer_name}"]
 
 [[language]]
-name              = "toml"
-indent            = { tab-width = 2, unit = "  " }
-language-servers  = ["taplo"]
-auto-format       = true
-formatter.command = "taplo"
-formatter.args    = ["format", "-", "--stdin-filepath", "%{buffer_name}"]
+name             = "toml"
+indent           = { tab-width = 2, unit = "  " }
+language-servers = ["taplo"]
+auto-format      = true
+
+  [language.formatter]
+  command = "taplo"
+  args    = ["format", "-", "--stdin-filepath", "%{buffer_name}"]
 
 [[language]]
-name              = "lua"
-shebangs          = ["lua", "luajit"]
-indent            = { tab-width = 2, unit = "  " }
-language-servers  = ["lua-language-server"]
-auto-format       = true
-formatter.command = "stylua"
-formatter.args    = ["--search-parent-directories", "-", "--stdin-filepath", "%{buffer_name}"]
+name             = "lua"
+shebangs         = ["lua", "luajit"]
+indent           = { tab-width = 2, unit = "  " }
+language-servers = ["lua-language-server"]
+auto-format      = true
+
+  [language.formatter]
+  command = "stylua"
+  args    = ["--search-parent-directories", "-", "--stdin-filepath", "%{buffer_name}"]
 
 # mkdir -p "$HELIX_RUNTIME/queries/filter" && echo '; inherits: git-ignore' > "$HELIX_RUNTIME/queries/filter/highlights.scm"
 [[language]]
@@ -232,46 +259,58 @@ comment-token   = "#"
 grammar         = "gitignore"
 
 [[language]]
-name              = "yaml"
-auto-format       = true
-formatter.command = "yamlfmt"
-formatter.args    = ["-"]
+name        = "yaml"
+auto-format = true
+
+  [language.formatter]
+  command = "yamlfmt"
+  args    = ["-"]
 
 [[language]]
-name              = "javascript"
-auto-format       = true
-formatter.command = "prettier"
-formatter.args    = ["--parser=typescript", "--stdin-filepath", "%{buffer_name}"]
+name        = "javascript"
+auto-format = true
+
+  [language.formatter]
+  command = "prettier"
+  args    = ["--parser=typescript", "--stdin-filepath", "%{buffer_name}"]
 
 [[language]]
-name              = "typescript"
-auto-format       = true
-formatter.command = "prettier"
-formatter.args    = ["--parser=typescript", "--stdin-filepath", "%{buffer_name}"]
+name        = "typescript"
+auto-format = true
+
+  [language.formatter]
+  command = "prettier"
+  args    = ["--parser=typescript", "--stdin-filepath", "%{buffer_name}"]
 
 [[language]]
-name              = "jsx"
-language-servers  = ["typescript-language-server", "tailwindcss-ls"]
-auto-format       = true
-formatter.command = "prettier"
-formatter.args    = ["--parser=typescript", "--stdin-filepath", "%{buffer_name}"]
+name             = "jsx"
+language-servers = ["typescript-language-server", "tailwindcss-ls"]
+auto-format      = true
+
+  [language.formatter]
+  command = "prettier"
+  args    = ["--parser=typescript", "--stdin-filepath", "%{buffer_name}"]
 
 [[language]]
-name              = "tsx"
-language-servers  = ["typescript-language-server", "tailwindcss-ls"]
-auto-format       = true
-formatter.command = "prettier"
-formatter.args    = ["--parser=typescript", "--stdin-filepath", "%{buffer_name}"]
+name             = "tsx"
+language-servers = ["typescript-language-server", "tailwindcss-ls"]
+auto-format      = true
+
+  [language.formatter]
+  command = "prettier"
+  args    = ["--parser=typescript", "--stdin-filepath", "%{buffer_name}"]
 
 [[language]]
 name             = "html"
 language-servers = ["vscode-html-language-server", "tailwindcss-ls"]
 
 [[language]]
-name              = "xml"
-auto-format       = true
-formatter.command = "prettier"
-formatter.args    = ["--parser=html", "--stdin-filepath", "%{buffer_name}"]
+name        = "xml"
+auto-format = true
+
+  [language.formatter]
+  command = "prettier"
+  args    = ["--parser=html", "--stdin-filepath", "%{buffer_name}"]
 
 [[language]]
 name             = "css"

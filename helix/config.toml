@@ -18,72 +18,75 @@ search.smart-case        = true
 search.wrap-around       = false
 shell                    = ["bash", "-c"]
 smart-tab.supersede-menu = false
-terminal                 = { command = "bash", args = ["-c"] }
 text-width               = 200
 true-color               = true
 undercurl                = true
 editor-config            = true
 
-[editor.auto-save]
-focus-lost          = true
-after-delay.enable  = false
-after-delay.timeout = 5000
+  [editor.terminal]
+  command = "bash"
+  args    = ["-c"]
 
-[editor.whitespace.characters]
-nbsp    = "⍽"
-newline = "⏎"
-nnbsp   = "␣"
-space   = "·"
-tab     = "→"
-tabpad  = "·" # Tabs will look like "→···" (depending on tab width)
+  [editor.auto-save]
+  focus-lost          = true
+  after-delay.enable  = false
+  after-delay.timeout = 5000
 
-[editor.inline-diagnostics]
-cursor-line     = "hint"
-other-lines     = "disable"
-prefix-len      = 1
-max-wrap        = 20
-max-diagnostics = 10
+  [editor.whitespace.characters]
+  nbsp    = "⍽"
+  newline = "⏎"
+  nnbsp   = "␣"
+  space   = "·"
+  tab     = "→"
+  tabpad  = "·" # Tabs will look like "→···" (depending on tab width)
 
-[editor.lsp]
-enable                             = true
-display-messages                   = true
-display-progress-messages          = false
-auto-signature-help                = true
-display-inlay-hints                = true
-display-signature-help-docs        = true
-snippets                           = true
-goto-reference-include-declaration = true
+  [editor.inline-diagnostics]
+  cursor-line     = "hint"
+  other-lines     = "disable"
+  prefix-len      = 1
+  max-wrap        = 20
+  max-diagnostics = 10
 
-[editor.indent-guides]
-render      = true
-character   = "╎"
-skip-levels = 0
+  [editor.lsp]
+  enable                             = true
+  display-messages                   = true
+  display-progress-messages          = false
+  auto-signature-help                = true
+  display-inlay-hints                = true
+  display-signature-help-docs        = true
+  snippets                           = true
+  goto-reference-include-declaration = true
 
-[editor.statusline]
-left = ["mode", "spinner", "file-name", "read-only-indicator", "file-modification-indicator", "version-control"]
-separator = "│"
-right = [
-  "file-encoding",
-  "file-line-ending",
-  "total-line-numbers",
-  "file-type",
-  "separator",
-  "spacer",
-  "diagnostics",
-  "selections",
-  "primary-selection-length",
-  "register",
-  "position",
-  "position-percentage",
-  "file-encoding",
-]
+  [editor.indent-guides]
+  render      = true
+  character   = "╎"
+  skip-levels = 0
 
-[editor.file-picker]
-git-exclude = false
-git-global  = false
-git-ignore  = false
-hidden      = false
-ignore      = false
+  [editor.statusline]
+  left = ["mode", "spinner", "file-name", "read-only-indicator", "file-modification-indicator", "version-control"]
+  separator = "│"
+  right = [
+    "file-encoding",
+    "file-line-ending",
+    "total-line-numbers",
+    "file-type",
+    "separator",
+    "spacer",
+    "diagnostics",
+    "selections",
+    "primary-selection-length",
+    "register",
+    "position",
+    "position-percentage",
+    "file-encoding",
+  ]
+
+  [editor.file-picker]
+  git-exclude = false
+  git-global  = false
+  git-ignore  = false
+  hidden      = false
+  ignore      = false
 
 [keys.normal]
 # open yazi
@@ -99,24 +102,19 @@ C-y = [
 # git blame
 G.b = "@:sh git blame -L %{cursor_line},+1 %{buffer_name}<ret>"
 
-q       = ":q"
-Q       = ":bc"
-C-S-q   = ":bc!"
-C-q     = ":q!"
-C-r     = ":rla"
-S-A-f   = ":fmt"
-ret     = ["open_below", "normal_mode"]
-f       = ["find_next_char", "normal_mode"]
-C-j     = ["goto_next_paragraph"]
-C-k     = ["goto_prev_paragraph"]
-esc     = ["collapse_selection", "keep_primary_selection"]
-H       = ["goto_previous_buffer"]
-L       = ["goto_next_buffer"]
-space.J = [":clipboard-yank-join"]
-
-space.l.c = ":lsp-workspace-command"
-space.l.r = ":lsp-restart"
-space.l.s = ":lsp-stop"
+q     = ":q"
+Q     = ":bc"
+C-S-q = ":bc!"
+C-q   = ":q!"
+C-r   = ":rla"
+S-A-f = ":fmt"
+ret   = ["open_below", "normal_mode"]
+f     = ["find_next_char", "normal_mode"]
+C-j   = ["goto_next_paragraph"]
+C-k   = ["goto_prev_paragraph"]
+esc   = ["collapse_selection", "keep_primary_selection"]
+H     = ["goto_previous_buffer"]
+L     = ["goto_next_buffer"]
 
 C-o   = "no_op"
 C-i   = "no_op"
@@ -128,83 +126,12 @@ C-S-s = "save_selection"
 # goto ext
 g.D = "@gd wv"
 
-# toggle opts
-space.t.C   = ":toggle search.smart-case"
-space.t.a.d = ":toggle auto-save.after-delay.enable"
-space.t.a.f = ":toggle auto-save.focus-lost"
-space.t.c   = ":toggle inline-diagnostics.cursor-line warning disable"
-space.t.e   = ":toggle end-of-line-diagnostics hint disable"
-space.t.f   = ":toggle auto-format"
-space.t.i   = ":toggle lsp.display-inlay-hints"
-space.t.o   = ":toggle inline-diagnostics.other-lines warning disable"
-space.t.s   = ":toggle lsp.auto-signature-help"
-space.t.w   = ":toggle soft-wrap.enable"
-space.t.x   = ":toggle whitespace.render all none"
-
-# ccase
-space.c.T   = "@|ccase --to train<ret>"          # Train-Case
-space.c.a   = "@|ccase --to alternating<ret>"    # aLtErNaTiNg CaSe
-space.c.c   = "@|ccase --to camel<ret>"          # camelCase
-space.c.k   = "@|ccase --to kebab<ret>"          # kebab-case
-space.c.p   = "@|ccase --to pascal<ret>"         # PascalCase
-space.c.r   = "@|ccase --to random<ret>"         # rAnDOm caSe
-space.c.s   = "@|ccase --to snake<ret>"          # snake_case
-space.c.t   = "@|ccase --to title<ret>"          # Title Case
-space.c.u.C = "@|ccase --to cobol<ret>"          # COBOL-CASE
-space.c.u.S = "@|ccase --to screamingsnake<ret>" # SCREAMING_SNAKE_CASE
-space.c.u.U = "@|ccase --to upperflat<ret>"      # UPPERFLATCASE
-space.c.u.c = "@|ccase --to uppercamel<ret>"     # UpperCamelCase
-space.c.u.k = "@|ccase --to upperkebab<ret>"     # UPPER-KEBAB-CASE
-space.c.u.s = "@|ccase --to uppersnake<ret>"     # UPPER_SNAKE_CASE
-
-# macros
-space.m.d   = "@ P:lang diff<ret>gg"                  # paste diff from clipboard
-space.m.e   = "@|sed '/^[[:space:]]*$/d'<ret>"        # remove empty lines
-space.m.i   = "@s[^\\x00-\\x7F]+<ret>"                # find non-ascii characters
-space.m.j   = "@s <ret>i<ret><esc>d"                  # split selection on white space
-space.m.t   = "@<A-!>date +%Y-%m-%dT%H:%M:%S%z<ret>;" # insert local datetime
-space.m.u   = "@|sed '/^$/d'<ret>|sort -u<ret>"       # sort buffer, unique lines + rm empty lines
-space.m.w.s = "@s\\s{2,}<ret>di <esc>"                # slurp whitespace
-space.m.w.t = "@|sed 's/ \\+ /\\t/g'<ret>"            # replace _multiple_ whitespaces with tab
-
-space.m.s = [ # sort paragraph under cursor
-  "goto_line_end",
-  "goto_prev_paragraph",
-  "goto_last_line",
-  "add_newline_below",
-  "jump_backward",
-  "goto_next_paragraph",
-  "select_mode",
-  "select_line_above",
-  "split_selection_on_newline",
-  ":sort",
-  "collapse_selection",
-  "normal_mode",
-  "keep_primary_selection",
-  "goto_line_start",
-  "goto_last_line",
-  "extend_to_line_bounds",
-  "delete_selection",
-  "jump_backward",
-]
-
-S-A-up = [ # copy line up
-  "extend_to_line_bounds",
-  "yank",
-  "open_above",
-  "replace_with_yanked",
-  "collapse_selection",
-  "normal_mode",
-]
-S-A-down = [ # copy line down
-  "extend_to_line_bounds",
-  "yank",
-  "open_below",
-  "replace_with_yanked",
-  "collapse_selection",
-  "normal_mode",
-]
-S-A-k = [ # move line up
+# copy line up
+S-A-up = ["extend_to_line_bounds", "yank", "open_above", "replace_with_yanked", "collapse_selection", "normal_mode"]
+# copy line down
+S-A-down = ["extend_to_line_bounds", "yank", "open_below", "replace_with_yanked", "collapse_selection", "normal_mode"]
+# move line up
+S-A-k = [
   "keep_primary_selection",
   "extend_to_line_bounds",
   "extend_line_above",
@@ -215,7 +142,8 @@ S-A-k = [ # move line up
   "rotate_selection_contents_forward",
   "keep_primary_selection",
 ]
-S-A-j = [ # move line down
+# move line down
+S-A-j = [
   "keep_primary_selection",
   "move_line_down",
   "extend_to_line_bounds",
@@ -228,12 +156,82 @@ S-A-j = [ # move line down
   "keep_primary_selection",
   "move_line_down",
 ]
+
+  [keys.normal.space]
+  J = [":clipboard-yank-join"]
+
+    [keys.normal.space.t] # toggle opts
+    C   = ":toggle search.smart-case"
+    a.d = ":toggle auto-save.after-delay.enable"
+    a.f = ":toggle auto-save.focus-lost"
+    c   = ":toggle inline-diagnostics.cursor-line warning disable"
+    e   = ":toggle end-of-line-diagnostics hint disable"
+    f   = ":toggle auto-format"
+    i   = ":toggle lsp.display-inlay-hints"
+    o   = ":toggle inline-diagnostics.other-lines warning disable"
+    s   = ":toggle lsp.auto-signature-help"
+    w   = ":toggle soft-wrap.enable"
+    x   = ":toggle whitespace.render all none"
+
+    [keys.normal.space.c] # ccase
+    T   = "@|ccase --to train<ret>"          # Train-Case
+    a   = "@|ccase --to alternating<ret>"    # aLtErNaTiNg CaSe
+    c   = "@|ccase --to camel<ret>"          # camelCase
+    k   = "@|ccase --to kebab<ret>"          # kebab-case
+    p   = "@|ccase --to pascal<ret>"         # PascalCase
+    r   = "@|ccase --to random<ret>"         # rAnDOm caSe
+    s   = "@|ccase --to snake<ret>"          # snake_case
+    t   = "@|ccase --to title<ret>"          # Title Case
+    u.C = "@|ccase --to cobol<ret>"          # COBOL-CASE
+    u.S = "@|ccase --to screamingsnake<ret>" # SCREAMING_SNAKE_CASE
+    u.U = "@|ccase --to upperflat<ret>"      # UPPERFLATCASE
+    u.c = "@|ccase --to uppercamel<ret>"     # UpperCamelCase
+    u.k = "@|ccase --to upperkebab<ret>"     # UPPER-KEBAB-CASE
+    u.s = "@|ccase --to uppersnake<ret>"     # UPPER_SNAKE_CASE
+
+    [keys.normal.space.m] # macros
+    d   = "@ P:lang diff<ret>gg"                  # paste diff from clipboard
+    e   = "@|sed '/^[[:space:]]*$/d'<ret>"        # remove empty lines
+    i   = "@s[^\\x00-\\x7F]+<ret>"                # find non-ascii characters
+    j   = "@s <ret>i<ret><esc>d"                  # split selection on white space
+    t   = "@<A-!>date +%Y-%m-%dT%H:%M:%S%z<ret>;" # insert local datetime
+    u   = "@|sed '/^$/d'<ret>|sort -u<ret>"       # sort buffer, unique lines + rm empty lines
+    w.s = "@s\\s{2,}<ret>di <esc>"                # slurp whitespace
+    w.t = "@|sed 's/ \\+ /\\t/g'<ret>"            # replace multiple whitespaces with tab
+    # sort paragraph under cursor
+    s = [
+      "goto_line_end",
+      "goto_prev_paragraph",
+      "goto_last_line",
+      "add_newline_below",
+      "jump_backward",
+      "goto_next_paragraph",
+      "select_mode",
+      "select_line_above",
+      "split_selection_on_newline",
+      ":sort",
+      "collapse_selection",
+      "normal_mode",
+      "keep_primary_selection",
+      "goto_line_start",
+      "goto_last_line",
+      "extend_to_line_bounds",
+      "delete_selection",
+      "jump_backward",
+    ]
+
+    [keys.normal.space.l]
+    c = ":lsp-workspace-command"
+    r = ":lsp-restart"
+    s = ":lsp-stop"
 
 [keys.insert]
 "C-[" = "normal_mode"
 
 [keys.select]
-"C-["   = "normal_mode"
-C-j     = ["goto_next_paragraph"]
-C-k     = ["goto_prev_paragraph"]
-space.J = [":clipboard-yank-join"]
+"C-[" = "normal_mode"
+"C-j" = ["goto_next_paragraph"]
+"C-k" = ["goto_prev_paragraph"]
+
+  [keys.select.space]
+  J = [":clipboard-yank-join"]

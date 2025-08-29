@@ -12,7 +12,7 @@ compact_inline_tables = false
 crlf                  = false
 indent_entries        = false
 indent_string         = "  "
-indent_tables         = false
+indent_tables         = true
 inline_table_expand   = true
 reorder_inline_tables = false
 reorder_keys          = false
@@ -22,5 +22,5 @@ trailing_newline      = true
 include = ["config.toml"]
 keys    = ["keys.normal"]
 
-[rule.formatting]
-align_comments = true
+  [rule.formatting]
+  align_comments = true
