@@ -1,5 +1,5 @@
 {
-  "__VERSION__": "230",
+  "__VERSION__": "234",
   "Main": {
     "Controls": [
       {
@@ -786,7 +786,6 @@
     "NvAPIWrapperSettings": {
       "Enabled": true,
       "ZeroRPMOverride": false
-    },
-    "SensorCount": 24
+    }
   }
 }
