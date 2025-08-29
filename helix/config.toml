@@ -137,6 +137,7 @@ S-A-k = [
   "normal_mode",
   "rotate_selection_contents_forward",
   "keep_primary_selection",
+  "move_visual_line_up",
 ]
 # move line down
 S-A-j = [
@@ -150,7 +151,8 @@ S-A-j = [
   "normal_mode",
   "rotate_selection_contents_forward",
   "keep_primary_selection",
-  "move_line_down",
+  "move_visual_line_down",
+  "move_visual_line_up",
 ]
 
   [keys.normal.space]
