@@ -135,7 +135,16 @@ auto-format      = true
 
   [language.formatter]
   command = "bash"
-  args    = ["-c", "ruff check --fix --extend-select I --silent --stdin-filename '%sh{realpath '%{buffer_name}'}' - | ruff format - --stdin-filename '%sh{realpath '%{buffer_name}'}'"]
+  args = ["-c", """
+  ruff check --fix \
+    --extend-fixable I,COM,PYI,RUF,TC,UP \
+    --extend-ignore RUF100 \
+    --silent \
+    --stdin-filename '%sh{realpath '%{buffer_name}'}' \
+    -- - \
+    | ruff format --stdin-filename '%sh{realpath '%{buffer_name}'}' \
+    -- -
+  """]
 
 [[language]]
 name                          = "rust"
