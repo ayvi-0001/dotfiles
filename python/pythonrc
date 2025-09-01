@@ -1,27 +1,26 @@
 #!/usr/bin/env python
 
 import atexit
-import readline
 from contextlib import suppress
 from pathlib import Path
 
-history = Path.home() / ".cache" / "python" / ".history"
+try:
+    import readline
+except ImportError:
+    ...
+else:
+    history: Path = Path.home() / ".cache" / "python" / ".history"
 
-history.touch(exist_ok=True)
+    history.touch(exist_ok=True)
 
-if not history.read_text(encoding="utf-8"):
-    history.write_text("# History created.\n")
+    if not history.read_text(encoding="utf-8"):
+        history.write_text("# History created.\n", encoding="utf-8")
 
+    with suppress(OSError):
+        readline.read_history_file(history)
 
-with suppress(OSError):
-    readline.read_history_file(history)
+    def write_history() -> None:
+        with suppress(OSError):
+            readline.write_history_file(history)
 
-
-def write_history():
-    try:
-        readline.write_history_file(history)
-    except OSError:
-        pass
-
-
-atexit.register(write_history)
+    atexit.register(write_history)
