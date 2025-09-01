@@ -3,6 +3,7 @@
 alias fp='fzf --bind "enter:become(hx {})" --preview "bat --style=numbers --color=always --line-range :500 {}"'
 
 alias rg='MSYS2_ARG_CONV_EXCL=--path-separator rg --path-separator=/'
+alias fd='MSYS_NO_PATHCONV=1 fd'
 
 alias ls='lsd -a -F'
 alias lt='lsd -a -F --tree'
