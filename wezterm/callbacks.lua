@@ -217,57 +217,26 @@ function M.scroll_to_bottom(window, pane)
   )
 end
 
----@enum
-local DIRECTION = {
-  up = "Up",
-  down = "Down",
-  left = "Left",
-  right = "Right",
-}
+---@param window Window
+---@param pane Pane
+function M.move_focus_or_tab_right(window, pane)
+  local adjacent_pane = window:active_tab():get_pane_direction "Right"
+  if adjacent_pane then
+    adjacent_pane:activate()
+  else
+    window:perform_action(wezterm.action.ActivateTabRelative(1), pane)
+  end
+end
 
 ---@param window Window
 ---@param pane Pane
----@param direction Direction
----@return nil
----@private
-function M._move_focus_or_tab(window, pane, direction)
-  local adjacent_pane = window:active_tab():get_pane_direction(direction)
+function M.move_focus_or_tab_left(window, pane)
+  local adjacent_pane = window:active_tab():get_pane_direction "Left"
   if adjacent_pane then
-    window:perform_action(wezterm.action.ActivatePaneDirection(direction), pane)
-  elseif direction == "Right" then
-    window:perform_action(wezterm.action.ActivateTabRelative(1), pane)
-  elseif direction == "Left" then
+    adjacent_pane:activate()
+  else
     window:perform_action(wezterm.action.ActivateTabRelative(-1), pane)
   end
-  -- do nothing on "Up" and "Down"
-end
-
----@param window Window
----@param pane Pane
----@return nil
-function M.move_focus_or_tab_right(window, pane)
-  M._move_focus_or_tab(window, pane, DIRECTION.right)
-end
-
----@param window Window
----@param pane Pane
----@return nil
-function M.move_focus_or_tab_left(window, pane)
-  M._move_focus_or_tab(window, pane, DIRECTION.left)
-end
-
----@param window Window
----@param pane Pane
----@return nil
-function M.move_focus_or_tab_up(window, pane)
-  M._move_focus_or_tab(window, pane, DIRECTION.up)
-end
-
----@param window Window
----@param pane Pane
----@return nil
-function M.move_focus_or_tab_down(window, pane)
-  M._move_focus_or_tab(window, pane, DIRECTION.down)
 end
 
 ---Returns a callback to open a new tab.
