@@ -37,7 +37,7 @@ local get_target_paths = function()
       return
     end
 
-    target_paths = tostring(hovered_url)
+    target_paths = ya.quote(tostring(hovered_url))
   end
 
   if ya.target_family() == "windows" then
