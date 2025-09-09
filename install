@@ -4,8 +4,12 @@ set -euo pipefail
 
 THISDIR="$(dirname "$(readlink -f "$0")")"
 
-DEBUG="${DEBUG:-}"
-if [[ "$DEBUG" -eq 2 ]]; then set -x; fi
+DEBUG=${DEBUG:-}
+
+DRY_RUN=false
+
+
+if [[ $DEBUG -eq 2 ]]; then set -x; fi
 
 
 _validate_bin() {
@@ -34,8 +38,10 @@ _find_config() {
 
 DOTFILES_CONFIG="$(_find_config)"
 
-! test -f "$DOTFILES_CONFIG" && \
-  { gum style --foreground='#dc4720' "error: $DOTFILES_CONFIG not found." >&2; exit 1; }
+if [[ ! -f "$DOTFILES_CONFIG" ]]; then
+  printf '%s' "error: $DOTFILES_CONFIG not found." | gum >&2 style --foreground='#dc4720'
+  exit 1
+fi
 
 CONFIG="$(
 	eval "cat <<-EOF
@@ -49,13 +55,8 @@ ln --help | rg '\-a,\s+--absolute' &>/dev/null && LN_OPTS+=(-a)
 ln --help | rg '\-f,\s+--force' &>/dev/null && LN_OPTS+=(-f)
 LN_OPTS+=(-s)
 
-__debug "LN_OPTS=${LN_OPTS[*]}"
 
-
-SUDO_CMD="$(command -v sudo || command -v gsudo)"
-
-
-DRY_RUN=false
+IGNORE_PATTERNS=(-E '.ignore/' -E '.templates/' -E '.gitignore' -E 'README.md')
 
 
 _create_or_replace_symlink() {
@@ -69,28 +70,72 @@ _create_or_replace_symlink() {
   __debug "dest_file=$dest_file"
 
   # Delete if destination alredy exists as a regular file.
-  ! "$DRY_RUN" && test -f "$dest_file" && rm "$_"
+  if [[ -f "$dest_file" ]] && [[ ! -L "$dest_file" ]]; then
+    rm "$dest_file"
+  fi
 
   # Verify an existing symlink points to the correct source, fix if not.
-  if test -L "$dest_file"; then
+  if [[ -L "$dest_file" ]]; then
     if [[ "$(realpath -m "$dest_file")" != "$(realpath "$src_file")" ]]; then
-      gum style --foreground='#FCFA7D' \
-        "Canonical path of $dest_file does not exist. Replacing symlink source."
-      ! "$DRY_RUN" && rm -f "$dest_file"
+      printf '%s' "Canonical path of $dest_file does not exist. Replacing symlink source." \
+       | gum style --foreground='#FCFA7D'
+
+      rm -f "$dest_file"
     fi
   fi
 
-  ! "$DRY_RUN" && mkdir -p "$(dirname "$dest_file")"
+  dest_dir="$(dirname "$dest_file")"
 
-  if ! "$DRY_RUN"; then
-    if [[ -n "$SUDO_CMD" ]]; then
-      "$SUDO_CMD" ln "${LN_OPTS[@]}" "$src_file" "$dest_file" >/dev/null 2>&1
-    else
-      ln "${LN_OPTS[@]}" "$src_file" "$dest_file" >/dev/null 2>&1
+  mkdir -p "$dest_dir"
+
+  if sudo="$(command -v sudo)"; then
+    "$sudo" ln "${LN_OPTS[@]}" "$src_file" "$dest_file" >/dev/null 2>&1 || true
+  else
+    ln "${LN_OPTS[@]}" "$src_file" "$dest_file" >/dev/null 2>&1 || true
+  fi
+
+  # option to exit if symlink failed
+  if [[ ! -L "$dest_file" ]]; then
+    if gum confirm "failed to symlink file $src_file > $dest_file. Continue or exit script?"; then
+      exit 1
+    fi
+  else
+    printf '%s' "1 file linked: $src_file -> $dest_path" \
+     | gum style --bold --foreground='#89F57C' 
+  fi
+}
+
+
+_create_or_replace_symlink_dry_run() {
+  src_file="$(realpath "$1")"
+  dest_file="$(realpath -m --no-symlinks -- "$2")"
+
+  __debug "src_file=$src_file"
+  __debug "dest_file=$dest_file"
+
+  # if dest file exists and is not a symlink
+  if [[ -f "$dest_file" ]] && [[ ! -L "$dest_file" ]]; then
+    printf '%s' \
+    "Would delete existing destination file: $dest_file." \
+    | gum style --foreground='#6C6CDF'
+  fi
+
+  if [[ -L "$dest_file" ]]; then
+    if [[ "$(realpath -m "$dest_file")" != "$(realpath "$src_file")" ]]; then
+      printf '%s' "Canonical path of $dest_file does not exist. Replacing symlink source." \
+        | gum style --foreground='#FCFA7D'
     fi
   fi
 
-  gum style --bold --foreground='#89F57C' "1 file linked: $src_file ->$dest_path"
+  dest_dir="$(dirname "$dest_file")"
+
+  if [[ ! -d "$dest_dir" ]]; then
+    printf '%s' "Would create directory: $(dirname "$dest_file")" \
+      | gum style --foreground='#6C6CDF'
+  fi
+
+  printf '%s' "Would link 1 file: $src_file -> $dest_path" \
+   | gum style --bold --foreground='#89F57C' 
 }
 
 
@@ -106,14 +151,16 @@ _replace_patterns() {
     __debug "pattern=$pattern"
     __debug "replacement=$replacement"
 
-    fd -ua --print0 --base-directory "./$key/.templates/" -tf | xargs -0 sd -F "$pattern" "$replacement"
+    fd -ua --print0 --base-directory "$(realpath "./$key/.templates/")" -tf | xargs -0 sd -F "$pattern" "$replacement"
   done
 }
 
+
 _expand_user() { echo "${1/#\~/$HOME}"; }
 
+
 _deploy_files() {
-  if ! test -d "$1"; then
+  if [[ ! -d "$1" ]]; then
     gum style --faint >&2 "The base directory path '$1' is not a directory. Skipping"
     return
   fi
@@ -131,9 +178,8 @@ _deploy_files() {
     jq -r '.[].pattern' <<< "$templates" | sort -u > "$patterns_file"
   fi
 
-  ignore_patterns=(-E '.ignore/' -E '.templates/' -E '.gitignore' -E 'README.md')
   fd_opts=(--unrestricted --type file --full-path --base-directory "$key")
-  readarray -t file_list < <(fd "${fd_opts[@]}" "${ignore_patterns[@]}" "$fd_filter")
+  readarray -t file_list < <(fd "${fd_opts[@]}" "${IGNORE_PATTERNS[@]}" "$fd_filter")
   readarray -t config_file_list < <(jq 'keys | .[]' -r <<< "$files")
 
   if [[ "${#config_file_list[@]}" -eq 0 ]]; then
@@ -143,22 +189,33 @@ _deploy_files() {
 
   for file in "${file_list[@]}"; do
     # Skip files that start with 2 leading underscores.
-    if [[ $file == __* ]]; then
+    if [[ $file =~ ^__.* ]]; then
       continue
+    # Skip files found without any entry in config.
     elif [[ ! " ${config_file_list[*]} " =~ [[:space:]]${file}[[:space:]] ]]; then
       gum style --faint >&2 \
         "$file found in dir $key/ but no destination path set in config. Skipping file.."
+      continue
     else
-      src_path="$key/$file"
-      dest_dir="$(_expand_user "$(jq -r ".\"$file\"" <<< "$files")")"
+      src_path=$key/$file
+      dest_prefix="$(_expand_user "$(jq -r ".\"$file\"" <<< "$files")")"
 
-      target_file_name="$(basename "$file")"
-      if ! test -d "$dest_dir"; then
-        target_file_name="$(basename "$dest_dir")"
-        dest_dir="$(dirname "$dest_dir")"
+      if jq '. | type == "array"' <<< "$dest_prefix" &>/dev/null; then
+        gum log -tRFC1123Z -lerror >&2 \
+          "linking a file to a multiple destinations not implemented yet: $src_path = $dest_prefix"
+        exit 1
       fi
 
-      dest_path="${dest_dir%/}/$target_file_name"
+      target_file_name="$(basename "$file")"
+      # if destination string doesn't end in '/', and doesn't already exist as a directory,
+      # treat the final path segment as the destination file name,
+      # and use the parent directory as the destination prefix.
+      if [[ ! "$dest_prefix" =~ /$  && ! -d "$dest_prefix" ]]; then
+        target_file_name="$(basename "$dest_prefix")"
+        dest_prefix="$(dirname "$dest_prefix")"
+      fi
+
+      dest_path="${dest_prefix%/}/$target_file_name"
 
       # If file contains a pattern from dotfiles.toml, copy the file to the
       # local .templates/ dir and apply the substitutions.
@@ -167,21 +224,36 @@ _deploy_files() {
         template_dir="$key/.templates"
         template_file="$template_dir/$file"
 
-        mkdir -p "$(dirname "$template_file")"
+        mkdir -p "$template_dir"
 
-        cp --preserve=all --force "$src_path" "$template_file" \
-          2> >(gum log -terror "$@" 2>/dev/null)
+        if ! "$DRY_RUN"; then
+          cp --preserve=all --force "$src_path" "$template_file" \
+            2> >(gum log -tRFC1123Z -lerror "$@" 2>/dev/null)
+        else
+          printf '%s' "Would copy file $src_path to template dir $template_dir" \
+           | gum style --foreground='#FCFA7D'
+        fi
 
         src_path="$template_file"
       fi
 
-      _create_or_replace_symlink "$src_path" "$dest_path"
+      if ! "$DRY_RUN"; then
+        _create_or_replace_symlink "$src_path" "$dest_path"
+      else
+        _create_or_replace_symlink_dry_run "$src_path" "$dest_path"
+      fi
     fi
   done
 
   rm -f "$patterns_file"
 
-  [[ -n "$templates" ]] && _replace_patterns "$key" "$templates"
+  if [[ -n "$templates" ]]; then
+    if ! "$DRY_RUN"; then
+      _replace_patterns "$key" "$templates";
+    # else
+      # TODO: show expected templated file
+    fi
+  fi
 
   return 0
 }
@@ -198,11 +270,10 @@ usage() {
 
 	\$ ${BASH_SOURCE[0]} --fd-filter git -- bin
 	\$ ${BASH_SOURCE[0]} -fgit -- bin
-	
+
 	Options:
 	  -h, --help       Display this help message.
-	  -d, --dry-run    Templated files will still be copied,
-	                   but no symlink targets are created.
+	  -d, --dry-run    Templated files will still be copied, but no symlink targets are created.
 	  -f, --fd-filter  Filter to pass to fd when searching for files.
 	EOF
 }
@@ -251,5 +322,6 @@ main() {
 
   exit 0
 }
+
 
 main "$@"
