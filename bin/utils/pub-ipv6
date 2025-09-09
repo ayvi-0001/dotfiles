@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-ifconfig.me
+curl -sfL ifconfig.me/all.json | jq
