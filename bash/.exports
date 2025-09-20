@@ -64,25 +64,6 @@ export OPENSSL_DIR=C:/Program\ Files/OpenSSL-Win64
 export OPENSSL_NO_VENDOR=1
 export SSL_CERT_FILE=C:/Program\ Files/OpenSSL-Win64/certs/cacert.pem
 
-# fzf -----------------------------------------------------------------------
-
-export FZF_DEFAULT_OPTS='--color=bg+:#293739,bg:#020202,border:#808080,spinner:#E6DB74,hl:#7E8E91,fg:#F8F8F2,header:#7E8E91,info:#A6E22E,pointer:#A6E22E,marker:#F92672,fg+:#F8F8F2,prompt:#F92672,hl+:#F92672'
-export FZF_CTRL_T_OPTS="
-  --walker-skip .git,node_modules,target
-  --preview 'bat -n --color=always {}'
-  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
-
-# CTRL-Y to copy the command into clipboard using pbcopy
-export FZF_CTRL_R_OPTS="
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | clip)+abort'
-  --color header:italic
-  --header 'Press CTRL-Y to copy command into clipboard'"
-
-# Print tree structure in the preview window
-export FZF_ALT_C_OPTS="
-  --walker-skip .git,node_modules,target
-  --preview 'tree -C {}'"
-
 # uv-------------------------------------------------------------------------
 
 export UV_TOOL_DIR=$HOME/.local/share/uv/tools

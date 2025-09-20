@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+FZF_DEFAULT_OPTS=$(cat<<'FZF_DEFAULT_OPTS'
+--color=bg+:#293739,bg:#020202,border:#808080,spinner:#E6DB74,hl:#7E8E91,fg:#F8F8F2,header:#7E8E91,info:#A6E22E,pointer:#A6E22E,marker:#F92672,fg+:#F8F8F2,prompt:#F92672,hl+:#F92672
+FZF_DEFAULT_OPTS
+)
+
+FZF_CTRL_T_OPTS=$(cat<<'FZF_CTRL_T_OPTS'
+--walker-skip .git,node_modules,target
+--preview 'bat -n --color=always {}'
+--bind 'ctrl-/:change-preview-window(down|hidden|)'
+FZF_CTRL_T_OPTS
+)
+
+FZF_CTRL_R_OPTS=$(cat<<'FZF_CTRL_R_OPTS'
+--layout=reverse
+--bind 'ctrl-y:execute-silent(echo -n {2..} | clip)+abort'
+--color header:italic
+--prompt ' history > '
+--with-nth 2..
+--header '<C-y> = copy command into clipboard
+<ret> = select'
+FZF_CTRL_R_OPTS
+)
+
+# Print tree structure in the preview window
+FZF_ALT_C_OPTS=$(cat<<'FZF_ALT_C_OPTS'
+--walker-skip .git,node_modules,target
+--preview 'tree -C {}'
+FZF_ALT_C_OPTS
+)
+
+export FZF_DEFAULT_OPTS
+export FZF_CTRL_T_OPTS
+export FZF_CTRL_R_OPTS
+export FZF_ALT_C_OPTS
