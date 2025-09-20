@@ -20,7 +20,7 @@ trailing_newline      = true
 
 [[rule]]
 include = ["config.toml"]
-keys    = ["keys.normal"]
+keys    = ["keys"]
 
   [rule.formatting]
   align_comments = true
