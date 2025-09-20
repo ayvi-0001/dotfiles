@@ -123,34 +123,8 @@ C-O   = "jump_backward"
 C-I   = "jump_forward"
 C-S-s = "save_selection"
 
-# move line up
-S-A-k = [
-  "keep_primary_selection",
-  "extend_to_line_bounds",
-  "extend_line_above",
-  "split_selection_on_newline",
-  "select_mode",
-  "goto_line_end_newline",
-  "normal_mode",
-  "rotate_selection_contents_forward",
-  "keep_primary_selection",
-  "move_visual_line_up",
-]
-# move line down
-S-A-j = [
-  "keep_primary_selection",
-  "move_line_down",
-  "extend_to_line_bounds",
-  "extend_line_above",
-  "split_selection_on_newline",
-  "select_mode",
-  "goto_line_end_newline",
-  "normal_mode",
-  "rotate_selection_contents_forward",
-  "keep_primary_selection",
-  "move_visual_line_down",
-  "move_visual_line_up",
-]
+S-A-k = "@XdkP;" # move line up
+S-A-j = "@Xdp;"  # move line down
 
   [keys.normal.g] # Goto ext
   D = "@gd wv"                         # Goto definition in new vertical right split
