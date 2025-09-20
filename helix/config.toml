@@ -226,7 +226,25 @@ S-A-j = [
     s = ":lsp-stop"
 
 [keys.insert]
-"C-[" = "normal_mode"
+"C-["    = "normal_mode"
+C-s      = "commit_undo_checkpoint"
+C-x      = "completion"
+C-r      = "insert_register"
+C-w      = "delete_word_backward"   # Alt-Backspace
+A-d      = "delete_word_forward"    # Alt-Delete
+C-u      = "kill_to_line_start"
+C-k      = "kill_to_line_end"
+C-h      = "delete_char_backward"   # Backspace, Shift-Backspace
+C-d      = "delete_char_forward"    # Delete
+C-j      = "insert_newline"         # Enter
+up       = "no_op"
+down     = "no_op"
+left     = "no_op"
+right    = "no_op"
+pageup   = "no_op"
+pagedown = "no_op"
+home     = "no_op"
+end      = "no_op"
 
 [keys.select]
 "C-[" = "normal_mode"
