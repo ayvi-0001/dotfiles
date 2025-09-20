@@ -34,6 +34,25 @@ function cd_up() { builtin cd "$(printf "%0.s../" $(seq 1 "${1:-0}" ))"; } \
   && alias 'cd..'='cd_up'
 
 
+# Remove lines from history with fzf
+hfzf() {
+  history -w
+  awk '!seen[$0]++' < ~/.bash_history \
+    | fzf \
+        --scheme=history \
+        --tac \
+        --highlight-line \
+        --layout=reverse \
+        --multi \
+        --scroll-off=3 \
+        > /tmp/to_remove
+  grep -vxFf /tmp/to_remove ~/.bash_history > ~/.new_bash_history
+  mv ~/.new_bash_history ~/.bash_history
+  rm /tmp/to_remove
+  history -r
+}
+
+
 # `bw_` points to wrapper script in ~/bin for bitwarden cli
 command -v bw_ >/dev/null && function bw() { "$(which bw_)" "$@"; }
 
