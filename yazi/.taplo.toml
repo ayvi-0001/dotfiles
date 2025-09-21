@@ -2,7 +2,7 @@
 align_comments        = false
 align_entries         = true
 allowed_blank_lines   = 2
-array_auto_collapse   = true
+array_auto_collapse   = false
 array_auto_expand     = true
 array_trailing_comma  = true
 column_width          = 200

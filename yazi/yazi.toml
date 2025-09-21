@@ -58,8 +58,7 @@ database = [
   { run = '''bash -c "harlequin '%*'"''', block = true, desc = "harlequin", for = "windows" },
 ]
 browser = [
-  { run = '''bash -c "$BROWSER '%*'"''', orphan = true, desc = "browser", for = "windows" },
-  { run = '''bash -c "cat '%*' | grep URL= | cut -d= -f2- | xargs $BROWSER"''', orphan = true, desc = "browser-shortcut", for = "windows" },
+  { run = '''bash -c "\"$BROWSER\" '%*'"''', orphan = true, desc = "browser", for = "windows" },
 ]
 
 [open]
@@ -72,7 +71,9 @@ prepend_rules = [
   { mime = "image/svg+xml", use = ["browser", "edit"] },
   { mime = "image/*", use = ["play", "open", "reveal"] },
 ]
-append_rules = [{ name = "*", use = ["open", "reveal", "edit"] }]
+append_rules = [
+  { name = "*", use = ["open", "reveal", "edit"] },
+]
 
 [tasks]
 micro_workers    = 20
@@ -87,7 +88,9 @@ prepend_previewers = [
   { name = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },
   { mime = "audio/*", run = "exifaudio" },
 ]
-prepend_fetchers = [{ id = "git", name = "*", run = "git" }]
+prepend_fetchers = [
+  { id = "git", name = "*", run = "git" },
+]
 append_previewers = [
   { mime = "application/*", run = 'piper -- exiftool "$1"' },
   { name = "*", run = 'piper -- bat -p --color=always "$1"' },
