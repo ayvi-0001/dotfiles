@@ -18,13 +18,13 @@ function M.apply_to_config(config, unix_domain, event_name)
   end
 
   local floating_pane_domain = unix_domain or {}
-  floating_pane_domain.name = "local-floating"
+  local domain_name = "local-floating"
+  floating_pane_domain.name = domain_name
   table.insert(config.unix_domains, floating_pane_domain)
 
   ---@param window Window
   ---@param pane Pane
   wezterm.on(event_name or "toggle-floating-pane", function(window, pane) ---@diagnostic disable-line: unused-local
-    local domain_name = "local-floating"
     local domain = wezterm.mux.get_domain(domain_name)
     local gui_windows = wezterm.gui.gui_windows()
 
