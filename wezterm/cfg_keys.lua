@@ -1,6 +1,8 @@
-local callbacks = require "callbacks"
 local wezterm = require "wezterm" --[[@as Wezterm]]
-local window_space = require "window_space"
+
+local callbacks = require "callbacks"
+
+require "window_space"
 
 local M = {}
 
@@ -36,8 +38,8 @@ function M.apply_to_config(config)
     { key = "t", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["tab"]) },
     { key = "s", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["scroll"]) },
     { key = "o", mods = "CTRL", action = wezterm.action.ActivateKeyTable(key_tables["session"]) },
-    { key = "d", mods = "LEADER", action = wezterm.action.ActivateKeyTable(key_tables["disable_one_shot"]) },
-    { key = "D", mods = "LEADER|SHIFT", action = wezterm.action.ActivateKeyTable(key_tables["disable"]) },
+    { key = "F12", mods = "NONE", action = wezterm.action.ActivateKeyTable(key_tables["disable_one_shot"]) },
+    { key = "F11", mods = "NONE", action = wezterm.action.ActivateKeyTable(key_tables["disable"]) },
     { key = "x", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCopyMode },
     { key = "f", mods = "ALT", action = wezterm.action.EmitEvent "toggle-floating-pane" },
     { key = "h", mods = "ALT", action = wezterm.action_callback(callbacks.move_focus_or_tab_left) },
@@ -270,7 +272,7 @@ function M.apply_to_config(config)
       { key = "L", mods = "ALT", action = wezterm.action.SendKey { key = "L", mods = "ALT" } },
       { key = "i", mods = "ALT", action = wezterm.action.SendKey { key = "i", mods = "ALT" } },
       { key = "o", mods = "ALT", action = wezterm.action.SendKey { key = "o", mods = "ALT" } },
-      { key = "d", mods = "LEADER", action = "PopKeyTable" },
+      { key = "F11", mods = "NONE", action = "PopKeyTable" },
     },
   }
 

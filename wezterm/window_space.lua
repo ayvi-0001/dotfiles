@@ -23,16 +23,17 @@ require("window_space").setup {
 Module functions:
   - spawn_window_and_set_dimensions
   - move_pane_to_new_window
+  - move_pane_to_new_tab
 
 Module events:
-  - "increase-to-top"
-  - "decrease-from-top"
-  - "increase-to-bottom"
-  - "decrease-from-bottom"
-  - "increase-to-left"
-  - "decrease-from-left"
-  - "increase-to-right"
-  - "decrease-from-right"
+  - "resize-window-increase-to-top"
+  - "resize-window-decrease-from-top"
+  - "resize-window-increase-to-bottom"
+  - "resize-window-decrease-from-bottom"
+  - "resize-window-increase-to-left"
+  - "resize-window-decrease-from-left"
+  - "resize-window-increase-to-right"
+  - "resize-window-decrease-from-right"
   - "move-window-left"
   - "move-window-right"
   - "move-window-up"
@@ -288,10 +289,11 @@ function M.setup(opts)
   end
 
   if opts.enable_pane_move_events then
-    ---@overload fun(window: Window, _: Pane): nil
+    ---@overload fun(window: Window, pane: Pane): nil
     wezterm.on("move-pane-to-new-window", function(window, pane)
       M.move_pane_to_new_window(window, pane)
     end)
+    ---@overload fun(window: Window, pane: Pane): nil
     wezterm.on("move-pane-to-new-tab", function(window, pane)
       M.move_pane_to_new_tab(window, pane)
     end)
