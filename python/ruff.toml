@@ -1,0 +1,53 @@
+exclude = [".venv"]
+fix = true
+line-length = 99
+preview = true
+unsafe-fixes = true
+
+[lint]
+preview = true
+select = ["ALL"]
+extend-fixable = [
+    "I",   # isort
+    "E",   # pycodestyle-error
+    "W",   # pycodestyle-warning
+    "COM", # flake8-commas
+    "PYI", # flake8-pyi
+    "RSE", # flake8-raise
+    "RUF", # ruff-specific rules
+    "TC",  # flake8-type-checking
+    "UP",  # pyupgrade
+]
+extend-ignore = [
+    "CPY",     # flake8-copyright
+    "D100",    # pydocstyle: undocumented-public-module
+    "D101",    # pydocstyle: undocumented-public-class
+    "D102",    # pydocstyle: undocumented-public-method
+    "D103",    # pydocstyle: undocumented-public-function
+    "D104",    # pydocstyle: undocumented-public-package
+    "D105",    # pydocstyle: undocumented-magic-method
+    "D107",    # pydocstyle: undocumented-public-init
+    "D203",    # pydocstyle: incorrect-blank-line-before-class
+    "D211",    # pydocstyle: blank-line-before-class
+    "D212",    # pydocstyle - multi-line-summary-first-line
+    "DOC201",  # pydoclint: docstring-missing-returns
+    "DOC501",  # pydoclint:  docstring-missing-exception
+    "EXE",     # flake8-executable
+    "FIX",     # flake8-fixme
+    "F841",    # pyflakes: unused-variable
+    "PLC0415", # pylint / convention: import-outside-top-level 
+    "PLR0913", # pylint / refactor: too-many-arguments
+    "PLR0917", # pylint / refactor: too-many-positional-arguments 
+    "TD003",   # flake8-todos: missing-todo-link
+]
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[lint.per-file-ignores]
+"test*" = [
+    "S101",    # flake8-bandit: assert
+    "PLR6301", # pylint / refactor: no-self-use
+]
+
+[format]
+preview = true
