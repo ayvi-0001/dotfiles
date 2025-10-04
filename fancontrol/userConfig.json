@@ -1,5 +1,5 @@
 {
-  "__VERSION__": "236",
+  "__VERSION__": "242",
   "Main": {
     "Controls": [
       {
@@ -507,7 +507,6 @@
       "CPU": true,
       "EmbeddedEC": true,
       "GPU": true,
-      "InpOut": false,
       "Memory": true,
       "Motherboard": true,
       "PSU": true,
