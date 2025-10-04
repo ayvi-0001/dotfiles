@@ -1,90 +1,74 @@
 {
-  "__VERSION__": "234",
+  "__VERSION__": "236",
   "Main": {
     "Controls": [
       {
-        "Calibration": null,
-        "Enable": true,
-        "ForceApply": true,
-        "Identifier": "NVApiWrapper/0-AD104-A/control/0",
-        "IsHidden": false,
-        "ManualControl": false,
-        "ManualControlValue": 66,
-        "MinimumPercent": 0,
         "Name": "Control 1 - NVIDIA GeForce RTX 4070 SUPER",
         "NickName": "Control 1 - NVIDIA GeForce RTX 4070 SUPER",
-        "PairedFanSensor": {
-          "Identifier": "NVApiWrapper/0-AD104-A/fan/0",
-          "IsHidden": false,
-          "Name": "Fan 1 - NVIDIA GeForce RTX 4070 SUPER",
-          "NickName": "Fan 1 - NVIDIA GeForce RTX 4070 SUPER"
-        },
-        "SelectedCommandStepDown": 8,
-        "SelectedCommandStepUp": 8,
+        "Identifier": "NVApiWrapper/0-AD104-A/control/0",
+        "IsHidden": false,
+        "Enable": true,
         "SelectedFanCurve": {
-          "CommandMode": 0,
-          "Deadband": 3,
-          "IdleTemperature": 45,
-          "IsHidden": false,
-          "LoadTemperature": 65,
-          "MaxFanSpeed": 100,
-          "MinFanSpeed": 40,
-          "Name": "auto-gpu",
-          "SelectedResponseTime": 2,
-          "SelectedTempSource": {
-            "Identifier": "NVApiWrapper/0-AD104-A/sensor/0",
-            "IsHidden": false,
-            "Name": "GPU",
-            "NickName": "GPU"
-          },
-          "Step": 2
+          "Name": "auto-gpu"
         },
         "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "NVApiWrapper/0-AD104-A/fan/0"
+        },
         "SelectedStart": 0,
-        "SelectedStop": 0
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 66,
+        "ManualControl": false,
+        "ForceApply": true,
+        "Calibration": null
       },
       {
-        "Calibration": null,
-        "Enable": true,
-        "ForceApply": true,
-        "Identifier": "NVApiWrapper/0-AD104-A/control/1",
-        "IsHidden": false,
-        "ManualControl": false,
-        "ManualControlValue": 74,
-        "MinimumPercent": 0,
         "Name": "Control 2 - NVIDIA GeForce RTX 4070 SUPER",
         "NickName": "Control 2 - NVIDIA GeForce RTX 4070 SUPER",
-        "PairedFanSensor": {
-          "Identifier": "NVApiWrapper/0-AD104-A/fan/1",
-          "IsHidden": false,
-          "Name": "Fan 2 - NVIDIA GeForce RTX 4070 SUPER",
-          "NickName": "Fan 2 - NVIDIA GeForce RTX 4070 SUPER"
-        },
-        "SelectedCommandStepDown": 8,
-        "SelectedCommandStepUp": 8,
+        "Identifier": "NVApiWrapper/0-AD104-A/control/1",
+        "IsHidden": false,
+        "Enable": true,
         "SelectedFanCurve": {
-          "CommandMode": 0,
-          "Deadband": 3,
-          "IdleTemperature": 45,
-          "IsHidden": false,
-          "LoadTemperature": 65,
-          "MaxFanSpeed": 100,
-          "MinFanSpeed": 40,
-          "Name": "auto-gpu",
-          "SelectedResponseTime": 2,
-          "SelectedTempSource": {
-            "Identifier": "NVApiWrapper/0-AD104-A/sensor/0",
-            "IsHidden": false,
-            "Name": "GPU",
-            "NickName": "GPU"
-          },
-          "Step": 2
+          "Name": "auto-gpu"
         },
         "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "NVApiWrapper/0-AD104-A/fan/1"
+        },
         "SelectedStart": 0,
-        "SelectedStop": 0
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 74,
+        "ManualControl": false,
+        "ForceApply": true,
+        "Calibration": null
       },
       {
+        "Name": "CPU Fan",
+        "NickName": "cooler",
+        "Identifier": "/lpc/nct6798d/control/1",
+        "IsHidden": false,
+        "Enable": true,
+        "SelectedFanCurve": {
+          "Name": "auto-cpu"
+        },
+        "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "/lpc/nct6798d/fan/1"
+        },
+        "SelectedStart": 0,
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 63,
+        "ManualControl": false,
+        "ForceApply": true,
         "Calibration": [
           [
             10,
@@ -126,47 +110,29 @@
             100,
             1940
           ]
-        ],
-        "Enable": true,
-        "ForceApply": true,
-        "Identifier": "/lpc/nct6798d/control/1",
-        "IsHidden": false,
-        "ManualControl": false,
-        "ManualControlValue": 63,
-        "MinimumPercent": 0,
-        "Name": "CPU Fan",
-        "NickName": "cooler",
-        "PairedFanSensor": {
-          "Identifier": "/lpc/nct6798d/fan/1",
-          "IsHidden": true,
-          "Name": "CPU Fan",
-          "NickName": "cooler"
-        },
-        "SelectedCommandStepDown": 8,
-        "SelectedCommandStepUp": 8,
-        "SelectedFanCurve": {
-          "CommandMode": 0,
-          "Deadband": 3,
-          "IdleTemperature": 35,
-          "IsHidden": false,
-          "LoadTemperature": 65,
-          "MaxFanSpeed": 100,
-          "MinFanSpeed": 50,
-          "Name": "auto-cpu",
-          "SelectedResponseTime": 2,
-          "SelectedTempSource": {
-            "Identifier": "/amdcpu/0/temperature/2",
-            "IsHidden": false,
-            "Name": "Core (Tctl/Tdie)",
-            "NickName": "Core (Tctl/Tdie)"
-          },
-          "Step": 5
-        },
-        "SelectedOffset": 0,
-        "SelectedStart": 0,
-        "SelectedStop": 0
+        ]
       },
       {
+        "Name": "Chassis Fan #2",
+        "NickName": "top",
+        "Identifier": "/lpc/nct6798d/control/2",
+        "IsHidden": false,
+        "Enable": true,
+        "SelectedFanCurve": {
+          "Name": "auto-cpu"
+        },
+        "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "/lpc/nct6798d/fan/2"
+        },
+        "SelectedStart": 28,
+        "SelectedStop": 16,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 76,
+        "ManualControl": false,
+        "ForceApply": false,
         "Calibration": [
           [
             10,
@@ -208,47 +174,29 @@
             100,
             1338
           ]
-        ],
-        "Enable": true,
-        "ForceApply": false,
-        "Identifier": "/lpc/nct6798d/control/2",
-        "IsHidden": false,
-        "ManualControl": false,
-        "ManualControlValue": 76,
-        "MinimumPercent": 0,
-        "Name": "Chassis Fan #2",
-        "NickName": "top",
-        "PairedFanSensor": {
-          "Identifier": "/lpc/nct6798d/fan/2",
-          "IsHidden": true,
-          "Name": "Chassis Fan #2",
-          "NickName": "top"
-        },
-        "SelectedCommandStepDown": 8,
-        "SelectedCommandStepUp": 8,
-        "SelectedFanCurve": {
-          "CommandMode": 0,
-          "Deadband": 3,
-          "IdleTemperature": 35,
-          "IsHidden": false,
-          "LoadTemperature": 65,
-          "MaxFanSpeed": 100,
-          "MinFanSpeed": 50,
-          "Name": "auto-cpu",
-          "SelectedResponseTime": 2,
-          "SelectedTempSource": {
-            "Identifier": "/amdcpu/0/temperature/2",
-            "IsHidden": false,
-            "Name": "Core (Tctl/Tdie)",
-            "NickName": "Core (Tctl/Tdie)"
-          },
-          "Step": 5
-        },
-        "SelectedOffset": 0,
-        "SelectedStart": 28,
-        "SelectedStop": 16
+        ]
       },
       {
+        "Name": "Chassis Fan #3",
+        "NickName": "back",
+        "Identifier": "/lpc/nct6798d/control/3",
+        "IsHidden": false,
+        "Enable": true,
+        "SelectedFanCurve": {
+          "Name": "sync-case-fans"
+        },
+        "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "/lpc/nct6798d/fan/3"
+        },
+        "SelectedStart": 31,
+        "SelectedStop": 16,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 67,
+        "ManualControl": false,
+        "ForceApply": false,
         "Calibration": [
           [
             10,
@@ -290,118 +238,29 @@
             100,
             1304
           ]
-        ],
-        "Enable": true,
-        "ForceApply": false,
-        "Identifier": "/lpc/nct6798d/control/3",
-        "IsHidden": false,
-        "ManualControl": false,
-        "ManualControlValue": 67,
-        "MinimumPercent": 0,
-        "Name": "Chassis Fan #3",
-        "NickName": "back",
-        "PairedFanSensor": {
-          "Identifier": "/lpc/nct6798d/fan/3",
-          "IsHidden": true,
-          "Name": "Chassis Fan #3",
-          "NickName": "back"
-        },
-        "SelectedCommandStepDown": 8,
-        "SelectedCommandStepUp": 8,
-        "SelectedFanCurve": {
-          "CommandMode": 0,
-          "IsHidden": false,
-          "Name": "sync-case-fans",
-          "Proportional": false,
-          "SelectedControl": {
-            "Calibration": [
-              [
-                10,
-                0
-              ],
-              [
-                20,
-                407
-              ],
-              [
-                30,
-                571
-              ],
-              [
-                40,
-                711
-              ],
-              [
-                50,
-                837
-              ],
-              [
-                60,
-                945
-              ],
-              [
-                70,
-                1064
-              ],
-              [
-                80,
-                1153
-              ],
-              [
-                90,
-                1243
-              ],
-              [
-                100,
-                1338
-              ]
-            ],
-            "Enable": true,
-            "ForceApply": false,
-            "Identifier": "/lpc/nct6798d/control/2",
-            "IsHidden": false,
-            "ManualControl": false,
-            "ManualControlValue": 76,
-            "MinimumPercent": 0,
-            "Name": "Chassis Fan #2",
-            "NickName": "top",
-            "PairedFanSensor": {
-              "Identifier": "/lpc/nct6798d/fan/2",
-              "IsHidden": true,
-              "Name": "Chassis Fan #2",
-              "NickName": "top"
-            },
-            "SelectedCommandStepDown": 8,
-            "SelectedCommandStepUp": 8,
-            "SelectedFanCurve": {
-              "CommandMode": 0,
-              "Deadband": 3,
-              "IdleTemperature": 35,
-              "IsHidden": false,
-              "LoadTemperature": 65,
-              "MaxFanSpeed": 100,
-              "MinFanSpeed": 50,
-              "Name": "auto-cpu",
-              "SelectedResponseTime": 2,
-              "SelectedTempSource": {
-                "Identifier": "/amdcpu/0/temperature/2",
-                "IsHidden": false,
-                "Name": "Core (Tctl/Tdie)",
-                "NickName": "Core (Tctl/Tdie)"
-              },
-              "Step": 5
-            },
-            "SelectedOffset": 0,
-            "SelectedStart": 28,
-            "SelectedStop": 16
-          },
-          "SelectedOffset": 0
-        },
-        "SelectedOffset": 0,
-        "SelectedStart": 31,
-        "SelectedStop": 16
+        ]
       },
       {
+        "Name": "Chipset Fan",
+        "NickName": "moba",
+        "Identifier": "/lpc/nct6798d/control/4",
+        "IsHidden": false,
+        "Enable": true,
+        "SelectedFanCurve": {
+          "Name": "auto-cpu"
+        },
+        "SelectedOffset": 0,
+        "PairedFanSensor": {
+          "Identifier": "/lpc/nct6798d/fan/4"
+        },
+        "SelectedStart": 27,
+        "SelectedStop": 6,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 71,
+        "ManualControl": false,
+        "ForceApply": false,
         "Calibration": [
           [
             0,
@@ -447,123 +306,80 @@
             100,
             4355
           ]
-        ],
-        "Enable": true,
-        "ForceApply": false,
-        "Identifier": "/lpc/nct6798d/control/4",
-        "IsHidden": false,
-        "ManualControl": false,
-        "ManualControlValue": 71,
-        "MinimumPercent": 0,
-        "Name": "Chipset Fan",
-        "NickName": "moba",
-        "PairedFanSensor": {
-          "Identifier": "/lpc/nct6798d/fan/4",
-          "IsHidden": true,
-          "Name": "Chipset Fan",
-          "NickName": "moba"
-        },
-        "SelectedCommandStepDown": 8,
-        "SelectedCommandStepUp": 8,
-        "SelectedFanCurve": {
-          "CommandMode": 0,
-          "Deadband": 3,
-          "IdleTemperature": 35,
-          "IsHidden": false,
-          "LoadTemperature": 65,
-          "MaxFanSpeed": 100,
-          "MinFanSpeed": 50,
-          "Name": "auto-cpu",
-          "SelectedResponseTime": 2,
-          "SelectedTempSource": {
-            "Identifier": "/amdcpu/0/temperature/2",
-            "IsHidden": false,
-            "Name": "Core (Tctl/Tdie)",
-            "NickName": "Core (Tctl/Tdie)"
-          },
-          "Step": 5
-        },
-        "SelectedOffset": 0,
-        "SelectedStart": 27,
-        "SelectedStop": 6
+        ]
       },
       {
-        "Calibration": [],
-        "Enable": true,
-        "ForceApply": false,
-        "Identifier": "/lpc/nct6798d/control/5",
-        "IsHidden": true,
-        "ManualControl": false,
-        "ManualControlValue": 50,
-        "MinimumPercent": 0,
         "Name": "AIO Pump",
         "NickName": "none",
-        "PairedFanSensor": null,
-        "SelectedCommandStepDown": 8,
-        "SelectedCommandStepUp": 8,
+        "Identifier": "/lpc/nct6798d/control/5",
+        "IsHidden": true,
+        "Enable": true,
         "SelectedFanCurve": null,
         "SelectedOffset": 0,
+        "PairedFanSensor": null,
         "SelectedStart": 0,
-        "SelectedStop": 0
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": []
       },
       {
-        "Calibration": [],
-        "Enable": true,
-        "ForceApply": false,
-        "Identifier": "/lpc/nct6798d/control/0",
-        "IsHidden": true,
-        "ManualControl": false,
-        "ManualControlValue": 50,
-        "MinimumPercent": 0,
         "Name": "Chassis Fan #1",
         "NickName": "none",
-        "PairedFanSensor": null,
-        "SelectedCommandStepDown": 8,
-        "SelectedCommandStepUp": 8,
+        "Identifier": "/lpc/nct6798d/control/0",
+        "IsHidden": true,
+        "Enable": true,
         "SelectedFanCurve": null,
         "SelectedOffset": 0,
+        "PairedFanSensor": null,
         "SelectedStart": 0,
-        "SelectedStop": 0
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": []
       },
       {
-        "Calibration": [],
-        "Enable": true,
-        "ForceApply": false,
-        "Identifier": "/lpc/nct6798d/control/6",
-        "IsHidden": true,
-        "ManualControl": false,
-        "ManualControlValue": 50,
-        "MinimumPercent": 0,
         "Name": "CPU Optional Fan",
         "NickName": "none",
-        "PairedFanSensor": null,
-        "SelectedCommandStepDown": 8,
-        "SelectedCommandStepUp": 8,
+        "Identifier": "/lpc/nct6798d/control/6",
+        "IsHidden": true,
+        "Enable": true,
         "SelectedFanCurve": null,
         "SelectedOffset": 0,
+        "PairedFanSensor": null,
         "SelectedStart": 0,
-        "SelectedStop": 0
+        "SelectedStop": 0,
+        "MinimumPercent": 0,
+        "SelectedCommandStepUp": 8,
+        "SelectedCommandStepDown": 8,
+        "ManualControlValue": 50,
+        "ManualControl": false,
+        "ForceApply": false,
+        "Calibration": []
       }
     ],
     "CustomSensors": [
       {
-        "AllowMissingSensor": false,
+        "Name": "max-ryzen-7-5800x",
+        "NickName": "max-ryzen-7-5800x",
         "Identifier": "Mix/max-ryzen-7-5800x",
         "IsHidden": false,
-        "Name": "max-ryzen-7-5800x",
+        "AllowMissingSensor": false,
         "SelectedMixFunction": 1,
         "SelectedSensors": [
           {
-            "Identifier": "/amdcpu/0/temperature/2",
-            "IsHidden": false,
-            "Name": "Core (Tctl/Tdie)",
-            "NickName": "Core (Tctl/Tdie)"
+            "Identifier": "/amdcpu/0/temperature/2"
           },
           {
-            "Identifier": "/amdcpu/0/temperature/3",
-            "IsHidden": false,
-            "Name": "CCD1 (Tdie)",
-            "NickName": "CCD1 (Tdie)"
+            "Identifier": "/amdcpu/0/temperature/3"
           }
         ]
       }
@@ -572,128 +388,43 @@
     "FanCurves": [
       {
         "CommandMode": 0,
-        "Deadband": 3,
-        "IdleTemperature": 45,
-        "IsHidden": false,
-        "LoadTemperature": 65,
-        "MaxFanSpeed": 100,
-        "MinFanSpeed": 40,
         "Name": "auto-gpu",
-        "SelectedResponseTime": 2,
+        "IsHidden": false,
         "SelectedTempSource": {
-          "Identifier": "NVApiWrapper/0-AD104-A/sensor/0",
-          "IsHidden": false,
-          "Name": "GPU",
-          "NickName": "GPU"
+          "Identifier": "NVApiWrapper/0-AD104-A/sensor/0"
         },
-        "Step": 2
-      },
-      {
-        "CommandMode": 0,
+        "Step": 2,
         "Deadband": 3,
-        "IdleTemperature": 35,
-        "IsHidden": false,
-        "LoadTemperature": 65,
-        "MaxFanSpeed": 100,
-        "MinFanSpeed": 50,
-        "Name": "auto-cpu",
         "SelectedResponseTime": 2,
-        "SelectedTempSource": {
-          "Identifier": "/amdcpu/0/temperature/2",
-          "IsHidden": false,
-          "Name": "Core (Tctl/Tdie)",
-          "NickName": "Core (Tctl/Tdie)"
-        },
-        "Step": 5
+        "IdleTemperature": 45,
+        "MinFanSpeed": 40,
+        "MaxFanSpeed": 100,
+        "LoadTemperature": 65
       },
       {
         "CommandMode": 0,
+        "Name": "auto-cpu",
         "IsHidden": false,
-        "Name": "sync-case-fans",
-        "Proportional": false,
-        "SelectedControl": {
-          "Calibration": [
-            [
-              10,
-              0
-            ],
-            [
-              20,
-              407
-            ],
-            [
-              30,
-              571
-            ],
-            [
-              40,
-              711
-            ],
-            [
-              50,
-              837
-            ],
-            [
-              60,
-              945
-            ],
-            [
-              70,
-              1064
-            ],
-            [
-              80,
-              1153
-            ],
-            [
-              90,
-              1243
-            ],
-            [
-              100,
-              1338
-            ]
-          ],
-          "Enable": true,
-          "ForceApply": false,
-          "Identifier": "/lpc/nct6798d/control/2",
-          "IsHidden": false,
-          "ManualControl": false,
-          "ManualControlValue": 76,
-          "MinimumPercent": 0,
-          "Name": "Chassis Fan #2",
-          "NickName": "top",
-          "PairedFanSensor": {
-            "Identifier": "/lpc/nct6798d/fan/2",
-            "IsHidden": true,
-            "Name": "Chassis Fan #2",
-            "NickName": "top"
-          },
-          "SelectedCommandStepDown": 8,
-          "SelectedCommandStepUp": 8,
-          "SelectedFanCurve": {
-            "CommandMode": 0,
-            "Deadband": 3,
-            "IdleTemperature": 35,
-            "IsHidden": false,
-            "LoadTemperature": 65,
-            "MaxFanSpeed": 100,
-            "MinFanSpeed": 50,
-            "Name": "auto-cpu",
-            "SelectedResponseTime": 2,
-            "SelectedTempSource": {
-              "Identifier": "/amdcpu/0/temperature/2",
-              "IsHidden": false,
-              "Name": "Core (Tctl/Tdie)",
-              "NickName": "Core (Tctl/Tdie)"
-            },
-            "Step": 5
-          },
-          "SelectedOffset": 0,
-          "SelectedStart": 28,
-          "SelectedStop": 16
+        "SelectedTempSource": {
+          "Identifier": "/amdcpu/0/temperature/2"
         },
-        "SelectedOffset": 0
+        "Step": 5,
+        "Deadband": 3,
+        "SelectedResponseTime": 2,
+        "IdleTemperature": 35,
+        "MinFanSpeed": 50,
+        "MaxFanSpeed": 100,
+        "LoadTemperature": 65
+      },
+      {
+        "CommandMode": 0,
+        "Name": "sync-case-fans",
+        "IsHidden": false,
+        "SelectedControl": {
+          "Identifier": "/lpc/nct6798d/control/2"
+        },
+        "SelectedOffset": 0,
+        "Proportional": false
       }
     ],
     "FanSensors": [
