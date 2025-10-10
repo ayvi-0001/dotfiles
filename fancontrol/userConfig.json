@@ -1,5 +1,5 @@
 {
-  "__VERSION__": "242",
+  "__VERSION__": "243",
   "Main": {
     "Controls": [
       {
@@ -411,9 +411,9 @@
         "Step": 5,
         "Deadband": 3,
         "SelectedResponseTime": 2,
-        "IdleTemperature": 35,
         "MinFanSpeed": 50,
         "MaxFanSpeed": 100,
+        "IdleTemperature": 35,
         "LoadTemperature": 65
       },
       {
