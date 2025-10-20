@@ -22,6 +22,10 @@ require("starship"):setup()
 
 require("zoxide"):setup { update_db = true }
 
+require("bunny"):setup {
+  hops = require("hops")["keys"],
+}
+
 if os.getenv "YAZI_HIDE_PREVIEW" then
   require("toggle-pane"):entry "min-preview"
 end

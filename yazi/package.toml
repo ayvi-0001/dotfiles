@@ -103,6 +103,11 @@ use = "boydaihungst/save-clipboard-to-file"
 rev = "40de82f"
 hash = "f79197930f23924827e81fa51a1413d0"
 
+[[plugin.deps]]
+use = "stelcodes/bunny"
+rev = "bd8a767"
+hash = "5dded0f0f40142f99dda23aedd76b2bf"
+
 [[flavor.deps]]
 use = "kmlupreti/ayu-dark"
 rev = "5f600aa"
