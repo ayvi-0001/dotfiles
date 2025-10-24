@@ -2,11 +2,12 @@
 
 set -euo pipefail
 
-git fetch -p \
+git fetch -p &>/dev/null \
   && git branch -r \
   | awk '{print $1}' \
-  | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) \
+  | grep -E -v -f /dev/fd/0 <(git branch -vv | grep ': gone]') \
   | awk '{print $1}' \
-  | xargs git branch -d
+  | awk '!/^[[:blank:]]*\+/' \
+  | xargs git branch -D
 
 exit 0
