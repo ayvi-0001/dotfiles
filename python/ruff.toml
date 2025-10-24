@@ -1,7 +1,7 @@
+preview = true
 exclude = [".venv"]
 fix = true
 line-length = 99
-preview = true
 unsafe-fixes = true
 
 [lint]
@@ -26,6 +26,7 @@ extend-ignore = [
     "D103",    # pydocstyle: undocumented-public-function
     "D104",    # pydocstyle: undocumented-public-package
     "D105",    # pydocstyle: undocumented-magic-method
+    "D106",    # pydocstyle: undocumented-public-nested-class
     "D107",    # pydocstyle: undocumented-public-init
     "D203",    # pydocstyle: incorrect-blank-line-before-class
     "D211",    # pydocstyle: blank-line-before-class
