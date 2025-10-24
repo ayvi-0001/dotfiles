@@ -38,7 +38,6 @@ open = [
   { run = "hx %*", block = true, desc = "helix", for = "windows" },
   { run = "code %*", block = true, desc = "vscode", orphan = true, for = "windows" },
   { run = "7zFM %*", orphan = true, desc = "7zFM", for = "windows" },
-  { run = "mpv %*", orphan = true, desc = "mpv", for = "windows" },
 ]
 reveal = [
   { run = 'explorer /select,"%1"', orphan = true, desc = "reveal", for = "windows" },
@@ -47,7 +46,6 @@ reveal = [
 extract = [
   { run = "ya pub extract --list %*", desc = "ya pub extract", for = "windows" },
   { run = "7zFM %*", orphan = true, desc = "7zFM", for = "windows" },
-  { run = 'start "" "%1"', orphan = true, desc = "open", for = "windows" },
 ]
 play = [
   { run = "mpv --force-window %*", orphan = true, desc = "mpv", for = "windows" },
