@@ -47,6 +47,7 @@ export HISTSIZE=100000000 # in bytes
 export HISTFILESIZE=$HISTSIZE
 
 export HISTCONTROL=ignoredups:erasedups:ignorespace
+export HISTIGNORE="y:\[*"
 export HISTFILE=$HOME/.bash_history
 export HISTLINESTOLOAD=50000
 
