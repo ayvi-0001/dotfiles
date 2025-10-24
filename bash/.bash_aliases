@@ -36,3 +36,5 @@ alias rrm='rclone delete'
 alias rrmdir='rclone rmdir'
 
 alias modsc='mods --continue-last'
+
+alias ld='lazydocker'
