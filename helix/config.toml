@@ -133,6 +133,7 @@ S-A-j = "@Xdp;"  # move line down
 
   [keys.normal.space]
   J = [":clipboard-yank-join"]
+  T = """@:w! %sh{mktemp}<ret>""" # Save current buffer to tmpfile
 
     [keys.normal.space.t] # toggle opts
     C   = ":toggle search.smart-case"
