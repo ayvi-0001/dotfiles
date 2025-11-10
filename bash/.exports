@@ -43,15 +43,16 @@ export npm_config_cache=$HOME/.cache/npm
 
 # history -------------------------------------------------------------------
 
-export HISTSIZE=100000000 # in bytes
-export HISTFILESIZE=$HISTSIZE
+# undocumented feature which sets the size to "unlimited"
+export HISTSIZE=
+export HISTFILESIZE=
 
 export HISTCONTROL=ignoredups:erasedups:ignorespace
 export HISTIGNORE="y:\[*"
 export HISTFILE=$HOME/.bash_history
-export HISTLINESTOLOAD=50000
 
-export LESSHISTFILE=$HOME/.cache/less/history # set to `-` to disable
+# disable
+export LESSHISTFILE=-
 export NODE_REPL_HISTORY=''
 
 # source/executables --------------------------------------------------------
