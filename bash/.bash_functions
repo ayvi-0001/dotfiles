@@ -37,7 +37,8 @@ function cd_up() { builtin cd "$(printf "%0.s../" $(seq 1 "${1:-0}" ))"; } \
 # Remove lines from history with fzf
 hfzf() {
   history -w
-  awk '!seen[$0]++' < ~/.bash_history \
+  awk '!seen[$0]++' < "$HISTFILE" \
+    | grep -v '^#' \
     | fzf \
         --scheme=history \
         --tac \
@@ -46,8 +47,8 @@ hfzf() {
         --multi \
         --scroll-off=3 \
         > /tmp/to_remove
-  grep -vxFf /tmp/to_remove ~/.bash_history > ~/.new_bash_history
-  mv ~/.new_bash_history ~/.bash_history
+  grep -vxFf /tmp/to_remove "$HISTFILE" > ~/.new_bash_history
+  mv ~/.new_bash_history "$HISTFILE"
   rm /tmp/to_remove
   history -r
 }
@@ -66,5 +67,5 @@ function _fzf_compgen_dir() { fd --type d --hidden --follow --exclude ".git" . "
 
 # some completion scripts still reference old bash-completion functions,
 # wrapping around a couple of them that were causing issues.
-function  _split_longopt { _comp__split_longopt "$@"; } 
-function  _filedir { _comp_compgen_filedir "$@"; } 
+function  _split_longopt { _comp__split_longopt "$@"; }
+function  _filedir { _comp_compgen_filedir "$@"; }

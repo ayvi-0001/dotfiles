@@ -47,9 +47,11 @@ export npm_config_cache=$HOME/.cache/npm
 export HISTSIZE=
 export HISTFILESIZE=
 
-export HISTCONTROL=ignoredups:erasedups:ignorespace
-export HISTIGNORE="y:\[*"
-export HISTFILE=$HOME/.bash_history
+export HISTCONTROL=ignoreboth:erasedups # ignoreboth=ignoredups:ignorespace
+export HISTIGNORE="y:\[*:hfzf" # :[A-Z]\:*:/[a-z]/*:
+# use a different file from the default ~/.bash_history,
+# some programs may have unexpected behaviour with the default name.
+export HISTFILE="$HOME/.bash_history_$USERNAME"
 export HISTTIMEFORMAT="%F %T "
 
 # disable
