@@ -50,6 +50,7 @@ export HISTFILESIZE=
 export HISTCONTROL=ignoredups:erasedups:ignorespace
 export HISTIGNORE="y:\[*"
 export HISTFILE=$HOME/.bash_history
+export HISTTIMEFORMAT="%F %T "
 
 # disable
 export LESSHISTFILE=-
