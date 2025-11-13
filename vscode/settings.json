@@ -35,6 +35,7 @@
   },
   "git.allowForcePush": true,
   "git.openRepositoryInParentFolders": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "markdown.extension.completion.enabled": true,
   "markdown.extension.toc.updateOnSave": false,
   "markdown.preview.doubleClickToSwitchToEditor": true,
