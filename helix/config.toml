@@ -1,6 +1,7 @@
 theme = "ayu_evolve"
 
 [editor]
+atomic-save              = true
 bufferline               = "always"
 clipboard-provider       = "windows"
 color-modes              = true
@@ -8,6 +9,7 @@ completion-timeout       = 5
 continue-comments        = false
 cursorline               = true
 default-line-ending      = "lf"
+editor-config            = true
 end-of-line-diagnostics  = "hint"
 insert-final-newline     = true
 middle-click-paste       = true
@@ -20,9 +22,9 @@ search.wrap-around       = false
 shell                    = ["bash", "-c"]
 smart-tab.supersede-menu = false
 text-width               = 200
+trim-trailing-whitespace = true
 true-color               = true
 undercurl                = true
-editor-config            = true
 
   [editor.terminal]
   command = "bash"
