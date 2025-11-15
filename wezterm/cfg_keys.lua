@@ -175,7 +175,7 @@ function M.apply_to_config(config)
       { key = "s", mods = "CTRL", action = wezterm.action.PaneSelect { mode = "SwapWithActive", show_pane_ids = true } },
       { key = "s", mods = "CTRL|ALT", action = wezterm.action.PaneSelect { mode = "SwapWithActiveKeepFocus", show_pane_ids = true } },
       { key = "f", mods = "NONE", action = wezterm.action.TogglePaneZoomState },
-      { key = "n", mods = "NONE", action = wezterm.action.EmitEvent "spawn-new-window-80%" },
+      { key = "n", mods = "NONE", action = wezterm.action.EmitEvent "spawn-new-window-90%" },
       { key = "N", mods = "SHIFT", action = wezterm.action.EmitEvent "spawn-new-window-50%" },
       { key = "w", mods = "NONE", action = wezterm.action.EmitEvent "toggle-floating-pane" },
       { key = "e", mods = "NONE", action = wezterm.action.EmitEvent "move-pane-to-new-tab" },

@@ -5,7 +5,7 @@ local window_space = require "window_space"
 ---@param cmd { args?: string[]?, cwd?: string, set_environment_variables?: table<[string], string>, domain: { ["DomainName"]:  string }, position: {x: integer, y: integer, origin: PositionOrigin}, width?: integer?, height?: integer?, workspace?: string? }
 wezterm.on("gui-startup", function(cmd) ---@diagnostic disable-line: unused-local
   local _, primary_pane, primary_window = window_space.spawn_window_and_set_dimensions {
-    ratio = 0.8,
+    ratio = 0.9,
     domain = "local",
     offsets = { x = 0, y = -30 },
     screen_name = "active",
@@ -47,11 +47,16 @@ end)
 
 ---@param window Window
 ---@param pane Pane
-wezterm.on("spawn-new-window-80%", function(window, pane) ---@diagnostic disable-line: unused-local
+wezterm.on("spawn-new-window-90%", function(window, pane) ---@diagnostic disable-line: unused-local
   local cwd = pane:get_current_working_dir()
   ---@cast cwd Url
   cwd = utils.get_url_file_path(cwd)
-  window_space.spawn_window_and_set_dimensions { ratio = 0.8, cwd = cwd, domain = "local" }
+  window_space.spawn_window_and_set_dimensions {
+    ratio = 0.9,
+    cwd = cwd,
+    domain = "local",
+    offsets = { x = 0, y = -30 },
+  }
 end)
 
 ---@param window Window
