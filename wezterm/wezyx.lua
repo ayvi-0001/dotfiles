@@ -113,7 +113,7 @@ local yazi_helix_launch_ide = function(window, pane)
     args = default_prog,
     direction = "Left",
     cwd = cwd,
-    size = 0.25,
+    size = 0.20,
     set_environment_variables = { YAZI_HIDE_PREVIEW = "1" },
   }
 
@@ -139,7 +139,7 @@ local yazi_helix_launch_ide = function(window, pane)
     args = default_prog,
     direction = "Bottom",
     cwd = cwd,
-    size = 0.3,
+    size = 0.25,
   }
 
   -- clear buffer
