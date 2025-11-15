@@ -21,4 +21,8 @@ require("floating_pane").apply_to_config(config, {
 
 require("docker").apply_to_config(config)
 
+if pcall(require, "gcloud_ssh") then
+  require("gcloud_ssh").apply_to_config(config)
+end
+
 return config
