@@ -63,7 +63,7 @@ browser = [
 prepend_rules = [
   { name = "*/", use = ["open", "reveal"] }, # Remove edit use from default config on directories.
   { mime = "image/svg+xml", use = ["browser", "edit"] },
-  { name = "*.{osz*,osk}", use = ["open", "extract"] },
+  { name = "*.{zip,osz*,osk}", use = ["open", "extract"] },
   { mime = "application/sqlite3", use = ["database"] }, # Database opener using harlequin.
   { name = "*.url", use = ["browser", "edit"] }, # Browser opener.
   { name = "*.html", use = ["edit", "browser"] },
