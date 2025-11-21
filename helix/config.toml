@@ -168,14 +168,14 @@ S-A-j = "@Xdp;"  # move line down
     u.s = "@|ccase --to uppersnake<ret>"     # UPPER_SNAKE_CASE
 
     [keys.normal.space.m] # macros
-    d   = "@ P:lang diff<ret>gg"                  # paste diff from clipboard
-    e   = "@|sed '/^[[:space:]]*$/d'<ret>"        # remove empty lines
-    i   = "@s[^\\x00-\\x7F]+<ret>"                # find non-ascii characters
-    j   = "@s <ret>i<ret><esc>d"                  # split selection on white space
-    t   = "@<A-!>date +%Y-%m-%dT%H:%M:%S%z<ret>;" # insert local datetime
-    u   = "@|sed '/^$/d'<ret>|sort -u<ret>"       # sort buffer, unique lines + rm empty lines
-    w.s = "@s\\s{2,}<ret>di <esc>"                # slurp whitespace
-    w.t = "@|sed 's/ \\+ /\\t/g'<ret>"            # replace multiple whitespaces with tab
+    d   = "@ P:lang diff<ret>gg"                         # paste diff from clipboard
+    e   = "@|sed '/^[[:space:]]*$/d'<ret>"               # remove empty lines
+    i   = "@s[^\\x00-\\x7F]+<ret>"                       # find non-ascii characters
+    j   = "@s <ret>i<ret><esc>d"                         # split selection on white space
+    t   = "@<A-!>date +%%Y-%%m-%%dT%%H:%%M:%%S%%z<ret>;" # insert local datetime
+    u   = "@|sed '/^$/d'<ret>|sort -u<ret>"              # sort buffer, unique lines + rm empty lines
+    w.s = "@s\\s{2,}<ret>di <esc>"                       # slurp whitespace
+    w.t = "@|sed 's/ \\+ /\\t/g'<ret>"                   # replace multiple whitespaces with tab
     # sort paragraph under cursor
     s = [
       "goto_line_end",
