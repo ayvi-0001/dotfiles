@@ -169,7 +169,7 @@ auto-format = false
 name             = "markdown"
 soft-wrap.enable = true
 text-width       = 200
-language-servers = ["markdown-oxide", "marksman"]
+language-servers = ["markdown-oxide", "marksman", "harper-ls"]
 indent           = { tab-width = 4, unit = "    " }
 auto-format      = true
 
