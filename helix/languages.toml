@@ -143,10 +143,9 @@ indent           = { tab-width = 2, unit = "  " }
 grammar          = "bash"
 
 [[language]]
-name             = "xit"
-indent           = { tab-width = 4, unit = "    " }
-language-servers = ["codebook"]
-auto-format      = true
+name        = "xit"
+indent      = { tab-width = 4, unit = "    " }
+auto-format = true
 
   [language.formatter]
   command = "bash"
