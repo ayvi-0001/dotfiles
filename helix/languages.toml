@@ -86,6 +86,10 @@ command = "lua-language-server"
 command = "codebook-lsp"
 args    = ["serve"]
 
+[language-server.harper-ls]
+command = "harper-ls"
+args    = ["--stdio"]
+
 [language-server.tailwindcss-ls]
 command = "tailwindcss-language-server"
 args    = ["--stdio"]
