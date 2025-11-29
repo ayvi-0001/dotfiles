@@ -165,7 +165,7 @@ auto-format = false
 name             = "markdown"
 soft-wrap.enable = true
 text-width       = 200
-language-servers = ["markdown-oxide", "marksman", "codebook"]
+language-servers = ["markdown-oxide", "marksman"]
 indent           = { tab-width = 4, unit = "    " }
 auto-format      = true
 
