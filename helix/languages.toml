@@ -178,10 +178,11 @@ auto-format      = true
   args    = ["--parser=markdown", "--stdin-filename", "%{buffer_name}"]
 
 [[language]]
-name       = "text"
-scope      = "source.text"
-indent     = { tab-width = 2, unit = "  " }
-file-types = ["txt"]
+name             = "text"
+scope            = "source.text"
+indent           = { tab-width = 2, unit = "  " }
+file-types       = ["txt"]
+language-servers = ["harper-ls"]
 
 # Following language is to provide auto-formatting for mermaid gantt charts.
 # File types is intentionally left blank, so files with  `.mermaid` or `.mmd`
