@@ -34,11 +34,12 @@ extend-ignore = [
     "DOC201",  # pydoclint: docstring-missing-returns
     "DOC501",  # pydoclint:  docstring-missing-exception
     "EXE",     # flake8-executable
+    "ERA001",  # eradicate / commented-out-code
     "FIX",     # flake8-fixme
     "F841",    # pyflakes: unused-variable
-    "PLC0415", # pylint / convention: import-outside-top-level 
+    "PLC0415", # pylint / convention: import-outside-top-level
     "PLR0913", # pylint / refactor: too-many-arguments
-    "PLR0917", # pylint / refactor: too-many-positional-arguments 
+    "PLR0917", # pylint / refactor: too-many-positional-arguments
     "TD003",   # flake8-todos: missing-todo-link
 ]
 # Allow unused variables when underscore-prefixed.
