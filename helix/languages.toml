@@ -90,6 +90,17 @@ args    = ["serve"]
 command = "harper-ls"
 args    = ["--stdio"]
 
+  [language-server.harper-ls.config.harper-ls.linters]
+  SpellCheck             = false
+  SentenceCapitalization = false
+  MissingTo              = false
+  ExpandMinimum          = false
+  ExpandTimeShorthands   = false
+  SplitWords             = false
+
+  [language-server.harper-ls.config.harper-ls.markdown]
+  IgnoreLinkTitle = true
+
 [language-server.tailwindcss-ls]
 command = "tailwindcss-language-server"
 args    = ["--stdio"]
@@ -169,7 +180,7 @@ auto-format = false
 name             = "markdown"
 soft-wrap.enable = true
 text-width       = 200
-language-servers = ["markdown-oxide", "marksman", "harper-ls"]
+language-servers = ["markdown-oxide", "marksman", "codebook", "harper-ls"]
 indent           = { tab-width = 4, unit = "    " }
 auto-format      = true
 
