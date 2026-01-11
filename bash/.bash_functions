@@ -45,6 +45,7 @@ hfzf() {
         --highlight-line \
         --layout=reverse \
         --multi \
+        --no-sort \
         --scroll-off=3 \
         > /tmp/to_remove
   grep -vxFf /tmp/to_remove "$HISTFILE" > ~/.new_bash_history
