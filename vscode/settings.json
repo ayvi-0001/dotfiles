@@ -66,5 +66,6 @@
   "workbench.editor.pinnedTabsOnSeparateRow": true,
   "workbench.editor.scrollToSwitchTabs": true,
   "workbench.editor.tabSizing": "shrink",
-  "workbench.iconTheme": "ayu"
+  "workbench.iconTheme": "ayu",
+  "workbench.secondarySideBar.defaultVisibility": "hidden"
 }
