@@ -1,5 +1,5 @@
 {
-  "__VERSION__": "251",
+  "__VERSION__": "254",
   "Sensors": {
     "AdlxWrapperSettings": {
       "Enabled": false
