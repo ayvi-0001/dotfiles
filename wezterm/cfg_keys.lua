@@ -58,6 +58,14 @@ function M.apply_to_config(config)
     { key = " ", mods = "SHIFT|CTRL", action = wezterm.action.QuickSelect },
     { key = "V", mods = "CTRL|SHIFT", action = wezterm.action.PasteFrom "Clipboard" },
     { key = "P", mods = "CTRL|SHIFT", action = wezterm.action.ActivateCommandPalette },
+    {
+      key = "K",
+      mods = "CTRL|SHIFT",
+      action = wezterm.action.Multiple {
+        wezterm.action.ClearScrollback "ScrollbackAndViewport",
+        wezterm.action.SendKey { key = "L", mods = "CTRL" },
+      },
+    },
   }
 
   config.key_tables = {
