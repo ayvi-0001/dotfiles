@@ -1,5 +1,5 @@
 {
-  "__VERSION__": "254",
+  "__VERSION__": "255",
   "Sensors": {
     "AdlxWrapperSettings": {
       "Enabled": false
@@ -434,9 +434,9 @@
         "Step": 5,
         "Deadband": 3,
         "SelectedResponseTime": 2,
+        "IdleTemperature": 35,
         "MinFanSpeed": 50,
         "MaxFanSpeed": 100,
-        "IdleTemperature": 35,
         "LoadTemperature": 65
       },
       {
