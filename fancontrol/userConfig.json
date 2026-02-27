@@ -1,32 +1,8 @@
 {
-  "__VERSION__": "255",
-  "Sensors": {
-    "AdlxWrapperSettings": {
-      "Enabled": false
-    },
-    "DisabledPlugins": [],
-    "DisableStorageSensors": true,
-    "LibreHardwareMonitorSettings": {
-      "Controller": false,
-      "CPU": true,
-      "EmbeddedEC": true,
-      "GPU": true,
-      "Memory": true,
-      "Motherboard": true,
-      "PSU": true,
-      "Storage": false,
-      "StorageUpdateInterval": "00:01:00",
-      "ZeroRPMOverride": false
-    },
-    "NvAPIWrapperSettings": {
-      "Enabled": true,
-      "ZeroRPMOverride": false
-    }
-  },
-  "Main": {
+  "__VERSION__": "260",
+  "FanControl": {
     "Controls": [
       {
-        "Name": "Control 1 - NVIDIA GeForce RTX 4070 SUPER",
         "NickName": "Control 1 - NVIDIA GeForce RTX 4070 SUPER",
         "Identifier": "NVApiWrapper/0-AD104-A/control/0",
         "IsHidden": false,
@@ -49,7 +25,6 @@
         "Calibration": null
       },
       {
-        "Name": "Control 2 - NVIDIA GeForce RTX 4070 SUPER",
         "NickName": "Control 2 - NVIDIA GeForce RTX 4070 SUPER",
         "Identifier": "NVApiWrapper/0-AD104-A/control/1",
         "IsHidden": false,
@@ -72,8 +47,7 @@
         "Calibration": null
       },
       {
-        "Name": "CPU Fan",
-        "NickName": "cooler",
+        "NickName": "cooler (cpu fan)",
         "Identifier": "/lpc/nct6798d/control/1",
         "IsHidden": false,
         "Enable": true,
@@ -136,8 +110,7 @@
         ]
       },
       {
-        "Name": "Chassis Fan #2",
-        "NickName": "top",
+        "NickName": "top (chassis #2)",
         "Identifier": "/lpc/nct6798d/control/2",
         "IsHidden": false,
         "Enable": true,
@@ -200,8 +173,7 @@
         ]
       },
       {
-        "Name": "Chassis Fan #3",
-        "NickName": "back",
+        "NickName": "back (chassis #3)",
         "Identifier": "/lpc/nct6798d/control/3",
         "IsHidden": false,
         "Enable": true,
@@ -264,8 +236,7 @@
         ]
       },
       {
-        "Name": "Chipset Fan",
-        "NickName": "moba",
+        "NickName": "moba (chipset fan)",
         "Identifier": "/lpc/nct6798d/control/4",
         "IsHidden": false,
         "Enable": true,
@@ -332,7 +303,6 @@
         ]
       },
       {
-        "Name": "AIO Pump",
         "NickName": "none",
         "Identifier": "/lpc/nct6798d/control/5",
         "IsHidden": true,
@@ -351,7 +321,6 @@
         "Calibration": []
       },
       {
-        "Name": "Chassis Fan #1",
         "NickName": "none",
         "Identifier": "/lpc/nct6798d/control/0",
         "IsHidden": true,
@@ -370,7 +339,6 @@
         "Calibration": []
       },
       {
-        "Name": "CPU Optional Fan",
         "NickName": "none",
         "Identifier": "/lpc/nct6798d/control/6",
         "IsHidden": true,
@@ -391,7 +359,6 @@
     ],
     "CustomSensors": [
       {
-        "Name": "max-ryzen-7-5800x",
         "NickName": "max-ryzen-7-5800x",
         "Identifier": "Mix/max-ryzen-7-5800x",
         "IsHidden": false,
@@ -407,12 +374,11 @@
         ]
       }
     ],
-    "Fahrenheit": false,
     "FanCurves": [
       {
-        "CommandMode": 0,
         "Name": "auto-gpu",
         "IsHidden": false,
+        "CommandMode": 0,
         "SelectedTempSource": {
           "Identifier": "NVApiWrapper/0-AD104-A/sensor/0"
         },
@@ -425,9 +391,9 @@
         "LoadTemperature": 65
       },
       {
-        "CommandMode": 0,
         "Name": "auto-cpu",
         "IsHidden": false,
+        "CommandMode": 0,
         "SelectedTempSource": {
           "Identifier": "/amdcpu/0/temperature/2"
         },
@@ -440,9 +406,9 @@
         "LoadTemperature": 65
       },
       {
-        "CommandMode": 0,
         "Name": "sync-case-fans",
         "IsHidden": false,
+        "CommandMode": 0,
         "SelectedControl": {
           "Identifier": "/lpc/nct6798d/control/2"
         },
@@ -454,58 +420,158 @@
       {
         "Identifier": "/lpc/nct6798d/fan/2",
         "IsHidden": true,
-        "Name": "Chassis Fan #2",
         "NickName": "top"
       },
       {
         "Identifier": "/lpc/nct6798d/fan/3",
         "IsHidden": true,
-        "Name": "Chassis Fan #3",
         "NickName": "back"
       },
       {
         "Identifier": "/lpc/nct6798d/fan/1",
         "IsHidden": true,
-        "Name": "CPU Fan",
         "NickName": "cooler"
       },
       {
         "Identifier": "/lpc/nct6798d/fan/4",
         "IsHidden": true,
-        "Name": "Chipset Fan",
         "NickName": "moba"
       },
       {
         "Identifier": "/lpc/nct6798d/fan/0",
         "IsHidden": true,
-        "Name": "Chassis Fan #1",
         "NickName": "Fan #1"
       },
       {
         "Identifier": "/lpc/nct6798d/fan/5",
         "IsHidden": true,
-        "Name": "AIO Pump",
         "NickName": "Fan #6"
-      },
-      {
-        "Identifier": "NVApiWrapper/0-AD104-A/fan/0",
-        "IsHidden": false,
-        "Name": "Fan 1 - NVIDIA GeForce RTX 4070 SUPER",
-        "NickName": "Fan 1 - NVIDIA GeForce RTX 4070 SUPER"
       },
       {
         "Identifier": "/lpc/nct6798d/fan/6",
         "IsHidden": true,
-        "Name": "CPU Optional Fan",
         "NickName": "Fan #7"
+      },
+      {
+        "Identifier": "NVApiWrapper/0-AD104-A/fan/0",
+        "IsHidden": false,
+        "NickName": "Fan 1 - NVIDIA GeForce RTX 4070 SUPER"
       },
       {
         "Identifier": "NVApiWrapper/0-AD104-A/fan/1",
         "IsHidden": false,
-        "Name": "Fan 2 - NVIDIA GeForce RTX 4070 SUPER",
         "NickName": "Fan 2 - NVIDIA GeForce RTX 4070 SUPER"
       }
     ],
+    "TemperatureSensors": [
+      {
+        "Identifier": "/amdcpu/0/temperature/2",
+        "IsHidden": false,
+        "NickName": "Core (Tctl/Tdie)"
+      },
+      {
+        "Identifier": "/amdcpu/0/temperature/3",
+        "IsHidden": false,
+        "NickName": "CCD1 (Tdie)"
+      },
+      {
+        "Identifier": "/memory/dimm/2/temperature/0",
+        "IsHidden": false,
+        "NickName": "DIMM #2"
+      },
+      {
+        "Identifier": "/memory/dimm/2/temperature/1",
+        "IsHidden": false,
+        "NickName": "Temperature Sensor Resolution"
+      },
+      {
+        "Identifier": "/memory/dimm/2/temperature/2",
+        "IsHidden": false,
+        "NickName": "Thermal Sensor Low Limit"
+      },
+      {
+        "Identifier": "/memory/dimm/2/temperature/3",
+        "IsHidden": false,
+        "NickName": "Thermal Sensor High Limit"
+      },
+      {
+        "Identifier": "/memory/dimm/2/temperature/4",
+        "IsHidden": false,
+        "NickName": "Thermal Sensor Critical Limit"
+      },
+      {
+        "Identifier": "/memory/dimm/3/temperature/0",
+        "IsHidden": false,
+        "NickName": "DIMM #3"
+      },
+      {
+        "Identifier": "/memory/dimm/3/temperature/1",
+        "IsHidden": false,
+        "NickName": "Temperature Sensor Resolution"
+      },
+      {
+        "Identifier": "/memory/dimm/3/temperature/2",
+        "IsHidden": false,
+        "NickName": "Thermal Sensor Low Limit"
+      },
+      {
+        "Identifier": "/memory/dimm/3/temperature/3",
+        "IsHidden": false,
+        "NickName": "Thermal Sensor High Limit"
+      },
+      {
+        "Identifier": "/memory/dimm/3/temperature/4",
+        "IsHidden": false,
+        "NickName": "Thermal Sensor Critical Limit"
+      },
+      {
+        "Identifier": "/lpc/nct6798d/temperature/22",
+        "IsHidden": false,
+        "NickName": "CPU"
+      },
+      {
+        "Identifier": "/lpc/nct6798d/temperature/2",
+        "IsHidden": false,
+        "NickName": "Motherboard"
+      },
+      {
+        "Identifier": "/lpc/nct6798d/temperature/10",
+        "IsHidden": false,
+        "NickName": "Chipset"
+      },
+      {
+        "Identifier": "NVApiWrapper/0-AD104-A/sensor/0",
+        "IsHidden": false,
+        "NickName": "GPU"
+      }
+    ]
+  },
+  "Sensors": {
+    "AdlxWrapperSettings": {
+      "Enabled": false
+    },
+    "DisabledPlugins": [],
+    "DisableStorageSensors": true,
+    "LibreHardwareMonitorSettings": {
+      "Controller": false,
+      "CPU": true,
+      "EmbeddedEC": true,
+      "GPU": true,
+      "Memory": true,
+      "Motherboard": true,
+      "PowerMonitor": false,
+      "PSU": true,
+      "Storage": false,
+      "StorageUpdateInterval": "00:01:00",
+      "ZeroRPMOverride": false
+    },
+    "NvAPIWrapperSettings": {
+      "Enabled": true,
+      "ZeroRPMOverride": false
+    }
+  },
+  "MainWindow": {
+    "Fahrenheit": false,
     "HideCalibration": false,
     "HideFanSpeedCards": false,
     "HorizontalUIOrientation": false,
@@ -515,7 +581,6 @@
     "ShowHiddenCards": true,
     "SyncThemeWithWindows": true,
     "SyncTrayIconColorWithWindows": false,
-    "TemperatureSensors": [],
     "TrayIconColor": "#FF000000",
     "TrayIcons": []
   }
