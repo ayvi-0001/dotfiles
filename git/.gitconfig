@@ -39,6 +39,7 @@
 	lg = lg1
 	nccommit = commit --allow-empty-message -m ''
 	ignore = "!gi() { IFS=\",\"; curl -L -s \"https://www.toptal.com/developers/gitignore/api/$*\" | tee .gitignore;}; gi"
+	stash-all = stash --include-untracked --keep-index
 
 [merge]
 	conflictstyle = diff3
