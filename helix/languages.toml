@@ -188,13 +188,6 @@ auto-format      = true
   command = "prettier"
   args    = ["--parser=markdown", "--stdin-filename", "%{buffer_name}"]
 
-[[language]]
-name             = "text"
-scope            = "source.text"
-indent           = { tab-width = 2, unit = "  " }
-file-types       = ["txt"]
-language-servers = ["harper-ls"]
-
 # Following language is to provide auto-formatting for mermaid gantt charts.
 # File types is intentionally left blank, so files with  `.mermaid` or `.mmd`
 # exts will still default to the mermaid lang.
@@ -334,6 +327,15 @@ name             = "jsonc"
 auto-format      = true
 language-servers = ["vscode-json-language-server-no-validate"]
 indent           = { tab-width = 2, unit = "  " }
+
+[[language]]
+name          = "default"
+scope         = "source.default"
+comment-token = "#"
+indent        = { tab-width = 2, unit = "  " }
+file-types    = ["*"]
+roots         = []
+auto-format   = false
 
 [[grammar]]
 name       = "xit"
