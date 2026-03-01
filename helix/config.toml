@@ -102,6 +102,9 @@ C-y = [
   ':set mouse true',
 ]
 
+tab   = "move_parent_node_end"
+S-tab = "move_parent_node_start"
+
 # git blame
 G.b = "@:sh git blame -L %{cursor_line},+1 '%sh{realpath '%{buffer_name}'}'<ret>"
 
@@ -205,6 +208,7 @@ S-A-j = "@Xdp;"  # move line down
     s = ":lsp-stop"
 
 [keys.insert]
+S-tab    = "move_parent_node_start"
 "C-["    = "normal_mode"
 C-s      = "commit_undo_checkpoint"
 C-x      = "completion"
@@ -226,6 +230,8 @@ home     = "no_op"
 end      = "no_op"
 
 [keys.select]
+tab   = "extend_parent_node_end"
+S-tab = "extend_parent_node_start"
 "C-[" = "normal_mode"
 "C-j" = ["goto_next_paragraph"]
 "C-k" = ["goto_prev_paragraph"]
