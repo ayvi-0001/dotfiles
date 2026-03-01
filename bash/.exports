@@ -9,7 +9,6 @@ export PAGER=less
 export SHELL=/c/program\ files/git/bin/bash.exe
 
 export EDITOR=hx
-export GIT_EDITOR="$EDITOR"
 
 export MSYS=winsymlinks:nativestrict
 
