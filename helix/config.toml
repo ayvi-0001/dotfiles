@@ -35,13 +35,16 @@ undercurl                = true
   after-delay.enable  = false
   after-delay.timeout = 5000
 
-  [editor.whitespace.characters]
-  nbsp    = "⍽"
-  newline = "⏎"
-  nnbsp   = "␣"
-  space   = "·"
-  tab     = "→"
-  tabpad  = "·" # Tabs will look like "→···" (depending on tab width)
+  [editor.whitespace]
+  render = "all"
+
+    [editor.whitespace.characters]
+    nbsp    = "⍽"
+    newline = "⏎"
+    nnbsp   = "␣"
+    space   = "·"
+    tab     = "→"
+    tabpad  = "·" # Tabs will look like "→···" (depending on tab width)
 
   [editor.inline-diagnostics]
   cursor-line     = "hint"
