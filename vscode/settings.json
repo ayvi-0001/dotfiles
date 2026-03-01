@@ -8,7 +8,6 @@
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": true
   },
-  "chat.commandCenter.enabled": false,
   "debugpy.debugJustMyCode": false,
   "diffEditor.experimental.showMoves": true,
   "diffEditor.ignoreTrimWhitespace": false,
