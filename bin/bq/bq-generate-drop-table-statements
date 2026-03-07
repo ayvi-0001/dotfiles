@@ -6,11 +6,25 @@ DEBUG="${DEBUG:-}"
 [[ -n "$DEBUG" ]] && set -x
 
 declare PROJECT_ID DATASET FILTER LOCATION
-GETOPT_ARGS=(--options 'p:d:f:l:' --long 'project:,dataset:,filter:,location:')
+GETOPT_ARGS=(--options 'hp:d:f:l:' --long 'help,project:,dataset:,filter:,location:')
 if OPTS=$(getopt "${GETOPT_ARGS[@]}" -- "$@"); then eval set -- "$OPTS"; fi
+
+help() {
+	cat <<- EOF
+	Usage: bq-generate-drop-table-statements [OPTIONS]
+
+	Options:
+	  -p, --project
+	  -d, --dataset
+	  -f, --filter
+	  -l, --location
+	EOF
+  exit 0
+}
 
 while :; do
   case "$1" in
+    -h | --help)      help ;;
     -p | --project)   PROJECT_ID="$2"; shift ;;
     -d | --dataset)   DATASET="$2"; shift ;;
     -f | --filter)    FILTER="$2"; shift ;;
