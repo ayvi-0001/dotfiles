@@ -63,7 +63,7 @@
         "MinimumPercent": 0,
         "SelectedCommandStepUp": 8,
         "SelectedCommandStepDown": 8,
-        "ManualControlValue": 63,
+        "ManualControlValue": 0,
         "ManualControl": false,
         "ForceApply": true,
         "Calibration": [
@@ -126,8 +126,8 @@
         "MinimumPercent": 0,
         "SelectedCommandStepUp": 8,
         "SelectedCommandStepDown": 8,
-        "ManualControlValue": 76,
-        "ManualControl": false,
+        "ManualControlValue": 25,
+        "ManualControl": true,
         "ForceApply": false,
         "Calibration": [
           [
@@ -178,7 +178,7 @@
         "IsHidden": false,
         "Enable": true,
         "SelectedFanCurve": {
-          "Name": "sync-case-fans"
+          "Name": "auto-cpu"
         },
         "SelectedOffset": 0,
         "PairedFanSensor": {
