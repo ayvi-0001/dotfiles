@@ -5,6 +5,19 @@ local M = {}
 ---@param window Window
 ---@param pane Pane
 ---@return nil
+function M.clear_scrollback_and_viewport(window, pane)
+  window:perform_action(
+    wezterm.action.Multiple {
+      wezterm.action.ClearScrollback "ScrollbackAndViewport",
+      wezterm.action.SendKey { key = "L", mods = "CTRL" },
+    },
+    pane
+  )
+end
+
+---@param window Window
+---@param pane Pane
+---@return nil
 function M.rename_tab(window, pane)
   local active_tab = window:active_tab()
   window:perform_action(
