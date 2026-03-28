@@ -250,13 +250,32 @@ local yazi_helix_open_new_pane = function(window, pane, direction, top_level)
   return _inner(window, pane)
 end
 
+local function remove_prefix(str, prefix)
+  if str:sub(1, #prefix) == prefix then
+    return str:sub(#prefix + 1)
+  else
+    return str
+  end
+end
+
 ---Open the selected/hovered url(s) in Yazi into a new Helix window.
 ---@param _ Window
 ---@param pane Pane
 local yazi_helix_open_new_window = function(_, pane)
+  local pid = wezterm.procinfo.pid()
+  local cwd = wezterm.procinfo.current_working_dir_for_pid(pid) or pane:get_current_working_dir()
+
+  if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+    cwd = remove_prefix(cwd.path, "/")
+  end
+
+  ---@cast cwd string
+  cwd = tostring(cwd)
+
   window_space.spawn_window_and_set_dimensions {
     ratio = 0.5,
     domain = "local",
+    cwd = cwd,
     args = { "hx", yazi_read_target_paths(pane:pane_id()) },
   }
 end
