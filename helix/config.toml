@@ -111,6 +111,9 @@ S-tab = "move_parent_node_start"
 # git blame
 G.b = "@:sh git blame -L %{cursor_line},+1 '%sh{realpath '%{buffer_name}'}'<ret>"
 
+# copy buffer to clipboard
+C-A-c = ["save_selection", "select_all", "yank_main_selection_to_clipboard", "collapse_selection", "jump_backward"]
+
 q     = ":q"
 Q     = ":bc"
 A-q   = "record_macro"
