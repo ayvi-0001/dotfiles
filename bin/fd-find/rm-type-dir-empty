@@ -4,4 +4,15 @@ set -euo pipefail
 
 # WARNING: Unrestricted, ignore/hidden files are included.
 # Sorted, otherwise it will attempt to rm the top level dirs first and error on any nested.
-fd -u -td -te | sort -r | awk '{ print "\""$0"\""}' | xargs -d $'\n' -i bash -c "echo {} ; rm -d {}"
+
+rm-type-dir-empty() {
+  if ! fd -u -td -te --has-results; then # exit with a non-zero status if no empty dirs found
+    return
+  fi
+
+  fd -u -td -te | sort -r | awk '{ print "\""$0"\""}' | xargs -d $'\n' -i bash -c "echo {} ; rm -d {}"
+
+  rm-type-dir-empty
+}
+
+rm-type-dir-empty
