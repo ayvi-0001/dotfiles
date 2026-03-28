@@ -74,9 +74,14 @@ _create_or_replace_symlink() {
     rm "$dest_file"
   # Verify an existing symlink points to the correct source, fix if not.
   elif [[ -L "$dest_file" ]] && [[ "$(realpath -m "$dest_file")" != "$(realpath "$src_file")" ]]; then
-    printf '%s' "Canonical path of $dest_file does not exist. Replacing symlink source." \
-      | gum style --foreground='#FCFA7D'
+    printf '%s' "Canonical path of $dest_file does not exist. Replacing symlink source." | gum style --foreground='#FCFA7D'
     rm -f "$dest_file"
+  elif [[ "$(realpath -P "$dest_file")" == "$src_file" ]]; then
+    printf '%s' "$dest_file@ " | gum style --foreground='#7DCFFF' --bold | tr -d '\n'; printf ' '
+    printf '%s' "already linked to" | gum style --foreground='#FCFA7D' | tr -d '\n'; printf ' '
+    printf '%s' "$src_file@ " | gum style --foreground='#7DCFFF' --bold | tr -d '\n'
+    printf '%s' ", skipping" | gum style --foreground='#FCFA7D'
+    return
   fi
 
   dest_dir="$(dirname "$dest_file")"
@@ -95,8 +100,7 @@ _create_or_replace_symlink() {
       exit 1
     fi
   else
-    printf '%s' "1 file linked: $src_file -> $dest_path" \
-      | gum style --bold --foreground='#89F57C' 
+    printf '%s' "1 file linked: $src_file -> $dest_path" | gum style --bold --foreground='#89F57C'
   fi
 }
 
@@ -109,22 +113,25 @@ _create_or_replace_symlink_dry_run() {
   __debug "dest_file=$dest_file"
 
   if [[ -f "$dest_file" ]] && [[ ! -L "$dest_file" ]]; then
-    printf '%s' "Would delete existing destination file: $dest_file." \
-      | gum style --foreground='#6C6CDF'
+    printf '%s' "Would delete existing destination file: $dest_file." | gum style --foreground='#6C6CDF'
   elif [[ -L "$dest_file" ]] && [[ "$(realpath -m "$dest_file")" != "$(realpath "$src_file")" ]]; then
-    printf '%s' "Canonical path of $dest_file does not exist. Replacing symlink source." \
-      | gum style --foreground='#FCFA7D'
+    printf '%s' "Canonical path of $dest_file does not exist. Replacing symlink source." | gum style --foreground='#FCFA7D'
   fi
 
   dest_dir="$(dirname "$dest_file")"
 
   if [[ ! -d "$dest_dir" ]]; then
-    printf '%s' "Would create directory: $(dirname "$dest_file")" \
-      | gum style --foreground='#6C6CDF'
+    printf '%s' "Would create directory: $(dirname "$dest_file")" | gum style --foreground='#6C6CDF'
   fi
 
-  printf '%s' "Would link 1 file: $src_file -> $dest_path" \
-    | gum style --bold --foreground='#89F57C' 
+  if [[ "$(realpath -P "$dest_file")" == "$src_file" ]]; then
+    printf '%s' "$dest_file@ " | gum style --foreground='#7DCFFF' --bold | tr -d '\n'; printf ' '
+    printf '%s' "already linked to" | gum style --foreground='#FCFA7D' | tr -d '\n'; printf ' '
+    printf '%s' "$src_file@ " | gum style --foreground='#7DCFFF' --bold | tr -d '\n'
+    printf '%s' ", skipping" | gum style --foreground='#FCFA7D'
+  else
+    printf '%s' "Would link 1 file: $src_file -> $dest_path" | gum style --bold --foreground='#89F57C'
+  fi
 }
 
 
@@ -220,8 +227,7 @@ _deploy_files() {
         cp --preserve=all --force "$src_path" "$template_file" \
           2> >(gum log -tRFC1123Z -lerror "$@" 2>/dev/null)
       else
-        printf '%s' "Would copy file $src_path to template dir $template_dir" \
-         | gum style --foreground='#FCFA7D'
+        printf '%s' "Would copy file $src_path to template dir $template_dir" | gum style --foreground='#FCFA7D'
       fi
 
       src_path="$template_file"
@@ -251,9 +257,9 @@ _deploy_files() {
 usage() {
 	cat <<- EOF
 	Usage: ${BASH_SOURCE[0]} [OPTIONS] [ARGS]
-	
+
 	Examples:
-	\$ ${BASH_SOURCE[0]} 
+	\$ ${BASH_SOURCE[0]}
 
 	\$ DEBUG=1 ${BASH_SOURCE[0]}
 
@@ -302,9 +308,10 @@ main() {
 
   if "$DRY_RUN"; then
     printf '%s %s' \
-      'dry run is enabled, templated files will still be copied' \
-      'but no symlink targets will be created.' \
-      | gum style --italic --foreground='#8FFAFD'
+      'DRY RUN IS ENABLED, TEMPLATED FILES WILL STILL BE COPIED' \
+      'BUT NO SYMLINK TARGETS WILL BE CREATED.' \
+      | gum style --bold --underline --foreground='#8FFAFD' \
+      && printf '\n'
   fi
 
   for d in "${DIRS[@]}"; do
