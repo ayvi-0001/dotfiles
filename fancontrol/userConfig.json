@@ -403,7 +403,7 @@
         "IdleTemperature": 35,
         "MinFanSpeed": 50,
         "MaxFanSpeed": 100,
-        "LoadTemperature": 65
+        "LoadTemperature": 60
       },
       {
         "Name": "sync-case-fans",
