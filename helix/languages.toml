@@ -27,7 +27,6 @@ args    = ["server", "-q", "--preview"]
   [language-server.ruff.config.settings]
   format.preview = true
   lint.preview   = true
-  logLevel       = "debug"
   run            = "onSave"
 
 [language-server.basedpyright]
