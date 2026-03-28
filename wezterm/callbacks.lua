@@ -34,9 +34,18 @@ end
 
 ---@param window Window
 ---@param pane Pane
+---@param multiplier number? 1
 ---@return nil
-function M.zoom_in(window, pane)
-  window:perform_action(wezterm.action.IncreaseFontSize, pane)
+function M.zoom_in(window, pane, multiplier)
+  multiplier = multiplier or 1
+
+  local i --@type number
+
+  i = 0
+  repeat
+    window:perform_action(wezterm.action.IncreaseFontSize, pane)
+    i = i + 1
+  until i == multiplier
 
   local overrides = window:get_config_overrides() or {}
 
@@ -50,15 +59,29 @@ function M.zoom_in(window, pane)
     overrides.window_frame = effective_config.window_frame or {}
   end
 
-  overrides.window_frame["font_size"] = overrides.window_frame.font_size + 0.5
+  i = 0
+  repeat
+    overrides.window_frame["font_size"] = overrides.window_frame.font_size + 0.5
+    i = i + 1
+  until i == multiplier
+
   window:set_config_overrides(overrides)
 end
 
 ---@param window Window
 ---@param pane Pane
+---@param multiplier number? 1
 ---@return nil
-function M.zoom_out(window, pane)
-  window:perform_action(wezterm.action.DecreaseFontSize, pane)
+function M.zoom_out(window, pane, multiplier)
+  multiplier = multiplier or 1
+
+  local i --@type number
+
+  i = 0
+  repeat
+    window:perform_action(wezterm.action.DecreaseFontSize, pane)
+    i = i + 1
+  until i == multiplier
 
   local overrides = window:get_config_overrides() or {}
 
@@ -72,7 +95,12 @@ function M.zoom_out(window, pane)
     overrides.window_frame = effective_config.window_frame or {}
   end
 
-  overrides.window_frame["font_size"] = overrides.window_frame.font_size - 0.5
+  i = 0
+  repeat
+    overrides.window_frame["font_size"] = overrides.window_frame.font_size - 0.5
+    i = i + 1
+  until i == multiplier
+
   window:set_config_overrides(overrides)
 end
 
