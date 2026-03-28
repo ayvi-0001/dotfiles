@@ -217,7 +217,7 @@ indent = { tab-width = 2, unit = "  " }
 name             = "sql"
 file-types       = ["sql", "dsql", "sqlx"]
 indent           = { tab-width = 2, unit = "  " }
-language-servers = ["sql-language-server"]
+language-servers = [] # ["sql-language-server"]
 auto-format      = false
 
   [language.formatter]
