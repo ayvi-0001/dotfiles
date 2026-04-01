@@ -19,7 +19,7 @@
         "MinimumPercent": 0,
         "SelectedCommandStepUp": 8,
         "SelectedCommandStepDown": 8,
-        "ManualControlValue": 66,
+        "ManualControlValue": 85,
         "ManualControl": false,
         "ForceApply": true,
         "Calibration": null
@@ -41,7 +41,7 @@
         "MinimumPercent": 0,
         "SelectedCommandStepUp": 8,
         "SelectedCommandStepDown": 8,
-        "ManualControlValue": 74,
+        "ManualControlValue": 85,
         "ManualControl": false,
         "ForceApply": true,
         "Calibration": null
