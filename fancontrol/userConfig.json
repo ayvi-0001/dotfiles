@@ -1,5 +1,5 @@
 {
-  "__VERSION__": "264",
+  "__VERSION__": "266",
   "FanControl": {
     "Controls": [
       {
@@ -126,8 +126,8 @@
         "MinimumPercent": 0,
         "SelectedCommandStepUp": 8,
         "SelectedCommandStepDown": 8,
-        "ManualControlValue": 25,
-        "ManualControl": true,
+        "ManualControlValue": 100,
+        "ManualControl": false,
         "ForceApply": false,
         "Calibration": [
           [
