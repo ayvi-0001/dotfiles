@@ -8,6 +8,7 @@ args    = ["start"]
 
 [language-server.rust-analyzer]
 command = "rust-analyzer"
+timeout = 120
 
   [language-server.rust-analyzer.config]
   cargo.features                                 = "all"
