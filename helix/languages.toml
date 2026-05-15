@@ -19,6 +19,7 @@ command = "rust-analyzer"
   inlayHints.discriminantHints.enable            = "fieldless"
   inlayHints.lifetimeElisionHints.enable         = "skip_trivial"
   inlayHints.typeHints.hideClosureInitialization = false
+  lru.capacity                                   = 16384
 
     [language-server.rust-analyzer.config.files]
     watcher = "server"
