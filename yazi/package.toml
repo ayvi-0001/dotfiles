@@ -65,8 +65,8 @@ hash = "f8530ee84fee95dbcc26bb1d8d8019c7"
 
 [[plugin.deps]]
 use = "aresler/path-from-root"
-rev = "22b6fb5"
-hash = "98cdb2e889b73c4d4a8945f166486605"
+rev = "3daa62f"
+hash = "f3375d21ceb5f49d2d50ad199262006a"
 
 [[plugin.deps]]
 use = "Sonico98/exifaudio"
