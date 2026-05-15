@@ -73,7 +73,6 @@ prepend_keymap = [
 
   # start: bunny.yazi
   { on = ";", run = "plugin bunny", desc = "Start bunny.yazi" },
-  { on = "'", run = "plugin bunny fuzzy", desc = "Start bunny.yazi fuzzy search" },
   # end: bunny.yazi
 
   # start: yamb.yazi
