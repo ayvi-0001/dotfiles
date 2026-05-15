@@ -37,15 +37,13 @@ function cd_up() { builtin cd "$(printf "%0.s../" $(seq 1 "${1:-0}" ))"; } \
 # Remove lines from history with fzf
 hfzf() {
   history -w
-  awk '!seen[$0]++' < "$HISTFILE" \
-    | grep -v '^#' \
+  tac < <(awk '!seen[$0]++' < <(grep -v '^#' < <(tac "$HISTFILE"))) \
     | fzf \
         --scheme=history \
         --tac \
         --highlight-line \
         --layout=reverse \
         --multi \
-        --no-sort \
         --scroll-off=3 \
         > /tmp/to_remove
   grep -vxFf /tmp/to_remove "$HISTFILE" > ~/.new_bash_history
