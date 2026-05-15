@@ -11,6 +11,7 @@ cursorline               = true
 default-line-ending      = "lf"
 editor-config            = true
 end-of-line-diagnostics  = "hint"
+insecure                 = true
 insert-final-newline     = true
 middle-click-paste       = true
 mouse                    = true
