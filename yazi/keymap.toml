@@ -68,7 +68,6 @@ prepend_keymap = [
   { on = ["P", "D"], run = "plugin projects -- delete_all", desc = "Delete all projects" },
   { on = ["P", "m"], run = "plugin projects -- 'merge current'", desc = "Merge current tab to other projects" },
   { on = ["P", "M"], run = "plugin projects -- 'merge all'", desc = "Merge current project to other projects" },
-  { on = ["q"], run = "plugin projects -- quit", desc = "Save last project and exit the process" },
   # end: projects.yazi
 
   # start: bunny.yazi
