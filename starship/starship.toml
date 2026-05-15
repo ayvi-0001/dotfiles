@@ -32,11 +32,13 @@ symbol                = " "
 
 [gcloud]
 detect_env_vars = ["CLOUDSDK_CONFIG"]
+disabled        = false
 format          = "on [$project:$account@$domain]($style) "
 
 [fill]
-style  = "bold black"
-symbol = "."
+disabled = false
+style    = "bold black"
+symbol   = "."
 
 [time]
 disabled        = false
@@ -50,6 +52,7 @@ disabled = false
 format   = "[+$added]($added_style)/[-$deleted]($deleted_style) "
 
 [git_commit]
+disabled      = false
 only_detached = false
 tag_disabled  = false
 tag_symbol    = '  '
@@ -62,6 +65,7 @@ symbol    = "󰍛 "
 threshold = -1
 
 [directory]
+disabled          = false
 read_only         = " 󰌾"
 truncation_length = 3
 use_os_path_sep   = false
@@ -95,85 +99,111 @@ use_os_path_sep   = false
 'Z:' = '/z'
 
 [aws]
-symbol = "  "
+disabled = false
+symbol   = "  "
 
 [buf]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [c]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [conda]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [crystal]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [dart]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [docker_context]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [elixir]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [elm]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [fennel]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [fossil_branch]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [git_branch]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [golang]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [guix_shell]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [haskell]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [haxe]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [hg_branch]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [hostname]
 ssh_symbol = " "
 
 [java]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [julia]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [kotlin]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [lua]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [meson]
-symbol = "󰔷 "
+disabled = false
+symbol   = "󰔷 "
 
 [nim]
-symbol = "󰆥 "
+disabled = false
+symbol   = "󰆥 "
 
 [nix_shell]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [nodejs]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [ocaml]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [os.symbols]
 AlmaLinux        = " "
@@ -221,37 +251,49 @@ Windows          = "󰍲 "
 openSUSE         = " "
 
 [package]
-symbol = "󰏗 "
+disabled = false
+symbol   = "󰏗 "
 
 [perl]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [php]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [pijul_channel]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [python]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [rlang]
-symbol = "󰟔 "
+disabled = false
+symbol   = "󰟔 "
 
 [ruby]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [rust]
-symbol = "󱘗 "
+disabled = false
+symbol   = "󱘗 "
 
 [scala]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [swift]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [zig]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [gradle]
-symbol = " "
+disabled = false
+symbol   = " "
