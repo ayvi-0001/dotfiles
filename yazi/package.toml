@@ -95,8 +95,8 @@ hash = "18a2829738214fe9bca99a2fef19113d"
 
 [[flavor.deps]]
 use = "kmlupreti/ayu-dark"
-rev = "5f600aa"
-hash = "a05f94b9a20b64d814c7631074d65c4a"
+rev = "1da67a8"
+hash = "4358d2053d15bd6855968e2d4646c744"
 
 [[flavor.deps]]
 use = "BennyOe/tokyo-night"
