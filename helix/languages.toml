@@ -347,11 +347,6 @@ source.git = "https://github.com/monaqa/tree-sitter-mermaid"
 source.rev = "90ae195b31933ceb9d079abfa8a3ad0a36fee4cc"
 
 [[grammar]]
-name       = "lua"
-source.git = "https://github.com/tree-sitter-grammars/tree-sitter-lua"
-source.rev = "4569d1c361129e71a205b94a05e158bd71b1709f"
-
-[[grammar]]
 name       = "csv"
 source.git = "https://github.com/weartist/rainbow-csv-tree-sitter"
 source.rev = "fbf125bcedb15080980e8afaf69c4374412e5844"
