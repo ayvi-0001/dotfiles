@@ -1,5 +1,5 @@
 # https://yazi-rs.github.io/docs/configuration/yazi
-"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+# "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
 [mgr]
 ratio          = [1, 3, 4]
@@ -56,39 +56,32 @@ database = [
   { run = '''bash -c "harlequin '%*'"''', block = true, desc = "harlequin", for = "windows" },
 ]
 browser = [
-  { run = '''bash -c "\"$BROWSER\" '%*'"''', orphan = true, desc = "browser", for = "windows" },
+  { run = '''bash -c "\"$BROWSER\" \"$(realpath '%*')\""''', orphan = true, desc = "browser", for = "windows" },
 ]
 
 [open]
 prepend_rules = [
-  { name = "*/", use = ["open", "reveal"] }, # Remove edit use from default config on directories.
-  { mime = "image/svg+xml", use = ["browser", "edit"] },
-  { name = "*.{zip,osz*,osk}", use = ["open", "extract"] },
+  { url = "*/", use = ["open", "reveal"] }, # Remove edit use from default config on directories.
+  { url = "*.{zip,osz*,osk}", use = ["open", "extract"] },
   { mime = "application/sqlite3", use = ["database"] }, # Database opener using harlequin.
-  { name = "*.url", use = ["browser", "edit"] }, # Browser opener.
-  { name = "*.html", use = ["edit", "browser"] },
+  { url = "*.url", use = ["browser", "edit"] }, # Browser opener.
+  { url = "*.html", use = ["edit", "browser"] },
+  { mime = "image/svg+xml", use = ["browser", "edit"] },
   { mime = "image/*", use = ["play", "open", "reveal"] },
 ]
 
 [tasks]
-micro_workers    = 20
-macro_workers    = 20
-bizarre_retry    = 5
 image_alloc      = 0 # unlimited
 image_bound      = [0, 0] # unlimited
 suppress_preload = true
 
 [plugin]
 prepend_previewers = [
-  { name = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },
+  { url = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },
   { mime = "audio/*", run = "exifaudio" },
-]
-prepend_fetchers = [
-  { id = "git", name = "*", run = "git" },
 ]
 append_previewers = [
   { mime = "application/*", run = 'piper -- exiftool "$1"' },
-  { name = "*", run = 'piper -- bat -p --color=always "$1"' },
 ]
 
 [input]
