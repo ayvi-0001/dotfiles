@@ -1,4 +1,4 @@
-require("relative-motions"):setup { show_numbers = "relative" }
+require("relative-motions"):setup { show_numbers = "none" }
 
 require("git"):setup()
 
