@@ -5,6 +5,11 @@ prepend_keymap = [{ on = "<Esc>", run = "close", desc = "Cancel input" }]
 
 [mgr]
 prepend_keymap = [
+  { on = ["t", "t"], run = "noop" },
+  { on = ["t", "r"], run = "noop" },
+  { on = ["t"], run = "tab_create --current", desc = "Create a new tab in CWD" },
+  { on = ["T"], run = "tab_rename --interactive", desc = "Rename current tab" },
+
   # start: copy
   # add the '--separator' option to builtin copy commands.
   { on = ["c", "c"], run = "copy --separator='unix' path", desc = "Copy the file path" },
