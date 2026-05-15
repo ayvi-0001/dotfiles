@@ -11,6 +11,7 @@ command = "rust-analyzer"
 
   [language-server.rust-analyzer.config]
   cargo.features                                 = "all"
+  cargo.targetDir                                = true
   check.command                                  = "clippy"
   inlayHints.bindingModeHints.enable             = false
   inlayHints.closingBraceHints.minLines          = 10
