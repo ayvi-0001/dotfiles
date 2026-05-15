@@ -26,6 +26,7 @@
   "explorer.confirmDragAndDrop": false,
   "explorer.copyRelativePathSeparator": "/",
   "extensions.closeExtensionDetailsOnViewChange": true,
+  "extensions.ignoreRecommendations": true,
   "files.exclude": {
     "**/.DS_Store": true,
     "**/.git": false,
