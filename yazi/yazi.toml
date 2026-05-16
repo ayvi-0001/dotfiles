@@ -34,7 +34,7 @@ edit = [
   { run = "code -w %*", block = true, desc = "vscode (block)", for = "windows" },
 ]
 open = [
-  { run = 'start "" "%1"', orphan = true, desc = "open", for = "windows" },
+  { run = 'start "" %s1', desc = "Open", for = "windows", orphan = true },
   { run = "hx %*", block = true, desc = "helix", for = "windows" },
   { run = "code %*", block = true, desc = "vscode", orphan = true, for = "windows" },
   { run = "7zFM %*", orphan = true, desc = "7zFM", for = "windows" },
@@ -82,6 +82,10 @@ prepend_previewers = [
 ]
 append_previewers = [
   { mime = "application/*", run = 'piper -- exiftool "$1"' },
+]
+prepend_fetchers = [
+  { url = "*", run = "git", group = "git" },
+  { url = "*/", run = "git", group = "git" },
 ]
 
 [input]

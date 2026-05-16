@@ -1,6 +1,6 @@
 require("relative-motions"):setup { show_numbers = "none" }
 
-require("git"):setup()
+require("git"):setup { order = 1500 }
 
 require("full-border"):setup()
 
@@ -13,11 +13,11 @@ local projects = os.getenv "YAZI_CONFIG_HOME" .. "/state/projects.json"
 require("projects"):setup {
   save = { method = "lua", lua_save_path = projects },
   last = {
-        update_after_save = true,
-        update_after_load = true,
-        update_before_quit = true,
-        load_after_start = false,
-    }
+    update_after_save = true,
+    update_after_load = true,
+    update_before_quit = true,
+    load_after_start = false,
+  },
 }
 
 require("copy-file-contents"):setup {}
