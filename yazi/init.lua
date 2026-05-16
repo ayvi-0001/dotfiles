@@ -26,7 +26,7 @@ require("session"):setup { sync_yanked = true }
 
 require("wezyx"):setup {}
 
-require("starship"):setup()
+require("starship"):setup { hide_flags = true }
 
 require("zoxide"):setup { update_db = true }
 
