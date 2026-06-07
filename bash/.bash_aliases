@@ -38,3 +38,5 @@ alias rrmdir='rclone rmdir'
 alias modsc='mods --continue-last'
 
 alias ld='lazydocker'
+
+alias gallery-dl='gallery-dl_windows'
