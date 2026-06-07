@@ -5,6 +5,6 @@ localhostForwarding=true
 memory=8GB
 nestedVirtualization=false
 # networkingMode=mirrored # w11 only
-processors=8
+processors=2
 # swap=0
 swapFile=%Temp%\swap.vhdx
