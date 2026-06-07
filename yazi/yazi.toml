@@ -13,7 +13,6 @@ show_hidden    = true
 show_symlink   = true
 scrolloff      = 10
 mouse_events   = ["click", "scroll"]
-title_format   = "yazi: {cwd}"
 
 [preview]
 wrap            = "no"

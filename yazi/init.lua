@@ -34,6 +34,16 @@ require("bunny"):setup {
   hops = require("hops")["keys"],
 }
 
+ps.sub("ind-app-title", function(args)
+  -- starting Yazi with --chooser-file means it's running as a file picker
+  if rt.args.chooser_file then
+    args.value = "file picker: " .. tostring(cx.active.current.cwd)
+  else
+    args.value = tostring(cx.active.current.cwd)
+  end
+  return args
+end)
+
 if os.getenv "YAZI_HIDE_PREVIEW" then
   require("toggle-pane"):entry "min-preview"
 end
