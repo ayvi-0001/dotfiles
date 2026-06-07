@@ -39,6 +39,7 @@ wezterm.on("gui-startup", function(cmd) ---@diagnostic disable-line: unused-loca
       size = 0.3,
     }
     secondary_tab:set_title "btop4win/bandwhich"
+    secondary_pane:activate()
   end
 
   primary_window:focus()
