@@ -1,3 +1,4 @@
+local utils = require "utils"
 local wezterm = require "wezterm" --[[@as Wezterm]]
 
 local M = {}
@@ -339,6 +340,25 @@ function M.rotate_pane_right(window, pane)
     },
     pane
   )
+end
+
+---@param window Window
+---@param pane Pane
+---@return nil
+function M.reset_pane(window, pane)
+  local cwd = utils.get_pane_working_dir(pane)
+
+  local new_pane = pane:split {
+    direction = "Bottom",
+    cwd = cwd,
+    size = 0.50,
+  }
+
+  pane:activate()
+
+  window:perform_action(wezterm.action.CloseCurrentPane { confirm = false }, pane)
+
+  new_pane:activate()
 end
 
 ---@param window Window

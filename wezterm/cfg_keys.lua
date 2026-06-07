@@ -161,6 +161,7 @@ function M.apply_to_config(config)
     pane = {
       { key = "r", mods = "NONE", action = wezterm.action.SplitPane { direction = "Right" } },
       { key = "R", mods = "SHIFT", action = wezterm.action.SplitPane { direction = "Right", top_level = true } },
+      { key = "r", mods = "ALT", action = wezterm.action_callback(callbacks.reset_pane) },
       { key = "d", mods = "NONE", action = wezterm.action.SplitPane { direction = "Down" } },
       { key = "D", mods = "SHIFT", action = wezterm.action.SplitPane { direction = "Down", top_level = true } },
       { key = "l", mods = "NONE", action = wezterm.action.SplitPane { direction = "Left" } },
