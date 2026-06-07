@@ -142,7 +142,7 @@ function M.apply_to_config(config)
       { key = "9", mods = "NONE", action = wezterm.action.ActivateWindow(8) },
     },
 
-    yazi_helix = {
+    helix = {
       { key = "i", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-launch-ide" },
       { key = "w", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-new-window" },
       { key = "r", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-new-right-pane" },
@@ -153,8 +153,12 @@ function M.apply_to_config(config)
       { key = "j", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-below" },
       { key = "k", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-pane-above" },
       { key = "l", mods = "NONE", action = wezterm.action.EmitEvent "yazi-helix-open-in-right-pane" },
-      { key = "t", mods = "NONE", action = wezterm.action.EmitEvent "yazi-open-new-tab" },
       { key = "S", mods = "SHIFT", action = wezterm.action.EmitEvent "trigger-hx-with-scrollback" },
+      { key = "Escape", mods = "NONE", action = "PopKeyTable" },
+    },
+
+    yazi = {
+      { key = "t", mods = "NONE", action = wezterm.action.EmitEvent "yazi-open-new-tab" },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
     },
 
@@ -172,7 +176,8 @@ function M.apply_to_config(config)
       { key = "3", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_33" } },
       { key = "6", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_66" } },
       { key = "7", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_75" } },
-      { key = "h", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "yazi_helix" } },
+      { key = "h", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "helix" } },
+      { key = "y", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "yazi" } },
       { key = "i", mods = "NONE", action = wezterm.action.ActivateKeyTable { name = "pane_index" } },
       { key = "s", mods = "NONE", action = wezterm.action.PaneSelect { show_pane_ids = true } },
       { key = "s", mods = "CTRL", action = wezterm.action.PaneSelect { mode = "SwapWithActive", show_pane_ids = true } },
