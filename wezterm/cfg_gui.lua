@@ -30,6 +30,13 @@ function M.apply_to_config(config)
       background = _G.UI_PANEL_SHADOW,
       inactive_tab_edge = _G.UI_PANEL_SHADOW,
     },
+    quick_select_label_bg = { Color = "peru" },
+    quick_select_label_fg = { Color = "#f0f0ff" },
+    quick_select_match_bg = { AnsiColor = "Navy" },
+    quick_select_match_fg = { Color = "#f0f0ff" },
+    cursor_bg = "#9146ff",
+    cursor_fg = "#f0f0ff",
+    cursor_border = "#9146ff",
   }
   config.bold_brightens_ansi_colors = "BrightAndBold"
 
