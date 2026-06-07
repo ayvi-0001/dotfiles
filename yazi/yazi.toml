@@ -39,7 +39,7 @@ open = [
   { run = "7zFM %*", orphan = true, desc = "7zFM", for = "windows" },
 ]
 reveal = [
-  { run = 'explorer /select,"%1"', orphan = true, desc = "reveal", for = "windows" },
+  { run = "explorer /select,%s1", desc = "reveal", for = "windows", orphan = true },
   { run = '''bash -c "clear; exiftool '%1'; echo 'Press enter to exit'; read _"''', block = true, desc = "show exif", for = "windows" },
 ]
 extract = [
