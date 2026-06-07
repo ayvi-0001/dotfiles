@@ -2,7 +2,7 @@
 debugConsole=true
 guiApplications=false
 localhostForwarding=true
-memory=8GB
+memory=3GB
 nestedVirtualization=false
 # networkingMode=mirrored # w11 only
 processors=2
