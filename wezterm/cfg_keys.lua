@@ -211,8 +211,8 @@ function M.apply_to_config(config)
       { key = "u", mods = "NONE", action = wezterm.action.ScrollByPage(-0.5) },
       { key = "f", mods = "NONE", action = wezterm.action.ScrollByPage(1) },
       { key = "b", mods = "NONE", action = wezterm.action.ScrollByPage(-1) },
-      { key = "c", mods = "NONE", action = wezterm.action_callback(callbacks.scroll_to_bottom) },
-      { key = "s", mods = "CTRL", action = wezterm.action_callback(callbacks.scroll_to_bottom) },
+      { key = "g", mods = "NONE", action = wezterm.action.ScrollToTop },
+      { key = "G", mods = "SHIFT", action = wezterm.action_callback(callbacks.scroll_to_bottom) },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
     },
 
