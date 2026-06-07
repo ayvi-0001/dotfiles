@@ -6,5 +6,5 @@ memory=3GB
 nestedVirtualization=false
 # networkingMode=mirrored # w11 only
 processors=2
-# swap=0
-swapFile=%Temp%\swap.vhdx
+# swap=4GB
+swapfile=C:\\temp\\wsl-swap.vhdx
