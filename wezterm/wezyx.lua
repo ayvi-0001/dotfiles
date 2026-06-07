@@ -286,7 +286,7 @@ end
 ---Set the title to the new current working directory.
 ---@param window Window
 ---@param pane Pane
-wezterm.on("yazi-open-new-tab", function(window, pane)
+local yazi_open_new_tab = function(window, pane)
   local mux_window = window:mux_window()
   local active_tab_index ---@type integer
   for _, item in ipairs(mux_window:tabs_with_info()) do
@@ -307,7 +307,7 @@ wezterm.on("yazi-open-new-tab", function(window, pane)
   local tab = mux_window:spawn_tab { cwd = target_dir }
   tab:set_title(utils.basename(target_dir))
   window:perform_action(wezterm.action.MoveTab(active_tab_index + 1), tab:active_pane())
-end)
+end
 
 -------------------------------------- CALLBACKS ---------------------------------------
 
@@ -383,6 +383,12 @@ end)
 ---@overload fun(window: Window, pane: Pane)
 wezterm.on("yazi-helix-open-in-right-pane", function(window, pane)
   yazi_helix_open_in_pane(window, pane, "Right")
+end)
+
+---Open the selected/hovered url(s) from Yazi into an _existing_ pane on the right running Helix.
+---@overload fun(window: Window, pane: Pane)
+wezterm.on("yazi-open-new-tab", function(window, pane)
+  yazi_open_new_tab(window, pane)
 end)
 
 return M -- NOTE: currently unused, for future setup function.
