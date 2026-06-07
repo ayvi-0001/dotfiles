@@ -14,11 +14,11 @@ function gpg-kill-agent() { gpgconf --kill gpg-agent; }
 function yy() {
   local tmp cwd
   test -d ~/.cache/yazi || mkdir -p ~/.cache/yazi
-  tmp="$(mktemp -p ~/.cache/yazi -- yazi-cwd.XXXXXX)"
-  yazi "$@" --cwd-file="$tmp"
+  tmp="$(mktemp -u -p ~/.cache/yazi -t yazi-cwd.XXXXXX)"
+  command yazi "$@" --cwd-file="$tmp"
   IFS= read -r -d '' cwd < "$tmp"
-  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd" || return
-  rm -f -- "$tmp"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || return
+  command rm -f -- "$tmp"
 }
 
 alias y=yy
