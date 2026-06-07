@@ -61,7 +61,7 @@ if shopt -q login_shell; then
   test -d "${BASH_COMPLETION_USER_DIR:-$HOME/.bash_completion}" && \
     for f in "$_"/*; do test -f "$f" && . "$_"; done; unset f
 
-  # set default completions 
+  # set default completions
   complete -o bashdefault -o default -o nosort -D
   # disable completions attempted on a blank line.
   complete -E
@@ -69,10 +69,22 @@ fi
 
 # hooks/prompt --------------------------------------------------------------
 
-command -v direnv >/dev/null && eval "$(direnv hook bash)"
-command -v starship >/dev/null && eval "$(starship init bash)"
-command -v zoxide >/dev/null && eval "$(zoxide init bash)"
-
 command -v fzf >/dev/null && eval "$(fzf --bash)"
 # export fzf opts after hook, otherwise some opts are overridden
 test -f ~/.fzf_opts && . "$_"
+
+command -v starship >/dev/null && eval "$(starship init bash)"
+command -v zoxide >/dev/null && eval "$(zoxide init bash)"
+
+if command -v direnv >/dev/null; then
+  # Unmangling paths set by direnv on Windows
+  # https://eighty-twenty.org/2024/01/04/direnv-path-unmangling-on-windows
+  export _unmangle_direnv_names='PATH'
+  _unmangle_direnv_paths() {
+      for k in $_unmangle_direnv_names; do
+          eval "$k=\"\$(/usr/bin/cygpath -p \"\$$k\")\""
+      done
+  }
+  eval "$(direnv hook bash | sed -e 's@export bash)@export bash)\
+  _unmangle_direnv_paths@')"
+fi
