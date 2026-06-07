@@ -68,4 +68,38 @@ function M.find_parent_executable(info, name)
   error(err_msg)
 end
 
+---@param pane Pane
+---@return string
+function M.get_pane_working_dir(pane)
+  local cwd = pane:get_current_working_dir() ---@type string|Url
+
+  if type(cwd) == "string" then
+    ---@diagnostic disable-next-line: undefined-field
+    cwd = wezterm.url.parse(cwd) ---@type Url
+  end
+
+  ---@generic T
+  ---@param str T
+  ---@param prefix string
+  ---@return string
+  local function remove_prefix(str, prefix)
+    if type(str) ~= "string" then
+      str = tostring(str)
+    end
+    if str:sub(1, #prefix) == prefix then
+      return str:sub(#prefix + 1)
+    else
+      return str
+    end
+  end
+
+  if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+    cwd = remove_prefix(cwd.path, "/")
+  else
+    cwd = tostring(cwd.path)
+  end
+
+  return cwd
+end
+
 return M
