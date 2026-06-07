@@ -84,8 +84,7 @@ local YAZI_CACHE_DIR = wezterm.home_dir .. "/.cache/yazi"
 ---@param window Window
 ---@param pane Pane
 local yazi_helix_launch_ide = function(window, pane)
-  local pid = wezterm.procinfo.pid()
-  local cwd = wezterm.procinfo.current_working_dir_for_pid(pid) or pane:get_current_working_dir()
+  local cwd = utils.get_pane_working_dir(pane)
   local active_tab_title = window:active_tab():get_title()
 
   window:perform_action(wezterm.action.SendKey { key = "c", mods = "CTRL" }, pane)
@@ -250,27 +249,11 @@ local yazi_helix_open_new_pane = function(window, pane, direction, top_level)
   return _inner(window, pane)
 end
 
-local function remove_prefix(str, prefix)
-  if str:sub(1, #prefix) == prefix then
-    return str:sub(#prefix + 1)
-  else
-    return str
-  end
-end
-
 ---Open the selected/hovered url(s) in Yazi into a new Helix window.
 ---@param _ Window
 ---@param pane Pane
 local yazi_helix_open_new_window = function(_, pane)
-  local pid = wezterm.procinfo.pid()
-  local cwd = wezterm.procinfo.current_working_dir_for_pid(pid) or pane:get_current_working_dir()
-
-  if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-    cwd = remove_prefix(cwd.path, "/")
-  end
-
-  ---@cast cwd string
-  cwd = tostring(cwd)
+  local cwd = utils.get_pane_working_dir(pane)
 
   window_space.spawn_window_and_set_dimensions {
     ratio = 0.5,

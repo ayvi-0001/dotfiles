@@ -33,18 +33,6 @@ function M.write(filename, text)
   return filename
 end
 
----@param url Url
-function M.get_url_file_path(url)
-  local file_path = url.file_path
-  -- issue with Windows where when accessing the attribute file_path on the Url object,
-  -- it adds a forward slash at the start of the path.
-  -- e.g. if the path is A:/, it returns /A:/
-  if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-    file_path = file_path:gsub("^/", "")
-  end
-  return file_path
-end
-
 ---@param info LocalProcessInfo?
 ---@param name string
 ---@return LocalProcessInfo?
@@ -78,23 +66,8 @@ function M.get_pane_working_dir(pane)
     cwd = wezterm.url.parse(cwd) ---@type Url
   end
 
-  ---@generic T
-  ---@param str T
-  ---@param prefix string
-  ---@return string
-  local function remove_prefix(str, prefix)
-    if type(str) ~= "string" then
-      str = tostring(str)
-    end
-    if str:sub(1, #prefix) == prefix then
-      return str:sub(#prefix + 1)
-    else
-      return str
-    end
-  end
-
   if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-    cwd = remove_prefix(cwd.path, "/")
+    cwd = tostring(cwd.path):gsub("^/", "")
   else
     cwd = tostring(cwd.path)
   end
