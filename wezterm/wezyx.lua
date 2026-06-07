@@ -292,6 +292,27 @@ local yazi_open_new_tab = function(window, pane)
   window:perform_action(wezterm.action.MoveTab(active_tab_index + 1), tab:active_pane())
 end
 
+---@param _ Window
+---@param pane Pane
+local yazi_open_new_window = function(_, pane)
+  local hovered_url = yazi_read_target_paths(pane:pane_id())
+
+  local target_dir
+  if pcall(wezterm.read_dir, hovered_url) then
+    target_dir = hovered_url
+  else
+    target_dir = hovered_url:match "^(.*)[/\\]"
+  end
+
+  window_space.spawn_window_and_set_dimensions {
+    ratio = 0.8,
+    domain = "local",
+    cwd = target_dir,
+    args = { "yazi" },
+    set_environment_variables = { YAZI_CONFIG_HOME = "~/.config/yazi" },
+  }
+end
+
 -------------------------------------- CALLBACKS ---------------------------------------
 
 ---@see wezyx.lua:97
@@ -372,6 +393,12 @@ end)
 ---@overload fun(window: Window, pane: Pane)
 wezterm.on("yazi-open-new-tab", function(window, pane)
   yazi_open_new_tab(window, pane)
+end)
+
+---Open the selected/hovered url(s) from Yazi into a _new_ window.
+---@overload fun(window: Window, pane: Pane)
+wezterm.on("yazi-open-new-window", function(window, pane)
+  yazi_open_new_window(window, pane)
 end)
 
 return M -- NOTE: currently unused, for future setup function.

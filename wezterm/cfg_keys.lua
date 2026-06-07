@@ -159,6 +159,7 @@ function M.apply_to_config(config)
 
     yazi = {
       { key = "t", mods = "NONE", action = wezterm.action.EmitEvent "yazi-open-new-tab" },
+      { key = "w", mods = "NONE", action = wezterm.action.EmitEvent "yazi-open-new-window" },
       { key = "Escape", mods = "NONE", action = "PopKeyTable" },
     },
 
