@@ -16,7 +16,7 @@ require("window_space").setup {
   enable_window_move_events = true,
   -- optional
   resize_increment = 25
-  move_increment = 25 
+  move_increment = 25
 }
 ```
 
@@ -52,6 +52,7 @@ end
 ---@field cwd? string
 ---@field screen_name? "active"|"main"|string = "active"
 ---@field offsets? { x?: number, y?: number }
+---@field set_environment_variables? table<[string], string>?
 ---@field args? string[]
 
 ---@param opts SpawnWindowOpts
@@ -88,6 +89,7 @@ function M.spawn_window_and_set_dimensions(opts)
     cwd = opts.cwd,
     position = { x = x, y = y, origin = "ActiveScreen" },
     domain = { DomainName = opts.domain or "local" },
+    set_environment_variables = opts.set_environment_variables,
   }
 
   local gui_window = mux_window:gui_window() --[[@as Window]]
