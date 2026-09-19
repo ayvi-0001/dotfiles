@@ -1,7 +1,7 @@
 array_width                 = 50
 attr_fn_like_width          = 50
 brace_style                 = "PreferSameLine"
-chain_width                 = 50
+chain_width                 = 80
 color                       = "Always"
 edition                     = "2024"
 empty_item_single_line      = true
