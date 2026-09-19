@@ -6,7 +6,7 @@ require("window_space").setup {
   enable_window_resize_events = true,
   enable_window_move_events = true,
   enable_pane_move_events = true,
-  resize_increment = 50,
+  resize_increment = 25,
 }
 
 require "events"
