@@ -59,6 +59,7 @@ undercurl                = true
   display-messages                   = true
   display-progress-messages          = true
   auto-signature-help                = true
+  auto-document-highlight            = true
   display-inlay-hints                = true
   display-signature-help-docs        = true
   snippets                           = true
