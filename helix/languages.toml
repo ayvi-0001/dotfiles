@@ -145,10 +145,10 @@ auto-format      = true
 
   [language.formatter]
   command = "bash"
-  args = ["-c", """
-  ruff check --fix --silent --stdin-filename '%sh{realpath '%{buffer_name}'}' -- - \
-    | ruff format --stdin-filename '%sh{realpath '%{buffer_name}'}' -- -
-  """]
+  args = ["-c", """\
+    ruff check --fix --silent --stdin-filename '%sh{realpath '%{buffer_name}'}' -- - \
+    | ruff format --stdin-filename '%sh{realpath '%{buffer_name}'}' -- -\
+    """]
 
   [language.debugger]
   name      = "debugpy"
