@@ -3,6 +3,7 @@ attr_fn_like_width          = 50
 brace_style                 = "PreferSameLine"
 chain_width                 = 80
 color                       = "Always"
+condense_wildcard_suffixes  = true
 edition                     = "2024"
 empty_item_single_line      = true
 fn_call_width               = 60
