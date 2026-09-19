@@ -142,6 +142,8 @@ C-S-s = "save_selection"
 S-A-k = "@XdkP;" # move line up
 S-A-j = "@Xdp;"  # move line down
 
+A-b = "move_prev_word_end"
+
   [keys.normal.g] # Goto ext
   D = "@gd wv"                         # Goto definition in new vertical right split
   R = "@<space>wv<space>whga<space>wl" # Move current buffer to new vertical right split, Goto last accessed file in previous buffer
