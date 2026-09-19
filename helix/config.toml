@@ -143,6 +143,7 @@ S-A-k = "@XdkP;" # move line up
 S-A-j = "@Xdp;"  # move line down
 
 A-b = "move_prev_word_end"
+A-e = "move_prev_long_word_end"
 
   [keys.normal.g] # Goto ext
   D = "@gd wv"                         # Goto definition in new vertical right split
