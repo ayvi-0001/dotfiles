@@ -68,5 +68,6 @@
   "workbench.editor.tabSizing": "shrink",
   "workbench.iconTheme": "ayu",
   "workbench.preferredDarkColorTheme": "True Dark Github Theme",
-  "workbench.secondarySideBar.defaultVisibility": "hidden"
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "chat.disableAIFeatures": true
 }
