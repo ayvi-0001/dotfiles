@@ -32,10 +32,6 @@ prepend_keymap = [
   { on = ["m", "S"], run = ["sort size --reverse", "linemode size", "sort natural --reverse=no"], desc = "Linemode: size (recursive)" },
   # end: linemode
 
-  # # start: relative-motions.yazi
-  # { on = ["M"], run = "plugin relative-motions", desc = "Trigger a new relative motion" },
-  # # end: relative-motions.yazi
-
   # start: compress.yazi
   { on = ["c", "a"], run = "plugin compress", desc = "Archive selected files" },
   # end: compress.yazi

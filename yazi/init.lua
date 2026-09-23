@@ -1,5 +1,3 @@
-require("relative-motions"):setup { show_numbers = "none" }
-
 require("git"):setup { order = 1500 }
 
 require("full-border"):setup()
