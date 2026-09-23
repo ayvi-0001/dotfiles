@@ -17,8 +17,8 @@ mouse_events   = ["click", "scroll"]
 [preview]
 wrap            = "no"
 tab_size        = 4
-max_width       = 600
-max_height      = 900
+max_width       = 1200
+max_height      = 1500
 cache_dir       = "~/.cache/yazi"
 image_delay     = 0
 image_filter    = "lanczos3"
