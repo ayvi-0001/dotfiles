@@ -174,7 +174,11 @@ end
 ---@param pane_id number
 ---@return string
 local yazi_read_target_paths = function(pane_id)
-  ya_pub_wezyx { fn = "cache_target_paths", wezterm_pane = pane_id }
+  ya_pub_wezyx {
+    fn = "cache_target_paths",
+    wezterm_pane = pane_id,
+    yazi_cache_dir = YAZI_CACHE_DIR,
+  }
 
   local file_template = "yazi-target-paths-wezterm-pane-"
   local filename = YAZI_CACHE_DIR .. "/" .. file_template .. tostring(pane_id)
