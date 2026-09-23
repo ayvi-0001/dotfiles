@@ -36,6 +36,7 @@ open = [
   { run = 'start "" %s1', desc = "open", for = "windows", orphan = true },
   { run = "code %s", block = true, desc = "vscode", orphan = true },
   { run = "7zFM %s", orphan = true, desc = "7zFM" },
+  { run = "mpv --force-window %s", orphan = true, desc = "mpv (directory)" },
 ]
 reveal = [
   { run = "explorer /select,%s1", desc = "reveal", for = "windows", orphan = true },
