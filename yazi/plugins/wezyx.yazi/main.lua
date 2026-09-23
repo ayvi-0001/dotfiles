@@ -76,8 +76,14 @@ end
 ---@param body Sendable
 ---@async
 local cache_target_paths = function(body) ---@diagnostic disable-line: unused-local
-  local cache_dir = rt.preview.cache_dir ---@type string?
-  cache_dir = ya_unwrap(cache_dir, "error: missing preview.cache_dir setting in yazi config.", 2)
+  local cache_dir ---@type string?
+  if body and body.yazi_cache_dir then
+    cache_dir = tostring(body.yazi_cache_dir)
+  else
+    -- FIX(ayvi-0001): preview.cache_dir not retrieving value from config since yazi v26.9.1 upgrade
+    cache_dir = rt.preview.cache_dir ---@type string?
+    cache_dir = ya_unwrap(cache_dir, "error: missing preview.cache_dir setting in yazi config.", 2)
+  end
 
   local cache_file = (cache_dir .. "/yazi-target-paths-wezterm-pane-" .. WEZTERM_PANE):gsub("\\", "/")
   local file = io.open(cache_file, "w")
