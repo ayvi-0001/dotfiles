@@ -49,6 +49,7 @@ extract = [
 play = [
   { run = "mpv --force-window %s", orphan = true, desc = "mpv" },
   { run = "mpv --fullscreen %s", block = true, desc = "mpv fs" },
+  { run = "gimp %s", orphan = true, desc = "gimp" },
   { run = "photoqt %s", orphan = true, desc = "photoqt" },
 ]
 database = [
