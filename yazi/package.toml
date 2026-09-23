@@ -80,8 +80,8 @@ hash = "d1e0499cae5f3aeb628c267616d4b682"
 
 [[plugin.deps]]
 use  = "boydaihungst/save-clipboard-to-file"
-rev  = "4f034ac"
-hash = "4bdfecaa643db1cc28ccba799463d5b8"
+rev  = "1199c45"
+hash = "e9761e39e52f5423700e49eaff0c899d"
 
 [[plugin.deps]]
 use  = "stelcodes/bunny"
