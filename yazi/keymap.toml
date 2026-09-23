@@ -17,7 +17,9 @@ prepend_keymap = [
   # start: copy
   # add the '--separator' option to builtin copy commands.
   { on = ["c", "c"], run = "copy --separator='unix' path", desc = "Copy the file path" },
-  { on = ["c", "d"], run = "copy --separator='unix' dirname", desc = "Copy the directory path" },
+  { on = ["c", "C"], run = "copy --separator='unix' url", desc = "Copy file URL" },
+  { on = ["c", "d"], run = "copy --separator='unix' dirpath", desc = "Copy the directory path" },
+  { on = ["c", "D"], run = "copy --separator='unix' dirurl", desc = "Copy directory URL" },
   { on = ["c", "f"], run = "copy --separator='unix' filename", desc = "Copy the filename" },
   { on = ["c", "n"], run = "copy --separator='unix' name_without_ext", desc = "Copy the filename without extension" },
   { on = ["c", "p"], run = "plugin cp-posix", desc = "Copy the file path as posix" },
