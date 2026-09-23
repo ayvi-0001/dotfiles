@@ -51,6 +51,7 @@ play = [
   { run = "mpv --fullscreen %s", block = true, desc = "mpv fs" },
   { run = "gimp %s", orphan = true, desc = "gimp" },
   { run = "photoqt %s", orphan = true, desc = "photoqt" },
+  { run = "mediainfo %s1 & pause", block = true, desc = "show media info", for = "windows" },
 ]
 database = [
   { run = '''bash -c "harlequin '%s'"''', block = true, desc = "harlequin", for = "windows" },
