@@ -123,6 +123,7 @@ A-Q   = "replay_macro"
 C-S-q = ":bc!"
 C-q   = ":q!"
 C-r   = ":rla"
+C-S-r = [":config-reload", ":rla"]
 S-A-f = ":fmt"
 ret   = ["open_below", "normal_mode"]
 f     = ["find_next_char", "normal_mode"]
@@ -217,8 +218,9 @@ A-e = "move_prev_long_word_end"
 
     [keys.normal.space.l]
     c = ":lsp-workspace-command"
-    r = ":lsp-restart"
     s = ":lsp-stop"
+    r = ":lsp-restart"
+    R = [":config-reload", ":lsp-restart"]
 
 [keys.insert]
 S-tab    = "move_parent_node_start"
