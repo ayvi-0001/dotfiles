@@ -4,6 +4,8 @@ require("full-border"):setup()
 
 require("fg"):setup()
 
+require("hxjump"):setup()
+
 local bookmarks = os.getenv "YAZI_CONFIG_HOME" .. "/state/bookmark"
 require("yamb"):setup { jump_notify = true, cli = "fzf", path = bookmarks }
 
