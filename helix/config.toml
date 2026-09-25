@@ -11,7 +11,6 @@ cursorline               = true
 default-line-ending      = "lf"
 editor-config            = true
 end-of-line-diagnostics  = "hint"
-insecure                 = true
 insert-final-newline     = true
 middle-click-paste       = true
 mouse                    = true
@@ -26,6 +25,9 @@ text-width               = 200
 trim-trailing-whitespace = true
 true-color               = true
 undercurl                = true
+
+  [editor.workspace-trust]
+  level = "insecure"
 
   [editor.terminal]
   command = "bash"
