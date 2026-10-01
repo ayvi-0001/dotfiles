@@ -158,6 +158,24 @@ args    = ["--stdio"]
   provideFormatter     = true
   json.validate.enable = false
 
+[language-server.ty]
+command = "ty"
+args    = ["server"]
+
+  [language-server.ty.config.configuration.analysis]
+  strict-generic-narrowing  = true
+  strict-equality-semantics = true
+
+  [language-server.ty.config]
+  diagnosticMode = "workspace"
+  logLevel       = "warn"
+
+    [language-server.ty.config.completions]
+    completeFunctionParentheses = true
+
+    [language-server.ty.config.experimental]
+    useUv = "on"
+
 [[language]]
 name             = "python"
 shebangs         = ["python", "uv"]
