@@ -179,7 +179,7 @@ args    = ["server"]
 [[language]]
 name             = "python"
 shebangs         = ["python", "uv"]
-language-servers = ["ruff", "basedpyright"] # "ty", "pylsp", "pylyzer"
+language-servers = ["ruff"] # "ty", "pylsp", "pylyzer", "basedpyright"
 indent           = { tab-width = 4, unit = "    " }
 auto-format      = true
 
