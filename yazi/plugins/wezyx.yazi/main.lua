@@ -71,6 +71,7 @@ end
 
 ---@class CacheTargetPathsOpts
 ---@field yazi_cache_dir? string
+---@field file_prefix? string default: "yazi-target-paths-wezterm-pane-"
 
 ---Save target urls in a file in yazi's cache_dir.
 ---If any files are selected, those will be the targeted paths.
@@ -88,7 +89,16 @@ local cache_target_paths = function(body) ---@diagnostic disable-line: unused-lo
     cache_dir = ya_unwrap(cache_dir, "error: missing preview.cache_dir setting in yazi config.", 2)
   end
 
-  local cache_file = (cache_dir .. "/yazi-target-paths-wezterm-pane-" .. WEZTERM_PANE):gsub("\\", "/")
+  local file_prefix ---@type string?
+  if body and body.file_prefix then
+    file_prefix = body.file_prefix:gsub("-+$", "")
+  else
+    file_prefix = "yazi-target-paths-wezterm-pane"
+  end
+
+  local cache_file = (cache_dir .. "/" .. file_prefix .. "-" .. WEZTERM_PANE)
+  cache_file = cache_file:gsub("\\", "/")
+
   local file = io.open(cache_file, "w")
   file = ya_unwrap(file, "error: could not create/open temp file - " .. cache_file, 2)
 
