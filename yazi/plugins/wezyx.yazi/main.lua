@@ -69,11 +69,14 @@ local get_target_paths = function()
   return target_paths
 end
 
+---@class CacheTargetPathsOpts
+---@field yazi_cache_dir? string
+
 ---Save target urls in a file in yazi's cache_dir.
 ---If any files are selected, those will be the targeted paths.
 ---If no files are selected, then it will default to the hovered url.
 ---Filename template is 'yazi-target-paths-wezterm-pane-$WEZTERM_PANE'.
----@param body Sendable
+---@param body? CacheTargetPathsOpts
 ---@async
 local cache_target_paths = function(body) ---@diagnostic disable-line: unused-local
   local cache_dir ---@type string?
@@ -96,12 +99,18 @@ end
 
 CALLBACKS = { cache_target_paths = cache_target_paths }
 
+---@class WezyxRemoteCallbackOpts
+---@field wezterm_pane number
+---@field fn string
+---@field args? table<[string], Sendable>
+
+---@param body WezyxRemoteCallbackOpts
 local wezyx_remote_callback = function(body)
   -- can't determine YAZI_ID from wezterm, instead message is published
   -- to all instances and only calls back on matching wezterm pane.
   if body.wezterm_pane and tonumber(WEZTERM_PANE) == tonumber(body.wezterm_pane) then
     ya_unwrap(body.fn, "error: published message to `wezyx` missing required parameter `fn`.", 2)
-    CALLBACKS[body.fn](body)
+    CALLBACKS[body.fn](body.args)
   end
 end
 
